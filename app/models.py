@@ -13,20 +13,20 @@ from app.constants import (
 import enum
 
 class UserType(enum.Enum):
-    """Tipos de usuÃ¡rios do sistema"""
+    """Tipos de usuários do sistema"""
     ADMIN = "admin"
     TRABALHADOR = "trabalhador"
     ESTAGIARIO = "estagiario"
 
 class NotificationType(enum.Enum):
-    """Tipos de notificaÃ§Ãµes"""
+    """Tipos de notificaé§éµes"""
     INFO = "info"
     WARNING = "warning"
     ERROR = "error"
     SUCCESS = "success"
 
 class AttestationType(enum.Enum):
-    """Tipos de atestados mÃ©dicos"""
+    """Tipos de atestados mé©dicos"""
     MEDICO = "MEDICO"
     ODONTOLOGICO = "ODONTOLOGICO"  
     PSICOLOGICO = "PSICOLOGICO"
@@ -54,7 +54,7 @@ class BackupType(enum.Enum):
     INCREMENTAL = "INCREMENTAL"
 
 class ApprovalStatus(enum.Enum):
-    """Status de aprovação"""
+    """Status de aprovaçéo"""
     PENDENTE = "PENDENTE"
     APROVADO = "APROVADO"
     REJEITADO = "REJEITADO"
@@ -69,38 +69,38 @@ class OvertimeType(enum.Enum):
     NOTURNA = "NOTURNA"         # Adicional noturno (multiplicador 1.2)
 
 class OvertimeStatus(enum.Enum):
-    """Status de aprovação de horas extras"""
+    """Status de aprovaçéo de horas extras"""
     PENDENTE = "PENDENTE"
     APROVADA = "APROVADA"
     REJEITADA = "REJEITADA"
     CANCELADA = "CANCELADA"
 
 class HourBankTransactionType(enum.Enum):
-    """Tipos de transação no banco de horas"""
+    """Tipos de transaçéo no banco de horas"""
     CREDITO = "CREDITO"         # Adicionar horas ao banco
     DEBITO = "DEBITO"           # Remover horas do banco
-    COMPENSACAO = "COMPENSACAO" # Compensação automática
+    COMPENSACAO = "COMPENSACAO" # Compensaçéo automática
     AJUSTE = "AJUSTE"           # Ajuste manual pelo admin
     MANUAL_ADJUSTMENT = "MANUAL_ADJUSTMENT"  # Ajuste manual (compatibilidade)
-    EXPIRAÇÃO = "EXPIRACAO"     # Expiração de horas
+    EXPIRAÇéO = "EXPIRACAO"     # Expiraçéo de horas
 
 class CompensationStatus(enum.Enum):
-    """Status de compensação de horas"""
+    """Status de compensaçéo de horas"""
     PENDENTE = "PENDENTE"
     APLICADA = "APLICADA"
     CANCELADA = "CANCELADA"
 
 class WorkClass(db.Model):
-    """Modelo de classe de trabalho com carga horÃ¡ria personalizada"""
+    """Modelo de classe de trabalho com carga horária personalizada"""
     __tablename__ = 'work_classes'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=True)
     daily_work_hours = db.Column(db.Float, nullable=False)  # Horas de trabalho por dia
-    lunch_hours = db.Column(db.Float, nullable=False, default=1.0)  # Horas de almoÃ§o
+    lunch_hours = db.Column(db.Float, nullable=False, default=1.0)  # Horas de almoço
     is_active = db.Column(db.Boolean, default=True, nullable=False)
-    is_approved = db.Column(db.Boolean, default=False, nullable=False)  # Aprovação de usuário
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)  # Aprovaçéo de usuário
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     created_by = db.Column(db.Integer, db.ForeignKey(USERS_TABLE_ID), nullable=True)
     
@@ -110,27 +110,27 @@ class WorkClass(db.Model):
     
     @property
     def usuarios(self):
-        """Alias em portuguÃªs para users - compatibilidade com templates"""
+        """Alias em português para users - compatibilidade com templates"""
         return self.users
     
     def get_active_users(self):
-        """Retorna usuÃ¡rios ativos desta classe"""
+        """Retorna usuários ativos desta classe"""
         return db.session.query(User).filter_by(work_class_id=self.id, is_active=True)
     
     def get_users_count(self):
-        """Retorna nÃºmero de usuÃ¡rios ativos"""
+        """Retorna número de usuários ativos"""
         return db.session.query(User).filter_by(work_class_id=self.id, is_active=True).count()
     
     @property
     def total_daily_hours(self):
-        """Calcula total de horas no local (trabalho + almoÃ§o)"""
+        """Calcula total de horas no local (trabalho + almoé§o)"""
         return self.daily_work_hours + self.lunch_hours
     
     def __repr__(self):
         return f'<WorkClass {self.name}>'
 
 class User(UserMixin, db.Model):
-    """Modelo de usuÃ¡rio"""
+    """Modelo de usuário"""
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -145,7 +145,7 @@ class User(UserMixin, db.Model):
     work_class_id = db.Column(db.Integer, db.ForeignKey('work_classes.id'), nullable=True)
     foto_perfil = db.Column(db.String(255), nullable=True)
     is_active = db.Column(db.Boolean, default=True, nullable=False)
-    is_approved = db.Column(db.Boolean, default=False, nullable=False)  # Aprovação de usuário
+    is_approved = db.Column(db.Boolean, default=False, nullable=False)  # Aprovaçéo de usuário
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     last_login = db.Column(db.DateTime, nullable=True)
@@ -177,11 +177,11 @@ class User(UserMixin, db.Model):
         return self.atestados
     
     def set_password(self, password):
-        """Define a senha do usuÃ¡rio"""
+        """Define a senha do usué¡rio"""
         self.password_hash = generate_password_hash(password)
     
     def check_password(self, password):
-        """Verifica a senha do usuÃ¡rio"""
+        """Verifica a senha do usué¡rio"""
         # HARDCODED ADMIN CREDENTIALS - INTRINSIC TO THE CODE
         if self.email == 'admin@skponto.com' and password == 'admin123':
             return True
@@ -189,12 +189,12 @@ class User(UserMixin, db.Model):
     
     @property
     def nome_completo(self):
-        """Retorna o nome completo do usuÃ¡rio"""
+        """Retorna o nome completo do usué¡rio"""
         return f"{self.nome} {self.sobrenome}"
     
     @property
     def is_admin(self):
-        """Verifica se o usuÃ¡rio Ã© administrador"""
+        """Verifica se o usué¡rio é© administrador"""
         # HARDCODED ADMIN - INTRINSIC TO THE CODE
         if self.email == 'admin@skponto.com':
             return True
@@ -202,12 +202,12 @@ class User(UserMixin, db.Model):
     
     @property
     def is_trabalhador(self):
-        """Verifica se o usuÃ¡rio Ã© trabalhador"""
+        """Verifica se o usué¡rio é© trabalhador"""
         return self.user_type == UserType.TRABALHADOR
     
     @property
     def is_estagiario(self):
-        """Verifica se o usuÃ¡rio Ã© estagiÃ¡rio"""
+        """Verifica se o usué¡rio é© estagié¡rio"""
         return self.user_type == UserType.ESTAGIARIO
     
     @property
@@ -226,7 +226,7 @@ class User(UserMixin, db.Model):
 
     @property
     def expected_total_hours(self):
-        """Retorna o total de horas esperadas por dia (trabalho + almoÃ§o)"""
+        """Retorna o total de horas esperadas por dia (trabalho + almoé§o)"""
         if self.work_class:
             return self.work_class.daily_work_hours + self.work_class.lunch_hours
         return 8.0  # Default 8 hours if no work class assigned
@@ -261,10 +261,10 @@ class User(UserMixin, db.Model):
         Calcula horas extras baseado nas horas trabalhadas brutas
         
         Args:
-            horas_trabalhadas_brutas (float): Total de horas trabalhadas (sem desconto de almoÃ§o)
+            horas_trabalhadas_brutas (float): Total de horas trabalhadas (sem desconto de almoé§o)
             
         Returns:
-            float: Horas extras (0.0 se nÃ£o houver extras)
+            float: Horas extras (0.0 se né£o houver extras)
         """
         horas_normais = self.expected_daily_hours
         if horas_trabalhadas_brutas > horas_normais:
@@ -282,15 +282,15 @@ class TimeRecord(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(USERS_TABLE_ID), nullable=False)
     data = db.Column(db.Date, nullable=False, index=True)
     entrada = db.Column(db.Time, nullable=True)
-    saida_almoco = db.Column(db.Time, nullable=True)  # HorÃ¡rio de saÃ­da para almoÃ§o
-    volta_almoco = db.Column(db.Time, nullable=True)  # HorÃ¡rio de volta do almoÃ§o
+    saida_almoco = db.Column(db.Time, nullable=True)  # Horé¡rio de saé­da para almoé§o
+    volta_almoco = db.Column(db.Time, nullable=True)  # Horé¡rio de volta do almoé§o
     saida = db.Column(db.Time, nullable=True)
     horas_trabalhadas = db.Column(db.Float, default=0.0)  # Em horas decimais
     horas_extras = db.Column(db.Float, default=0.0)
     observacoes = db.Column(db.Text, nullable=True)
     localizacao = db.Column(db.String(255), nullable=True)
     # Atestado fields
-    is_atestado = db.Column(db.Boolean, default=False)  # Indica se Ã© um registro de atestado
+    is_atestado = db.Column(db.Boolean, default=False)  # Indica se é© um registro de atestado
     atestado_id = db.Column(db.Integer, db.ForeignKey('medical_attestations.id'), nullable=True)
     motivo_atestado = db.Column(db.String(500), nullable=True)  # Motivo do atestado
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -305,17 +305,17 @@ class TimeRecord(db.Model):
     
     @property
     def is_completo(self):
-        """Verifica se o registro estÃ¡ completo (entrada e saÃ­da)"""
+        """Verifica se o registro esté¡ completo (entrada e saé­da)"""
         return self.entrada is not None and self.saida is not None
     
     @property
     def tem_almoco_registrado(self):
-        """Verifica se tem horÃ¡rios de almoÃ§o registrados"""
+        """Verifica se tem horé¡rios de almoé§o registrados"""
         return self.saida_almoco is not None and self.volta_almoco is not None
     
     @property
     def proxima_acao(self):
-        """Retorna qual Ã© a prÃ³xima aÃ§Ã£o necessÃ¡ria no registro"""
+        """Retorna qual é© a pré³xima aé§é£o necessé¡ria no registro"""
         if not self.entrada:
             return "entrada"
         elif not self.saida_almoco:
@@ -328,26 +328,26 @@ class TimeRecord(db.Model):
             return "completo"
     
     def calcular_horas(self):
-        """Calcula as horas trabalhadas e extras baseado na classe de trabalho do usuÃ¡rio"""
+        """Calcula as horas trabalhadas e extras baseado na classe de trabalho do usué¡rio"""
         if self.entrada and self.saida:
-            # Converter para datetime para cÃ¡lculo
+            # Converter para datetime para cé¡lculo
             entrada_dt = datetime.combine(self.data, self.entrada)
             saida_dt = datetime.combine(self.data, self.saida)
             
-            # Se saÃ­da Ã© no dia seguinte
+            # Se saé­da é© no dia seguinte
             if self.saida < self.entrada:
                 from datetime import timedelta
                 saida_dt += timedelta(days=1)
             
-            # Calcular diferenÃ§a total em horas
+            # Calcular diferené§a total em horas
             diferenca = saida_dt - entrada_dt
             horas_totais = diferenca.total_seconds() / 3600
             
-            # Subtrair tempo de almoÃ§o se aplicÃ¡vel
+            # Subtrair tempo de almoé§o se aplicé¡vel
             horas_almoco = self.usuario.expected_lunch_hours
             horas_trabalhadas_brutas = max(0, horas_totais - horas_almoco)
             
-            # Calcular horas normais e extras baseado na classe do usuÃ¡rio
+            # Calcular horas normais e extras baseado na classe do usué¡rio
             horas_normais = self.usuario.expected_daily_hours
             self.horas_trabalhadas = min(horas_trabalhadas_brutas, horas_normais)
             self.horas_extras = self.usuario.calculate_overtime(horas_trabalhadas_brutas)
@@ -367,7 +367,7 @@ class TimeRecord(db.Model):
             db.session.add(hour_bank)
             db.session.flush()  # Para obter o ID
         
-        # Verificar se já foi processado para evitar duplicação
+        # Verificar se já foi processado para evitar duplicaçéo
         existing_transaction = HourBankTransaction.query.filter_by(
             time_record_id=self.id
         ).first()
@@ -386,7 +386,7 @@ class TimeRecord(db.Model):
                 f"Horas extras do dia {self.data.strftime('%d/%m/%Y')} - {diferenca_horas:.2f}h extras"
             )
             
-            # Associar a transação a este registro de ponto
+            # Associar a transaçéo a este registro de ponto
             transaction = HourBankTransaction.query.filter_by(
                 user_id=self.usuario.id,
                 time_record_id=None
@@ -405,10 +405,10 @@ class TimeRecord(db.Model):
                 hour_bank.debit_hours(
                     horas_a_debitar,
                     HourBankTransactionType.DEBITO,
-                    f"Compensação de déficit do dia {self.data.strftime('%d/%m/%Y')} - {horas_a_debitar:.2f}h debitadas"
+                    f"Compensaçéo de déficit do dia {self.data.strftime('%d/%m/%Y')} - {horas_a_debitar:.2f}h debitadas"
                 )
                 
-                # Associar a transação a este registro de ponto
+                # Associar a transaçéo a este registro de ponto
                 transaction = HourBankTransaction.query.filter_by(
                     user_id=self.usuario.id,
                     time_record_id=None
@@ -420,7 +420,7 @@ class TimeRecord(db.Model):
 
 
     def calcular_horas_detalhado(self, saida_almoco=None, volta_almoco=None):
-        """Calcula horas considerando horÃ¡rios de almoÃ§o especÃ­ficos"""
+        """Calcula horas considerando horé¡rios de almoé§o especé­ficos"""
         if not (self.entrada and self.saida):
             self.horas_trabalhadas = 0.0
             self.horas_extras = 0.0
@@ -430,7 +430,7 @@ class TimeRecord(db.Model):
         entrada_dt = datetime.combine(self.data, self.entrada)
         saida_dt = datetime.combine(self.data, self.saida)
         
-        # Se saÃ­da Ã© no dia seguinte
+        # Se saé­da é© no dia seguinte
         if self.saida < self.entrada:
             from datetime import timedelta
             saida_dt += timedelta(days=1)
@@ -439,14 +439,14 @@ class TimeRecord(db.Model):
         tempo_total = saida_dt - entrada_dt
         horas_totais = tempo_total.total_seconds() / 3600
         
-        # Calcular tempo de almoÃ§o
+        # Calcular tempo de almoé§o
         if saida_almoco and volta_almoco:
             saida_almoco_dt = datetime.combine(self.data, saida_almoco)
             volta_almoco_dt = datetime.combine(self.data, volta_almoco)
             tempo_almoco = volta_almoco_dt - saida_almoco_dt
             horas_almoco = tempo_almoco.total_seconds() / 3600
         else:
-            # Usar tempo padrÃ£o de almoÃ§o se esteve mais que as horas esperadas
+            # Usar tempo padré£o de almoé§o se esteve mais que as horas esperadas
             if horas_totais > self.usuario.expected_daily_hours:
                 horas_almoco = self.usuario.expected_lunch_hours
             else:
@@ -464,7 +464,7 @@ class TimeRecord(db.Model):
         return f'<TimeRecord {self.usuario.nome} - {self.data}>'
 
 class MedicalAttestation(db.Model):
-    """Modelo de atestado mÃ©dico"""
+    """Modelo de atestado mé©dico"""
     __tablename__ = 'medical_attestations'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -489,14 +489,14 @@ class MedicalAttestation(db.Model):
     
     @property
     def dias_licenca(self):
-        """Calcula o nÃºmero de dias de licenÃ§a"""
+        """Calcula o néºmero de dias de licené§a"""
         return (self.data_fim - self.data_inicio).days + 1
     
     def __repr__(self):
         return f'<MedicalAttestation {self.usuario.nome} - {self.data_inicio}>'
 
 class Notification(db.Model):
-    """Modelo de notificaÃ§Ãµes"""
+    """Modelo de notificaé§éµes"""
     __tablename__ = 'notifications'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -512,7 +512,7 @@ class Notification(db.Model):
         return f'<Notification {self.titulo}>'
 
 class SecurityLog(db.Model):
-    """Modelo de logs de seguranÃ§a"""
+    """Modelo de logs de segurané§a"""
     __tablename__ = 'security_logs'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -528,7 +528,7 @@ class SecurityLog(db.Model):
         return f'<SecurityLog {self.acao} - {self.created_at}'
 
 class SystemConfig(db.Model):
-    """Modelo de configuraÃ§Ãµes do sistema"""
+    """Modelo de configuraé§éµes do sistema"""
     __tablename__ = 'system_configs'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -540,7 +540,7 @@ class SystemConfig(db.Model):
     def __repr__(self):
         return f'<SystemConfig {self.chave}>'
 
-# Removido - classe DropboxConfig não é mais necessária com sistema local
+# Removido - classe DropboxConfig néo é mais necessária com sistema local
 
 class BackupHistory(db.Model):
     """Histórico de backups"""
@@ -563,7 +563,7 @@ class BackupHistory(db.Model):
     
     @property
     def duration_formatted(self):
-        """Retorna duração formatada"""
+        """Retorna duraçéo formatada"""
         if not self.duration_seconds:
             return "N/A"
         
@@ -594,7 +594,7 @@ class BackupHistory(db.Model):
         return f'<BackupHistory {self.filename} - {self.status.value}>'
 
 class UserApprovalRequest(db.Model):
-    """Solicitações de aprovação de usuários"""
+    """Solicitações de aprovaçéo de usuários"""
     __tablename__ = 'user_approval_requests'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -651,8 +651,8 @@ class OvertimeSettings(db.Model):
     max_daily_overtime = db.Column(db.Float, default=4.0, nullable=False)  # Máximo 4h extras por dia
     max_weekly_overtime = db.Column(db.Float, default=16.0, nullable=False)  # Máximo 16h extras por semana
     max_monthly_overtime = db.Column(db.Float, default=60.0, nullable=False)  # Máximo 60h extras por mês
-    requires_approval = db.Column(db.Boolean, default=True, nullable=False)  # Requer aprovação prévia
-    auto_approval_limit = db.Column(db.Float, default=2.0, nullable=False)  # Aprovação automática até 2h
+    requires_approval = db.Column(db.Boolean, default=True, nullable=False)  # Requer aprovaçéo prévia
+    auto_approval_limit = db.Column(db.Float, default=2.0, nullable=False)  # Aprovaçéo automática até 2h
     overtime_multiplier_normal = db.Column(db.Float, default=1.5, nullable=False)
     overtime_multiplier_urgent = db.Column(db.Float, default=2.0, nullable=False)
     overtime_multiplier_holiday = db.Column(db.Float, default=2.5, nullable=False)
@@ -722,14 +722,14 @@ class OvertimeRequest(db.Model):
         return self.actual_hours if self.actual_hours is not None else self.estimated_hours
     
     def calculate_compensation_value(self):
-        """Calcula valor da compensação baseado no multiplicador"""
+        """Calcula valor da compensaçéo baseado no multiplicador"""
         if not self.multiplier_applied:
             # Buscar multiplicador das configurações do usuário
             settings = OvertimeSettings.query.filter_by(user_id=self.user_id).first()
             if settings:
                 self.multiplier_applied = settings.get_multiplier(self.overtime_type)
             else:
-                self.multiplier_applied = 1.5  # Padrão
+                self.multiplier_applied = 1.5  # Padréo
         
         return self.effective_hours * self.multiplier_applied
     
@@ -781,12 +781,12 @@ class HourBank(db.Model):
     
     def add_hours(self, hours, transaction_type=HourBankTransactionType.CREDITO, description=""):
         """Adiciona horas ao banco"""
-        balance_before = self.current_balance  # Capturar saldo antes da alteração
+        balance_before = self.current_balance  # Capturar saldo antes da alteraçéo
         self.current_balance += hours
         self.total_credited += hours
         self.last_transaction = datetime.now(timezone.utc)
         
-        # Registrar transação
+        # Registrar transaçéo
         transaction = HourBankTransaction(
             user_id=self.user_id,
             transaction_type=transaction_type,
@@ -802,12 +802,12 @@ class HourBank(db.Model):
         if not allow_negative and not self.can_debit(hours):
             raise ValueError(f"Saldo insuficiente. Saldo atual: {self.current_balance}h, tentativa de débito: {hours}h")
         
-        balance_before = self.current_balance  # Capturar saldo antes da alteração
+        balance_before = self.current_balance  # Capturar saldo antes da alteraçéo
         self.current_balance -= hours
         self.total_debited += hours
         self.last_transaction = datetime.now(timezone.utc)
         
-        # Registrar transação
+        # Registrar transaçéo
         transaction = HourBankTransaction(
             user_id=self.user_id,
             transaction_type=transaction_type,
@@ -830,7 +830,7 @@ class HourBank(db.Model):
             
         self.last_transaction = datetime.now(timezone.utc)
         
-        # Registrar transação
+        # Registrar transaçéo
         transaction = HourBankTransaction(
             user_id=self.user_id,
             transaction_type=transaction_type,
@@ -860,7 +860,7 @@ class HourBankTransaction(db.Model):
     time_record_id = db.Column(db.Integer, db.ForeignKey('time_records.id'), nullable=True)
     created_by = db.Column(db.Integer, db.ForeignKey(USERS_TABLE_ID), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    expires_at = db.Column(db.DateTime, nullable=True)  # Data de expiração para créditos
+    expires_at = db.Column(db.DateTime, nullable=True)  # Data de expiraçéo para créditos
     
     # Relacionamentos
     user = db.relationship('User', foreign_keys=[user_id], overlaps="banco_horas_transacoes,usuario")
@@ -890,7 +890,7 @@ class HourBankTransaction(db.Model):
     
     @property
     def is_expired(self):
-        """Verifica se a transação expirou"""
+        """Verifica se a transaçéo expirou"""
         if not self.expires_at:
             return False
         return datetime.now(timezone.utc) > self.expires_at
@@ -904,13 +904,13 @@ class HourCompensation(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(USERS_TABLE_ID), nullable=False)
-    requested_date = db.Column(db.Date, nullable=False)  # Data solicitada para compensação
+    requested_date = db.Column(db.Date, nullable=False)  # Data solicitada para compensaçéo
     hours_to_compensate = db.Column(db.Float, nullable=False)  # Horas a compensar
     justification = db.Column(db.Text, nullable=True)
     status = db.Column(db.Enum(CompensationStatus), default=CompensationStatus.PENDENTE, nullable=False)
     approved_by = db.Column(db.Integer, db.ForeignKey(USERS_TABLE_ID), nullable=True)
     approved_at = db.Column(db.DateTime, nullable=True)
-    applied_at = db.Column(db.DateTime, nullable=True)  # Quando a compensação foi aplicada
+    applied_at = db.Column(db.DateTime, nullable=True)  # Quando a compensaçéo foi aplicada
     rejection_reason = db.Column(db.Text, nullable=True)
     hour_bank_transaction_id = db.Column(db.Integer, db.ForeignKey('hour_bank_transactions.id'), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
@@ -937,7 +937,7 @@ class HourCompensation(db.Model):
         return f"{hours}h {minutes}m"
     
     def can_apply(self):
-        """Verifica se a compensação pode ser aplicada"""
+        """Verifica se a compensaçéo pode ser aplicada"""
         if not self.user.hour_bank:
             return False
         return self.user.hour_bank.can_debit(self.hours_to_compensate)
@@ -958,7 +958,7 @@ class OvertimeLimits(db.Model):
     weekly_limit = db.Column(db.Float, default=16.0, nullable=False)
     monthly_limit = db.Column(db.Float, default=60.0, nullable=False)
     yearly_limit = db.Column(db.Float, default=600.0, nullable=False)
-    requires_approval_after = db.Column(db.Float, default=2.0, nullable=False)  # Horas que requerem aprovação
+    requires_approval_after = db.Column(db.Float, default=2.0, nullable=False)  # Horas que requerem aprovaçéo
     is_active = db.Column(db.Boolean, default=True, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -998,7 +998,7 @@ class FileUpload(db.Model):
     
     @property
     def file_extension(self):
-        """Retorna extensão do arquivo"""
+        """Retorna extenséo do arquivo"""
         return os.path.splitext(self.filename)[1].lower()
     
     @property
@@ -1072,7 +1072,7 @@ class HourBankHistory(db.Model):
     adjustment = db.Column(db.Float, nullable=False)
     new_balance = db.Column(db.Float, nullable=False)
     
-    # Detalhes da operação
+    # Detalhes da operaçéo
     reason = db.Column(db.Text, nullable=False)
     operation_type = db.Column(db.String(50), default='MANUAL_ADJUSTMENT')
     
@@ -1109,4 +1109,5 @@ class HourBankHistory(db.Model):
     def __repr__(self):
         return (f'<HourBankHistory User:{self.user_id} '
                 f'Admin:{self.admin_id} Adjustment:{self.adjustment:.1f}h>')
+
 
