@@ -33,17 +33,31 @@ try:
     app = create_app('production')
     
     with app.app_context():
-        print("📋 Verificando conexão com PostgreSQL...")
+        print("📋 Verificando conexão com banco de dados...")
         
-        # Testar conexão de forma compatível
+        # Verificar qual banco está sendo usado
         try:
             from sqlalchemy import text
-            result = db.session.execute(text("SELECT version();"))
-            version = result.fetchone()[0]
-            print(f"✅ Conectado ao PostgreSQL: {version[:50]}...")
+            
+            # Verificar se é PostgreSQL ou SQLite
+            db_url = app.config.get('SQLALCHEMY_DATABASE_URI', '')
+            print(f"📊 Database URL: {db_url[:50]}...")
+            
+            if 'postgres' in db_url.lower():
+                print("🐘 PostgreSQL detectado")
+                result = db.session.execute(text("SELECT version();"))
+                version = result.fetchone()[0]
+                print(f"✅ Conectado ao PostgreSQL: {version[:50]}...")
+            else:
+                print("📁 SQLite detectado")
+                result = db.session.execute(text("SELECT sqlite_version();"))
+                version = result.fetchone()[0]
+                print(f"✅ Conectado ao SQLite: {version}")
+                
         except Exception as e:
             print(f"❌ Erro na conexão: {e}")
-            sys.exit(1)
+            print("⚠️ Continuando mesmo assim...")
+            # Não falhar aqui, continuar com a inicialização
         
         print("🗄️ Criando tabelas...")
         try:

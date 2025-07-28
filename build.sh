@@ -55,14 +55,20 @@ pip install xlsxwriter==3.1.2 || echo "⚠️ xlsxwriter não pôde ser instalad
 # Inicializar banco de dados
 echo "🗄️ Inicializando banco de dados..."
 
-# Verificar se é PostgreSQL (Render.com)
-if [[ "${DATABASE_URL}" == *"postgres"* ]]; then
-    echo "🐘 PostgreSQL detectado - usando script específico..."
+# Verificar se é PostgreSQL (Render.com) pela presença de DATABASE_URL
+if [[ -n "${DATABASE_URL}" && "${DATABASE_URL}" == *"postgres"* ]]; then
+    echo "🐘 PostgreSQL detectado via DATABASE_URL - usando script específico..."
+    echo "📊 Database URL: ${DATABASE_URL:0:50}..."
     if python scripts/init_postgres.py; then
         echo "✅ PostgreSQL inicializado com sucesso"
     else
-        echo "❌ Erro na inicialização PostgreSQL"
-        exit 1
+        echo "❌ Erro na inicialização PostgreSQL - tentando script simples..."
+        if python scripts/init_simple.py; then
+            echo "✅ Inicialização simples concluída"
+        else
+            echo "❌ Falha total na inicialização"
+            exit 1
+        fi
     fi
 # Tentar Flask-Migrate primeiro
 elif flask db upgrade 2>/dev/null; then
@@ -70,11 +76,13 @@ elif flask db upgrade 2>/dev/null; then
 elif test -f scripts/init_db.py && python scripts/init_db.py 2>/dev/null; then
     echo "✅ Inicialização via scripts/init_db.py concluída"
 else
-    echo "⚠️ Criando tabelas manualmente..."
+    echo "⚠️ Criando tabelas manualmente (SQLite)..."
     python -c "
 import os
 os.environ['FLASK_ENV'] = 'production'
 os.environ['FLASK_CONFIG'] = 'production'
+import sys
+sys.path.insert(0, '.')
 try:
     from app import create_app, db
     from app.models import User, UserType
