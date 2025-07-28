@@ -55,8 +55,17 @@ pip install xlsxwriter==3.1.2 || echo "⚠️ xlsxwriter não pôde ser instalad
 # Inicializar banco de dados
 echo "🗄️ Inicializando banco de dados..."
 
+# Verificar se é PostgreSQL (Render.com)
+if [[ "${DATABASE_URL}" == *"postgres"* ]]; then
+    echo "🐘 PostgreSQL detectado - usando script específico..."
+    if python scripts/init_postgres.py; then
+        echo "✅ PostgreSQL inicializado com sucesso"
+    else
+        echo "❌ Erro na inicialização PostgreSQL"
+        exit 1
+    fi
 # Tentar Flask-Migrate primeiro
-if flask db upgrade 2>/dev/null; then
+elif flask db upgrade 2>/dev/null; then
     echo "✅ Migração Flask-Migrate concluída"
 elif test -f scripts/init_db.py && python scripts/init_db.py 2>/dev/null; then
     echo "✅ Inicialização via scripts/init_db.py concluída"
