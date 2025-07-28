@@ -3,7 +3,7 @@
     name: skponto-app
     env: python
     plan: free
-    buildCommand: chmod +x build.sh && ./build.sh
+    buildCommand: bash build.sh
     startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 wsgi:app
     envVars:
       - key: FLASK_ENV
