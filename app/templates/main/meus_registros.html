@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Meus Registros de Ponto</h2>
+            <a href="{{ url_for('main.ponto') }}" class="btn btn-primary">
+                <i class="fas fa-clock"></i> Registrar Ponto
+            </a>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="GET" class="row g-3">
+                    <div class="col-md-3">
+                        <label for="data_inicio" class="form-label">Data Início</label>
+                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" 
+                               value="{{ request.args.get('data_inicio', '') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="data_fim" class="form-label">Data Fim</label>
+                        <input type="date" class="form-control" id="data_fim" name="data_fim" 
+                               value="{{ request.args.get('data_fim', '') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">&nbsp;</label>
+                        <div>
+                            <button type="submit" class="btn btn-outline-primary">
+                                <i class="fas fa-filter"></i> Filtrar
+                            </button>
+                            <a href="{{ url_for('main.meus_registros') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times"></i> Limpar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de registros -->
+        <div class="card">
+            <div class="card-body">
+                {% if registros %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Entrada</th>
+                                    <th>Saída Almoço</th>
+                                    <th>Volta Almoço</th>
+                                    <th>Saída</th>
+                                    <th>Horas Trabalhadas</th>
+                                    <th>Horas Extras</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for registro in registros %}
+                                <tr>
+                                    <td>{{ registro.data|date }}</td>
+                                    <td>{{ registro.entrada|time if registro.entrada else '-' }}</td>
+                                    <td>{{ registro.saida_almoco|time if registro.saida_almoco else '-' }}</td>
+                                    <td>{{ registro.volta_almoco|time if registro.volta_almoco else '-' }}</td>
+                                    <td>{{ registro.saida|time if registro.saida else '-' }}</td>
+                                    <td>{{ registro.horas_trabalhadas|format_hours }}
+                                        {% if current_user.work_class %}
+                                            <br><small class="text-muted">/ {{ current_user.work_class.daily_work_hours }}h</small>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if registro.horas_extras > 0 %}
+                                            <span class="text-warning fw-bold">{{ registro.horas_extras|format_hours }}</span>
+                                        {% else %}
+                                            {{ registro.horas_extras|format_hours }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if registro.is_completo %}
+                                            <span class="badge bg-success">Completo</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Incompleto</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('main.editar_registro', id=registro.id) }}" 
+                                           class="btn btn-sm btn-outline-primary" title="Editar registro">
+                                            <i class="fas fa-clock"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Paginação -->
+                    {% if registros.pages > 1 %}
+                    <nav aria-label="Navegação de páginas">
+                        <ul class="pagination justify-content-center">
+                            {% if registros.has_prev %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('main.meus_registros', page=registros.prev_num, **request.args) }}">Anterior</a>
+                                </li>
+                            {% endif %}
+                            
+                            {% for page_num in registros.iter_pages() %}
+                                {% if page_num %}
+                                    {% if page_num != registros.page %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ url_for('main.meus_registros', page=page_num, **request.args) }}">{{ page_num }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item active">
+                                            <span class="page-link">{{ page_num }}</span>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if registros.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('main.meus_registros', page=registros.next_num, **request.args) }}">Próximo</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-clock fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">Nenhum registro encontrado</h5>
+                        <p class="text-muted">Comece registrando seu primeiro ponto!</p>
+                        <a href="{{ url_for('main.ponto') }}" class="btn btn-primary">
+                            Registrar Ponto
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

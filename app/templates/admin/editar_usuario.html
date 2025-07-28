@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Editar Usuário</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.nome.label(class="form-label") }}
+                            {{ form.nome(class="form-control") }}
+                            {% for error in form.nome.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.sobrenome.label(class="form-label") }}
+                            {{ form.sobrenome(class="form-control") }}
+                            {% for error in form.sobrenome.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control") }}
+                            {% for error in form.email.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.cpf.label(class="form-label") }}
+                            {{ form.cpf(class="form-control cpf-mask") }}
+                            {% for error in form.cpf.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.telefone.label(class="form-label") }}
+                            {{ form.telefone(class="form-control phone-mask") }}
+                            {% for error in form.telefone.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.cargo.label(class="form-label") }}
+                            {{ form.cargo(class="form-control") }}
+                            {% for error in form.cargo.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.user_type.label(class="form-label") }}
+                            {{ form.user_type(class="form-select") }}
+                            {% for error in form.user_type.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.work_class_id.label(class="form-label") }}
+                            {{ form.work_class_id(class="form-select") }}
+                            {% for error in form.work_class_id.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text">Define a carga horária e cálculo de horas extras</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-check mt-4">
+                                {{ form.is_active() }}
+                                {{ form.is_active.label(class="form-check-label") }}
+                            </div>
+                            {% for error in form.is_active.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.foto_perfil.label(class="form-label") }}
+                        {{ form.foto_perfil(class="form-control") }}
+                        {% for error in form.foto_perfil.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                        <div class="form-text">Formatos aceitos: JPG, PNG. Tamanho máximo: 2MB</div>
+                    </div>
+
+                    <!-- Alterar senha -->
+                    <hr>
+                    <h5>Alterar Senha (Opcional)</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.nova_senha.label(class="form-label") }}
+                            {{ form.nova_senha(class="form-control") }}
+                            {% for error in form.nova_senha.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.confirmar_senha.label(class="form-label") }}
+                            {{ form.confirmar_senha(class="form-control") }}
+                            {% for error in form.confirmar_senha.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Atenção:</strong> Deixe os campos de senha em branco para manter a senha atual.
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('admin.usuarios') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Informações adicionais -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Informações da Conta</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Criado em:</strong> {{ usuario.created_at|datetime }}</p>
+                        <p><strong>Último login:</strong> {{ usuario.last_login|datetime if usuario.last_login else 'Nunca' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Total de registros:</strong> {{ total_registros }}</p>
+                        <p><strong>Horas trabalhadas (total):</strong> {{ horas_total }}h</p>
+                    </div>
+                </div>
+                
+                {% if current_user.id != usuario.id %}
+                <hr>
+                <div class="d-flex gap-2">
+                    {% if usuario.is_active %}
+                        <form method="POST" action="{{ url_for('admin.desativar_usuario', id=usuario.id) }}" 
+                              class="d-inline" onsubmit="return confirm('Tem certeza que deseja desativar este usuário?')">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-user-slash"></i> Desativar Usuário
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="POST" action="{{ url_for('admin.ativar_usuario', id=usuario.id) }}" 
+                              class="d-inline">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-play"></i> Ativar Usuário
+                            </button>
+                        </form>
+                    {% endif %}
+                    
+                    <form method="POST" action="{{ url_for('admin.deletar_usuario', id=usuario.id) }}" 
+                          class="d-inline" onsubmit="return confirm('ATENÇÃO: Esta ação irá deletar permanentemente o usuário e todos os seus dados. Esta ação não pode ser desfeita. Tem certeza?')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Deletar Usuário
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

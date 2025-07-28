@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Editar Registro de Ponto</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="data" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="data" name="data" 
+                                   value="{{ registro.data.strftime('%Y-%m-%d') }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.entrada.label(class="form-label") }}
+                            {{ form.entrada(class="form-control") }}
+                            {% for error in form.entrada.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.saida.label(class="form-label") }}
+                            {{ form.saida(class="form-control") }}
+                            {% for error in form.saida.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.saida_almoco.label(class="form-label") }}
+                            {{ form.saida_almoco(class="form-control") }}
+                            {% for error in form.saida_almoco.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.volta_almoco.label(class="form-label") }}
+                            {{ form.volta_almoco(class="form-control") }}
+                            {% for error in form.volta_almoco.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.observacoes.label(class="form-label") }}
+                        {{ form.observacoes(class="form-control", rows="3") }}
+                        {% for error in form.observacoes.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Informações calculadas -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alert alert-info">
+                                <h6>Horas Trabalhadas: <span id="horas-trabalhadas">{{ registro.horas_trabalhadas|format_hours }}</span></h6>
+                                <h6>Horas Extras: <span id="horas-extras">{{ registro.horas_extras|format_hours }}</span></h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('main.meus_registros') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const campos = ['entrada', 'saida', 'saida_almoco', 'volta_almoco'];
+    campos.forEach(campo => {
+        document.getElementById(campo).addEventListener('change', calcularHoras);
+    });
+    
+    function calcularHoras() {
+        const entrada = document.getElementById('entrada').value;
+        const saida = document.getElementById('saida').value;
+        const saidaAlmoco = document.getElementById('saida_almoco').value;
+        const voltaAlmoco = document.getElementById('volta_almoco').value;
+        
+        if (entrada && saida) {
+            // Simular cálculo (em produção, seria melhor fazer via AJAX)
+            const entradaTime = new Date('2000-01-01 ' + entrada);
+            const saidaTime = new Date('2000-01-01 ' + saida);
+            let horasTrabalhadas = (saidaTime - entradaTime) / (1000 * 60 * 60);
+            
+            // Descontar almoço
+            if (saidaAlmoco && voltaAlmoco) {
+                const saidaAlmocoTime = new Date('2000-01-01 ' + saidaAlmoco);
+                const voltaAlmocoTime = new Date('2000-01-01 ' + voltaAlmoco);
+                const horasAlmoco = (voltaAlmocoTime - saidaAlmocoTime) / (1000 * 60 * 60);
+                horasTrabalhadas -= horasAlmoco;
+            }
+            
+            const horasExtras = Math.max(0, horasTrabalhadas - 8);
+            
+            // Função para formatar horas no estilo "Xh Ymin"
+            function formatHours(hoursDecimal) {
+                if (hoursDecimal === 0) return '0min';
+                
+                const hours = Math.floor(hoursDecimal);
+                const minutes = Math.round((hoursDecimal - hours) * 60);
+                
+                const result = [];
+                if (hours > 0) result.push(hours + 'h');
+                if (minutes > 0) result.push(minutes + 'min');
+                
+                return result.length > 0 ? result.join(' ') : '0min';
+            }
+            
+            document.getElementById('horas-trabalhadas').textContent = formatHours(horasTrabalhadas);
+            document.getElementById('horas-extras').textContent = formatHours(horasExtras);
+        }
+    }
+});
+</script>
+{% endblock %}

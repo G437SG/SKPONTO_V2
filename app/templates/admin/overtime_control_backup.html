@@ -1,0 +1,3640 @@
+{% extends "base.html" %}
+
+{% block title %}Controle de Horas Extras{% endblock %}
+
+{% block head %}
+{{ super() }}
+<!-- Meta tag para CSRF Token - SOLUÇÃO PARA SINCRONIZAÇÃO -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-clock"></i> Controle de Horas Extras
+                    </h3>
+                </div>
+                <div class="card-body" id="overtime-control">
+                    
+                    <!-- Sistema de Integração Automática -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card border-primary">
+                                <div class="card-header bg-primary text-white">
+                                    <h4><i class="fas fa-robot"></i> Sistema de Integração Automática</h4>
+                                    <small>Controle automático de horas extras baseado nos registros de ponto</small>
+                                </div>
+                                <div class="card-body">
+                                    {% if stats.automatic_stats %}
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h4 class="text-success">{{ (stats.automatic_stats.auto_credits if stats.automatic_stats and stats.automatic_stats.auto_credits else 0) | format_hours }}</h4>
+                                                <small class="text-muted">Horas Creditadas<br>Automaticamente</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h4 class="text-warning">{{ (stats.automatic_stats.auto_debits if stats.automatic_stats and stats.automatic_stats.auto_debits else 0) | format_hours }}</h4>
+                                                <small class="text-muted">Déficit Compensado<br>Automaticamente</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h4 class="text-info">{{ stats.automatic_stats.auto_transactions_count if stats.automatic_stats and stats.automatic_stats.auto_transactions_count else '0' }}</h4>
+                                                <small class="text-muted">Transações<br>Automáticas</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h4 class="text-primary">{{ stats.automatic_stats.users_with_auto_credits if stats.automatic_stats and stats.automatic_stats.users_with_auto_credits else '0' }}</h4>
+                                                <small class="text-muted">Usuários com<br>Créditos Auto</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h4 class="text-secondary">{{ stats.automatic_stats.users_with_auto_debits if stats.automatic_stats and stats.automatic_stats.users_with_auto_debits else '0' }}</h4>
+                                                <small class="text-muted">Usuários com<br>Débitos Auto</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h4 class="text-dark">{{ stats.automatic_stats.today_processed if stats.automatic_stats and stats.automatic_stats.today_processed else '0' }}</h4>
+                                                <small class="text-muted">Processados<br>Hoje</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="alert alert-info mb-0">
+                                        <h6><i class="fas fa-info-circle"></i> Como Funciona:</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <strong>🔄 Crédito Automático:</strong>
+                                                <ul class="mb-0">
+                                                    <li>Usuário trabalha mais que as horas diárias esperadas</li>
+                                                    <li>Sistema calcula horas extras automaticamente</li>
+                                                    <li>Horas são creditadas no banco do usuário</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <strong>⚖️ Débito Automático:</strong>
+                                                <ul class="mb-0">
+                                                    <li>Usuário trabalha menos que as horas diárias esperadas</li>
+                                                    <li>Sistema verifica saldo no banco de horas</li>
+                                                    <li>Déficit é compensado automaticamente (se houver saldo)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle"></i> Não foi possível carregar estatísticas do sistema automático.
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO REFORMULADA - AJUSTE MANUAL DE HORAS -->
+                    <div class="row mb-4">
+                        <div class="col-lg-8">
+                            <div class="card shadow-sm border-0">
+                                <div class="card-header bg-gradient-primary text-white">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-edit me-2"></i>
+                                        <h4 class="mb-0 fw-bold">Ajuste Manual de Horas</h4>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-light text-dark">Sistema Reformulado</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <!-- Status da Última Operação -->
+                                    <div id="adjustmentStatus" class="alert d-none" role="alert">
+                                        <div class="d-flex align-items-center">
+                                            <i id="statusIcon" class="fas me-2"></i>
+                                            <div id="statusMessage" class="flex-grow-1"></div>
+                                            <button type="button" class="btn-close" onclick="hideAdjustmentStatus()"></button>
+                                        </div>
+                                    </div>
+
+                                    <form id="adjustHoursForm" class="needs-validation" novalidate action="javascript:void(0);" method="post">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        
+                                        <!-- Seleção de Usuário -->
+                                        <div class="row mb-4">
+                                            <div class="col-12">
+                                                <label for="user_id" class="form-label fw-semibold">
+                                                    <i class="fas fa-user text-primary me-1"></i>Selecionar Usuário
+                                                </label>
+                                                <select class="form-select form-select-lg" id="user_id" name="user_id" required onchange="onUserSelected()">
+                                                    <option value="">🔍 Escolha um usuário para ajustar...</option>
+                                                    {% for user in all_users %}
+                                                        <option value="{{ user.id }}" 
+                                                                data-balance="{{ user.hour_bank.current_balance if user.hour_bank else 0 }}"
+                                                                data-name="{{ user.nome_completo }}"
+                                                                data-email="{{ user.email }}">
+                                                            {{ user.nome }} {{ user.sobrenome or '' }} 
+                                                            {% if user.hour_bank %}
+                                                                (Saldo: {{ user.hour_bank.current_balance | format_hours }})
+                                                            {% else %}
+                                                                (Sem banco de horas)
+                                                            {% endif %}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="form-text">
+                                                    <i class="fas fa-info-circle text-info"></i>
+                                                    {{ all_users|length if all_users else 0 }} usuário(s) disponível(is) para ajuste
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Por favor, selecione um usuário.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Informações do Usuário Selecionado -->
+                                        <div id="userInfo" class="alert alert-light border-start border-4 border-info d-none mb-4">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <strong>👤 Nome:</strong> <span id="selectedUserName">-</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>📧 Email:</strong> <span id="selectedUserEmail">-</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>💰 Saldo Atual:</strong> <span id="selectedUserBalance" class="fw-bold text-primary">-</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>🔮 Saldo Previsto:</strong> <span id="projectedBalance" class="fw-bold text-success">-</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tipo de Operação -->
+                                        <div class="row mb-4">
+                                            <div class="col-12">
+                                                <label class="form-label fw-semibold">
+                                                    <i class="fas fa-calculator text-primary me-1"></i>Tipo de Operação
+                                                </label>
+                                                <div class="btn-group w-100" role="group">
+                                                    <input type="radio" class="btn-check" name="operation" id="operation_add" value="add" checked onchange="updateDisplay()">
+                                                    <label class="btn btn-outline-success btn-lg" for="operation_add">
+                                                        <i class="fas fa-plus me-2"></i>
+                                                        <span class="d-block">Adicionar Horas</span>
+                                                        <small class="text-muted d-block">Crédito no banco de horas</small>
+                                                    </label>
+                                                    
+                                                    <input type="radio" class="btn-check" name="operation" id="operation_subtract" value="subtract" onchange="updateDisplay()">
+                                                    <label class="btn btn-outline-danger btn-lg" for="operation_subtract">
+                                                        <i class="fas fa-minus me-2"></i>
+                                                        <span class="d-block">Subtrair Horas</span>
+                                                        <small class="text-muted d-block">Débito no banco de horas</small>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Valores de Ajuste -->
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <label for="hours" class="form-label fw-semibold">
+                                                    <i class="fas fa-clock text-primary me-1"></i>Horas
+                                                </label>
+                                                <div class="input-group input-group-lg">
+                                                    <input type="number" class="form-control" id="hours" name="hours" 
+                                                           value="0" min="0" step="1" onchange="updateDisplay()" oninput="updateDisplay()">
+                                                    <span class="input-group-text">h</span>
+                                                </div>
+                                                <div class="form-text">
+                                                    <i class="fas fa-lightbulb text-warning"></i>
+                                                    Digite o número de horas (ex: 2, 8, 1)
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="minutes" class="form-label fw-semibold">
+                                                    <i class="fas fa-stopwatch text-primary me-1"></i>Minutos
+                                                </label>
+                                                <div class="input-group input-group-lg">
+                                                    <input type="number" class="form-control" id="minutes" name="minutes" 
+                                                           min="0" max="59" value="0" step="1" onchange="updateDisplay()" oninput="updateDisplay()">
+                                                    <span class="input-group-text">min</span>
+                                                </div>
+                                                <div class="form-text">
+                                                    <i class="fas fa-info-circle text-info"></i>
+                                                    Entre 0 e 59 minutos
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Minutos devem estar entre 0 e 59.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Resumo do Ajuste -->
+                                        <div class="card border-primary mb-4">
+                                            <div class="card-body bg-light">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-8">
+                                                        <h6 class="mb-2">📊 Resumo do Ajuste</h6>
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="me-3">
+                                                                <strong>Valor:</strong> 
+                                                                <span id="adjustmentValue" class="fs-5 fw-bold text-primary">0h 0m</span>
+                                                            </span>
+                                                            <span id="operationIcon" class="fs-4">➕</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 text-end">
+                                                        <div class="text-muted small">Valor em decimal</div>
+                                                        <div id="decimalValue" class="fs-5 fw-bold text-secondary">0.00h</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Motivo do Ajuste -->
+                                        <div class="mb-4">
+                                            <label for="reason" class="form-label fw-semibold">
+                                                <i class="fas fa-comment-alt text-primary me-1"></i>Motivo do Ajuste
+                                            </label>
+                                            <textarea class="form-control form-control-lg" id="reason" name="reason" rows="3" required 
+                                                      placeholder="📝 Descreva detalhadamente o motivo deste ajuste...&#10;&#10;Exemplos:&#10;• Correção de ponto devido a falha no sistema&#10;• Horas trabalhadas não registradas&#10;• Compensação de feriado trabalhado"></textarea>
+                                            <div class="form-text">
+                                                <i class="fas fa-exclamation-triangle text-warning"></i>
+                                                O motivo é obrigatório e será registrado no histórico
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Por favor, informe o motivo do ajuste.
+                                            </div>
+                                        </div>
+
+                                        <!-- Botões de Ação -->
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button" class="btn btn-outline-secondary btn-lg me-md-2" onclick="resetForm()">
+                                                <i class="fas fa-undo me-2"></i>Limpar Formulário
+                                            </button>
+                                            <button type="submit" class="btn btn-primary btn-lg px-4" id="submitBtn">
+                                                <i class="fas fa-save me-2"></i>
+                                                <span id="submitText">Aplicar Ajuste</span>
+                                                <span id="submitSpinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Painel de Ajuda e Estatísticas -->
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm mb-3">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-question-circle text-info me-2"></i>Como Usar
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex mb-3">
+                                        <div class="flex-shrink-0">
+                                            <span class="badge bg-primary rounded-circle">1</span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <strong>Selecione o usuário</strong><br>
+                                            <small class="text-muted">Escolha na lista suspensa</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="flex-shrink-0">
+                                            <span class="badge bg-primary rounded-circle">2</span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <strong>Escolha a operação</strong><br>
+                                            <small class="text-muted">Adicionar ou subtrair horas</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mb-3">
+                                        <div class="flex-shrink-0">
+                                            <span class="badge bg-primary rounded-circle">3</span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <strong>Informe o valor</strong><br>
+                                            <small class="text-muted">Horas e minutos separadamente</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <span class="badge bg-primary rounded-circle">4</span>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <strong>Descreva o motivo</strong><br>
+                                            <small class="text-muted">Justificativa obrigatória</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Estatísticas Rápidas -->
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-line text-success me-2"></i>Estatísticas
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-6 mb-3">
+                                            <div class="text-muted small">Usuários Ativos</div>
+                                            <div class="fs-4 fw-bold text-primary">{{ all_users|length if all_users else 0 }}</div>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <div class="text-muted small">Com Banco de Horas</div>
+                                            <div class="fs-4 fw-bold text-success">
+                                                {{ all_users|selectattr('hour_bank')|list|length if all_users else 0 }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <small class="text-muted">
+                                            <i class="fas fa-shield-alt text-success"></i>
+                                            Sistema seguro com logs de auditoria
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4><i class="fas fa-clipboard-list"></i> Controle de Solicitações</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>Sistema de controle de solicitações de horas extras.</p>
+                                    
+                                    {% if pending_requests %}
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Usuário</th>
+                                                        <th>Horas</th>
+                                                        <th>Data</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for request in pending_requests %}
+                                                    <tr>
+                                                        <td>{{ request.user.nome }} {{ request.user.sobrenome }}</td>
+                                                        <td>{{ request.estimated_hours | format_hours }}</td>
+                                                        <td>{{ request.created_at.strftime('%d/%m') }}</td>
+                                                        <td>
+                                                            <span class="badge badge-warning">
+                                                                <i class="fas fa-clock"></i> Pendente
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <a href="#" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-eye"></i> Ver Todas
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i> Nenhuma solicitação pendente
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LISTA DE USUÁRIOS REFORMULADA PARA ATUALIZAÇÃO AUTOMÁTICA -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-gradient-info text-white">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <h4 class="mb-0">
+                                                <i class="fas fa-users me-2"></i>Lista de Usuários - Sistema Dinâmico
+                                            </h4>
+                                            <small class="opacity-75">Atualização automática dos saldos em tempo real</small>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-light btn-sm" onclick="forceRefreshUserList()" title="Atualizar Lista">
+                                                <i class="fas fa-sync-alt"></i> Atualizar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    {% if users_with_hours %}
+                                    <div id="userListContainer" class="table-responsive">
+                                        <table class="table table-hover mb-0" id="userListTable">
+                                            <thead class="table-dark sticky-top">
+                                                <tr>
+                                                    <th class="ps-3">
+                                                        <i class="fas fa-user text-info me-1"></i>Usuário
+                                                    </th>
+                                                    <th>
+                                                        <i class="fas fa-envelope text-info me-1"></i>Contato
+                                                    </th>
+                                                    <th class="text-center">
+                                                        <i class="fas fa-clock text-info me-1"></i>Saldo Atual
+                                                    </th>
+                                                    <th class="text-center">
+                                                        <i class="fas fa-user-tag text-info me-1"></i>Perfil
+                                                    </th>
+                                                    <th class="text-center pe-3">
+                                                        <i class="fas fa-tools text-info me-1"></i>Ações
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="userListBody">
+                                                {% for user in users_with_hours %}
+                                                <tr class="user-row" data-user-id="{{ user.id }}" data-original-balance="{{ user.saldo }}">
+                                                    <td class="ps-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                                                                <span class="fw-bold">{{ user.nome[0]|upper }}</span>
+                                                            </div>
+                                                            <div>
+                                                                <div class="fw-semibold text-dark">{{ user.nome }}</div>
+                                                                <small class="text-muted">ID: {{ user.id }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            <small class="text-muted d-block">{{ user.email }}</small>
+                                                            <small class="text-success">
+                                                                <i class="fas fa-circle" style="font-size: 6px;"></i> Online
+                                                            </small>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <!-- NOVO SISTEMA DE BADGE DINÂMICO -->
+                                                        <div class="balance-container" 
+                                                             data-user-id="{{ user.id }}" 
+                                                             data-balance="{{ user.saldo }}"
+                                                             id="balance-user-{{ user.id }}">
+                                                            {% if user.saldo > 0 %}
+                                                                <span class="badge bg-success px-3 py-2 fs-6 fw-bold user-balance-badge">
+                                                                    <i class="fas fa-arrow-up me-1"></i>
+                                                                    +{{ "%.2f"|format(user.saldo) }}h
+                                                                </span>
+                                                            {% elif user.saldo < 0 %}
+                                                                <span class="badge bg-danger px-3 py-2 fs-6 fw-bold user-balance-badge">
+                                                                    <i class="fas fa-arrow-down me-1"></i>
+                                                                    {{ "%.2f"|format(user.saldo|abs) }}h
+                                                                </span>
+                                                            {% else %}
+                                                                <span class="badge bg-secondary px-3 py-2 fs-6 fw-bold user-balance-badge">
+                                                                    <i class="fas fa-minus me-1"></i>
+                                                                    0.00h
+                                                                </span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <!-- INDICADOR DE ÚLTIMA ATUALIZAÇÃO -->
+                                                        <div class="mt-1">
+                                                            <small class="text-muted last-update" id="lastUpdate-{{ user.id }}">
+                                                                <i class="fas fa-clock"></i> Inicial
+                                                            </small>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {% if user.user_type == 'ADMIN' %}
+                                                            <span class="badge bg-warning text-dark px-2 py-1">
+                                                                <i class="fas fa-crown me-1"></i>Administrador
+                                                            </span>
+                                                        {% elif user.user_type == 'TRABALHADOR' %}
+                                                            <span class="badge bg-info px-2 py-1">
+                                                                <i class="fas fa-user-tie me-1"></i>Trabalhador
+                                                            </span>
+                                                        {% else %}
+                                                            <span class="badge bg-light text-dark px-2 py-1">
+                                                                <i class="fas fa-user me-1"></i>{{ user.user_type }}
+                                                            </span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="text-center pe-3">
+                                                        <div class="btn-group" role="group">
+                                                            <button class="btn btn-sm btn-outline-primary" 
+                                                                    onclick="selectUserForAdjustment({{ user.id }}, '{{ user.nome }}', {{ user.saldo }})"
+                                                                    title="Ajustar Horas">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-outline-info" 
+                                                                    onclick="viewUserHistory({{ user.id }})"
+                                                                    title="Ver Histórico">
+                                                                <i class="fas fa-history"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <!-- ESTATÍSTICAS DINÂMICAS -->
+                                    <div class="card-footer bg-light">
+                                        <div class="row text-center">
+                                            <div class="col-3">
+                                                <div class="stat-box">
+                                                    <span class="stat-number text-primary fw-bold" id="totalUsersCount">{{ users_with_hours|length }}</span>
+                                                    <div class="stat-label text-muted small">Total</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="stat-box">
+                                                    <span class="stat-number text-success fw-bold" id="positiveBalanceCount">{{ users_with_hours|selectattr('saldo', '>', 0)|list|length }}</span>
+                                                    <div class="stat-label text-muted small">Positivos</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="stat-box">
+                                                    <span class="stat-number text-danger fw-bold" id="negativeBalanceCount">{{ users_with_hours|selectattr('saldo', '<', 0)|list|length }}</span>
+                                                    <div class="stat-label text-muted small">Negativos</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="stat-box">
+                                                    <span class="stat-number text-secondary fw-bold" id="zeroBalanceCount">{{ users_with_hours|selectattr('saldo', '==', 0)|list|length }}</span>
+                                                    <div class="stat-label text-muted small">Zerados</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {% else %}
+                                        <div class="p-4">
+                                            <div class="alert alert-warning text-center mb-0">
+                                                <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                                                <h5>Nenhum usuário encontrado!</h5>
+                                                <p class="mb-0">Verifique se existem usuários cadastrados e aprovados no sistema.</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4><i class="fas fa-chart-bar"></i> Estatísticas</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Resumo de usuários -->
+                                    <div class="row text-center mb-3">
+                                        <div class="col-6">
+                                            <h4 class="text-primary">{{ users_with_hours|length }}</h4>
+                                            <small class="text-muted">Total de Usuários</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4 class="text-success">
+                                                {{ users_with_hours|selectattr('saldo', '>', 0)|list|length }}
+                                            </h4>
+                                            <small class="text-muted">Com Saldo Positivo</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Saldo total -->
+                                    <div class="alert alert-info">
+                                        <h6><i class="fas fa-calculator"></i> Saldo Total do Sistema:</h6>
+                                        {% set total_saldo = users_with_hours|sum(attribute='saldo') %}
+                                        {% if total_saldo > 0 %}
+                                            <h4 class="text-success mb-0">
+                                                <i class="fas fa-plus"></i> {{ total_saldo | format_hours }}
+                                            </h4>
+                                        {% elif total_saldo < 0 %}
+                                            <h4 class="text-danger mb-0">
+                                                <i class="fas fa-minus"></i> {{ (total_saldo|abs) | format_hours }}
+                                            </h4>
+                                        {% else %}
+                                            <h4 class="text-secondary mb-0">
+                                                <i class="fas fa-equals"></i> {{ 0 | format_hours }}
+                                            </h4>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <!-- Ações rápidas -->
+                                    <div class="mt-3">
+                                        <h6><i class="fas fa-tools"></i> Ações Rápidas:</h6>
+                                        <div class="btn-group-vertical w-100">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="exportUsersList()">
+                                                <i class="fas fa-download"></i> Exportar Lista
+                                            </button>
+                                            <button class="btn btn-outline-success btn-sm mt-1" onclick="showBulkAdjust()">
+                                                <i class="fas fa-users-cog"></i> Ajuste em Massa
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Função para atualizar o display de horas total
+function updateHoursDisplay() {
+    const hours = parseInt($('#hours').val()) || 0;
+    const minutes = parseInt($('#minutes').val()) || 0;
+    const operation = $('input[name="operation"]:checked').val();
+    
+    // Validar minutos (manter entre 0 e 59)
+    if (minutes < 0) {
+        $('#minutes').val(0);
+        return updateHoursDisplay();
+    } else if (minutes >= 60) {
+        $('#minutes').val(59);
+        return updateHoursDisplay();
+    }
+    
+    // Calcular total em formato legível
+    let displayHours = Math.abs(hours);
+    let displayMinutes = minutes;
+    let sign = '';
+    
+    // Determinar sinal baseado na operação
+    if (operation === 'subtract' && (displayHours > 0 || displayMinutes > 0)) {
+        sign = '-';
+    } else if (operation === 'add' && (displayHours > 0 || displayMinutes > 0)) {
+        sign = '+';
+    }
+    
+    // Formatação do display
+    let timeDisplay = '';
+    if (displayHours === 0 && displayMinutes === 0) {
+        timeDisplay = '0h 0m';
+        sign = '';
+    } else if (displayHours === 0) {
+        timeDisplay = `${displayMinutes}m`;
+    } else if (displayMinutes === 0) {
+        timeDisplay = `${displayHours}h`;
+    } else {
+        timeDisplay = `${displayHours}h ${displayMinutes}m`;
+    }
+    
+    $('#hoursTotal').text(sign + timeDisplay);
+    
+    // Atualizar cor do display baseado na operação
+    const alertDiv = $('#hoursTotal').parent();
+    alertDiv.removeClass('alert-info alert-success alert-warning alert-danger');
+    
+    if (displayHours === 0 && displayMinutes === 0) {
+        alertDiv.addClass('alert-info');
+    } else if (operation === 'add') {
+        alertDiv.addClass('alert-success');
+    } else {
+        alertDiv.addClass('alert-warning');
+    }
+}
+
+// ============================================================================
+// SISTEMA REFORMULADO DE AJUSTE MANUAL DE HORAS - JAVASCRIPT
+// ============================================================================
+
+// FUNÇÃO ROBUSTA PARA OBTER CSRF TOKEN - SOLUÇÃO DEFINITIVA
+function getCSRFToken() {
+    console.log('🔐 Obtendo CSRF Token...');
+    
+    // Método 1: Meta tag (mais confiável)
+    let token = $('meta[name="csrf-token"]').attr('content');
+    if (token) {
+        console.log('✅ CSRF Token obtido via meta tag');
+        return token;
+    }
+    
+    // Método 2: Input hidden no formulário
+    token = $('input[name="csrf_token"]').val();
+    if (token) {
+        console.log('✅ CSRF Token obtido via input hidden');
+        return token;
+    }
+    
+    // Método 3: Template direto (fallback)
+    token = '{{ csrf_token() }}';
+    if (token && token !== '') {
+        console.log('✅ CSRF Token obtido via template');
+        return token;
+    }
+    
+    console.error('❌ CSRF Token não encontrado em nenhum método!');
+    return null;
+}
+
+$(document).ready(function() {
+    console.log('🚀 [DEBUG] Document ready - inicializando sistema...');
+    
+    // Verificar CSRF Token na inicialização
+    const token = getCSRFToken();
+    console.log('🔍 Status do CSRF Token:', token ? 'DISPONÍVEL' : 'NÃO ENCONTRADO');
+    
+    // Verificar se elementos existem
+    const form = document.getElementById('adjustHoursForm');
+    console.log('📋 [DEBUG] Formulário encontrado:', form ? 'SIM' : 'NÃO');
+    
+    const submitBtn = document.getElementById('submitBtn');
+    console.log('🔘 [DEBUG] Botão submit encontrado:', submitBtn ? 'SIM' : 'NÃO');
+    
+    // Inicializar sistema reformulado
+    initializeReformulatedAdjustmentSystem();
+    
+    console.log('✅ [DEBUG] Inicialização completa!');
+});
+
+function initializeReformulatedAdjustmentSystem() {
+    console.log('🚀 Inicializando Sistema Reformulado de Ajuste Manual');
+    
+    // Configurar formulário
+    setupAdjustmentForm();
+    
+    // Configurar validação em tempo real
+    setupRealTimeValidation();
+    
+    // Inicializar displays
+    updateDisplay();
+    
+    console.log('✅ Sistema reformulado inicializado com sucesso');
+}
+
+function setupAdjustmentForm() {
+    console.log('🔧 [DEBUG] Configurando event handler do formulário...');
+    
+    // Verificar se formulário existe
+    const form = $('#adjustHoursForm');
+    console.log('📋 [DEBUG] Formulário jQuery encontrado:', form.length > 0 ? 'SIM' : 'NÃO');
+    
+    // Handler do formulário principal
+    $('#adjustHoursForm').off('submit').on('submit', function(e) {
+        e.preventDefault();
+        
+        console.log('🎯 [DEBUG] EVENTO SUBMIT CAPTURADO! O botão foi clicado!');
+        console.log('📋 Formulário de ajuste submetido');
+        
+        // Validar formulário
+        if (!validateAdjustmentForm()) {
+            console.log('❌ Validação do formulário falhou');
+            return;
+        }
+        
+        // Processar ajuste
+        processManualAdjustment();
+    });
+    
+    console.log('✅ [DEBUG] Event listener anexado ao formulário!');
+}
+
+function setupRealTimeValidation() {
+    // Validação em tempo real dos campos
+    $('#user_id').on('change', onUserSelected);
+    $('#hours, #minutes').on('input change', updateDisplay);
+    $('#operation_add, #operation_subtract').on('change', updateDisplay);
+    $('#reason').on('input', validateReason);
+    
+    // Validação de minutos
+    $('#minutes').on('input', function() {
+        const value = parseInt($(this).val()) || 0;
+        if (value < 0 || value > 59) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+}
+
+function onUserSelected() {
+    const $select = $('#user_id');
+    const $option = $select.find('option:selected');
+    const userId = $select.val();
+    
+    if (userId) {
+        const balance = parseFloat($option.data('balance')) || 0;
+        const name = $option.data('name') || $option.text().split('(')[0].trim();
+        const email = $option.data('email') || '';
+        
+        // Mostrar informações do usuário
+        $('#userInfo').removeClass('d-none');
+        $('#selectedUserName').text(name);
+        $('#selectedUserEmail').text(email);
+        $('#selectedUserBalance').text(formatHours(balance));
+        
+        // Atualizar saldo previsto
+        updateProjectedBalance();
+        
+        console.log(`👤 Usuário selecionado: ${name} (Saldo: ${balance}h)`);
+    } else {
+        $('#userInfo').addClass('d-none');
+    }
+}
+
+function updateDisplay() {
+    // Obter valores
+    const hours = parseInt($('#hours').val()) || 0;
+    const minutes = parseInt($('#minutes').val()) || 0;
+    const operation = $('input[name="operation"]:checked').val();
+    
+    // Calcular total em decimal
+    const totalDecimal = hours + (minutes / 60);
+    const finalValue = operation === 'subtract' ? -totalDecimal : totalDecimal;
+    
+    // Atualizar displays
+    $('#adjustmentValue').text(formatHoursMinutes(hours, minutes));
+    $('#decimalValue').text(finalValue.toFixed(2) + 'h');
+    
+    // Atualizar ícone da operação
+    const icon = operation === 'add' ? '➕' : '➖';
+    const color = operation === 'add' ? 'text-success' : 'text-danger';
+    $('#operationIcon').text(icon).removeClass('text-success text-danger').addClass(color);
+    
+    // Atualizar saldo previsto
+    updateProjectedBalance();
+}
+
+function updateProjectedBalance() {
+    const $userSelect = $('#user_id');
+    const $option = $userSelect.find('option:selected');
+    
+    if ($userSelect.val()) {
+        const currentBalance = parseFloat($option.data('balance')) || 0;
+        const hours = parseInt($('#hours').val()) || 0;
+        const minutes = parseInt($('#minutes').val()) || 0;
+        const operation = $('input[name="operation"]:checked').val();
+        
+        // Calcular novo saldo
+        const adjustment = hours + (minutes / 60);
+        const finalAdjustment = operation === 'subtract' ? -adjustment : adjustment;
+        const projectedBalance = currentBalance + finalAdjustment;
+        
+        // Atualizar display
+        const $projectedElement = $('#projectedBalance');
+        $projectedElement.text(formatHours(projectedBalance));
+        
+        // Colorir baseado no valor
+        $projectedElement.removeClass('text-success text-warning text-danger');
+        if (projectedBalance > 0) {
+            $projectedElement.addClass('text-success');
+        } else if (projectedBalance < 0) {
+            $projectedElement.addClass('text-danger');
+        } else {
+            $projectedElement.addClass('text-warning');
+        }
+    }
+}
+
+function validateAdjustmentForm() {
+    let isValid = true;
+    
+    // Validar usuário
+    const userId = $('#user_id').val();
+    if (!userId) {
+        showFieldError('#user_id', 'Selecione um usuário');
+        isValid = false;
+    } else {
+        clearFieldError('#user_id');
+    }
+    
+    // Validar valores
+    const hours = parseInt($('#hours').val()) || 0;
+    const minutes = parseInt($('#minutes').val()) || 0;
+    
+    if (minutes < 0 || minutes > 59) {
+        showFieldError('#minutes', 'Minutos devem estar entre 0 e 59');
+        isValid = false;
+    } else {
+        clearFieldError('#minutes');
+    }
+    
+    if (hours === 0 && minutes === 0) {
+        showFieldError('#hours', 'Informe pelo menos horas ou minutos');
+        showFieldError('#minutes', 'Informe pelo menos horas ou minutos');
+        isValid = false;
+    }
+    
+    // Validar motivo
+    const reason = $('#reason').val().trim();
+    if (!reason) {
+        showFieldError('#reason', 'O motivo é obrigatório');
+        isValid = false;
+    } else if (reason.length < 10) {
+        showFieldError('#reason', 'O motivo deve ter pelo menos 10 caracteres');
+        isValid = false;
+    } else {
+        clearFieldError('#reason');
+    }
+    
+    return isValid;
+}
+
+function processManualAdjustment() {
+    console.log('⚡ Processando ajuste manual...');
+    
+    // Desabilitar botão e mostrar loading
+    const $submitBtn = $('#submitBtn');
+    const $submitText = $('#submitText');
+    const $submitSpinner = $('#submitSpinner');
+    
+    $submitBtn.prop('disabled', true);
+    $submitText.text('Processando...');
+    $submitSpinner.removeClass('d-none');
+    
+    // Preparar dados
+    const data = {
+        user_id: $('#user_id').val(),
+        hours: parseInt($('#hours').val()) || 0,
+        minutes: parseInt($('#minutes').val()) || 0,
+        operation: $('input[name="operation"]:checked').val(),
+        reason: $('#reason').val().trim()
+    };
+    
+    console.log('📤 Enviando dados:', data);
+    
+    // Verificar CSRF token usando função robusta
+    const csrfToken = getCSRFToken();
+    console.log('🔐 CSRF Token:', csrfToken ? 'Encontrado' : 'NÃO ENCONTRADO');
+    
+    if (!csrfToken) {
+        console.error('❌ CSRF Token não encontrado!');
+        showAdjustmentStatus('error', 'Erro de Segurança', 'Token CSRF não encontrado. Recarregue a página.');
+        return;
+    }
+    
+    // Enviar requisição
+    $.ajax({
+        url: '/admin/adjust-user-hours',
+        method: 'POST',
+        contentType: 'application/json',
+        headers: {
+            'X-CSRFToken': csrfToken
+        },
+        data: JSON.stringify(data),
+        success: function(response) {
+            console.log('✅ Ajuste realizado com sucesso:', response);
+            
+            if (response.success) {
+                // Mostrar sucesso
+                showAdjustmentStatus('success', 'Ajuste aplicado com sucesso!', response.message);
+                
+                // Extrair o novo saldo da resposta (remover o sinal + se houver)
+                let newBalance = parseFloat(response.new_balance) || 0;
+                console.log(`💰 Novo saldo recebido: ${newBalance}`);
+                
+                // Atualizar interface IMEDIATAMENTE
+                updateUserBalance(data.user_id, newBalance);
+                
+                // NOVA FUNCIONALIDADE: RECARREGAR LISTA COMPLETA VIA API
+                reloadUserListFromAPI();
+                
+                // Atualizar estatísticas da Lista de Usuários
+                updateUserListStatistics();
+                
+                // Disparar evento personalizado para outras partes da interface
+                $(document).trigger('userBalanceUpdated', {
+                    userId: data.user_id,
+                    newBalance: newBalance,
+                    adjustment: response.adjustment
+                });
+                
+                // Atualizar também o dropdown de usuários
+                updateUserInDropdown(data.user_id, newBalance);
+                
+                // Reset formulário após sucesso
+                setTimeout(() => {
+                    resetForm();
+                    
+                    // Atualização adicional para garantir sincronização
+                    refreshUserList();
+                }, 1500);
+                
+            } else {
+                showAdjustmentStatus('error', 'Erro no ajuste', response.error || 'Erro desconhecido');
+            }
+        },
+        error: function(xhr) {
+            console.error('❌ Erro na requisição:', xhr);
+            console.error('Status:', xhr.status);
+            console.error('Response Text:', xhr.responseText);
+            console.error('Response Headers:', xhr.getAllResponseHeaders());
+            
+            let errorMessage = 'Erro interno do servidor';
+            try {
+                const errorResponse = JSON.parse(xhr.responseText);
+                errorMessage = errorResponse.error || errorMessage;
+                console.error('Erro parsed:', errorResponse);
+            } catch (e) {
+                console.error('Erro ao processar resposta de erro:', e);
+                errorMessage = `HTTP ${xhr.status}: ${xhr.statusText || 'Erro desconhecido'}`;
+            }
+            
+            // Verificar se é erro de CSRF especificamente
+            if (xhr.status === 400 && xhr.responseText.includes('CSRF')) {
+                console.error('🚨 ERRO DE CSRF DETECTADO!');
+                errorMessage = 'Erro de token CSRF. Recarregue a página e tente novamente.';
+                
+                // Oferecer reload automático
+                if (confirm('Erro de segurança detectado. Deseja recarregar a página?')) {
+                    window.location.reload();
+                    return;
+                }
+            }
+            
+            showAdjustmentStatus('error', 'Erro na comunicação', errorMessage);
+        },
+        complete: function() {
+            // Reabilitar botão
+            $submitBtn.prop('disabled', false);
+            $submitText.text('Aplicar Ajuste');
+            $submitSpinner.addClass('d-none');
+        }
+    });
+}
+
+function showAdjustmentStatus(type, title, message) {
+    const $status = $('#adjustmentStatus');
+    const $icon = $('#statusIcon');
+    const $message = $('#statusMessage');
+    
+    // Configurar baseado no tipo
+    $status.removeClass('alert-success alert-danger alert-warning alert-info');
+    $icon.removeClass('fa-check-circle fa-exclamation-circle fa-exclamation-triangle fa-info-circle');
+    
+    if (type === 'success') {
+        $status.addClass('alert-success');
+        $icon.addClass('fa-check-circle text-success');
+    } else if (type === 'error') {
+        $status.addClass('alert-danger');
+        $icon.addClass('fa-exclamation-circle text-danger');
+    } else if (type === 'warning') {
+        $status.addClass('alert-warning');
+        $icon.addClass('fa-exclamation-triangle text-warning');
+    } else {
+        $status.addClass('alert-info');
+        $icon.addClass('fa-info-circle text-info');
+    }
+    
+    // Definir mensagem
+    $message.html(`<strong>${title}</strong><br>${message}`);
+    
+    // Mostrar
+    $status.removeClass('d-none');
+    
+    // Auto-hide após 10 segundos se for sucesso
+    if (type === 'success') {
+        setTimeout(() => {
+            hideAdjustmentStatus();
+        }, 10000);
+    }
+}
+
+function hideAdjustmentStatus() {
+    $('#adjustmentStatus').addClass('d-none');
+}
+
+function resetForm() {
+    // Limpar formulário
+    $('#adjustHoursForm')[0].reset();
+    
+    // Reset displays
+    $('#userInfo').addClass('d-none');
+    $('#adjustmentValue').text('0h 0m');
+    $('#decimalValue').text('0.00h');
+    $('#projectedBalance').text('-');
+    $('#operationIcon').text('➕').removeClass('text-danger').addClass('text-success');
+    
+    // Limpar validações
+    $('.is-invalid').removeClass('is-invalid');
+    $('.invalid-feedback').hide();
+    
+    // Reset radio buttons
+    $('#operation_add').prop('checked', true);
+    
+    console.log('🔄 Formulário resetado');
+}
+
+function showFieldError(selector, message) {
+    const $field = $(selector);
+    $field.addClass('is-invalid');
+    
+    // Encontrar ou criar feedback element
+    let $feedback = $field.siblings('.invalid-feedback');
+    if ($feedback.length === 0) {
+        $feedback = $('<div class="invalid-feedback"></div>');
+        $field.after($feedback);
+    }
+    
+    $feedback.text(message).show();
+}
+
+function clearFieldError(selector) {
+    const $field = $(selector);
+    $field.removeClass('is-invalid');
+    $field.siblings('.invalid-feedback').hide();
+}
+
+function validateReason() {
+    const reason = $('#reason').val().trim();
+    const $field = $('#reason');
+    
+    if (reason.length === 0) {
+        showFieldError('#reason', 'O motivo é obrigatório');
+    } else if (reason.length < 10) {
+        showFieldError('#reason', `Motivo muito curto (${reason.length}/10 caracteres mínimos)`);
+    } else {
+        clearFieldError('#reason');
+    }
+}
+
+// Funções utilitárias
+function formatHours(hours) {
+    if (hours === 0) return '0.00h';
+    return `${hours >= 0 ? '+' : ''}${hours.toFixed(2)}h`;
+}
+
+function formatHoursMinutes(hours, minutes) {
+    return `${hours}h ${minutes}m`;
+}
+
+// Manter compatibilidade com funções existentes
+function updateHoursDisplay() {
+    updateDisplay();
+}
+
+// FUNÇÃO COMPLETAMENTE REFORMULADA PARA ATUALIZAÇÃO DA LISTA
+function updateUserBalance(userId, newBalance) {
+    console.log(`🔄 [NOVA VERSÃO] Atualizando saldo do usuário ${userId}: ${newBalance}h`);
+    
+    // Converter para número
+    const balance = parseFloat(newBalance) || 0;
+    console.log(`💰 Saldo convertido: ${balance}`);
+    
+    // MÉTODO 1: ATUALIZAÇÃO DIRETA POR ID (MAIS CONFIÁVEL)
+    const balanceContainer = document.getElementById(`balance-user-${userId}`);
+    if (balanceContainer) {
+        console.log(`✅ Container encontrado para usuário ${userId}`);
+        
+        // Atualizar atributo data-balance
+        balanceContainer.setAttribute('data-balance', balance);
+        
+        // Criar novo badge HTML
+        let badgeHTML = '';
+        let badgeClass = '';
+        let icon = '';
+        let formattedBalance = '';
+        
+        if (balance > 0) {
+            badgeClass = 'bg-success';
+            icon = 'fas fa-arrow-up';
+            formattedBalance = `+${balance.toFixed(2)}h`;
+        } else if (balance < 0) {
+            badgeClass = 'bg-danger';
+            icon = 'fas fa-arrow-down';
+            formattedBalance = `${Math.abs(balance).toFixed(2)}h`;
+        } else {
+            badgeClass = 'bg-secondary';
+            icon = 'fas fa-minus';
+            formattedBalance = '0.00h';
+        }
+        
+        badgeHTML = `<span class="badge ${badgeClass} px-3 py-2 fs-6 fw-bold user-balance-badge">
+            <i class="${icon} me-1"></i>
+            ${formattedBalance}
+        </span>`;
+        
+        // Atualizar o conteúdo
+        balanceContainer.innerHTML = badgeHTML;
+        
+        // Atualizar timestamp
+        const lastUpdateElement = document.getElementById(`lastUpdate-${userId}`);
+        if (lastUpdateElement) {
+            const now = new Date().toLocaleTimeString('pt-BR');
+            lastUpdateElement.innerHTML = `<i class="fas fa-clock"></i> ${now}`;
+        }
+        
+        console.log(`✅ Badge atualizado para usuário ${userId}: ${formattedBalance}`);
+        
+        // Adicionar efeito visual de atualização
+        balanceContainer.style.transform = 'scale(1.1)';
+        balanceContainer.style.transition = 'transform 0.2s';
+        setTimeout(() => {
+            balanceContainer.style.transform = 'scale(1)';
+        }, 200);
+        
+        // MÉTODO 2: ATUALIZAÇÃO NO DROPDOWN TAMBÉM
+        updateUserInDropdown(userId, balance);
+        
+        // MÉTODO 3: ATUALIZAR ESTATÍSTICAS
+        updateUserListStatistics();
+        
+        return true;
+    } else {
+        console.error(`❌ Container balance-user-${userId} não encontrado!`);
+        
+        // FALLBACK: TENTAR MÉTODOS ALTERNATIVOS
+        return tryAlternativeUpdate(userId, balance);
+    }
+}
+
+// FUNÇÃO DE FALLBACK PARA MÉTODOS ALTERNATIVOS
+function tryAlternativeUpdate(userId, balance) {
+    console.log(`🚨 Tentando métodos alternativos para usuário ${userId}`);
+    
+    let updated = false;
+    
+    // Tentar por data-user-id na linha
+    const userRow = document.querySelector(`tr.user-row[data-user-id="${userId}"]`);
+    if (userRow) {
+        const balanceCell = userRow.querySelector('.balance-container');
+        if (balanceCell) {
+            // Usar mesmo método de atualização
+            balanceCell.setAttribute('data-balance', balance);
+            
+            let badgeHTML = '';
+            if (balance > 0) {
+                badgeHTML = `<span class="badge bg-success px-3 py-2 fs-6 fw-bold user-balance-badge">
+                    <i class="fas fa-arrow-up me-1"></i>
+                    +${balance.toFixed(2)}h
+                </span>`;
+            } else if (balance < 0) {
+                badgeHTML = `<span class="badge bg-danger px-3 py-2 fs-6 fw-bold user-balance-badge">
+                    <i class="fas fa-arrow-down me-1"></i>
+                    ${Math.abs(balance).toFixed(2)}h
+                </span>`;
+            } else {
+                badgeHTML = `<span class="badge bg-secondary px-3 py-2 fs-6 fw-bold user-balance-badge">
+                    <i class="fas fa-minus me-1"></i>
+                    0.00h
+                </span>`;
+            }
+            
+            balanceCell.innerHTML = badgeHTML;
+            console.log(`✅ Atualização alternativa bem-sucedida para usuário ${userId}`);
+            updated = true;
+        }
+    }
+    
+    if (!updated) {
+        console.error(`❌ Todos os métodos de atualização falharam para usuário ${userId}`);
+        
+        // ÚLTIMO RECURSO: FORÇAR RELOAD DA PÁGINA
+        console.log(`🔄 Programando reload da página em 3 segundos...`);
+        setTimeout(() => {
+            if (confirm('A lista não pôde ser atualizada automaticamente. Deseja recarregar a página?')) {
+                window.location.reload();
+            }
+        }, 3000);
+    }
+    
+    return updated;
+}
+
+// FUNÇÃO PARA SELECIONAR USUÁRIO PARA AJUSTE
+function selectUserForAdjustment(userId, userName, currentBalance) {
+    console.log(`🎯 Selecionando usuário ${userName} (ID: ${userId}) para ajuste`);
+    
+    // Selecionar no formulário
+    const userSelect = document.getElementById('user_id');
+    if (userSelect) {
+        userSelect.value = userId;
+        userSelect.dispatchEvent(new Event('change'));
+    }
+    
+    // Scroll para o formulário
+    const adjustmentForm = document.getElementById('adjustHoursForm');
+    if (adjustmentForm) {
+        adjustmentForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Destacar formulário temporariamente
+        adjustmentForm.style.border = '3px solid #007bff';
+        setTimeout(() => {
+            adjustmentForm.style.border = '';
+        }, 2000);
+    }
+}
+
+// FUNÇÃO PARA VER HISTÓRICO DO USUÁRIO
+function viewUserHistory(userId) {
+    console.log(`📊 Visualizando histórico do usuário ${userId}`);
+    alert(`Funcionalidade de histórico será implementada para o usuário ${userId}`);
+}
+
+// FUNÇÃO PARA FORÇAR ATUALIZAÇÃO DA LISTA
+function forceRefreshUserList() {
+    console.log(`� Forçando atualização completa da lista de usuários...`);
+    
+    // Mostrar indicador de carregamento
+    const refreshBtn = document.querySelector('button[onclick="forceRefreshUserList()"]');
+    if (refreshBtn) {
+        const originalHTML = refreshBtn.innerHTML;
+        refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Atualizando...';
+        refreshBtn.disabled = true;
+        
+        // Usar a nova função de reload via API
+        reloadUserListFromAPI();
+        
+        // Restaurar botão após 2 segundos
+        setTimeout(() => {
+            refreshBtn.innerHTML = originalHTML;
+            refreshBtn.disabled = false;
+        }, 2000);
+    } else {
+        // Se botão não encontrado, fazer reload direto
+        reloadUserListFromAPI();
+    }
+    }
+}
+
+// FUNÇÃO PARA ATUALIZAR ESTATÍSTICAS DA LISTA
+function updateUserListStatistics() {
+    console.log(`📊 Atualizando estatísticas da lista de usuários...`);
+    
+    // Contar diferentes tipos de saldo
+    let totalUsers = 0;
+    let positiveCount = 0;
+    let negativeCount = 0;
+    let zeroCount = 0;
+    
+    // Verificar cada usuário na lista
+    document.querySelectorAll('.balance-container[data-balance]').forEach(container => {
+        totalUsers++;
+        const balance = parseFloat(container.getAttribute('data-balance')) || 0;
+        
+        if (balance > 0) {
+            positiveCount++;
+        } else if (balance < 0) {
+            negativeCount++;
+        } else {
+            zeroCount++;
+        }
+    });
+    
+    // Atualizar displays
+    const updateStat = (id, value) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = value;
+            // Efeito visual de atualização
+            element.style.transform = 'scale(1.2)';
+            setTimeout(() => { element.style.transform = 'scale(1)'; }, 200);
+        }
+    };
+    
+    updateStat('totalUsersCount', totalUsers);
+    updateStat('positiveBalanceCount', positiveCount);
+    updateStat('negativeBalanceCount', negativeCount);
+    updateStat('zeroBalanceCount', zeroCount);
+    
+    console.log(`📈 Estatísticas atualizadas: ${totalUsers} total, ${positiveCount} positivos, ${negativeCount} negativos, ${zeroCount} zerados`);
+}
+
+// Função específica para atualizar usuário no dropdown
+function updateUserInDropdown(userId, newBalance) {
+    console.log(`🔄 Atualizando usuário ${userId} no dropdown com saldo ${newBalance}h`);
+    
+    const $option = $(`#user_id option[value="${userId}"]`);
+    if ($option.length) {
+        // Atualizar data-balance
+        $option.attr('data-balance', newBalance);
+        
+        // Atualizar texto da opção para mostrar novo saldo
+        const currentText = $option.text();
+        const namepart = currentText.split('(')[0].trim();
+        
+        let newText;
+        if (newBalance !== 0) {
+            newText = `${namepart} (Saldo: ${formatHours(newBalance)})`;
+        } else {
+            newText = `${namepart} (Sem banco de horas)`;
+        }
+        
+        $option.text(newText);
+        
+        console.log(`✅ Dropdown atualizado: ${newText}`);
+    }
+}
+
+// Função para atualizar dropdown de usuários
+function updateUserDropdown() {
+    console.log('🔄 Atualizando dropdown de usuários...');
+    
+    // Aqui você pode fazer uma chamada AJAX para recarregar os dados
+    // Por enquanto, vamos apenas recarregar a página para garantir sincronização
+    setTimeout(() => {
+        location.reload();
+    }, 2000);
+}
+
+// Função para atualizar estatísticas da Lista de Usuários
+function updateUserListStatistics() {
+    console.log('📊 Atualizando estatísticas da Lista de Usuários...');
+    
+    // Contar usuários com diferentes tipos de saldo
+    let totalUsers = 0;
+    let positiveBalance = 0;
+    let negativeBalance = 0;
+    let zeroBalance = 0;
+    
+    $('.user-balance[data-user-id]').each(function() {
+        totalUsers++;
+        const $badge = $(this).find('.badge');
+        
+        if ($badge.hasClass('badge-success')) {
+            positiveBalance++;
+        } else if ($badge.hasClass('badge-danger')) {
+            negativeBalance++;
+        } else {
+            zeroBalance++;
+        }
+    });
+    
+    // Atualizar displays de estatísticas se existirem
+    $('.total-users-count').text(totalUsers);
+    $('.positive-balance-count').text(positiveBalance);
+    $('.negative-balance-count').text(negativeBalance);
+    $('.zero-balance-count').text(zeroBalance);
+    
+    console.log(`📈 Estatísticas atualizadas: ${totalUsers} total, ${positiveBalance} positivos, ${negativeBalance} negativos`);
+}
+
+// Função para forçar atualização completa da Lista de Usuários
+function refreshUserList() {
+    console.log('🔄 Forçando atualização completa da Lista de Usuários...');
+    
+    // Fazer uma chamada AJAX para recarregar os dados da lista
+    $.ajax({
+        url: window.location.href,
+        method: 'GET',
+        success: function(response) {
+            // Extrair a nova tabela da resposta
+            const $newContent = $(response);
+            const $newTable = $newContent.find('.table-responsive table tbody');
+            
+            if ($newTable.length) {
+                // Substituir o conteúdo da tabela
+                $('.table-responsive table tbody').html($newTable.html());
+                
+                // Atualizar estatísticas
+                updateUserListStatistics();
+                
+                console.log('✅ Lista de Usuários atualizada com sucesso');
+            }
+        },
+        error: function(xhr) {
+            console.error('❌ Erro ao atualizar Lista de Usuários:', xhr);
+            // Fallback: recarregar página
+            setTimeout(() => location.reload(), 1000);
+        }
+    });
+}
+
+// Event handlers para compatibilidade
+$(document).on('userBalanceUpdated', function(e, data) {
+    console.log('📡 Evento userBalanceUpdated recebido:', data);
+    updateUserBalance(data.userId, data.newBalance);
+});
+
+// Função de compatibilidade para modal antigo (se existir)
+function openEditHoursModal(userId, userName, currentBalance) {
+    console.log(`🔧 Abrindo modal de edição: ${userName} (${currentBalance}h)`);
+    
+    // Selecionar usuário no novo formulário
+    $('#user_id').val(userId).trigger('change');
+    
+    // Scroll para o formulário
+    $('html, body').animate({
+        scrollTop: $('#manual-adjustment').offset().top - 100
+    }, 500);
+    
+    // Destacar seção temporariamente
+    $('#manual-adjustment').addClass('bg-light border-primary').delay(2000).queue(function() {
+        $(this).removeClass('bg-light border-primary').dequeue();
+    });
+}
+
+// Função de compatibilidade para ajuste direto
+function adjustUserHours(userId) {
+    console.log(`⚡ Ajuste direto para usuário ${userId}`);
+    openEditHoursModal(userId, 'Usuário', 0);
+}
+
+// ============================================================================
+// NOVA FUNÇÃO: RECARREGAR LISTA COMPLETA VIA API
+// ============================================================================
+function reloadUserListFromAPI() {
+    console.log('🔄 Recarregando lista de usuários via API...');
+    
+    $.ajax({
+        url: '/admin/get_all_users_data',
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': getCSRFToken()
+        },
+        success: function(response) {
+            if (response.success) {
+                console.log(`✅ Lista atualizada: ${response.users.length} usuários`);
+                
+                // Regenerar HTML da tabela
+                regenerateUserListHTML(response.users);
+                
+                // Atualizar estatísticas
+                updateUserListStatistics();
+                
+                // Mostrar feedback visual
+                showTemporaryNotification('Lista atualizada com sucesso!', 'success');
+                
+            } else {
+                console.error('❌ Erro na resposta da API:', response.error);
+                showTemporaryNotification('Erro ao atualizar lista', 'error');
+            }
+        },
+        error: function(xhr) {
+            console.error('❌ Erro na requisição da API:', xhr);
+            showTemporaryNotification('Erro de comunicação', 'error');
+        }
+    });
+}
+
+// Função para regenerar HTML da tabela de usuários
+function regenerateUserListHTML(users) {
+    console.log(`🔨 Regenerando HTML da tabela com ${users.length} usuários`);
+    
+    const tbody = document.getElementById('userListBody');
+    if (!tbody) {
+        console.error('❌ Element userListBody não encontrado!');
+        return;
+    }
+    
+    let html = '';
+    
+    users.forEach(user => {
+        const balance = parseFloat(user.saldo) || 0;
+        let badgeClass = 'bg-secondary';
+        let badgeIcon = 'fas fa-minus';
+        let balanceText = '0.00h';
+        
+        if (balance > 0) {
+            badgeClass = 'bg-success';
+            badgeIcon = 'fas fa-arrow-up';
+            balanceText = `+${balance.toFixed(2)}h`;
+        } else if (balance < 0) {
+            badgeClass = 'bg-danger';
+            badgeIcon = 'fas fa-arrow-down';
+            balanceText = `${Math.abs(balance).toFixed(2)}h`;
+        }
+        
+        const userTypeText = user.user_type === 'ADMIN' ? 'Administrador' : 
+                           user.user_type === 'TRABALHADOR' ? 'Trabalhador' : 'Estagiário';
+        
+        html += `
+            <tr class="user-row" data-user-id="${user.id}">
+                <td class="ps-3">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <div class="avatar-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="fw-bold">${user.nome} ${user.sobrenome || ''}</div>
+                            <small class="text-muted">${userTypeText}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <div class="text-primary">${user.email}</div>
+                        <small class="text-muted">ID: ${user.id}</small>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div id="balance-user-${user.id}" class="balance-container" data-balance="${balance}">
+                        <span class="badge ${badgeClass} px-3 py-2 fs-6 fw-bold user-balance-badge">
+                            <i class="${badgeIcon} me-1"></i>
+                            ${balanceText}
+                        </span>
+                    </div>
+                    <div id="lastUpdate-${user.id}" class="text-muted small mt-1">
+                        <i class="fas fa-clock"></i> Atualizado agora
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-outline-primary" 
+                                onclick="selectUserForAdjustment(${user.id}, '${user.nome}', ${balance})" 
+                                title="Ajustar Horas">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-info" 
+                                onclick="viewUserHistory(${user.id})" 
+                                title="Ver Histórico">
+                            <i class="fas fa-history"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+    
+    tbody.innerHTML = html;
+    console.log(`✅ Tabela regenerada com sucesso!`);
+}
+
+// Função para mostrar notificações temporárias
+function showTemporaryNotification(message, type = 'info') {
+    const alertClass = type === 'success' ? 'alert-success' : 
+                      type === 'error' ? 'alert-danger' : 'alert-info';
+    
+    const notification = $(`
+        <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
+             style="top: 20px; right: 20px; z-index: 9999;">
+            <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info'}-circle me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `);
+    
+    $('body').append(notification);
+    
+    // Auto-remove após 3 segundos
+    setTimeout(() => {
+        notification.fadeOut(() => notification.remove());
+    }, 3000);
+}
+                           user.user_type === 'TRABALHADOR' ? 'Trabalhador' : user.user_type;
+        
+        const userTypeBadge = user.user_type === 'ADMIN' ? 'bg-warning text-dark' :
+                            user.user_type === 'TRABALHADOR' ? 'bg-info' : 'bg-light text-dark';
+        
+        const userTypeIcon = user.user_type === 'ADMIN' ? 'fas fa-crown' :
+                           user.user_type === 'TRABALHADOR' ? 'fas fa-user-tie' : 'fas fa-user';
+        
+        const now = new Date().toLocaleTimeString('pt-BR');
+        
+        html += `
+            <tr class="user-row" data-user-id="${user.id}" data-original-balance="${balance}">
+                <td class="ps-3">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                            <span class="fw-bold">${user.nome.charAt(0).toUpperCase()}</span>
+                        </div>
+                        <div>
+                            <div class="fw-semibold text-dark">${user.nome}</div>
+                            <small class="text-muted">ID: ${user.id}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <small class="text-muted d-block">${user.email}</small>
+                        <small class="text-success">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> Online
+                        </small>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="balance-container" 
+                         data-user-id="${user.id}" 
+                         data-balance="${balance}"
+                         id="balance-user-${user.id}">
+                        <span class="badge ${badgeClass} px-3 py-2 fs-6 fw-bold user-balance-badge">
+                            <i class="${badgeIcon} me-1"></i>
+                            ${balanceText}
+                        </span>
+                    </div>
+                    <div class="mt-1">
+                        <small class="text-muted last-update" id="lastUpdate-${user.id}">
+                            <i class="fas fa-clock"></i> ${now}
+                        </small>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span class="badge ${userTypeBadge} px-2 py-1">
+                        <i class="${userTypeIcon} me-1"></i>${userTypeText}
+                    </span>
+                </td>
+                <td class="text-center pe-3">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-outline-primary" 
+                                onclick="selectUserForAdjustment(${user.id}, '${user.nome}', ${balance})"
+                                title="Ajustar Horas">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-info" 
+                                onclick="viewUserHistory(${user.id})"
+                                title="Ver Histórico">
+                            <i class="fas fa-history"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+    
+    // Atualizar HTML
+    tbody.innerHTML = html;
+    
+    console.log('✅ HTML da tabela regenerado com sucesso');
+    
+    // Adicionar efeito visual de atualização
+    $(tbody).css('opacity', '0.5').animate({opacity: 1}, 300);
+}
+
+// Função para mostrar notificações temporárias
+function showTemporaryNotification(message, type = 'info') {
+    const notification = $(`
+        <div class="alert alert-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} 
+                    alert-dismissible fade show position-fixed" 
+             style="top: 20px; right: 20px; z-index: 9999; min-width: 300px;">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `);
+    
+    $('body').append(notification);
+    
+    // Auto-remover após 3 segundos
+    setTimeout(() => {
+        notification.alert('close');
+    }, 3000);
+}
+
+    // Atualizar lista de usuários
+    updateUsersList();
+    
+    // Atualizar dashboard se existir função
+    if (typeof updateDashboard === 'function') {
+        updateDashboard();
+    }
+    
+    // Outras atualizações necessárias
+    updateOvertimeData();
+});
+    
+    // Processamento automático
+    $('#processAutomatic').click(function() {
+        var btn = $(this);
+        btn.prop('disabled', true).text('Processando...');
+        
+        $.ajax({
+            url: '/admin/overtime/process-automatic',
+            method: 'POST',
+            success: function(response) {
+                if (response.success) {
+                    alert('Processamento concluído!');
+                } else {
+                    alert('Erro: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('Erro ao processar');
+            },
+            complete: function() {
+                btn.prop('disabled', false).text('Executar Processamento');
+            }
+        });
+    });
+    
+    // Event listener global para atualizações de saldo
+    $(document).on('userBalanceUpdated', function(event, data) {
+        console.log('Saldo atualizado:', data);
+        
+        // Atualizar qualquer outro elemento da interface que mostre saldos
+        $('.user-balance-display').each(function() {
+            if ($(this).data('user-id') == data.userId) {
+                $(this).text(data.newBalance + 'h');
+            }
+        });
+        
+        // Atualizar cards de estatísticas se existirem
+        updateStatisticsCards();
+    });
+    
+    // Função para atualizar cards de estatísticas
+    function updateStatisticsCards() {
+        // Recalcular estatísticas se necessário
+        // Esta função pode ser expandida conforme necessário
+    }
+});
+
+// Função para atualizar saldo do usuário na lista em tempo real
+function updateUserBalance(userId, newBalance) {
+    // Converter string para número se necessário
+    const balance = parseFloat(newBalance.replace('+', ''));
+    
+    // Atualizar na tabela de usuários se existir
+    $(`tr[data-user-id="${userId}"] .user-balance`).each(function() {
+        let badgeClass = 'badge-secondary';
+        let iconClass = 'fas fa-equals';
+        let formattedBalance = '0.00h';
+        
+        if (balance > 0) {
+            badgeClass = 'badge-success';
+            iconClass = 'fas fa-plus';
+            formattedBalance = `${balance.toFixed(2)}h`;
+        } else if (balance < 0) {
+            badgeClass = 'badge-danger';
+            iconClass = 'fas fa-minus';
+            formattedBalance = `${Math.abs(balance).toFixed(2)}h`;
+        }
+        
+        $(this).html(`
+            <span class="badge ${badgeClass}">
+                <i class="${iconClass}"></i> ${formattedBalance}
+            </span>
+        `);
+    });
+    
+    // Atualizar no dropdown de seleção de usuários
+    $(`#user_id option[value="${userId}"]`).each(function() {
+        let text = $(this).text();
+        // Substituir o saldo atual pelo novo
+        let newText = text.replace(/- Saldo: [+-]?\d+(\.\d+)?h?/, `- Saldo: ${newBalance}h`);
+        if (newText === text) {
+            // Se não encontrou padrão, adicionar saldo
+            newText = text.replace(/ - Sem banco de horas/, ` - Saldo: ${newBalance}h`);
+        }
+        $(this).text(newText);
+    });
+    
+    console.log(`Saldo do usuário ${userId} atualizado para ${newBalance}h`);
+}
+
+// Função para atualizar dropdown de usuários
+function updateUserDropdown() {
+    $.ajax({
+        url: '/admin/api/users-with-balances',
+        method: 'GET',
+        success: function(users) {
+            const userSelect = $('#user_id');
+            const currentValue = userSelect.val();
+            
+            // Limpar opções exceto a primeira
+            userSelect.find('option:not(:first)').remove();
+            
+            // Adicionar usuários atualizados
+            users.forEach(function(user) {
+                const balanceText = user.hour_bank ? 
+                    `- Saldo: ${user.hour_bank.current_balance}h` : 
+                    '- Sem banco de horas';
+                    
+                userSelect.append(
+                    `<option value="${user.id}">${user.nome} ${user.sobrenome || ''} (${user.email}) ${balanceText}</option>`
+                );
+            });
+            
+            // Restaurar seleção se ainda existir
+            if (currentValue) {
+                userSelect.val(currentValue);
+            }
+        },
+        error: function() {
+            console.log('Erro ao atualizar dropdown de usuários');
+        }
+    });
+}
+
+// ==========================================
+// SISTEMA DE SINCRONIZAÇÃO COMPLETA ADICIONADO
+// ==========================================
+
+// Cache global para dados dos usuários
+let userDataCache = new Map();
+let isUpdating = false;
+
+// FUNÇÃO PARA BUSCAR DADOS ATUALIZADOS DO SERVIDOR
+async function fetchUpdatedUserData() {
+    try {
+        console.log('🔄 Buscando dados atualizados do servidor...');
+        
+        const response = await fetch('/admin/get_all_users_data', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            
+            // Atualizar cache
+            userDataCache.clear();
+            data.users.forEach(user => {
+                userDataCache.set(user.id, user);
+            });
+            
+            console.log(`✅ Dados atualizados: ${data.users.length} usuários`);
+            return data.users;
+        }
+        
+        throw new Error(`Erro HTTP: ${response.status}`);
+    } catch (error) {
+        console.error('❌ Erro ao buscar dados atualizados:', error);
+        return null;
+    }
+}
+
+// SINCRONIZAÇÃO COMPLETA - FUNÇÃO PRINCIPAL
+async function performCompleteSync() {
+    console.log('🔄 Iniciando sincronização completa...');
+    
+    try {
+        // Buscar dados atualizados do servidor
+        const updatedUsers = await fetchUpdatedUserData();
+        
+        if (updatedUsers) {
+            console.log('✅ Sincronização completa finalizada');
+            
+            // Mostrar indicador visual de atualização
+            showSyncIndicator();
+            
+            // Compatibilidade: atualizar sistema antigo também
+            await refreshUsersList();
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro na sincronização completa:', error);
+    }
+}
+
+// MOSTRAR INDICADOR DE SINCRONIZAÇÃO
+function showSyncIndicator() {
+    const indicator = document.createElement('div');
+    indicator.className = 'sync-indicator alert alert-success alert-dismissible fade show';
+    indicator.innerHTML = `
+        <strong>✅ Listas atualizadas!</strong> 
+        Todas as informações foram sincronizadas com o banco de dados.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    // Inserir no topo da página
+    const container = document.querySelector('.container-fluid') || document.body;
+    container.insertBefore(indicator, container.firstChild);
+    
+    // Remover automaticamente após 4 segundos
+    setTimeout(() => {
+        if (indicator.parentNode) {
+            indicator.remove();
+        }
+    }, 4000);
+}
+
+// OVERRIDE DA FUNÇÃO ORIGINAL PARA INCLUIR SINCRONIZAÇÃO
+const originalApplyHourAdjustment = window.applyHourAdjustment;
+window.applyHourAdjustment = async function(userId, element) {
+    const result = await originalApplyHourAdjustment(userId, element);
+    
+    // Após o ajuste bem-sucedido, executar sincronização completa
+    console.log('🔄 Executando sincronização pós-ajuste...');
+    await performCompleteSync();
+    
+    return result;
+};
+
+// INICIALIZAÇÃO DO SISTEMA DE SINCRONIZAÇÃO
+document.addEventListener('DOMContentLoaded', function() {
+    // Aguardar um pouco para garantir que o sistema principal carregou
+    setTimeout(() => {
+        console.log('🚀 Sistema de sincronização completa inicializado');
+        
+        // Adicionar estilos CSS para indicador
+        const style = document.createElement('style');
+        style.textContent = `
+            .sync-indicator {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9999;
+                min-width: 400px;
+                animation: slideInFromTop 0.3s ease-out;
+            }
+            
+            @keyframes slideInFromTop {
+                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Iniciar sincronização automática a cada 30 segundos
+        setInterval(async () => {
+            if (!isUpdating) {
+                console.log('🔄 Sincronização automática executando...');
+                await performCompleteSync();
+            }
+        }, 30000);
+    }, 2000);
+});
+</script>
+{% endblock %}
+    }
+    
+    .overtime-type-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-weight: 600;
+    }
+    
+    .overtime-normal { background: #17a2b8; color: white; }
+    .overtime-urgente { background: #dc3545; color: white; }
+    .overtime-feriado { background: #6f42c1; color: white; }
+    .overtime-domingo { background: #fd7e14; color: white; }
+    
+    .chart-container {
+        height: 300px;
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .quick-action-btn {
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .quick-action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* User Management Specific Styles */
+    .user-management-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+    }
+    
+    .user-table {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .user-table thead {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+    }
+    
+    .user-table th {
+        border: none;
+        padding: 1rem;
+        font-weight: 600;
+    }
+    
+    .user-table td {
+        padding: 0.75rem 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f3f4;
+    }
+    
+    .user-table tbody tr:hover {
+        background-color: #f8f9ff;
+        transform: scale(1.02);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
+    }
+    
+    .hour-bank-display {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    
+    .hour-bank-positive {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+    }
+    
+    .hour-bank-negative {
+        background: linear-gradient(45deg, #dc3545, #fd7e14);
+        color: white;
+    }
+    
+    .hour-bank-zero {
+        background: linear-gradient(45deg, #6c757d, #adb5bd);
+        color: white;
+    }
+    
+    .edit-btn {
+        background: linear-gradient(45deg, #17a2b8, #007bff);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .edit-btn:hover {
+        transform: rotate(15deg) scale(1.1);
+        background: linear-gradient(45deg, #138496, #0056b3);
+        box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+    }
+    
+    .search-container {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-input {
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        border: 2px solid #e9ecef;
+        border-radius: 25px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        z-index: 5;
+    }
+    
+    /* Enhanced Modal Styles */
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .modal-header {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        border-bottom: none;
+    }
+    
+    .modal-title {
+        font-weight: 600;
+    }
+    
+    .btn-close {
+        filter: brightness(0) invert(1);
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 0.75rem;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .operation-summary {
+        background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-left: 4px solid #667eea;
+    }
+    
+    .alert-custom {
+        border-radius: 10px;
+        border: none;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .alert-success-custom {
+        background: linear-gradient(45deg, #d4edda, #c3e6cb);
+        color: #155724;
+        border-left: 4px solid #28a745;
+    }
+    
+    .alert-warning-custom {
+        background: linear-gradient(45deg, #fff3cd, #ffeaa7);
+        color: #856404;
+        border-left: 4px solid #ffc107;
+    }
+    
+    /* Notification System */
+    .notification-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+    
+    .notification {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        border-left: 4px solid #28a745;
+        transform: translateX(100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .notification.show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
+    .notification.error {
+        border-left-color: #dc3545;
+    }
+    
+    .notification.warning {
+        border-left-color: #ffc107;
+    }
+    
+    .notification.info {
+        border-left-color: #17a2b8;
+    }
+    
+    /* Responsive Improvements */
+    @media (max-width: 768px) {
+        .user-table {
+            font-size: 0.875rem;
+        }
+        
+        .hour-bank-display {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+        }
+        
+        .edit-btn {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .quick-action-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+    }
+    
+    /* Loading States */
+    .loading {
+        position: relative;
+        color: transparent;
+    }
+    
+    .loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 2px solid #667eea;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    /* Custom Scrollbar */
+    .table-responsive::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border-radius: 10px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #5a6fd8, #6a4190);
+    }
+</style>
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-clock text-primary"></i>
+                    Controle de Horas Extras
+                </h1>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary quick-action-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                    </button>
+                    <button type="button" class="btn btn-outline-success quick-action-btn" onclick="openBatchProcessModal()">
+                        <i class="fas fa-cogs"></i> Processar Lote
+                    </button>
+                    <button type="button" class="btn btn-outline-info quick-action-btn" onclick="openReportsModal()">
+                        <i class="fas fa-chart-bar"></i> Relatórios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estatísticas Principais -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="overtime-stat">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ stats.total_users if stats else '0' }}</h4>
+                        <p class="mb-0">Total de Usuários</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="overtime-stat info">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ stats.pending_requests if stats else '0' }}</h4>
+                        <p class="mb-0">Solicitações Pendentes</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-hourglass-half fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="overtime-stat success">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ stats.approved_requests }}</h4>
+                        <p class="mb-0">Solicitações Aprovadas</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="overtime-stat warning">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ stats.alerts|length }}</h4>
+                        <p class="mb-0">Alertas Ativos</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alertas -->
+    {% if stats.alerts %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card alert-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                        Alertas de Limites Excedidos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% for alert in stats.alerts %}
+                    <div class="alert alert-warning d-flex align-items-center mb-2">
+                        <div class="user-avatar me-3">
+                            {{ alert.user.nome[0] }}{{ alert.user.sobrenome[0] if alert.user.sobrenome else '' }}
+                        </div>
+                        <div>
+                            <strong>{{ alert.user.nome_completo }}</strong> - 
+                            {% if alert.type == 'daily_limit_exceeded' %}
+                                Limite diário excedido: {{ alert.current }}h / {{ alert.limit }}h
+                            {% elif alert.type == 'weekly_limit_exceeded' %}
+                                Limite semanal excedido: {{ alert.current }}h / {{ alert.limit }}h
+                            {% endif %}
+                        </div>
+                        <div class="ms-auto">
+                            <button class="btn btn-sm btn-outline-primary" onclick="adjustUserHours({{ alert.user.id }})">
+                                <i class="fas fa-edit"></i> Ajustar
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Gráficos -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-line"></i>
+                        Horas Extras por Tipo
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="overtimeTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-trophy"></i>
+                        Top Banco de Horas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if stats and stats.top_hour_banks %}
+                    {% for bank in stats.top_hour_banks %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="user-avatar me-2">
+                                {{ bank.nome[0] }}{{ bank.sobrenome[0] if bank.sobrenome else '' }}
+                            </div>
+                            <div>
+                                <strong>{{ bank.nome }} {{ bank.sobrenome }}</strong>
+                            </div>
+                        </div>
+                        <div>
+                            {{ bank.current_balance | format_time_badge }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt"></i>
+                        Ações Rápidas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-primary w-100 quick-action-btn" onclick="scrollToAdjustForm()">
+                                <i class="fas fa-edit"></i><br>
+                                Ajustar Horas
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-success w-100 quick-action-btn" onclick="openApproveAllModal()">
+                                <i class="fas fa-check-double"></i><br>
+                                Aprovar Pendentes
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-warning w-100 quick-action-btn" onclick="openLimitsModal()">
+                                <i class="fas fa-sliders-h"></i><br>
+                                Configurar Limites
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-info w-100 quick-action-btn" onclick="openAnalyticsModal()">
+                                <i class="fas fa-analytics"></i><br>
+                                Análise Avançada
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Usuários e Banco de Horas -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users"></i>
+                        Banco de Horas por Usuário
+                    </h5>
+                    <div class="input-group" style="width: 250px;">
+                        <input type="text" class="form-control" id="searchUser" placeholder="Buscar usuário...">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Email</th>
+                                    <th>Cargo</th>
+                                    <th>Banco de Horas</th>
+                                    <th>Status</th>
+                                    <th>Última Atualização</th>
+                                    <th width="100">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- DEBUG: Verificação de usuários -->
+                                {% if all_users %}
+                                    <!-- DEBUG: {{ all_users|length }} usuários encontrados -->
+                                    {% for user in all_users %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-avatar me-2">
+                                                    {{ user.nome[0] }}{{ user.sobrenome[0] if user.sobrenome else '' }}
+                                                </div>
+                                                <div>
+                                                    <strong>{{ user.nome }} {{ user.sobrenome or '' }}</strong><br>
+                                                    <small class="text-muted">ID: {{ user.id }}</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.cargo or 'N/A' }}</td>
+                                        <td>
+                                            <span class="badge {% if user.hour_bank and user.hour_bank.current_balance >= 0 %}badge-success{% else %}badge-danger{% endif %} fs-6">
+                                                {{ (user.hour_bank.current_balance if user.hour_bank else 0) | format_hours }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if user.is_active %}
+                                                <span class="badge badge-success">Ativo</span>
+                                            {% else %}
+                                                <span class="badge badge-secondary">Inativo</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">
+                                                {{ user.hour_bank.updated_at.strftime('%d/%m/%Y %H:%M') if user.hour_bank and user.hour_bank.updated_at else 'Nunca' }}
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                   onclick="openEditHoursModal({{ user.id }}, '{{ user.nome }} {{ user.sobrenome or '' }}', {{ user.hour_bank.current_balance if user.hour_bank else 0 }})"
+                                                   title="Ajustar horas">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7" class="text-center text-danger">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <strong>Nenhum usuário encontrado!</strong><br>
+                                            <small>Verifique se existem usuários ativos e aprovados no sistema.</small>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Paginação -->
+                    <nav aria-label="Navegação da tabela">
+                        <ul class="pagination justify-content-center" id="tablePagination">
+                            <!-- Páginas serão inseridas via JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Histórico de Alterações -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-history"></i>
+                        Histórico de Alterações no Banco de Horas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Data/Hora</th>
+                                    <th>Usuário Afetado</th>
+                                    <th>Administrador</th>
+                                    <th>Alteração</th>
+                                    <th>Saldo Anterior</th>
+                                    <th>Saldo Atual</th>
+                                    <th>Motivo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                {% for change in hour_bank_history[:20] %}
+                                <tr>
+                                    <td>
+                                        <small>{{ change.created_at.strftime('%d/%m/%Y %H:%M') }}</small>
+                                    </td>
+                                    <td>
+                                        <strong>{{ change.user.nome }} {{ change.user.sobrenome or '' }}</strong>
+                                    </td>
+                                    <td>
+                                        <small>{{ change.admin.nome }} {{ change.admin.sobrenome or '' }}</small>
+                                    </td>
+                                    <td>
+                                        {% if change.adjustment > 0 %}
+                                            <span class="text-success">
+                                                <i class="fas fa-plus"></i> {{ change.adjustment | format_hours }}
+                                            </span>
+                                        {% else %}
+                                            <span class="text-danger">
+                                                <i class="fas fa-minus"></i> {{ (change.adjustment|abs) | format_hours }}
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ change.old_balance | format_hours }}</td>
+                                    <td>{{ change.new_balance | format_hours }}</td>
+                                    <td>
+                                        <small>{{ change.reason[:50] }}{% if change.reason|length > 50 %}...{% endif %}</small>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    {% if hour_bank_history|length == 0 %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-clock fa-2x text-muted mb-2"></i>
+                        <p class="text-muted">Nenhuma alteração registrada ainda.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modais -->
+<!-- Modal de Edição de Banco de Horas -->
+<div class="modal fade" id="editHoursModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit"></i>
+                    Editar Banco de Horas
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="editHoursForm">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title">Informações do Usuário</h6>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="user-avatar me-3" id="modalUserAvatar">
+                                            <!-- Avatar será preenchido via JS -->
+                                        </div>
+                                        <div>
+                                            <strong id="modalUserName">Nome do Usuário</strong><br>
+                                            <small class="text-muted">ID: <span id="modalUserId"></span></small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small class="text-muted">Saldo Atual:</small><br>
+                                            <span class="badge badge-primary fs-6" id="modalCurrentBalance">0.0h</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Novo Saldo:</small><br>
+                                            <span class="badge badge-success fs-6" id="modalNewBalance">0.0h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de Alteração</label>
+                                <select class="form-select" id="editActionType" required onchange="updateCalculation()">
+                                    <option value="">Selecione uma ação</option>
+                                    <option value="add">Adicionar Horas</option>
+                                    <option value="subtract">Subtrair Horas</option>
+                                    <option value="set">Definir Saldo Total</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Quantidade</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="editHoursAmount" 
+                                           step="0.1" min="0" required onchange="updateCalculation()" 
+                                           placeholder="Ex: 2.5">
+                                    <span class="input-group-text">horas</span>
+                                </div>
+                                <div class="form-text">
+                                    Use decimais para minutos (ex: 0.5 = 30min, 1.25 = 1h15min)
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Motivo da Alteração 
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <textarea class="form-control" id="editReason" rows="4" required 
+                                          placeholder="Descreva o motivo desta alteração no banco de horas..."></textarea>
+                                <div class="form-text">
+                                    Este motivo será enviado ao usuário via notificação
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Resumo da Operação -->
+                    <div class="alert alert-info d-none" id="operationSummary">
+                        <h6><i class="fas fa-info-circle"></i> Resumo da Operação</h6>
+                        <div id="summaryText"></div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="confirmEditBtn" disabled>
+                        <i class="fas fa-save"></i> Confirmar Alteração
+                    </button>
+                </div>
+                
+                <input type="hidden" id="editUserId" name="user_id">
+                <input type="hidden" id="editCurrentBalance" name="current_balance">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal removido - conflito de IDs duplicados -->
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Dados para gráficos
+const overtimeTypeData = {{ overtime_by_type|tojson }};
+
+// Gráfico de tipos de horas extras
+const typeCtx = document.getElementById('overtimeTypeChart').getContext('2d');
+new Chart(typeCtx, {
+    type: 'bar',
+    data: {
+        labels: overtimeTypeData.map(item => item[0].replace('OvertimeType.', '')),
+        datasets: [{
+            label: 'Horas Extras',
+            data: overtimeTypeData.map(item => item[1]),
+            backgroundColor: [
+                'rgba(23, 162, 184, 0.8)',
+                'rgba(220, 53, 69, 0.8)',
+                'rgba(111, 66, 193, 0.8)',
+                'rgba(253, 126, 20, 0.8)',
+                'rgba(40, 167, 69, 0.8)'
+            ],
+            borderColor: [
+                'rgba(23, 162, 184, 1)',
+                'rgba(220, 53, 69, 1)',
+                'rgba(111, 66, 193, 1)',
+                'rgba(253, 126, 20, 1)',
+                'rgba(40, 167, 69, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Horas'
+                }
+            }
+        }
+    }
+});
+
+// Funções JavaScript
+let currentEditUserId = null;
+let currentEditUserName = '';
+let currentEditBalance = 0;
+
+function refreshData() {
+    location.reload();
+}
+
+// Função para abrir modal de edição de horas
+function openEditHoursModal(userId, userName, currentBalance) {
+    currentEditUserId = userId;
+    currentEditUserName = userName;
+    currentEditBalance = parseFloat(currentBalance) || 0;
+    
+    // Preencher informações do modal
+    document.getElementById('modalUserId').textContent = userId;
+    document.getElementById('modalUserName').textContent = userName;
+    document.getElementById('modalCurrentBalance').textContent = currentBalance.toFixed(1) + 'h';
+    document.getElementById('modalNewBalance').textContent = currentBalance.toFixed(1) + 'h';
+    
+    // Preencher avatar
+    const avatar = document.getElementById('modalUserAvatar');
+    const initials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
+    avatar.textContent = initials;
+    
+    // Definir valores nos campos hidden
+    document.getElementById('editUserId').value = userId;
+    document.getElementById('editCurrentBalance').value = currentBalance;
+    
+    // Limpar formulário
+    document.getElementById('editHoursForm').reset();
+    document.getElementById('editUserId').value = userId;
+    document.getElementById('editCurrentBalance').value = currentBalance;
+    
+    // Abrir modal
+    new bootstrap.Modal(document.getElementById('editHoursModal')).show();
+}
+
+// Função para atualizar cálculo em tempo real
+function updateCalculation() {
+    const actionType = document.getElementById('editActionType').value;
+    const amount = parseFloat(document.getElementById('editHoursAmount').value) || 0;
+    const reason = document.getElementById('editReason').value.trim();
+    
+    let newBalance = currentEditBalance;
+    let operationText = '';
+    
+    if (actionType && amount >= 0) {
+        switch(actionType) {
+            case 'add':
+                newBalance = currentEditBalance + amount;
+                operationText = `Adicionar ${amount.toFixed(1)}h ao saldo atual (${currentEditBalance.toFixed(1)}h)`;
+                break;
+            case 'subtract':
+                newBalance = currentEditBalance - amount;
+                operationText = `Subtrair ${amount.toFixed(1)}h do saldo atual (${currentEditBalance.toFixed(1)}h)`;
+                break;
+            case 'set':
+                newBalance = amount;
+                operationText = `Definir saldo total como ${amount.toFixed(1)}h (atual: ${currentEditBalance.toFixed(1)}h)`;
+                break;
+        }
+        
+        // Atualizar novo saldo
+        document.getElementById('modalNewBalance').textContent = newBalance.toFixed(1) + 'h';
+        document.getElementById('modalNewBalance').className = `badge fs-6 ${newBalance >= 0 ? 'badge-success' : 'badge-danger'}`;
+        
+        // Mostrar resumo
+        const summary = document.getElementById('operationSummary');
+        const summaryText = document.getElementById('summaryText');
+        summaryText.innerHTML = `
+            <strong>Usuário:</strong> ${currentEditUserName}<br>
+            <strong>Operação:</strong> ${operationText}<br>
+            <strong>Resultado:</strong> ${currentEditBalance.toFixed(1)}h → ${newBalance.toFixed(1)}h
+        `;
+        summary.classList.remove('d-none');
+        
+        // Habilitar botão se tudo estiver preenchido
+        const confirmBtn = document.getElementById('confirmEditBtn');
+        confirmBtn.disabled = !(actionType && amount > 0 && reason.length > 0);
+    } else {
+        // Ocultar resumo
+        document.getElementById('operationSummary').classList.add('d-none');
+        document.getElementById('confirmEditBtn').disabled = true;
+    }
+}
+
+// Busca na tabela de usuários
+document.getElementById('searchUser').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const tableRows = document.querySelectorAll('#usersTable tbody tr');
+    
+    tableRows.forEach(row => {
+        const userName = row.cells[0].textContent.toLowerCase();
+        const userEmail = row.cells[1].textContent.toLowerCase();
+        
+        if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+// Formulário de edição de horas
+document.getElementById('editHoursForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        user_id: parseInt(document.getElementById('editUserId').value),
+        action_type: document.getElementById('editActionType').value,
+        hours_amount: parseFloat(document.getElementById('editHoursAmount').value),
+        reason: document.getElementById('editReason').value,
+        current_balance: parseFloat(document.getElementById('editCurrentBalance').value)
+    };
+    
+    // Mostrar loading
+    const submitBtn = document.getElementById('confirmEditBtn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+    submitBtn.disabled = true;
+    
+    fetch('/admin/adjust-user-hours', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Mostrar sucesso
+            showNotification('Banco de horas atualizado com sucesso!', 'success');
+            
+            // Fechar modal
+            bootstrap.Modal.getInstance(document.getElementById('editHoursModal')).hide();
+            
+            // Recarregar página após pequeno delay
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
+        } else {
+            showNotification('Erro ao atualizar banco de horas: ' + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        showNotification('Erro interno do servidor', 'error');
+    })
+    .finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+});
+
+// Função para mostrar notificações
+function showNotification(message, type = 'info') {
+    const alertClass = type === 'success' ? 'alert-success' : 
+                     type === 'error' ? 'alert-danger' : 'alert-info';
+    
+    const notification = document.createElement('div');
+    notification.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remover após 5 segundos
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Função para obter CSRF token
+function getCsrfToken() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.getAttribute('content') : '';
+}
+
+// Adicionar listeners aos campos do formulário
+document.getElementById('editActionType').addEventListener('change', updateCalculation);
+document.getElementById('editHoursAmount').addEventListener('input', updateCalculation);
+document.getElementById('editReason').addEventListener('input', updateCalculation);
+
+function scrollToAdjustForm() {
+    // Rolar até o formulário de ajuste de horas
+    document.getElementById('adjustHoursForm').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+    });
+    
+    // Focar no campo de seleção de usuário
+    setTimeout(() => {
+        document.getElementById('user_id').focus();
+    }, 500);
+}
+
+function adjustUserHours(userId) {
+    // Rolar até o formulário e pré-selecionar o usuário
+    scrollToAdjustForm();
+    
+    // Selecionar o usuário no formulário
+    setTimeout(() => {
+        const userSelect = document.getElementById('user_id');
+        if (userSelect) {
+            userSelect.value = userId;
+            userSelect.dispatchEvent(new Event('change'));
+        }
+    }, 500);
+}
+
+function approveRequest(requestId) {
+    if (confirm('Confirma a aprovação desta solicitação?')) {
+        fetch(`/admin/overtime-request/${requestId}/approve`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({action: 'approve'})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Erro ao aprovar solicitação: ' + data.error);
+            }
+        });
+    }
+}
+
+function rejectRequest(requestId) {
+    const reason = prompt('Motivo da rejeição:');
+    if (reason) {
+        fetch(`/admin/overtime-request/${requestId}/approve`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                action: 'reject',
+                rejection_reason: reason
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Erro ao rejeitar solicitação: ' + data.error);
+            }
+        });
+    }
+}
+
+function viewRequestDetails(requestId) {
+    window.location.href = `/admin/overtime-request/${requestId}`;
+}
+
+// Outras funções
+function editUserHours(userId, userName, currentBalance) {
+    // Preencher form de ajuste com dados do usuário
+    $('#user_id').val(userId);
+    $('#reason').val(`Ajuste para ${userName}`);
+    
+    // Scroll para o formulário
+    document.getElementById('adjustHoursForm').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+    
+    // Destacar temporariamente o formulário
+    const form = $('#adjustHoursForm');
+    form.parent().addClass('border-primary');
+    setTimeout(() => {
+        form.parent().removeClass('border-primary');
+    }, 3000);
+}
+
+function exportUsersList() {
+    // Criar dados para exportação
+    const users = [];
+    $('tbody tr').each(function() {
+        const row = $(this);
+        const name = row.find('td:eq(0)').text().trim();
+        const email = row.find('td:eq(1)').text().trim();
+        const balance = row.find('td:eq(2)').text().trim();
+        const type = row.find('td:eq(3)').text().trim();
+        
+        if (name) {
+            users.push({
+                nome: name,
+                email: email,
+                saldo: balance,
+                tipo: type
+            });
+        }
+    });
+    
+    // Converter para CSV
+    const csvContent = "data:text/csv;charset=utf-8," 
+        + "Nome,Email,Saldo,Tipo\n"
+        + users.map(u => `"${u.nome}","${u.email}","${u.saldo}","${u.tipo}"`).join("\n");
+    
+    // Download
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `usuarios_horas_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function showBulkAdjust() {
+    const modal = `
+        <div class="modal fade" id="bulkAdjustModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-users-cog"></i> Ajuste em Massa
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="bulkAdjustForm">
+                            <div class="form-group">
+                                <label>Usuários a ajustar:</label>
+                                <div id="userCheckboxes" style="max-height: 200px; overflow-y: auto;">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Operação:</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="bulk_operation" value="add" checked>
+                                        <label class="form-check-label">
+                                            <i class="fas fa-plus text-success"></i> Adicionar
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="bulk_operation" value="subtract">
+                                        <label class="form-check-label">
+                                            <i class="fas fa-minus text-danger"></i> Subtrair
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Horas:</label>
+                                    <input type="number" class="form-control" id="bulk_hours" value="0">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Minutos:</label>
+                                    <input type="number" class="form-control" id="bulk_minutes" min="0" max="59" value="0">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mt-3">
+                                <label>Motivo do ajuste:</label>
+                                <textarea class="form-control" id="bulk_reason" rows="3" required 
+                                          placeholder="Descreva o motivo do ajuste em massa..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="processBulkAdjust()">
+                            <i class="fas fa-save"></i> Aplicar Ajustes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Remover modal existente se houver
+    $('#bulkAdjustModal').remove();
+    
+    // Adicionar modal ao body
+    $('body').append(modal);
+    
+    // Popular checkboxes dos usuários
+    let checkboxesHtml = '';
+    $('tbody tr').each(function() {
+        const row = $(this);
+        const name = row.find('td:eq(0)').text().trim();
+        const email = row.find('td:eq(1)').text().trim();
+        const balance = row.find('td:eq(2)').text().trim();
+        const editBtn = row.find('button[onclick*="editUserHours"]');
+        
+        if (editBtn.length > 0) {
+            const onclickAttr = editBtn.attr('onclick');
+            const userId = onclickAttr.match(/editUserHours\\((\\d+)/)[1];
+            
+            checkboxesHtml += `
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="${userId}" id="user_${userId}">
+                    <label class="form-check-label" for="user_${userId}">
+                        <strong>${name}</strong> - ${email} 
+                        <small class="text-muted">(${balance})</small>
+                    </label>
+                </div>
+            `;
+        }
+    });
+    
+    $('#userCheckboxes').html(checkboxesHtml);
+    
+    // Mostrar modal
+    $('#bulkAdjustModal').modal('show');
+}
+
+function processBulkAdjust() {
+    const selectedUsers = [];
+    $('#userCheckboxes input:checked').each(function() {
+        selectedUsers.push($(this).val());
+    });
+    
+    if (selectedUsers.length === 0) {
+        alert('Selecione pelo menos um usuário');
+        return;
+    }
+    
+    const hours = parseInt($('#bulk_hours').val()) || 0;
+    const minutes = parseInt($('#bulk_minutes').val()) || 0;
+    const operation = $('input[name="bulk_operation"]:checked').val();
+    const reason = $('#bulk_reason').val().trim();
+    
+    if (hours === 0 && minutes === 0) {
+        alert('Informe pelo menos horas ou minutos diferentes de zero');
+        return;
+    }
+    
+    if (!reason) {
+        alert('Informe o motivo do ajuste');
+        return;
+    }
+    
+    if (!confirm(`Confirma o ajuste em massa para ${selectedUsers.length} usuário(s)?\\nOperação: ${operation === 'add' ? 'Adicionar' : 'Subtrair'} ${hours}h ${minutes}m\\nMotivo: ${reason}`)) {
+        return;
+    }
+    
+    // Processar ajustes sequencialmente
+    let processed = 0;
+    let errors = 0;
+    
+    function processNext() {
+        if (processed >= selectedUsers.length) {
+            $('#bulkAdjustModal').modal('hide');
+            alert(`Processamento concluído!\\nSucesso: ${processed - errors}\\nErros: ${errors}`);
+            setTimeout(() => location.reload(), 1000);
+            return;
+        }
+        
+        const userId = selectedUsers[processed];
+        const data = {
+            user_id: userId,
+            hours: hours,
+            minutes: minutes,
+            operation: operation,
+            reason: reason
+        };
+        
+        $.ajax({
+            url: '/admin/adjust-user-hours',
+            method: 'POST',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': $('input[name="csrf_token"]').val()
+            },
+            data: JSON.stringify(data),
+            success: function(response) {
+                if (!response.success) {
+                    errors++;
+                }
+                processed++;
+                processNext();
+            },
+            error: function() {
+                errors++;
+                processed++;
+                processNext();
+            }
+        });
+    }
+    
+    processNext();
+}
+
+function openBatchProcessModal() {
+    const modal = `
+        <div class="modal fade" id="batchProcessModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-cogs"></i> Processamento Automático em Lote
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Processamento Automático</strong><br>
+                            Esta função processará automaticamente os registros de ponto para calcular horas extras e déficits.
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Data alvo:</label>
+                            <input type="date" class="form-control" id="batch_target_date" 
+                                   value="${new Date().toISOString().split('T')[0]}">
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="force_recalculate">
+                            <label class="form-check-label" for="force_recalculate">
+                                Forçar recálculo (sobrescrever registros existentes)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" onclick="processBatch()">
+                            <i class="fas fa-play"></i> Processar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    $('#batchProcessModal').remove();
+    $('body').append(modal);
+    $('#batchProcessModal').modal('show');
+}
+
+function processBatch() {
+    const targetDate = $('#batch_target_date').val();
+    const forceRecalculate = $('#force_recalculate').is(':checked');
+    
+    if (!targetDate) {
+        alert('Selecione uma data');
+        return;
+    }
+    
+    if (!confirm(`Confirma o processamento automático para ${targetDate}?`)) {
+        return;
+    }
+    
+    const btn = $('button[onclick="processBatch()"]');
+    btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Processando...');
+    
+    $.ajax({
+        url: '/admin/overtime-batch-process',
+        method: 'POST',
+        contentType: 'application/json',
+        headers: {
+            'X-CSRFToken': $('input[name="csrf_token"]').val()
+        },
+        data: JSON.stringify({
+            target_date: targetDate,
+            force_recalculate: forceRecalculate
+        }),
+        success: function(response) {
+            if (response.success) {
+                alert('Processamento concluído com sucesso!\\n' + response.message);
+                $('#batchProcessModal').modal('hide');
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                alert('Erro: ' + response.error);
+            }
+        },
+        error: function(xhr) {
+            const response = xhr.responseJSON || {};
+            alert('Erro ao processar: ' + (response.error || 'Erro interno'));
+        },
+        complete: function() {
+            btn.prop('disabled', false).html('<i class="fas fa-play"></i> Processar');
+        }
+    });
+}
+
+function openReportsModal() {
+    const modal = `
+        <div class="modal fade" id="reportsModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-chart-line"></i> Relatórios de Horas Extras
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Período:</h6>
+                                <div class="form-group">
+                                    <label>Data inicial:</label>
+                                    <input type="date" class="form-control" id="report_start_date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Data final:</label>
+                                    <input type="date" class="form-control" id="report_end_date" 
+                                           value="${new Date().toISOString().split('T')[0]}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Tipo de Relatório:</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="report_type" value="summary" checked>
+                                    <label class="form-check-label">Resumo Geral</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="report_type" value="detailed">
+                                    <label class="form-check-label">Detalhado por Usuário</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="report_type" value="transactions">
+                                    <label class="form-check-label">Histórico de Transações</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="include_charts">
+                                <label class="form-check-label">Incluir gráficos</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" onclick="generateReport('pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="generateReport('excel')">
+                            <i class="fas fa-file-excel"></i> Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Definir data inicial como 30 dias atrás
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    $('#reportsModal').remove();
+    $('body').append(modal);
+    $('#report_start_date').val(thirtyDaysAgo.toISOString().split('T')[0]);
+    $('#reportsModal').modal('show');
+}
+
+function generateReport(format) {
+    const startDate = $('#report_start_date').val();
+    const endDate = $('#report_end_date').val();
+    const reportType = $('input[name="report_type"]:checked').val();
+    const includeCharts = $('#include_charts').is(':checked');
+    
+    if (!startDate || !endDate) {
+        alert('Selecione o período do relatório');
+        return;
+    }
+    
+    // Criar URL de download
+    const params = new URLSearchParams({
+        start_date: startDate,
+        end_date: endDate,
+        report_type: reportType,
+        format: format,
+        include_charts: includeCharts
+    });
+    
+    const url = `/admin/overtime-report?${params.toString()}`;
+    
+    // Abrir em nova aba para download
+    window.open(url, '_blank');
+    
+    $('#reportsModal').modal('hide');
+}
+
+function openApproveAllModal() {
+    // Buscar solicitações pendentes
+    const pendingCount = $('.badge-warning:contains("Pendente")').length;
+    
+    if (pendingCount === 0) {
+        alert('Não há solicitações pendentes para aprovar');
+        return;
+    }
+    
+    if (confirm(`Confirma a aprovação de todas as ${pendingCount} solicitações pendentes?`)) {
+        // Implementar aprovação em massa
+        $.ajax({
+            url: '/admin/approve-all-overtime-requests',
+            method: 'POST',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': $('input[name="csrf_token"]').val()
+            },
+            data: JSON.stringify({}),
+            success: function(response) {
+                if (response.success) {
+                    alert('Todas as solicitações foram aprovadas com sucesso!');
+                    location.reload();
+                } else {
+                    alert('Erro: ' + response.error);
+                }
+            },
+            error: function(xhr) {
+                const response = xhr.responseJSON || {};
+                alert('Erro ao aprovar solicitações: ' + (response.error || 'Erro interno'));
+            }
+        });
+    }
+}
+
+function openLimitsModal() {
+    alert('Funcionalidade de configuração de limites será implementada na próxima versão');
+}
+
+function openAnalyticsModal() {
+    alert('Funcionalidade de análise avançada será implementada na próxima versão');
+}
+</script>
+{% endblock %}

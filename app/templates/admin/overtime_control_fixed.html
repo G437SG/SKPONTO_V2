@@ -1,0 +1,671 @@
+{% extends "base.html" %}
+
+{% block title %}Controle de Horas Extras{% endblock %}
+
+{% block head %}
+{{ super() }}
+<!-- Meta tag para CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+.card-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-clock"></i> Controle de Horas Extras
+                    </h3>
+                </div>
+                <div class="card-body">
+
+                    <!-- SEÇÃO PRINCIPAL - AJUSTE MANUAL DE HORAS -->
+                    <div class="row mb-4">
+                        <div class="col-lg-8">
+                            <div class="card shadow">
+                                <div class="card-header card-gradient text-white">
+                                    <h4 class="mb-0">
+                                        <i class="fas fa-edit me-2"></i>
+                                        Ajuste Manual de Horas
+                                    </h4>
+                                </div>
+                                <div class="card-body p-4">
+                                    
+                                    <!-- Status Messages -->
+                                    <div id="statusMessage" class="alert d-none" role="alert"></div>
+
+                                    <!-- Formulário Principal -->
+                                    <form id="adjustmentForm" method="POST" action="/admin/adjust-user-hours">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        
+                                        <!-- Seleção de Usuário -->
+                                        <div class="mb-4">
+                                            <label for="user_id" class="form-label fw-bold">
+                                                <i class="fas fa-user text-primary me-1"></i>
+                                                Selecionar Usuário
+                                            </label>
+                                            <select class="form-select form-select-lg" id="user_id" name="user_id" required>
+                                                <option value="">Escolha um usuário...</option>
+                                                {% for user in all_users %}
+                                                <option value="{{ user.id }}" 
+                                                        data-balance="{{ user.hour_bank.current_balance if user.hour_bank else 0 }}"
+                                                        data-name="{{ user.nome }} {{ user.sobrenome or '' }}"
+                                                        data-email="{{ user.email }}">
+                                                    {{ user.nome }} {{ user.sobrenome or '' }} 
+                                                    ({{ user.hour_bank.current_balance | format_hours if user.hour_bank else '0.00h' }})
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <!-- Informações do Usuário -->
+                                        <div id="userInfo" class="alert alert-info d-none mb-4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <strong>Nome:</strong> <span id="userName">-</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>Email:</strong> <span id="userEmail">-</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>Saldo Atual:</strong> <span id="currentBalance" class="fw-bold">-</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>Novo Saldo:</strong> <span id="newBalance" class="fw-bold">-</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tipo de Operação -->
+                                        <div class="mb-4">
+                                            <label class="form-label fw-bold">
+                                                <i class="fas fa-calculator text-primary me-1"></i>
+                                                Tipo de Operação
+                                            </label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="operation" 
+                                                               id="addHours" value="add" checked>
+                                                        <label class="form-check-label" for="addHours">
+                                                            <i class="fas fa-plus text-success me-1"></i>
+                                                            Adicionar Horas
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="operation" 
+                                                               id="subtractHours" value="subtract">
+                                                        <label class="form-check-label" for="subtractHours">
+                                                            <i class="fas fa-minus text-danger me-1"></i>
+                                                            Subtrair Horas
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Valores -->
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <label for="hours" class="form-label fw-bold">
+                                                    <i class="fas fa-clock text-primary me-1"></i>
+                                                    Horas
+                                                </label>
+                                                <input type="number" class="form-control form-control-lg" 
+                                                       id="hours" name="hours" value="0" min="0" step="1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="minutes" class="form-label fw-bold">
+                                                    <i class="fas fa-stopwatch text-primary me-1"></i>
+                                                    Minutos
+                                                </label>
+                                                <input type="number" class="form-control form-control-lg" 
+                                                       id="minutes" name="minutes" value="0" min="0" max="59" step="1">
+                                            </div>
+                                        </div>
+
+                                        <!-- Resumo -->
+                                        <div class="alert alert-light border mb-4">
+                                            <h6>📊 Resumo do Ajuste</h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <strong>Valor:</strong> <span id="adjustmentValue">0h 0m</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>Operação:</strong> <span id="operationType">Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Motivo -->
+                                        <div class="mb-4">
+                                            <label for="reason" class="form-label fw-bold">
+                                                <i class="fas fa-comment text-primary me-1"></i>
+                                                Motivo do Ajuste
+                                            </label>
+                                            <textarea class="form-control" id="reason" name="reason" rows="3" 
+                                                      required placeholder="Descreva o motivo do ajuste..."></textarea>
+                                        </div>
+
+                                        <!-- Botões -->
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                                                <i class="fas fa-undo me-1"></i>
+                                                Limpar
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" id="submitButton">
+                                                <i class="fas fa-save me-1"></i>
+                                                <span id="submitText">Aplicar Ajuste</span>
+                                                <span id="submitSpinner" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Painel de Ajuda -->
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-info-circle text-info me-1"></i>
+                                        Como Usar
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <ol class="list-unstyled">
+                                        <li class="mb-2">
+                                            <span class="badge bg-primary me-2">1</span>
+                                            Selecione o usuário
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="badge bg-primary me-2">2</span>
+                                            Escolha adicionar ou subtrair
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="badge bg-primary me-2">3</span>
+                                            Informe horas e minutos
+                                        </li>
+                                        <li class="mb-2">
+                                            <span class="badge bg-primary me-2">4</span>
+                                            Descreva o motivo
+                                        </li>
+                                        <li>
+                                            <span class="badge bg-success me-2">5</span>
+                                            Clique em "Aplicar Ajuste"
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <!-- Estatísticas -->
+                            <div class="card mt-3">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-bar text-success me-1"></i>
+                                        Estatísticas
+                                    </h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h4 class="text-primary">{{ all_users|length if all_users else 0 }}</h4>
+                                            <small class="text-muted">Usuários</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4 class="text-success">
+                                                {{ all_users|selectattr('hour_bank')|list|length if all_users else 0 }}
+                                            </h4>
+                                            <small class="text-muted">Com Banco de Horas</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Usuários -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-users text-primary me-1"></i>
+                                        Usuários e Saldos
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" id="usersTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Saldo Atual</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for user in all_users %}
+                                                <tr id="user-row-{{ user.id }}">
+                                                    <td>{{ user.nome }} {{ user.sobrenome or '' }}</td>
+                                                    <td>{{ user.email }}</td>
+                                                    <td id="balance-{{ user.id }}" class="fw-bold">
+                                                        {% if user.hour_bank %}
+                                                            {{ user.hour_bank.current_balance | format_hours }}
+                                                        {% else %}
+                                                            0.00h
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" 
+                                                                onclick="selectUser({{ user.id }})">
+                                                            <i class="fas fa-edit me-1"></i>
+                                                            Ajustar
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+console.log('🚀 Inicializando sistema de ajuste de horas...');
+
+// Variáveis globais
+let selectedUser = null;
+
+// Função para obter CSRF Token
+function getCSRFToken() {
+    const metaToken = document.querySelector('meta[name="csrf-token"]');
+    if (metaToken) {
+        return metaToken.getAttribute('content');
+    }
+    const hiddenToken = document.querySelector('input[name="csrf_token"]');
+    if (hiddenToken) {
+        return hiddenToken.value;
+    }
+    return null;
+}
+
+// Inicialização quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ DOM carregado, configurando eventos...');
+    
+    // Configurar eventos do formulário
+    setupFormEvents();
+    
+    // Configurar eventos dos campos
+    setupFieldEvents();
+    
+    console.log('✅ Sistema inicializado com sucesso!');
+});
+
+function setupFormEvents() {
+    const form = document.getElementById('adjustmentForm');
+    if (!form) {
+        console.error('❌ Formulário não encontrado!');
+        return;
+    }
+    
+    console.log('📋 Configurando evento de submit do formulário...');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        console.log('🎯 EVENTO SUBMIT CAPTURADO!');
+        
+        // Validar formulário
+        if (!validateForm()) {
+            console.log('❌ Validação falhou');
+            return;
+        }
+        
+        // Processar ajuste
+        processAdjustment();
+    });
+    
+    console.log('✅ Evento de submit configurado');
+}
+
+function setupFieldEvents() {
+    console.log('⚙️ Configurando eventos dos campos...');
+    
+    // Evento de seleção de usuário
+    const userSelect = document.getElementById('user_id');
+    if (userSelect) {
+        userSelect.addEventListener('change', onUserChange);
+    }
+    
+    // Eventos de atualização de valores
+    const hoursInput = document.getElementById('hours');
+    const minutesInput = document.getElementById('minutes');
+    const operationInputs = document.querySelectorAll('input[name="operation"]');
+    
+    if (hoursInput) hoursInput.addEventListener('input', updateSummary);
+    if (minutesInput) minutesInput.addEventListener('input', updateSummary);
+    
+    operationInputs.forEach(input => {
+        input.addEventListener('change', updateSummary);
+    });
+    
+    console.log('✅ Eventos dos campos configurados');
+}
+
+function onUserChange() {
+    const select = document.getElementById('user_id');
+    const selectedOption = select.options[select.selectedIndex];
+    
+    if (select.value) {
+        selectedUser = {
+            id: select.value,
+            name: selectedOption.dataset.name,
+            email: selectedOption.dataset.email,
+            balance: parseFloat(selectedOption.dataset.balance) || 0
+        };
+        
+        console.log('👤 Usuário selecionado:', selectedUser);
+        
+        // Mostrar informações do usuário
+        showUserInfo();
+        
+        // Atualizar resumo
+        updateSummary();
+    } else {
+        selectedUser = null;
+        hideUserInfo();
+    }
+}
+
+function showUserInfo() {
+    if (!selectedUser) return;
+    
+    const userInfo = document.getElementById('userInfo');
+    const userName = document.getElementById('userName');
+    const userEmail = document.getElementById('userEmail');
+    const currentBalance = document.getElementById('currentBalance');
+    
+    if (userInfo && userName && userEmail && currentBalance) {
+        userName.textContent = selectedUser.name;
+        userEmail.textContent = selectedUser.email;
+        currentBalance.textContent = formatHours(selectedUser.balance);
+        
+        userInfo.classList.remove('d-none');
+    }
+}
+
+function hideUserInfo() {
+    const userInfo = document.getElementById('userInfo');
+    if (userInfo) {
+        userInfo.classList.add('d-none');
+    }
+}
+
+function updateSummary() {
+    const hours = parseInt(document.getElementById('hours').value) || 0;
+    const minutes = parseInt(document.getElementById('minutes').value) || 0;
+    const operation = document.querySelector('input[name="operation"]:checked').value;
+    
+    // Atualizar display do valor
+    const adjustmentValue = document.getElementById('adjustmentValue');
+    if (adjustmentValue) {
+        adjustmentValue.textContent = `${hours}h ${minutes}m`;
+    }
+    
+    // Atualizar tipo de operação
+    const operationType = document.getElementById('operationType');
+    if (operationType) {
+        operationType.textContent = operation === 'add' ? 'Adicionar' : 'Subtrair';
+        operationType.className = operation === 'add' ? 'text-success' : 'text-danger';
+    }
+    
+    // Calcular novo saldo se usuário selecionado
+    if (selectedUser) {
+        const adjustment = hours + (minutes / 60);
+        const finalAdjustment = operation === 'subtract' ? -adjustment : adjustment;
+        const newBalance = selectedUser.balance + finalAdjustment;
+        
+        const newBalanceElement = document.getElementById('newBalance');
+        if (newBalanceElement) {
+            newBalanceElement.textContent = formatHours(newBalance);
+            newBalanceElement.className = newBalance >= 0 ? 'fw-bold text-success' : 'fw-bold text-danger';
+        }
+    }
+}
+
+function validateForm() {
+    console.log('🔍 Validando formulário...');
+    
+    // Verificar usuário selecionado
+    if (!selectedUser) {
+        showError('Por favor, selecione um usuário.');
+        return false;
+    }
+    
+    // Verificar valores
+    const hours = parseInt(document.getElementById('hours').value) || 0;
+    const minutes = parseInt(document.getElementById('minutes').value) || 0;
+    
+    if (minutes < 0 || minutes > 59) {
+        showError('Minutos devem estar entre 0 e 59.');
+        return false;
+    }
+    
+    if (hours === 0 && minutes === 0) {
+        showError('Informe pelo menos horas ou minutos.');
+        return false;
+    }
+    
+    // Verificar motivo
+    const reason = document.getElementById('reason').value.trim();
+    if (!reason) {
+        showError('O motivo é obrigatório.');
+        return false;
+    }
+    
+    if (reason.length < 10) {
+        showError('O motivo deve ter pelo menos 10 caracteres.');
+        return false;
+    }
+    
+    console.log('✅ Formulário válido');
+    return true;
+}
+
+function processAdjustment() {
+    console.log('⚡ Processando ajuste...');
+    
+    // Desabilitar botão
+    const submitButton = document.getElementById('submitButton');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+    
+    submitButton.disabled = true;
+    submitText.textContent = 'Processando...';
+    submitSpinner.classList.remove('d-none');
+    
+    // Preparar dados
+    const data = {
+        user_id: selectedUser.id,
+        hours: parseInt(document.getElementById('hours').value) || 0,
+        minutes: parseInt(document.getElementById('minutes').value) || 0,
+        operation: document.querySelector('input[name="operation"]:checked').value,
+        reason: document.getElementById('reason').value.trim()
+    };
+    
+    console.log('📤 Enviando dados:', data);
+    
+    // Obter CSRF token
+    const csrfToken = getCSRFToken();
+    if (!csrfToken) {
+        showError('Erro de segurança: Token CSRF não encontrado. Recarregue a página.');
+        resetSubmitButton();
+        return;
+    }
+    
+    console.log('🔐 CSRF Token encontrado');
+    
+    // Enviar requisição
+    fetch('/admin/adjust-user-hours', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        console.log('📥 Resposta recebida:', response.status);
+        return response.json();
+    })
+    .then(result => {
+        console.log('📋 Resultado:', result);
+        
+        if (result.success) {
+            showSuccess(result.message);
+            
+            // Atualizar saldo na tabela
+            updateUserBalanceInTable(selectedUser.id, result.new_balance);
+            
+            // Atualizar dados do usuário selecionado
+            selectedUser.balance = result.new_balance;
+            
+            // Resetar formulário
+            resetForm();
+        } else {
+            showError(result.message || 'Erro ao processar ajuste.');
+        }
+    })
+    .catch(error => {
+        console.error('❌ Erro na requisição:', error);
+        showError('Erro de conexão. Tente novamente.');
+    })
+    .finally(() => {
+        resetSubmitButton();
+    });
+}
+
+function updateUserBalanceInTable(userId, newBalance) {
+    const balanceElement = document.getElementById(`balance-${userId}`);
+    if (balanceElement) {
+        balanceElement.textContent = formatHours(newBalance);
+        
+        // Highlight da mudança
+        balanceElement.style.background = '#d4edda';
+        setTimeout(() => {
+            balanceElement.style.background = '';
+        }, 3000);
+    }
+    
+    // Atualizar também no select
+    const userSelect = document.getElementById('user_id');
+    const option = userSelect.querySelector(`option[value="${userId}"]`);
+    if (option) {
+        const name = option.textContent.split('(')[0].trim();
+        option.textContent = `${name} (${formatHours(newBalance)})`;
+        option.dataset.balance = newBalance;
+    }
+}
+
+function resetSubmitButton() {
+    const submitButton = document.getElementById('submitButton');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+    
+    submitButton.disabled = false;
+    submitText.textContent = 'Aplicar Ajuste';
+    submitSpinner.classList.add('d-none');
+}
+
+function resetForm() {
+    console.log('🔄 Resetando formulário...');
+    
+    // Limpar formulário
+    document.getElementById('adjustmentForm').reset();
+    
+    // Resetar variáveis
+    selectedUser = null;
+    
+    // Esconder informações do usuário
+    hideUserInfo();
+    
+    // Resetar resumo
+    document.getElementById('adjustmentValue').textContent = '0h 0m';
+    document.getElementById('operationType').textContent = 'Adicionar';
+    document.getElementById('newBalance').textContent = '-';
+    
+    // Marcar operação "adicionar" como padrão
+    document.getElementById('addHours').checked = true;
+    
+    console.log('✅ Formulário resetado');
+}
+
+function selectUser(userId) {
+    const userSelect = document.getElementById('user_id');
+    userSelect.value = userId;
+    onUserChange();
+    
+    // Scroll para o formulário
+    document.getElementById('adjustmentForm').scrollIntoView({ behavior: 'smooth' });
+}
+
+function showSuccess(message) {
+    const statusDiv = document.getElementById('statusMessage');
+    statusDiv.className = 'alert alert-success';
+    statusDiv.innerHTML = `
+        <i class="fas fa-check-circle me-2"></i>
+        <strong>Sucesso!</strong> ${message}
+    `;
+    statusDiv.classList.remove('d-none');
+    
+    // Auto-hide após 5 segundos
+    setTimeout(() => {
+        statusDiv.classList.add('d-none');
+    }, 5000);
+}
+
+function showError(message) {
+    const statusDiv = document.getElementById('statusMessage');
+    statusDiv.className = 'alert alert-danger';
+    statusDiv.innerHTML = `
+        <i class="fas fa-exclamation-circle me-2"></i>
+        <strong>Erro!</strong> ${message}
+    `;
+    statusDiv.classList.remove('d-none');
+}
+
+function formatHours(hours) {
+    const sign = hours >= 0 ? '+' : '';
+    return `${sign}${hours.toFixed(2)}h`;
+}
+
+console.log('✅ Script carregado com sucesso!');
+</script>
+{% endblock %}

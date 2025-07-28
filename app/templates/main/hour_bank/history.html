@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico - Banco de Horas{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2><i class="fas fa-history me-2"></i>Histórico do Banco de Horas</h2>
+                <a href="{{ url_for('main.my_hour_bank') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-filter me-2"></i>Filtros</h6>
+                </div>
+                <div class="card-body">
+                    <form method="GET" class="row g-3">
+                        <div class="col-md-3">
+                            <label for="type" class="form-label">Tipo de Transação</label>
+                            <select class="form-select" id="type" name="type">
+                                <option value="">Todos</option>
+                                {% for trans_type in transaction_types %}
+                                <option value="{{ trans_type.value }}" 
+                                        {% if transaction_type == trans_type.value %}selected{% endif %}>
+                                    {{ trans_type.value }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="start_date" class="form-label">Data Início</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" 
+                                   value="{{ start_date }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="end_date" class="form-label">Data Fim</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" 
+                                   value="{{ end_date }}">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">&nbsp;</label>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Filtrar
+                                </button>
+                                <a href="{{ url_for('main.my_hour_bank_history') }}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-eraser"></i> Limpar
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Transações -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-list me-2"></i>
+                        Transações 
+                        {% if transactions.total %}
+                            ({{ transactions.total }} encontrada{{ 's' if transactions.total > 1 else '' }})
+                        {% endif %}
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if transactions.items %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Data/Hora</th>
+                                        <th>Tipo</th>
+                                        <th>Horas</th>
+                                        <th>Saldo Anterior</th>
+                                        <th>Saldo Atual</th>
+                                        <th>Descrição</th>
+                                        <th>Origem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in transactions.items %}
+                                    <tr>
+                                        <td>
+                                            <small>
+                                                {{ transaction.created_at.strftime('%d/%m/%Y') }}<br>
+                                                <span class="text-muted">{{ transaction.created_at.strftime('%H:%M') }}</span>
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{{ 'success' if transaction.hours > 0 else 'danger' }}">
+                                                {{ transaction.transaction_type.value }}
+                                            </span>
+                                        </td>
+                                        <td class="text-{{ 'success' if transaction.hours > 0 else 'danger' }} fw-bold">
+                                            {{ "{:+.2f}h".format(transaction.hours) }}
+                                        </td>
+                                        <td>
+                                            {{ "%.2f"|format(transaction.balance_before if transaction.balance_before is not none else 0.0) }}h
+                                        </td>
+                                        <td class="fw-bold">
+                                            {{ "%.2f"|format(transaction.balance_after) }}h
+                                        </td>
+                                        <td>
+                                            {% if transaction.description %}
+                                                <span data-bs-toggle="tooltip" 
+                                                      title="{{ transaction.description }}">
+                                                    {{ transaction.description[:50] }}
+                                                    {% if transaction.description|length > 50 %}...{% endif %}
+                                                </span>
+                                            {% else %}
+                                                <small class="text-muted">Sem descrição</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if transaction.overtime_request_id %}
+                                                <small class="text-primary">
+                                                    <i class="fas fa-clock"></i> Horas Extras
+                                                </small>
+                                            {% elif transaction.compensation_id %}
+                                                <small class="text-warning">
+                                                    <i class="fas fa-balance-scale"></i> Compensação
+                                                </small>
+                                            {% else %}
+                                                <small class="text-muted">
+                                                    <i class="fas fa-cog"></i> Sistema
+                                                </small>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Paginação -->
+                        {% if transactions.pages > 1 %}
+                        <div class="d-flex justify-content-center mt-4">
+                            <nav aria-label="Navegação de páginas">
+                                <ul class="pagination">
+                                    {% if transactions.has_prev %}
+                                        <li class="page-item">
+                                            <a class="page-link" 
+                                               href="{{ url_for('main.my_hour_bank_history', page=transactions.prev_num, 
+                                                              type=transaction_type, start_date=start_date, end_date=end_date) }}">
+                                                Anterior
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% for page_num in transactions.iter_pages() %}
+                                        {% if page_num %}
+                                            {% if page_num != transactions.page %}
+                                                <li class="page-item">
+                                                    <a class="page-link" 
+                                                       href="{{ url_for('main.my_hour_bank_history', page=page_num,
+                                                                      type=transaction_type, start_date=start_date, end_date=end_date) }}">
+                                                        {{ page_num }}
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item active">
+                                                    <span class="page-link">{{ page_num }}</span>
+                                                </li>
+                                            {% endif %}
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <span class="page-link">…</span>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if transactions.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" 
+                                               href="{{ url_for('main.my_hour_bank_history', page=transactions.next_num,
+                                                              type=transaction_type, start_date=start_date, end_date=end_date) }}">
+                                                Próxima
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                        {% endif %}
+
+                    {% else %}
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-inbox fa-3x mb-3"></i>
+                            <h5>Nenhuma transação encontrada</h5>
+                            <p>
+                                {% if transaction_type or start_date or end_date %}
+                                    Tente ajustar os filtros ou 
+                                    <a href="{{ url_for('main.my_hour_bank_history') }}">remover todos os filtros</a>.
+                                {% else %}
+                                    Ainda não há transações no seu banco de horas.
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resumo -->
+    {% if transactions.items %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Resumo do Período</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <div class="border-end">
+                                <h4 class="text-success mb-1">
+                                    {{ "%.2f"|format(transactions.items|selectattr('hours', '>', 0)|map(attribute='hours')|sum) }}h
+                                </h4>
+                                <small class="text-muted">Total Creditado</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border-end">
+                                <h4 class="text-danger mb-1">
+                                    {{ "%.2f"|format(transactions.items|selectattr('hours', '<', 0)|map(attribute='hours')|map('abs')|sum) }}h
+                                </h4>
+                                <small class="text-muted">Total Debitado</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-primary mb-1">
+                                {{ "%.2f"|format(transactions.items|map(attribute='hours')|sum) }}h
+                            </h4>
+                            <small class="text-muted">Saldo Líquido</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+// Inicializar tooltips
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+
+<style>
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.025);
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+.border-end {
+    border-right: 1px solid #dee2e6 !important;
+}
+
+@media (max-width: 768px) {
+    .border-end {
+        border-right: none !important;
+        border-bottom: 1px solid #dee2e6 !important;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}

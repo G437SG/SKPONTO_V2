@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="d-flex align-items-center mb-4">
+                <a href="{{ url_for('admin.classes_trabalho') }}" class="btn btn-outline-secondary me-3">
+                    <i class="bi bi-arrow-left"></i>
+                    Voltar
+                </a>
+                <h1>
+                    <i class="bi bi-person-plus"></i>
+                    Atribuir Classe: {{ classe.name }}
+                </h1>
+            </div>
+
+            <!-- Informações da classe -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>{{ classe.name }}</h5>
+                            <p class="text-muted">{{ classe.descricao }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <small class="text-muted">Horas Diárias</small>
+                                    <div><strong>{{ "%.1f"|format(classe.daily_work_hours) }}h</strong></div>
+                                </div>
+                                <div class="col-6">
+                                    <small class="text-muted">Total Esperado</small>
+                                    <div><strong>{{ "%.1f"|format(classe.total_daily_hours) }}h</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estatísticas de usuários -->
+            <div class="row mb-4">
+                {% for tipo, count in usuarios_por_tipo %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="text-primary">{{ count }}</h3>
+                            <p class="mb-0">
+                                {% if tipo.value == 'admin' %}
+                                    <i class="bi bi-shield-check"></i> Administradores
+                                {% elif tipo.value == 'trabalhador' %}
+                                    <i class="bi bi-person-badge"></i> Trabalhadores
+                                {% else %}
+                                    <i class="bi bi-person"></i> Estagiários
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Formulário de atribuição -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-gear"></i>
+                        Configurar Atribuição
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.user_type.label(class="form-label") }}
+                                {{ form.user_type(class="form-select") }}
+                                {% if form.user_type.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.user_type.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">Selecione o tipo de usuário para atribuir esta classe.</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                {{ form.work_class_id.label(class="form-label") }}
+                                {{ form.work_class_id(class="form-select") }}
+                                {% if form.work_class_id.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.work_class_id.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">Classe que será atribuída aos usuários selecionados.</div>
+                            </div>
+                        </div>
+
+                        <!-- Preview da ação -->
+                        <div class="alert alert-info">
+                            <h6><i class="bi bi-info-circle"></i> Resumo da Ação</h6>
+                            <p class="mb-0">
+                                Esta operação irá atribuir a classe "<strong>{{ classe.name }}</strong>" 
+                                aos usuários do tipo selecionado. A alteração afetará o cálculo de horas 
+                                a partir da próxima marcação de ponto.
+                            </p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.classes_trabalho') }}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary" 
+                                    onclick="return confirm('Tem certeza que deseja atribuir esta classe aos usuários selecionados?')">
+                                <i class="fas fa-user-plus"></i>
+                                Atribuir Classe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Instruções -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="bi bi-info-circle"></i> Como Funciona</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Atribuição por Tipo</h6>
+                            <ul>
+                                <li><strong>Todos:</strong> Atribui a classe a todos os usuários ativos</li>
+                                <li><strong>Administradores:</strong> Apenas usuários com perfil Admin</li>
+                                <li><strong>Trabalhadores:</strong> Apenas usuários com perfil Trabalhador</li>
+                                <li><strong>Estagiários:</strong> Apenas usuários com perfil Estagiário</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Efeitos da Atribuição</h6>
+                            <ul>
+                                <li>Altera o cálculo de horas esperadas do usuário</li>
+                                <li>Afeta o cálculo de horas extras</li>
+                                <li>Aplica-se apenas a marcações futuras</li>
+                                <li>Não altera registros históricos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-3 mb-0">
+                        <small>
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <strong>Importante:</strong> Esta operação irá sobrescrever a classe de trabalho atual 
+                            dos usuários selecionados. Certifique-se de que esta é a ação desejada.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usuários atualmente usando esta classe -->
+            {% set usuarios_atuais = classe.get_active_users().all() %}
+            {% if usuarios_atuais %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-people"></i>
+                        Usuários Usando Esta Classe ({{ usuarios_atuais|length }})
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for usuario in usuarios_atuais %}
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-person-circle me-2"></i>
+                                <div>
+                                    <div><strong>{{ usuario.nome }}</strong></div>
+                                    <small class="text-muted">{{ usuario.user_type.value.title() }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-2">
+                        <a href="{{ url_for('admin.usuarios_classe_trabalho', id=classe.id) }}" 
+                           class="btn btn-sm btn-outline-info">
+                            <i class="bi bi-eye"></i>
+                            Ver Todos os Usuários
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="error-content">
+                <i class="fas fa-file-upload fa-5x text-warning mb-4"></i>
+                <h1 class="display-4">413</h1>
+                <h2 class="mb-4">Arquivo muito grande</h2>
+                <p class="lead text-muted mb-4">
+                    O arquivo que você está tentando enviar excede o tamanho máximo permitido (16MB).
+                </p>
+                <div class="d-flex gap-2 justify-content-center">
+                    <button onclick="history.back()" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Voltar
+                    </button>
+                    <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-home me-2"></i>Página Inicial
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

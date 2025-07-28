@@ -1,0 +1,2295 @@
+2025-07-16 13:01:11,597 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130111_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost:5000/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-16 13:01:34,198 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130134_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost:5000/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-16 13:05:46,168 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130546_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 157, in dashboard
+    return render_template('main/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 80, in top-level template code
+    <li><a class="dropdown-item" href="{{ url_for('backup_dashboard_admin.dashboard') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-16 13:05:54,191 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130554_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 157, in dashboard
+    return render_template('main/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 80, in top-level template code
+    <li><a class="dropdown-item" href="{{ url_for('backup_dashboard_admin.dashboard') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-16 13:06:08,979 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130608_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 157, in dashboard
+    return render_template('main/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 80, in top-level template code
+    <li><a class="dropdown-item" href="{{ url_for('backup_dashboard_admin.dashboard') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-16 13:06:16,742 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130616_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost:5000/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-16 13:07:36,987 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130736_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/admin/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 168, in dashboard
+    return render_template('admin/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 182, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 261, in block 'content'
+    <a href="{{ url_for('backup_dashboard_admin.dashboard') }}" class="btn btn-primary btn-block">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-16 13:07:57,801 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130757_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/admin/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 168, in dashboard
+    return render_template('admin/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 182, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 261, in block 'content'
+    <a href="{{ url_for('backup_dashboard_admin.dashboard') }}" class="btn btn-primary btn-block">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-16 13:08:04,739 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_130804_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/admin/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 168, in dashboard
+    return render_template('admin/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 182, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 261, in block 'content'
+    <a href="{{ url_for('backup_dashboard_admin.dashboard') }}" class="btn btn-primary btn-block">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-16 13:08:34,721 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:34,734 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:34,746 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:39,269 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:39,279 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:39,289 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:43,774 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:43,785 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:08:43,796 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:09:07,953 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:09:07,963 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:09:07,972 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:10:57,047 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:10:57,058 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:10:57,067 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-16 13:12:21,796 - app - ERROR - routes.py:221 - ponto() - Erro no registro manual: 'NoneType' object has no attribute 'expected_lunch_hours'
+2025-07-16 13:12:21,816 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_131221_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: TypeError
+Descrição: type NoneType doesn't define __round__ method
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py
+Linha: 1182
+Função: do_round
+URL: http://127.0.0.1:5000/ponto
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 280, in ponto
+    return render_template('main/ponto.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 182, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html", line 86, in block 'content'
+    <strong>{{ registro.horas_trabalhadas|round(2) }}h</strong>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py", line 1182, in do_round
+    return round(value, precision)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: type NoneType doesn't define __round__ method
+
+========================
+
+2025-07-16 13:22:39,926 - app - ERROR - routes.py:221 - ponto() - Erro no registro manual: 'NoneType' object has no attribute 'expected_lunch_hours'
+2025-07-16 13:22:39,977 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_132239_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: TypeError
+Descrição: '>' not supported between instances of 'NoneType' and 'int'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html
+Linha: 94
+Função: block 'content'
+URL: http://127.0.0.1:5000/ponto
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 280, in ponto
+    return render_template('main/ponto.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 188, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html", line 94, in block 'content'
+    <strong class="{{ 'text-warning' if registro.horas_extras > 0 else 'text-success' }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+
+========================
+
+2025-07-16 13:22:46,818 - app - ERROR - routes.py:221 - ponto() - Erro no registro manual: 'NoneType' object has no attribute 'expected_lunch_hours'
+2025-07-16 13:22:46,821 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250716_132246_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: TypeError
+Descrição: '>' not supported between instances of 'NoneType' and 'int'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html
+Linha: 94
+Função: block 'content'
+URL: http://127.0.0.1:5000/ponto
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 OPR/119.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 280, in ponto
+    return render_template('main/ponto.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 188, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\ponto.html", line 94, in block 'content'
+    <strong class="{{ 'text-warning' if registro.horas_extras > 0 else 'text-success' }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'NoneType' and 'int'
+
+========================
+
+2025-07-16 13:23:50,466 - app.attestation_upload_service - ERROR - attestation_upload_service.py:72 - save_and_upload_attestation() - Erro no upload de atestado: LocalAttestationService.upload_attestation() got an unexpected keyword argument 'file'
+2025-07-20 17:52:16,180 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_175214_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py
+Linha: 950
+Função: build
+URL: http://127.0.0.1:5000/admin/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 168, in dashboard
+    return render_template('admin/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 80, in top-level template code
+    <li><a class="dropdown-item" href="{{ url_for('backup_dashboard_admin.dashboard') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1697, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1686, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\werkzeug\routing\map.py", line 950, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-20 17:57:45,512 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_175745_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/login?next=/admin/dashboard?id%3D8c792edb-a868-49f3-957b-6895f50aa7f7%26vscodeBrowserReqId%3D1753045054396
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.1 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-20 17:58:16,173 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:139 - dashboard() - Erro no dashboard de backup: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+2025-07-20 17:58:21,293 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 17:58:21,302 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 17:58:21,311 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 17:58:25,440 - app - ERROR - overtime_controller.py:344 - get_system_overtime_stats() - Erro ao obter estatísticas: name 'db' is not defined
+2025-07-20 17:58:25,442 - app - ERROR - overtime_admin.py:54 - overtime_control() - Erro no dashboard de horas extras: Can't determine join between 'overtime_requests' and 'users'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+2025-07-20 17:58:42,028 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:139 - dashboard() - Erro no dashboard de backup: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+2025-07-20 17:58:55,141 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 17:58:55,150 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 17:58:55,159 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 17:59:48,083 - app - ERROR - routes.py:516 - download_atestado() - Erro inesperado no download de atestado: 'AttestationUploadService' object has no attribute 'get_download_link'
+2025-07-20 18:02:17,793 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:633 - attestations_stats() - Erro ao obter estatísticas de atestados: 'AttestationUploadService' object has no attribute 'get_Local_statistics'
+2025-07-20 18:02:17,794 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:656 - attestations_users() - Erro ao obter usuários com atestados: 'AttestationUploadService' object has no attribute 'get_users_with_attestations'
+2025-07-20 18:02:27,810 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:633 - attestations_stats() - Erro ao obter estatísticas de atestados: 'AttestationUploadService' object has no attribute 'get_Local_statistics'
+2025-07-20 18:02:27,811 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:656 - attestations_users() - Erro ao obter usuários com atestados: 'AttestationUploadService' object has no attribute 'get_users_with_attestations'
+2025-07-20 18:03:58,349 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:633 - attestations_stats() - Erro ao obter estatísticas de atestados: 'AttestationUploadService' object has no attribute 'get_Local_statistics'
+2025-07-20 18:03:58,350 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:656 - attestations_users() - Erro ao obter usuários com atestados: 'AttestationUploadService' object has no attribute 'get_users_with_attestations'
+2025-07-20 18:04:17,663 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_180417_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: ModuleNotFoundError
+Descrição: No module named 'app.local_database'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py
+Linha: 924
+Função: backup_config
+URL: http://127.0.0.1:5000/admin/backup-config
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 924, in backup_config
+    from app.local_database import get_db_manager
+ModuleNotFoundError: No module named 'app.local_database'
+
+========================
+
+2025-07-20 18:04:30,690 - app - ERROR - overtime_controller.py:344 - get_system_overtime_stats() - Erro ao obter estatísticas: name 'db' is not defined
+2025-07-20 18:04:30,692 - app - ERROR - overtime_admin.py:54 - overtime_control() - Erro no dashboard de horas extras: Can't determine join between 'overtime_requests' and 'users'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+2025-07-20 18:07:50,427 - app - ERROR - overtime_controller.py:344 - get_system_overtime_stats() - Erro ao obter estatísticas: name 'db' is not defined
+2025-07-20 18:07:50,428 - app - ERROR - overtime_admin.py:54 - overtime_control() - Erro no dashboard de horas extras: Can't determine join between 'overtime_requests' and 'users'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+2025-07-20 18:07:59,343 - app - ERROR - routes.py:516 - download_atestado() - Erro inesperado no download de atestado: 'AttestationUploadService' object has no attribute 'get_download_link'
+2025-07-20 18:09:18,902 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:09:18,908 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 18:09:32,832 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_180932_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: ModuleNotFoundError
+Descrição: No module named 'app.local_database'
+Arquivo: c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py
+Linha: 924
+Função: backup_config
+URL: http://127.0.0.1:5000/admin/backup-config
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 924, in backup_config
+    from app.local_database import get_db_manager
+ModuleNotFoundError: No module named 'app.local_database'
+
+========================
+
+2025-07-20 18:09:41,286 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:09:41,292 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 18:09:49,960 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:503 - storage_info() - Erro ao carregar informações de armazenamento: Could not build url for endpoint 'backup_dashboard_admin.cleanup'. Did you mean 'backup_dashboard_admin.schedule' instead?
+2025-07-20 18:09:50,062 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:09:50,065 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 18:09:58,218 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:10:07,957 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_181007_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: ModuleNotFoundError
+Descrição: No module named 'app.local_database'
+Arquivo: c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py
+Linha: 924
+Função: backup_config
+URL: http://127.0.0.1:5000/admin/backup-config
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 924, in backup_config
+    from app.local_database import get_db_manager
+ModuleNotFoundError: No module named 'app.local_database'
+
+========================
+
+2025-07-20 18:12:36,730 - app - ERROR - overtime_controller.py:344 - get_system_overtime_stats() - Erro ao obter estatísticas: name 'db' is not defined
+2025-07-20 18:12:36,739 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: Encountered unknown tag 'endblock'.
+2025-07-20 18:16:59,083 - app - ERROR - overtime_controller.py:344 - get_system_overtime_stats() - Erro ao obter estatísticas: name 'db' is not defined
+2025-07-20 18:16:59,092 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: Encountered unknown tag 'endblock'.
+2025-07-20 18:20:20,816 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: Encountered unknown tag 'endblock'.
+2025-07-20 18:26:58,206 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:26:58,211 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 18:27:00,131 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 18:27:00,142 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 18:27:00,152 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 18:34:44,017 - app.attestation_upload_service - ERROR - attestation_upload_service.py:480 - get_download_link() - Erro ao gerar link de download para atestado 2: 'MedicalAttestation' object has no attribute 'local_file_path'
+2025-07-20 18:34:44,017 - app - ERROR - routes.py:511 - download_atestado() - Erro ao gerar link de download: Erro interno: 'MedicalAttestation' object has no attribute 'local_file_path'
+2025-07-20 18:35:12,100 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'app.models.User object' has no attribute 'hour_bank_balance'
+2025-07-20 18:36:56,157 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:36:56,164 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 18:37:00,696 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:175 - create_backup() - Erro ao criar backup: LocalBackupManager.create_backup() got an unexpected keyword argument 'created_by'
+2025-07-20 18:37:19,869 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:606 - backup_status() - Erro ao obter status do backup 6: 'BackupHistory' object has no attribute 'file_path'
+2025-07-20 18:37:22,052 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:606 - backup_status() - Erro ao obter status do backup 6: 'BackupHistory' object has no attribute 'file_path'
+2025-07-20 18:37:22,547 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:606 - backup_status() - Erro ao obter status do backup 5: 'BackupHistory' object has no attribute 'file_path'
+2025-07-20 18:37:23,205 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:606 - backup_status() - Erro ao obter status do backup 6: 'BackupHistory' object has no attribute 'file_path'
+2025-07-20 18:37:24,426 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:503 - storage_info() - Erro ao carregar informações de armazenamento: Could not build url for endpoint 'backup_dashboard_admin.cleanup'. Did you mean 'backup_dashboard_admin.schedule' instead?
+2025-07-20 18:37:24,523 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 18:37:24,526 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 18:37:35,742 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'app.models.User object' has no attribute 'hour_bank_balance'
+2025-07-20 18:38:37,945 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'app.models.User object' has no attribute 'hour_bank_balance'
+2025-07-20 18:38:43,268 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'app.models.User object' has no attribute 'hour_bank_balance'
+2025-07-20 18:39:37,120 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'app.models.User object' has no attribute 'hour_bank_balance'
+2025-07-20 18:49:16,743 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 18:50:11,134 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 18:58:31,565 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 18:58:31,575 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 18:58:31,585 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 18:58:33,493 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 18:59:04,522 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:02:03,364 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:05:42,602 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:05:50,077 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:08:39,510 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:10:48,246 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:12:52,428 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:13:28,341 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_191327_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: UndefinedError
+Descrição: 'app.models.HourBankTransaction object' has no attribute 'previous_balance'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py
+Linha: 1043
+Função: do_format
+URL: http://127.0.0.1:5000/my-hour-bank/history
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\hour_bank_routes.py", line 146, in my_hour_bank_history
+    return render_template('main/hour_bank/history.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\hour_bank\history.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 193, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\hour_bank\history.html", line 113, in block 'content'
+    {{ "%.2f"|format(transaction.previous_balance) }}h
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+           ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+jinja2.exceptions.UndefinedError: 'app.models.HourBankTransaction object' has no attribute 'previous_balance'
+
+========================
+
+2025-07-20 19:17:24,666 - app - ERROR - overtime_admin.py:56 - overtime_control() - Erro no dashboard de horas extras: 'hour_bank_history' is undefined
+2025-07-20 19:22:46,957 - app - ERROR - overtime_admin.py:61 - overtime_control() - Erro no dashboard de horas extras: Can't determine join between 'hour_bank_history' and 'users'; tables have more than one foreign key constraint relationship between them. Please specify the 'onclause' of this join explicitly.
+2025-07-20 19:48:20,453 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_194820_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: UndefinedError
+Descrição: 'app.models.HourBankTransaction object' has no attribute 'previous_balance'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py
+Linha: 1043
+Função: do_format
+URL: http://127.0.0.1:5000/my-hour-bank/history
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\hour_bank_routes.py", line 146, in my_hour_bank_history
+    return render_template('main/hour_bank/history.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\hour_bank\history.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 193, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\hour_bank\history.html", line 113, in block 'content'
+    {{ "%.2f"|format(transaction.previous_balance) }}h
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+           ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+jinja2.exceptions.UndefinedError: 'app.models.HourBankTransaction object' has no attribute 'previous_balance'
+
+========================
+
+2025-07-20 19:50:27,715 - app - ERROR - overtime_controller.py:348 - get_system_overtime_stats() - Erro ao obter estatísticas: 'OvertimeController' object has no attribute '_get_automatic_integration_stats'
+2025-07-20 19:50:51,124 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_195051_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: UndefinedError
+Descrição: 'app.models.HourBankTransaction object' has no attribute 'previous_balance'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py
+Linha: 1043
+Função: do_format
+URL: http://127.0.0.1:5000/my-hour-bank/history
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\hour_bank_routes.py", line 146, in my_hour_bank_history
+    return render_template('main/hour_bank/history.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\hour_bank\history.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 193, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\hour_bank\history.html", line 113, in block 'content'
+    {{ "%.2f"|format(transaction.previous_balance) }}h
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\jinja2\filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+           ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+jinja2.exceptions.UndefinedError: 'app.models.HourBankTransaction object' has no attribute 'previous_balance'
+
+========================
+
+2025-07-20 20:17:03,172 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_201703_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: ModuleNotFoundError
+Descrição: No module named 'app.local_database'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py
+Linha: 924
+Função: backup_config
+URL: http://127.0.0.1:5000/admin/backup-config
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 924, in backup_config
+    from app.local_database import get_db_manager
+ModuleNotFoundError: No module named 'app.local_database'
+
+========================
+
+2025-07-20 21:06:36,722 - app - ERROR - overtime_admin.py:343 - get_user_performance_analysis() - Erro na análise de performance: (sqlite3.ProgrammingError) Error binding parameter 1: type 'property' is not supported
+[SQL: SELECT users.id AS users_id, users.nome AS users_nome, users.sobrenome AS users_sobrenome, sum(?) AS total_overtime, count(overtime_requests.id) AS total_requests 
+FROM users JOIN overtime_requests ON users.id = overtime_requests.user_id 
+WHERE overtime_requests.status IN (?, ?) GROUP BY users.id, users.nome, users.sobrenome ORDER BY sum(?) DESC
+ LIMIT ? OFFSET ?]
+[parameters: (<property object at 0x000001CC61C88EA0>, 'APROVADA', 'approved', <property object at 0x000001CC61C88EA0>, 10, 0)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-20 21:06:36,726 - app - ERROR - overtime_admin.py:411 - get_overtime_cost_analysis() - Erro na análise de custos: (sqlite3.ProgrammingError) Error binding parameter 1: type 'property' is not supported
+[SQL: SELECT sum(?) AS sum_1 
+FROM overtime_requests 
+WHERE overtime_requests.status IN (?, ?) AND overtime_requests.created_at >= ?]
+[parameters: (<property object at 0x000001CC61C88EA0>, 'APROVADA', 'approved', '2025-06-20 21:06:36.725367')]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-20 21:21:54,799 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: PENDING
+2025-07-20 21:21:59,433 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: PENDING
+2025-07-20 21:24:07,348 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: PENDING
+2025-07-20 21:26:39,742 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:27:46,056 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:29:20,437 - app - ERROR - routes.py:414 - criar_usuario() - Erro de validação no formulário: {'is_active': ['Not a valid choice.']}
+2025-07-20 21:29:27,967 - app - ERROR - routes.py:414 - criar_usuario() - Erro de validação no formulário: {'is_active': ['Not a valid choice.']}
+2025-07-20 21:30:34,526 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:30:47,889 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:32:12,136 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:32:23,925 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:33:49,441 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-20 21:33:58,422 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 21:33:58,433 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 21:33:58,444 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-20 21:34:02,024 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:34:02,028 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:34:06,788 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:175 - create_backup() - Erro ao criar backup: LocalBackupManager.create_backup() got an unexpected keyword argument 'created_by'
+2025-07-20 21:34:11,232 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:503 - storage_info() - Erro ao carregar informações de armazenamento: Could not build url for endpoint 'backup_dashboard_admin.cleanup'. Did you mean 'backup_dashboard_admin.schedule' instead?
+2025-07-20 21:34:11,329 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:34:11,331 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:34:25,743 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:472 - schedule() - Erro ao carregar página de agendamento: Could not build url for endpoint 'backup_dashboard_admin.config'. Did you mean 'backup_dashboard_admin.history' instead?
+2025-07-20 21:34:25,842 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:34:25,846 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:34:30,374 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:472 - schedule() - Erro ao carregar página de agendamento: Could not build url for endpoint 'backup_dashboard_admin.config'. Did you mean 'backup_dashboard_admin.history' instead?
+2025-07-20 21:34:30,479 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:34:30,485 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:34:49,830 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:34:49,833 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:36:19,946 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:36:19,950 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:36:33,279 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:36:33,292 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:37:44,645 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_213744_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: Werkzeug/3.1.3
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-20 21:47:05,201 - app.attestation_upload_service - ERROR - attestation_upload_service.py:360 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-20 21:47:05,202 - app.attestation_upload_service - ERROR - attestation_upload_service.py:441 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-20 21:50:52,562 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250720_215052_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 09:14:27,970 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_091427_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/forgot_password
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 09:14:27,997 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_091427_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/forgot_password
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 09:14:28,003 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_091428_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/forgot_password
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 09:14:28,008 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_091428_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/forgot_password
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 09:14:28,014 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_091428_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/forgot_password
+Método: POST
+IP: 127.0.0.1
+User-Agent: python-requests/2.32.4
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 09:31:45,594 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 09:47:47,296 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 10:26:45,859 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_102645_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: Werkzeug/3.1.3
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 10:28:56,848 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250721_102856_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost:5000/auth/forgot_password
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.1 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-21 11:25:26,098 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 11:36:18,547 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 11:53:10,369 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 13:38:03,624 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 14:48:24,458 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-21 15:32:53,954 - app - ERROR - overtime_admin.py:92 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 19:39:54,631 - app - ERROR - overtime_admin.py:99 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 19:48:37,194 - app - ERROR - overtime_admin.py:99 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 19:48:56,959 - app - ERROR - overtime_admin.py:99 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 19:50:10,670 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_195010_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost:5000/auth/login?next=/admin/overtime-control?id%3Ddbd0a90c-d131-4d8d-90c2-d1ab36cc039b%26vscodeBrowserReqId%3D1753310879942
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.2 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-23 19:50:27,551 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_195027_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost:5000/auth/login
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.2 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-23 19:50:58,885 - app - ERROR - overtime_admin.py:99 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 19:51:07,780 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-23 19:51:07,796 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-23 19:51:07,812 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-23 19:51:12,612 - app - ERROR - overtime_admin.py:99 - overtime_control() - Erro no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 19:56:24,021 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-23 19:56:24,023 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-23 19:57:10,185 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-23 19:57:10,275 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-23 20:04:04,087 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:04:04,088 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 3 items'}
+2025-07-23 20:04:28,671 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:04:28,672 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 3 items'}
+2025-07-23 20:04:30,774 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:04:30,774 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 3 items'}
+2025-07-23 20:05:10,753 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:05:10,753 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 3 items'}
+2025-07-23 20:05:38,086 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:05:38,086 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 3 items'}
+2025-07-23 20:08:09,922 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_200809_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/login?next=/admin/overtime-control?id%3Ddbd0a90c-d131-4d8d-90c2-d1ab36cc039b%26vscodeBrowserReqId%3D1753312074543
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.2 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-23 20:08:35,207 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:08:35,208 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 3 items'}
+2025-07-23 20:12:26,156 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:12:26,157 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 5 items'}
+2025-07-23 20:12:49,410 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.HourBankHistory object' has no attribute 'hours_changed'
+2025-07-23 20:12:49,410 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 5 items'}
+2025-07-23 20:15:57,547 - app - ERROR - overtime_admin.py:188 - overtime_control() - ERRO CRÍTICO no dashboard de horas extras: 'app.models.OvertimeRequest object' has no attribute 'hours'
+2025-07-23 20:15:57,547 - app - ERROR - overtime_admin.py:189 - overtime_control() - DEBUG INFO até o erro: {'imports': 'OK', 'controller': 'OK', 'database': 'OK - 4 users', 'stats': "OK - Keys: ['total_users', 'users_with_overtime', 'total_requests', 'pending_requests', 'approved_requests', 'overtime_by_type', 'top_hour_banks', 'automatic_stats', 'alerts']", 'automatic_stats': "OK - Keys: ['auto_credits', 'auto_debits', 'auto_transactions_count', 'users_with_auto_credits', 'users_with_auto_debits', 'today_processed', 'period_days']", 'recent_requests': 'OK - 1 items', 'all_users': 'OK - 4 items', 'users_with_hours': 'OK - 4 items', 'pending_requests': 'OK - 1 items', 'hour_bank_history': 'OK - 5 items'}
+2025-07-23 20:43:42,139 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_204342_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost/admin/adjust-user-hours
+Método: POST
+IP: 127.0.0.1
+User-Agent: Werkzeug/3.1.3
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-23 20:50:13,947 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_205013_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/login?next=/admin/overtime-control?id%3Ddbd0a90c-d131-4d8d-90c2-d1ab36cc039b%26vscodeBrowserReqId%3D1753314592271
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.2 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1482, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask\app.py", line 1974, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\.venv\Lib\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-23 21:03:32,721 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_210332_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: ModuleNotFoundError
+Descrição: No module named 'app.local_database'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py
+Linha: 952
+Função: backup_config
+URL: http://localhost:5000/admin/backup-config
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 952, in backup_config
+    from app.local_database import get_db_manager
+ModuleNotFoundError: No module named 'app.local_database'
+
+========================
+
+2025-07-23 21:21:49,275 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_212149_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: TypeError
+Descrição: '<' not supported between instances of 'str' and 'int'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\time_formatter.py
+Linha: 81
+Função: format_duration
+URL: http://localhost:5000/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 157, in dashboard
+    return render_template('main/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 193, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 28, in block 'content'
+    <h3 class="mb-0">{{ horas_extras_mes|format_hours }}</h3>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\template_filters.py", line 31, in format_hours_filter
+    return formatter.format_duration(decimal_hours, show_sign=False, short_format=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\time_formatter.py", line 81, in format_duration
+    is_negative = decimal_hours < 0
+                  ^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+========================
+
+2025-07-23 21:24:10,605 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_212410_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: TypeError
+Descrição: '<' not supported between instances of 'str' and 'int'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\time_formatter.py
+Linha: 81
+Função: format_duration
+URL: http://localhost:5000/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 157, in dashboard
+    return render_template('main/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 193, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 28, in block 'content'
+    <h3 class="mb-0">{{ horas_extras_mes|format_hours }}</h3>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\template_filters.py", line 31, in format_hours_filter
+    return formatter.format_duration(decimal_hours, show_sign=False, short_format=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\time_formatter.py", line 81, in format_duration
+    is_negative = decimal_hours < 0
+                  ^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+========================
+
+2025-07-23 21:24:12,776 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250723_212412_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: TypeError
+Descrição: '<' not supported between instances of 'str' and 'int'
+Arquivo: C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\time_formatter.py
+Linha: 81
+Função: format_duration
+URL: http://localhost:5000/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\main\routes.py", line 157, in dashboard
+    return render_template('main/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\gabri\AppData\Local\Programs\Python\Python311\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 193, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\templates\main\dashboard.html", line 28, in block 'content'
+    <h3 class="mb-0">{{ horas_extras_mes|format_hours }}</h3>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\template_filters.py", line 31, in format_hours_filter
+    return formatter.format_duration(decimal_hours, show_sign=False, short_format=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabri\OneDrive\Python Projetos\SKPONTO_V2\app\time_formatter.py", line 81, in format_duration
+    is_negative = decimal_hours < 0
+                  ^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+========================
+
+2025-07-24 14:09:54,246 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250724_140954_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/overtime-request/1/cancel
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0 (Edition ms_store_gx)
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-24 14:32:26,606 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250724_143226_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost/admin/adjust-user-hours
+Método: POST
+IP: 127.0.0.1
+User-Agent: Werkzeug/3.0.3
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-24 14:32:26,612 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250724_143226_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF token is missing.
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost/admin/adjust-user-hours
+Método: POST
+IP: 127.0.0.1
+User-Agent: Werkzeug/3.0.3
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 100, in validate_csrf
+    raise ValidationError("The CSRF token is missing.")
+wtforms.validators.ValidationError: The CSRF token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
+
+========================
+
+2025-07-24 15:51:20,376 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250724_155120_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://localhost/admin/adjust-user-hours
+Método: POST
+IP: 127.0.0.1
+User-Agent: Werkzeug/3.0.3
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-24 16:36:37,739 - app - ERROR - hour_bank_routes.py:71 - my_hour_bank() - Erro no dashboard do banco de horas: 'MANUAL_ADJUSTMENT' is not among the defined enum values. Enum name: hourbanktransactiontype. Possible values: CREDITO, DEBITO, COMPENSACAO, ..., EXPIRAÇÃO
+2025-07-24 16:36:56,677 - app - ERROR - hour_bank_routes.py:71 - my_hour_bank() - Erro no dashboard do banco de horas: 'MANUAL_ADJUSTMENT' is not among the defined enum values. Enum name: hourbanktransactiontype. Possible values: CREDITO, DEBITO, COMPENSACAO, ..., EXPIRAÇÃO
+2025-07-25 09:34:46,552 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250725_093446_400 ===
+Código: 400
+Mensagem: Requisição Inválida
+Tipo: CSRFError
+Descrição: 400 Bad Request: The CSRF session token is missing.
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py
+Linha: 307
+Função: _error_response
+URL: http://127.0.0.1:5000/auth/login?next=/admin/get_all_users_data?id%3D42a5e86c-6c69-4ee1-b54d-4a3a9ac5e298%26vscodeBrowserReqId%3D1753446868810
+Método: POST
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.102.2 Chrome/134.0.6998.205 Electron/35.6.0 Safari/537.36
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 261, in protect
+    validate_csrf(self._get_csrf_token())
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 103, in validate_csrf
+    raise ValidationError("The CSRF session token is missing.")
+wtforms.validators.ValidationError: The CSRF session token is missing.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 229, in csrf_protect
+    self.protect()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 264, in protect
+    self._error_response(e.args[0])
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_wtf\csrf.py", line 307, in _error_response
+    raise CSRFError(reason)
+flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF session token is missing.
+
+========================
+
+2025-07-25 09:34:59,118 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:06:33,770 - app - ERROR - hour_bank_routes.py:71 - my_hour_bank() - Erro no dashboard do banco de horas: 'MANUAL_ADJUSTMENT' is not among the defined enum values. Enum name: hourbanktransactiontype. Possible values: CREDITO, DEBITO, COMPENSACAO, ..., EXPIRAÇÃO
+2025-07-25 10:07:19,485 - app - ERROR - hour_bank_routes.py:71 - my_hour_bank() - Erro no dashboard do banco de horas: 'MANUAL_ADJUSTMENT' is not among the defined enum values. Enum name: hourbanktransactiontype. Possible values: CREDITO, DEBITO, COMPENSACAO, ..., EXPIRAÇÃO
+2025-07-25 10:07:24,511 - app - ERROR - hour_bank_routes.py:71 - my_hour_bank() - Erro no dashboard do banco de horas: 'MANUAL_ADJUSTMENT' is not among the defined enum values. Enum name: hourbanktransactiontype. Possible values: CREDITO, DEBITO, COMPENSACAO, ..., EXPIRAÇÃO
+2025-07-25 10:07:49,648 - app - ERROR - hour_bank_routes.py:71 - my_hour_bank() - Erro no dashboard do banco de horas: 'MANUAL_ADJUSTMENT' is not among the defined enum values. Enum name: hourbanktransactiontype. Possible values: CREDITO, DEBITO, COMPENSACAO, ..., EXPIRAÇÃO
+2025-07-25 10:09:10,763 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:09:10,764 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:10:40,923 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:10:40,924 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:12:11,082 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:12:11,083 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:13:42,096 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:13:42,099 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:15:13,087 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:15:13,087 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:16:01,975 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:16:01,976 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:17:32,146 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:17:32,147 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:19:02,324 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:19:02,326 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:20:32,496 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:20:32,496 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:22:02,665 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:22:02,682 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:23:32,854 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:23:32,860 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:25:03,043 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:25:03,043 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:25:33,774 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:606 - backup_status() - Erro ao obter status do backup 9: 'BackupHistory' object has no attribute 'file_path'
+2025-07-25 10:26:33,240 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:26:33,242 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:28:03,452 - app.attestation_upload_service - ERROR - attestation_upload_service.py:361 - get_local_statistics() - Erro ao obter estatísticas locais: 'MedicalAttestation' object has no attribute 'upload_date'
+2025-07-25 10:28:03,452 - app.attestation_upload_service - ERROR - attestation_upload_service.py:442 - get_users_with_attestations() - Erro ao obter usuários com atestações: 'User' object has no attribute 'name'
+2025-07-25 10:29:33,557 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:139 - dashboard() - Erro no dashboard de backup: 'storage_info' is undefined
+2025-07-25 10:31:05,735 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:139 - dashboard() - Erro no dashboard de backup: 'storage_info' is undefined
+2025-07-25 11:09:56,779 - app.admin.backup_dashboard - ERROR - backup_dashboard.py:139 - dashboard() - Erro no dashboard de backup: 'storage_info' is undefined
+2025-07-25 11:25:43,307 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250725_112543_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\werkzeug\routing\map.py
+Linha: 924
+Função: build
+URL: http://127.0.0.1:5000/admin/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0 (Edition ms_store_gx)
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 168, in dashboard
+    return render_template('admin/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 85, in top-level template code
+    <li><a class="dropdown-item" href="{{ url_for('backup_dashboard_admin.dashboard') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup_dashboard_admin.dashboard'. Did you mean 'error_dashboard.dashboard' instead?
+
+========================
+
+2025-07-25 11:34:00,577 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 11:34:00,578 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 11:34:00,580 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 11:37:38,160 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 11:37:38,161 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 11:37:38,162 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 11:53:21,834 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250725_115321_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: BuildError
+Descrição: Could not build url for endpoint 'backup.error_log_page'. Did you mean 'backup.test_no_auth' instead?
+Arquivo: C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\werkzeug\routing\map.py
+Linha: 924
+Função: build
+URL: http://127.0.0.1:5000/admin/dashboard
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0 (Edition ms_store_gx)
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 74, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 168, in dashboard
+    return render_template('admin/dashboard.html',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\templates\admin\dashboard.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\templates\base.html", line 88, in top-level template code
+    <li><a class="dropdown-item" href="{{ url_for('backup.error_log_page') }}">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup.error_log_page'. Did you mean 'backup.test_no_auth' instead?
+
+========================
+
+2025-07-25 14:12:37,686 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 14:12:37,687 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-25 14:12:37,688 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte

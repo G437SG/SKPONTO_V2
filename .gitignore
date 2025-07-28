@@ -1,0 +1,119 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask
+instance/
+.webassets-cache
+
+# Database - manter estrutura mas excluir dados sensíveis
+storage/database/*.db
+storage/database/*.sqlite*
+storage/database/backups/
+!storage/database/.gitkeep
+
+# Logs - manter estrutura mas excluir logs
+storage/logs/*.log
+storage/logs/debug/
+storage/logs/error/
+!storage/logs/.gitkeep
+
+# Backups - manter estrutura mas excluir backups
+storage/backups/*.zip
+storage/backups/*.sql
+storage/backups/*.bak
+!storage/backups/.gitkeep
+
+# Uploads - manter estrutura mas excluir uploads de usuários
+storage/uploads/general/
+storage/uploads/profile/
+storage/uploads/temp/
+!storage/uploads/.gitkeep
+
+# Atestados - manter estrutura mas excluir dados pessoais
+storage/attestations/user_*/
+storage/attestations/migrated/
+!storage/attestations/.gitkeep
+
+# Arquivos temporários
+storage/temp/
+temp/
+*.tmp
+*.temp
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Uploads (sensitive data)
+uploads/
+test_uploads/
+temp/
+
+# Backup files
+backups/
+*.backup
+
+# Environment variables
+.env.local
+.env.production
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Test files
+test_*.py
+*_test.py
+
+# Migration versions (optional)
+# migrations/versions/
+
+# Flask session
+.flask_session
+flask_session/
+
+# Development tools
+*.pyc
+.pytest_cache/

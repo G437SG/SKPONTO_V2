@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/pagination.html' import render_pagination %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>
+            <i class="bi bi-briefcase"></i>
+            Classes de Trabalho
+        </h1>
+        <div>
+            <a href="{{ url_for('admin.nova_classe_trabalho') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>
+                Nova Classe
+            </a>
+            {% if total_classes == 0 %}
+            <button type="button" class="btn btn-outline-info ms-2" data-bs-toggle="modal" data-bs-target="#modalMigracaoPadrao">
+                <i class="bi bi-magic"></i>
+                Criar Classes Padrão
+            </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-briefcase fs-1 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-0">Total de Classes</h5>
+                            <h2 class="mb-0">{{ total_classes }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle fs-1 me-3"></i>
+                        <div>
+                            <h5 class="card-title mb-0">Classes Ativas</h5>
+                            <h2 class="mb-0">{{ classes_ativas }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-4">
+                    <label for="busca" class="form-label">Buscar</label>
+                    <input type="text" class="form-control" id="busca" name="busca" 
+                           value="{{ request.args.get('busca', '') }}" 
+                           placeholder="Nome ou descrição...">
+                </div>
+                <div class="col-md-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="">Todos</option>
+                        <option value="ativo" {{ 'selected' if request.args.get('status') == 'ativo' }}>Ativo</option>
+                        <option value="inativo" {{ 'selected' if request.args.get('status') == 'inativo' }}>Inativo</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-outline-primary me-2">
+                        <i class="bi bi-search"></i>
+                        Filtrar
+                    </button>
+                    <a href="{{ url_for('admin.classes_trabalho') }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle"></i>
+                        Limpar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista de Classes -->
+    {% if classes.items %}
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Horas Diárias</th>
+                            <th>Horas Almoço</th>
+                            <th>Total Esperado</th>
+                            <th>Usuários</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for classe in classes.items %}
+                        <tr>
+                            <td>
+                                <strong>{{ classe.name }}</strong>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ classe.description }}</small>
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ "%.1f"|format(classe.daily_work_hours) }}h</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-warning">{{ "%.1f"|format(classe.lunch_hours) }}h</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">{{ "%.1f"|format(classe.total_daily_hours) }}h</span>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('admin.usuarios_classe_trabalho', id=classe.id) }}" 
+                                   class="btn btn-sm btn-outline-info">
+                                    {{ classe.users|length }}
+                                    <i class="bi bi-people"></i>
+                                </a>
+                            </td>
+                            <td>
+                                {% if classe.is_active %}
+                                    <span class="badge bg-success">Ativo</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Inativo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ url_for('admin.editar_classe_trabalho', id=classe.id) }}" 
+                                       class="btn btn-sm btn-outline-primary" title="Editar classe">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ url_for('admin.atribuir_classe_trabalho', id=classe.id) }}" 
+                                       class="btn btn-sm btn-outline-info" title="Atribuir a usuários">
+                                        <i class="fas fa-user-plus"></i>
+                                    </a>
+                                    <form method="POST" action="{{ url_for('admin.toggle_classe_status', id=classe.id) }}" 
+                                          class="d-inline" onsubmit="return confirm('Tem certeza?')">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        <button type="submit" 
+                                                class="btn btn-sm {{ 'btn-outline-danger' if classe.is_active else 'btn-outline-success' }}" 
+                                                title="{{ 'Desativar classe' if classe.is_active else 'Ativar classe' }}">
+                                            <i class="fas {{ 'fa-ban' if classe.is_active else 'fa-check-circle' }}"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paginação -->
+    {% if classes.pages > 1 %}
+    <div class="d-flex justify-content-center mt-4">
+        {{ render_pagination(classes, 'admin.classes_trabalho') }}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-briefcase display-1 text-muted"></i>
+        <h3 class="mt-3">Nenhuma classe encontrada</h3>
+        <p class="text-muted">Nenhuma classe de trabalho foi encontrada com os filtros selecionados.</p>
+        {% if total_classes == 0 %}
+        <div class="mt-4">
+            <a href="{{ url_for('admin.nova_classe_trabalho') }}" class="btn btn-primary me-2">
+                <i class="bi bi-plus-circle"></i>
+                Criar Primeira Classe
+            </a>
+            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalMigracaoPadrao">
+                <i class="bi bi-magic"></i>
+                Criar Classes Padrão
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal para criar classes padrão -->
+{% if total_classes == 0 %}
+<div class="modal fade" id="modalMigracaoPadrao" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Criar Classes Padrão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja criar as classes de trabalho padrão do sistema?</p>
+                <ul>
+                    <li><strong>Administrador Padrão:</strong> 8h trabalho + 1h almoço = 9h total</li>
+                    <li><strong>Trabalhador Padrão:</strong> 8h trabalho + 1h almoço = 9h total</li>
+                    <li><strong>Estagiário Padrão:</strong> 6h trabalho + 1h almoço = 7h total</li>
+                </ul>
+                <p class="text-muted">Isso facilitará a configuração inicial do sistema.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form method="POST" action="{{ url_for('admin.migrar_classes_padrao') }}" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-magic"></i>
+                        Criar Classes Padrão
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

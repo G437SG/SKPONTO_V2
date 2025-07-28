@@ -1,0 +1,66 @@
+{% macro render_pagination(pagination, endpoint, acao=None, busca=None, status=None, tipo=None) %}
+    {% if pagination %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if pagination.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for(endpoint, page=pagination.prev_num, acao=acao, busca=busca, status=status, tipo=tipo) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </span>
+                    </li>
+                {% endif %}
+
+                {% for page_num in pagination.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num != pagination.page %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for(endpoint, page=page_num, acao=acao, busca=busca, status=status, tipo=tipo) }}">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if pagination.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for(endpoint, page=pagination.next_num, acao=acao, busca=busca, status=status, tipo=tipo) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <small class="text-muted">
+                Mostrando {{ pagination.per_page * (pagination.page - 1) + 1 }} 
+                até {{ pagination.per_page * pagination.page if pagination.has_next else pagination.total }} 
+                de {{ pagination.total }} registros
+            </small>
+            {% if pagination.pages > 1 %}
+                <small class="text-muted">
+                    Página {{ pagination.page }} de {{ pagination.pages }}
+                </small>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}

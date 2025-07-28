@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Detalhes do Atestado Médico</h4>
+                    <div>
+                        {% if atestado.status.value == 'PENDENTE' %}
+                            <button type="button" class="btn btn-success me-2" 
+                                    data-bs-toggle="modal" data-bs-target="#approveModal">
+                                <i class="fas fa-check"></i> Aprovar
+                            </button>
+                            <button type="button" class="btn btn-danger me-2" 
+                                    data-bs-toggle="modal" data-bs-target="#rejectModal">
+                                <i class="fas fa-times"></i> Rejeitar
+                            </button>
+                        {% endif %}
+                        <a href="{{ url_for('admin.atestados') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Informações do atestado -->
+                    <div class="col-md-6">
+                        <h5>Informações do Atestado</h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <th width="40%">Usuário:</th>
+                                <td>{{ atestado.usuario.nome }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>{{ atestado.usuario.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Tipo de atestado:</th>
+                                <td>
+                                    <span class="badge bg-info">
+                                        {% if atestado.tipo.value == 'MEDICO' %}Médico
+                                        {% elif atestado.tipo.value == 'ODONTOLOGICO' %}Odontológico
+                                        {% elif atestado.tipo.value == 'PSICOLOGICO' %}Psicológico
+                                        {% else %}Outros
+                                        {% endif %}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Data de início:</th>
+                                <td>{{ atestado.data_inicio|date }}</td>
+                            </tr>
+                            <tr>
+                                <th>Data de fim:</th>
+                                <td>{{ atestado.data_fim|date }}</td>
+                            </tr>
+                            <tr>
+                                <th>Dias de afastamento:</th>
+                                <td>{{ atestado.dias_licenca }} dia(s)</td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td>
+                                    {% if atestado.status.value == 'PENDENTE' %}
+                                        <span class="badge bg-warning">Pendente</span>
+                                    {% elif atestado.status.value == 'APROVADO' %}
+                                        <span class="badge bg-success">Aprovado</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Rejeitado</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Enviado em:</th>
+                                <td>{{ atestado.created_at|datetime }}</td>
+                            </tr>
+                            {% if atestado.data_aprovacao %}
+                            <tr>
+                                <th>Aprovado em:</th>
+                                <td>{{ atestado.data_aprovacao|datetime }}</td>
+                            </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                    
+                    <!-- Observações e motivos -->
+                    <div class="col-md-6">
+                        <h5>Observações</h5>
+                        {% if atestado.observacoes %}
+                            <div class="alert alert-info">
+                                {{ atestado.observacoes }}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">Nenhuma observação fornecida.</p>
+                        {% endif %}
+                        
+                        {% if atestado.motivo_rejeicao %}
+                            <h5 class="mt-4">Motivo da Rejeição</h5>
+                            <div class="alert alert-danger">
+                                {{ atestado.motivo_rejeicao }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Arquivo do atestado -->
+        {% if atestado.arquivo %}
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Arquivo do Atestado</h5>
+            </div>
+            <div class="card-body text-center">
+                {% if atestado.arquivo.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')) %}
+                    <!-- Mostrar imagem -->
+                    <div class="mb-3">
+                        <img src="{{ url_for('main.download_atestado', id=atestado.id) }}" 
+                             class="img-fluid" style="max-height: 500px;" alt="Atestado">
+                    </div>
+                {% else %}
+                    <!-- Mostrar link para PDF -->
+                    <div class="mb-3">
+                        <i class="fas fa-file-pdf fa-5x text-danger mb-3"></i>
+                        <p>Arquivo PDF</p>
+                    </div>
+                {% endif %}
+                
+                <a href="{{ url_for('main.download_atestado', id=atestado.id) }}" 
+                   class="btn btn-primary" target="_blank">
+                    <i class="fas fa-download"></i> Baixar Arquivo
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Histórico de ações -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Histórico de Ações</h5>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h6>Atestado enviado</h6>
+                            <p class="text-muted mb-0">{{ atestado.created_at|datetime }}</p>
+                        </div>
+                    </div>
+                    
+                    {% if atestado.status.value == 'APROVADO' %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h6>Atestado aprovado</h6>
+                            <p class="text-muted mb-0">{{ atestado.data_aprovacao|datetime }}</p>
+                        </div>
+                    </div>
+                    {% elif atestado.status.value == 'REJEITADO' %}
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-danger"></div>
+                        <div class="timeline-content">
+                            <h6>Atestado rejeitado</h6>
+                            <p class="text-muted mb-0">{{ atestado.data_aprovacao|datetime }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de aprovação -->
+{% if atestado.status.value == 'PENDENTE' %}
+<div class="modal fade" id="approveModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('admin.aprovar_atestado', id=atestado.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <div class="modal-header">
+                    <h5 class="modal-title">Aprovar Atestado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja aprovar este atestado médico?</p>
+                    <div class="alert alert-info">
+                        <strong>Usuário:</strong> {{ atestado.usuario.nome }}<br>
+                        <strong>Período:</strong> {{ atestado.data_inicio|date }} - {{ atestado.data_fim|date }}<br>
+                        <strong>Dias:</strong> {{ atestado.dias_licenca }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i> Aprovar Atestado
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de rejeição -->
+<div class="modal fade" id="rejectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('admin.rejeitar_atestado', id=atestado.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <div class="modal-header">
+                    <h5 class="modal-title">Rejeitar Atestado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <strong>Usuário:</strong> {{ atestado.usuario.nome }}<br>
+                        <strong>Período:</strong> {{ atestado.data_inicio|date }} - {{ atestado.data_fim|date }}<br>
+                        <strong>Dias:</strong> {{ atestado.dias_licenca }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="motivo_rejeicao" class="form-label">
+                            Motivo da rejeição <span class="text-danger">*</span>
+                        </label>
+                        <textarea class="form-control" id="motivo_rejeicao" 
+                                  name="motivo_rejeicao" rows="4" required 
+                                  placeholder="Explique detalhadamente o motivo da rejeição..."></textarea>
+                        <div class="form-text">
+                            Este motivo será enviado ao usuário por notificação.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times"></i> Rejeitar Atestado
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -35px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.timeline-content {
+    padding-left: 10px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    bottom: 0;
+    width: 2px;
+    background-color: #dee2e6;
+}
+</style>
+{% endblock %}

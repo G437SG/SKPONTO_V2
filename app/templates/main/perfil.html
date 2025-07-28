@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        {% if current_user.foto_perfil %}
+                            <img src="{{ url_for('static', filename=current_user.profile_picture_url) }}" 
+                                 alt="Foto de {{ current_user.nome_completo }}" 
+                                 class="rounded-circle border border-2 border-primary" 
+                                 width="60" height="60"
+                                 onerror="this.src='{{ url_for('static', filename='img/default-avatar.svg') }}'">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='img/default-avatar.svg') }}" 
+                                 alt="Avatar padrão" 
+                                 class="rounded-circle border border-2 border-secondary" 
+                                 width="60" height="60">
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h4 class="mb-0">Meu Perfil</h4>
+                        <p class="text-muted mb-0">{{ current_user.email }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.nome.label(class="form-label") }}
+                            {{ form.nome(class="form-control") }}
+                            {% for error in form.nome.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control") }}
+                            {% for error in form.email.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.telefone.label(class="form-label") }}
+                            {{ form.telefone(class="form-control") }}
+                            {% for error in form.telefone.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.cargo.label(class="form-label") }}
+                            {{ form.cargo(class="form-control") }}
+                            {% for error in form.cargo.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.avatar.label(class="form-label") }}
+                        {{ form.avatar(class="form-control") }}
+                        {% for error in form.avatar.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                        <div class="form-text">Formatos aceitos: JPG, PNG. Tamanho máximo: 2MB</div>
+                    </div>
+
+                    <!-- Seção de mudança de senha -->
+                    <hr>
+                    <h5>Alterar Senha</h5>
+                    
+                    <div class="mb-3">
+                        {{ form.senha_atual.label(class="form-label") }}
+                        {{ form.senha_atual(class="form-control") }}
+                        {% for error in form.senha_atual.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.nova_senha.label(class="form-label") }}
+                            {{ form.nova_senha(class="form-control") }}
+                            {% for error in form.nova_senha.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.confirmar_senha.label(class="form-label") }}
+                            {{ form.confirmar_senha(class="form-control") }}
+                            {% for error in form.confirmar_senha.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Informações da conta -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Informações da Conta</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Tipo de Usuário:</strong> 
+                            {% if current_user.is_admin %}
+                                <span class="badge bg-danger">Administrador</span>
+                            {% elif current_user.user_type.value == 'trabalhador' %}
+                                <span class="badge bg-primary">Trabalhador</span>
+                            {% else %}
+                                <span class="badge bg-info">Estagiário</span>
+                            {% endif %}
+                        </p>
+                        <p><strong>Classe de Trabalho:</strong> 
+                            {% if current_user.work_class %}
+                                <span class="badge bg-success">{{ current_user.work_class.name }}</span>
+                                <br><small class="text-muted">{{ current_user.work_class.description }}</small>
+                            {% else %}
+                                <span class="badge bg-warning">Não definida</span>
+                            {% endif %}
+                        </p>
+                        <p><strong>Carga Horária Diária:</strong> 
+                            {% if current_user.work_class %}
+                                {{ current_user.work_class.daily_work_hours }}h trabalho + {{ current_user.work_class.lunch_hours }}h almoço = {{ current_user.expected_total_hours }}h total
+                            {% else %}
+                                <span class="text-muted">Não definida</span>
+                            {% endif %}
+                        </p>
+                        <p><strong>Membro desde:</strong> {{ current_user.created_at|date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Último login:</strong> 
+                            {{ current_user.last_login|datetime if current_user.last_login else 'Primeiro acesso' }}
+                        </p>
+                        <p><strong>Status:</strong> 
+                            {% if current_user.is_active %}
+                                <span class="badge bg-success">Ativo</span>
+                            {% else %}
+                                <span class="badge bg-danger">Inativo</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Debug - Erro no Dashboard de Horas Extras{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3><i class="fas fa-bug"></i> Debug - Erro no Dashboard de Horas Extras</h3>
+                    <small>{{ timestamp }}</small>
+                </div>
+                <div class="card-body">
+                    
+                    <!-- Informações do Erro -->
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Erro Detectado</h4>
+                        <p><strong>Tipo:</strong> {{ error_type }}</p>
+                        <hr>
+                        <p class="mb-0"><strong>Mensagem:</strong> {{ error_message }}</p>
+                    </div>
+                    
+                    <!-- Informações de Debug -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-search"></i> Informações de Debug</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for key, value in debug_info.items() %}
+                                <div class="col-md-6 mb-3">
+                                    <div class="card {% if 'error' in key.lower() %}border-danger{% elif 'ok' in value %}border-success{% else %}border-warning{% endif %}">
+                                        <div class="card-body p-2">
+                                            <h6 class="card-title">
+                                                {% if 'error' in key.lower() %}
+                                                    <i class="fas fa-times text-danger"></i>
+                                                {% elif 'ok' in value %}
+                                                    <i class="fas fa-check text-success"></i>
+                                                {% else %}
+                                                    <i class="fas fa-question text-warning"></i>
+                                                {% endif %}
+                                                {{ key.replace('_', ' ').title() }}
+                                            </h6>
+                                            <p class="card-text"><code>{{ value }}</code></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ações -->
+                    <div class="mt-4">
+                        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+                        </a>
+                        <button onclick="location.reload()" class="btn btn-warning">
+                            <i class="fas fa-redo"></i> Tentar Novamente
+                        </button>
+                        <button onclick="copyDebugInfo()" class="btn btn-info">
+                            <i class="fas fa-copy"></i> Copiar Info Debug
+                        </button>
+                    </div>
+                    
+                    <!-- Sugestões de Resolução -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-lightbulb"></i> Possíveis Soluções</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                {% if 'stats_error' in debug_info %}
+                                <li><strong>Erro nas estatísticas:</strong> Verifique se todas as tabelas do banco estão criadas corretamente.</li>
+                                {% endif %}
+                                {% if 'database' not in debug_info or 'OK' not in debug_info.get('database', '') %}
+                                <li><strong>Problema no banco:</strong> Verifique a conexão com o banco de dados.</li>
+                                {% endif %}
+                                {% if 'controller' not in debug_info %}
+                                <li><strong>Problema no controller:</strong> Verifique se o OvertimeController está funcionando.</li>
+                                {% endif %}
+                                <li><strong>Geral:</strong> Reinicie o aplicativo ou verifique os logs para mais detalhes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyDebugInfo() {
+    const debugText = `
+ERRO NO DASHBOARD DE HORAS EXTRAS
+=================================
+Timestamp: {{ timestamp }}
+Tipo: {{ error_type }}
+Mensagem: {{ error_message }}
+
+DEBUG INFO:
+{% for key, value in debug_info.items() %}
+{{ key }}: {{ value }}
+{% endfor %}
+    `.trim();
+    
+    navigator.clipboard.writeText(debugText).then(function() {
+        alert('Informações de debug copiadas para o clipboard!');
+    });
+}
+</script>
+{% endblock %}

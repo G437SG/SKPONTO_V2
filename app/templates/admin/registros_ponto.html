@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-clock"></i> Registros de Ponto</h2>
+            <div class="btn-group">
+                <a href="{{ url_for('admin.relatorios') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-file-pdf"></i> Gerar Relatório
+                </a>
+            </div>
+        </div>
+
+        <!-- Estatísticas rápidas -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Total de Registros</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_registros }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Registros Hoje</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ registros_hoje }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clock fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="GET" class="row g-3">
+                    <div class="col-md-3">
+                        <label for="usuario" class="form-label">Usuário</label>
+                        <select class="form-select" id="usuario" name="usuario">
+                            <option value="">Todos os usuários</option>
+                            {% for u in usuarios %}
+                            <option value="{{ u.id }}" {{ 'selected' if usuario_id and int(usuario_id) == u.id }}>
+                                {{ u.nome_completo }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="data_inicio" class="form-label">Data Início</label>
+                        <input type="date" class="form-control" id="data_inicio" name="data_inicio" 
+                               value="{{ data_inicio or '' }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="data_fim" class="form-label">Data Fim</label>
+                        <input type="date" class="form-control" id="data_fim" name="data_fim" 
+                               value="{{ data_fim or '' }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">&nbsp;</label>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-filter"></i> Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de registros -->
+        <div class="card shadow">
+            <div class="card-body">
+                {% if registros.items %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Data</th>
+                                <th>Entrada</th>
+                                <th>Saída</th>
+                                <th>Horas Trabalhadas</th>
+                                <th>Horas Extras</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for registro in registros.items %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ url_for('static', filename=registro.usuario.profile_picture_url) }}" 
+                                             class="rounded-circle me-2" style="width: 32px; height: 32px;">
+                                        <strong>{{ registro.usuario.nome_completo }}</strong>
+                                    </div>
+                                </td>
+                                <td>{{ registro.data|date }}</td>
+                                <td>
+                                    {% if registro.entrada %}
+                                        <span class="badge bg-success">{{ registro.entrada.strftime('%H:%M') }}</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if registro.saida %}
+                                        <span class="badge bg-danger">{{ registro.saida.strftime('%H:%M') }}</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ registro.horas_trabalhadas|format_hours }}</td>
+                                <td>
+                                    {% if registro.horas_extras > 0 %}
+                                        <span class="text-warning">{{ registro.horas_extras|format_hours }}</span>
+                                    {% else %}
+                                        <span class="text-muted">{{ registro.horas_extras|format_hours }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if registro.is_completo %}
+                                        <span class="badge bg-success">Completo</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Pendente</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('admin.usuario_detalhes', id=registro.usuario.id) }}" 
+                                       class="btn btn-sm btn-outline-primary" title="Ver usuário">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginação -->
+                {% if registros.pages > 1 %}
+                <nav aria-label="Navegação de páginas" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if registros.has_prev %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin.registros_ponto', page=registros.prev_num, **request.args) }}">Anterior</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for page_num in registros.iter_pages() %}
+                            {% if page_num %}
+                                {% if page_num != registros.page %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ url_for('admin.registros_ponto', page=page_num, **request.args) }}">{{ page_num }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ page_num }}</span>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">…</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if registros.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin.registros_ponto', page=registros.next_num, **request.args) }}">Próximo</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-clock fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Nenhum registro encontrado</h5>
+                    <p class="text-muted">Ajuste os filtros ou verifique se há registros no sistema.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

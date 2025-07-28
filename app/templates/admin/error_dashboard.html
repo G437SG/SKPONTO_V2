@@ -1,0 +1,403 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard de Erros - SKPONTO{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-card {
+        transition: transform 0.2s;
+        border-left: 4px solid #dc3545;
+    }
+    
+    .error-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .error-stat {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .error-stat.warning {
+        background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+    }
+    
+    .error-stat.success {
+        background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
+    }
+    
+    .error-details {
+        font-family: 'Courier New', monospace;
+        font-size: 0.8rem;
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .error-type-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-right: 0.5rem;
+    }
+    
+    .error-type-KeyError { background: #dc3545; color: white; }
+    .error-type-ValueError { background: #fd7e14; color: white; }
+    .error-type-AttributeError { background: #6f42c1; color: white; }
+    .error-type-TypeError { background: #e83e8c; color: white; }
+    .error-type-Other { background: #6c757d; color: white; }
+    
+    .chart-container {
+        height: 300px;
+        padding: 1rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                    Dashboard de Erros
+                </h1>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                    </button>
+                    <button type="button" class="btn btn-outline-warning" onclick="clearLogs()">
+                        <i class="fas fa-trash"></i> Limpar Logs Antigos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estatísticas Principais -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="error-stat">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ error_stats.total_errors }}</h4>
+                        <p class="mb-0">Total de Erros</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-exclamation-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="error-stat warning">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ error_stats.errors_24h }}</h4>
+                        <p class="mb-0">Últimas 24h</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="error-stat success">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ error_stats.errors_7d }}</h4>
+                        <p class="mb-0">Últimos 7 dias</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-calendar-week fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="error-stat">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ error_stats.error_rate }}</h4>
+                        <p class="mb-0">Erros/Hora</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-tachometer-alt fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-line"></i>
+                        Tendência de Erros (24h)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="errorTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-pie-chart"></i>
+                        Tipos de Erro
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="errorTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Erros -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i>
+                        Top Tipos de Erro
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% for error_type, count in error_stats.top_errors %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="error-type-badge error-type-{{ error_type }}">
+                            {{ error_type }}
+                        </span>
+                        <span class="badge badge-secondary">{{ count }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i>
+                        Status do Sistema
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Sistema de Erros:</span>
+                        <span class="badge badge-success">Ativo</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Logging:</span>
+                        <span class="badge badge-success">Funcionando</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Monitoramento:</span>
+                        <span class="badge badge-success">Online</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Última Atualização:</span>
+                        <span class="text-muted" id="lastUpdate">{{ moment().strftime('%d/%m/%Y %H:%M:%S') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Erros Recentes -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-history"></i>
+                        Erros Recentes
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="recentErrors">
+                        {% for error in recent_errors %}
+                        <div class="error-card card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="card-title">
+                                            <i class="fas fa-exclamation-triangle text-danger"></i>
+                                            Erro {{ loop.index }}
+                                        </h6>
+                                        <p class="text-muted mb-2">
+                                            <i class="fas fa-clock"></i>
+                                            {{ error.timestamp }}
+                                        </p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-secondary" 
+                                            onclick="toggleErrorDetails({{ loop.index }})">
+                                        <i class="fas fa-chevron-down"></i>
+                                        Detalhes
+                                    </button>
+                                </div>
+                                
+                                <div class="error-summary mb-2">
+                                    <code>{{ error.content }}</code>
+                                </div>
+                                
+                                <div id="errorDetails{{ loop.index }}" class="error-details" style="display: none;">
+                                    {% for detail in error.details %}
+                                    <div>{{ detail }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        {% if not recent_errors %}
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i>
+                            <h5>Nenhum erro recente encontrado!</h5>
+                            <p>O sistema está funcionando perfeitamente.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Dados para gráficos
+const errorTrendData = {{ error_trends|tojson }};
+const errorTypeData = {{ error_stats.error_types|tojson }};
+
+// Gráfico de tendência
+const trendCtx = document.getElementById('errorTrendChart').getContext('2d');
+new Chart(trendCtx, {
+    type: 'line',
+    data: {
+        labels: errorTrendData.map(item => item.hour.split(' ')[1]),
+        datasets: [{
+            label: 'Erros por Hora',
+            data: errorTrendData.map(item => item.count),
+            borderColor: 'rgb(220, 53, 69)',
+            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Gráfico de tipos de erro
+const typeCtx = document.getElementById('errorTypeChart').getContext('2d');
+new Chart(typeCtx, {
+    type: 'doughnut',
+    data: {
+        labels: Object.keys(errorTypeData),
+        datasets: [{
+            data: Object.values(errorTypeData),
+            backgroundColor: [
+                '#dc3545',
+                '#fd7e14',
+                '#6f42c1',
+                '#e83e8c',
+                '#6c757d'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Funções auxiliares
+function toggleErrorDetails(index) {
+    const details = document.getElementById(`errorDetails${index}`);
+    const button = details.previousElementSibling.querySelector('button');
+    
+    if (details.style.display === 'none') {
+        details.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Ocultar';
+    } else {
+        details.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Detalhes';
+    }
+}
+
+function refreshData() {
+    location.reload();
+}
+
+function clearLogs() {
+    if (confirm('Tem certeza que deseja limpar os logs antigos?')) {
+        fetch('/admin/errors/api/clear-logs')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`${data.cleared} arquivos de log foram removidos.`);
+                    location.reload();
+                } else {
+                    alert('Erro ao limpar logs: ' + data.error);
+                }
+            })
+            .catch(error => {
+                alert('Erro ao limpar logs: ' + error);
+            });
+    }
+}
+
+// Atualizar timestamp
+document.getElementById('lastUpdate').textContent = new Date().toLocaleString('pt-BR');
+
+// Auto-refresh a cada 5 minutos
+setInterval(refreshData, 300000);
+</script>
+{% endblock %}
