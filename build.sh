@@ -8,14 +8,20 @@ echo "🚀 Iniciando build para produção..."
 echo "🐍 Versão do Python:"
 python --version
 
+# Verificar se estamos usando Python 3.11 (mais compatível)
+python_version=$(python --version 2>&1)
+if [[ $python_version != *"3.11"* ]]; then
+    echo "⚠️ AVISO: Recomendado Python 3.11.x para melhor compatibilidade"
+fi
+
 # Definir configurações de produção
 export FLASK_ENV=production
 export FLASK_CONFIG=production
 
-# Instalar dependências com verbose
-echo "📦 Instalando dependências..."
+# Instalar dependências essenciais
+echo "📦 Instalando dependências essenciais..."
 pip install --upgrade pip
-pip install --no-cache-dir -v -r requirements.txt
+pip install --no-cache-dir -r requirements.txt
 
 # Verificar instalação crítica
 echo "🔍 Verificando instalações críticas..."
@@ -27,10 +33,15 @@ try:
     print('✅ Gunicorn instalado')
     import flask_sqlalchemy
     print('✅ Flask-SQLAlchemy instalado')
+    print('✅ Dependências essenciais instaladas com sucesso!')
 except ImportError as e:
     print('❌ Erro na importação:', e)
     exit(1)
 "
+
+# Tentar instalar dependências opcionais (não críticas)
+echo "📊 Tentando instalar dependências opcionais..."
+pip install xlsxwriter==3.1.2 || echo "⚠️ xlsxwriter não pôde ser instalado - funcionalidade Excel limitada"
 
 # Inicializar banco de dados
 echo "🗄️ Inicializando banco de dados..."
@@ -61,3 +72,5 @@ except Exception as e:
 fi
 
 echo "✅ Build concluído com sucesso!"
+echo "📋 Sistema funcional com dependências essenciais"
+echo "💡 Para funcionalidades Excel avançadas, instale requirements-optional.txt"

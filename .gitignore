@@ -107,9 +107,6 @@ htmlcov/
 test_*.py
 *_test.py
 
-# Migration versions (optional)
-# migrations/versions/
-
 # Flask session
 .flask_session
 flask_session/
@@ -117,3 +114,6 @@ flask_session/
 # Development tools
 *.pyc
 .pytest_cache/
+
+# Dependências opcionais (não essenciais para deploy)
+# requirements-optional.txt é mantido no repositório como referência

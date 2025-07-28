@@ -1,0 +1,14 @@
+# Dependências opcionais para funcionalidades avançadas
+# Execute: pip install -r requirements-optional.txt
+
+# Excel generation (pandas approach)
+pandas==2.0.3
+openpyxl==3.1.2
+
+# Excel generation (xlsxwriter approach)
+xlsxwriter==3.1.2
+
+# Advanced analytics
+numpy==1.24.3
+matplotlib==3.7.1
+seaborn==0.12.2
