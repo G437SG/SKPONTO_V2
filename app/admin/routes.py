@@ -9,7 +9,8 @@ import zipfile
 from app import db
 from app.admin import bp
 from app.models import (User, TimeRecord, MedicalAttestation, Notification, SecurityLog, 
-                       UserType, AttestationStatus, AttestationType, NotificationType, WorkClass)
+                       UserType, AttestationStatus, AttestationType, NotificationType, WorkClass,
+                       HourBank, HourBankTransaction, HourBankHistory, OvertimeRequest, HourCompensation)
 from app.forms import (UserManagementForm, NotificationForm, ApproveAttestationForm, 
                       ReportForm, EmptyForm, WorkClassForm, BulkWorkClassForm, AssignWorkClassForm)
 from app.utils import (log_security_event, create_notification, send_notification_to_admins,
@@ -479,11 +480,26 @@ def deletar_usuario(id):
     user_name = user.nome_completo
     user_email = user.email
     
-    # Deletar registros associados
+    # Deletar registros associados na ordem correta
     TimeRecord.query.filter_by(user_id=user.id).delete()
     MedicalAttestation.query.filter_by(user_id=user.id).delete()
     Notification.query.filter_by(user_id=user.id).delete()
     SecurityLog.query.filter_by(user_id=user.id).delete()
+    
+    # Deletar banco de horas (deve ser deletado antes do usuário)
+    HourBank.query.filter_by(user_id=user.id).delete()
+    
+    # Deletar transações do banco de horas
+    HourBankTransaction.query.filter_by(user_id=user.id).delete()
+    
+    # Deletar histórico do banco de horas
+    HourBankHistory.query.filter_by(user_id=user.id).delete()
+    
+    # Deletar solicitações de horas extras
+    OvertimeRequest.query.filter_by(user_id=user.id).delete()
+    
+    # Deletar compensações
+    HourCompensation.query.filter_by(user_id=user.id).delete()
     
     # Deletar usuário
     db.session.delete(user)
