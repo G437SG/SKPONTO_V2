@@ -74,6 +74,33 @@ try:
         if existing_users == 0:
             print("🔧 Criando usuários de exemplo...")
             
+            # Primeiro, criar classes de trabalho
+            print("⚙️ Criando classes de trabalho...")
+            clt_class = WorkClass(
+                name='CLT',
+                description='Trabalhador CLT - 8 horas diárias',
+                daily_work_hours=8.0,
+                lunch_hours=1.0,
+                is_active=True,
+                is_approved=True,
+                created_at=datetime.utcnow()
+            )
+            db.session.add(clt_class)
+            
+            estagiario_class = WorkClass(
+                name='Estagiário',
+                description='Estagiário - 6 horas diárias',
+                daily_work_hours=6.0,
+                lunch_hours=0.5,
+                is_active=True,
+                is_approved=True,
+                created_at=datetime.utcnow()
+            )
+            db.session.add(estagiario_class)
+            
+            db.session.commit()
+            print("✅ Classes de trabalho criadas")
+            
             users_to_create = [
                 {
                     'nome': 'Admin',
@@ -82,7 +109,7 @@ try:
                     'cpf': '00000000000',
                     'password': 'admin123',
                     'user_type': UserType.ADMIN,
-                    'work_class': WorkClass.CLT
+                    'work_class_id': clt_class.id
                 },
                 {
                     'nome': 'João',
@@ -91,7 +118,7 @@ try:
                     'cpf': '11111111111',
                     'password': 'senha123',
                     'user_type': UserType.TRABALHADOR,
-                    'work_class': WorkClass.CLT
+                    'work_class_id': clt_class.id
                 },
                 {
                     'nome': 'Maria',
@@ -100,7 +127,7 @@ try:
                     'cpf': '22222222222',
                     'password': 'senha123',
                     'user_type': UserType.TRABALHADOR,
-                    'work_class': WorkClass.CLT
+                    'work_class_id': clt_class.id
                 },
                 {
                     'nome': 'Pedro',
@@ -109,7 +136,7 @@ try:
                     'cpf': '33333333333',
                     'password': 'senha123',
                     'user_type': UserType.ESTAGIARIO,
-                    'work_class': WorkClass.ESTAGIARIO
+                    'work_class_id': estagiario_class.id
                 },
                 {
                     'nome': 'Ana',
@@ -118,7 +145,7 @@ try:
                     'cpf': '44444444444',
                     'password': 'senha123',
                     'user_type': UserType.TRABALHADOR,
-                    'work_class': WorkClass.CLT
+                    'work_class_id': clt_class.id
                 }
             ]
             
@@ -133,7 +160,7 @@ try:
                         cpf=user_data['cpf'],
                         password_hash=generate_password_hash(user_data['password']),
                         user_type=user_data['user_type'],
-                        work_class=user_data['work_class'],
+                        work_class_id=user_data['work_class_id'],
                         is_active=True,
                         is_approved=True,
                         created_at=datetime.utcnow()

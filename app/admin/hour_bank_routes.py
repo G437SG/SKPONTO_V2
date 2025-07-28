@@ -605,46 +605,46 @@ def generate_hour_bank_pdf_report(transactions, form):
 def generate_hour_bank_excel_report(transactions, form):
     """Gera relatório em Excel"""
     try:
-        import pandas as pd
-        from io import BytesIO
+        # Gerar CSV (compatível com Excel)
+        from io import StringIO
+        import csv
         
-        # Preparar dados
-        data = []
+        output = StringIO()
+        writer = csv.writer(output)
+        
+        # Cabeçalho
+        writer.writerow([
+            'Data', 'Usuário', 'Email', 'Tipo', 'Horas', 
+            'Saldo Anterior', 'Saldo Após', 'Descrição', 
+            'Data Referência', 'Criado Por'
+        ])
+        
+        # Dados
         for t in transactions:
-            data.append({
-                'Data': t.created_at.strftime('%d/%m/%Y %H:%M'),
-                'Usuário': t.user.nome_completo,
-                'Email': t.user.email,
-                'Tipo': t.transaction_type.value,
-                'Horas': t.hours,
-                'Saldo Anterior': t.balance_before or 0,
-                'Saldo Após': t.balance_after,
-                'Descrição': t.description or '',
-                'Data Referência': t.reference_date.strftime('%d/%m/%Y') if t.reference_date else '',
-                'Criado Por': t.creator.nome_completo if t.creator else 'Sistema'
-            })
-        
-        # Criar DataFrame
-        df = pd.DataFrame(data)
-        
-        # Criar arquivo Excel
-        output = BytesIO()
-        with pd.ExcelWriter(output, engine='openpyxl') as writer:
-            df.to_excel(writer, sheet_name='Banco de Horas', index=False)
+            writer.writerow([
+                t.created_at.strftime('%d/%m/%Y %H:%M'),
+                t.user.nome_completo,
+                t.user.email,
+                t.transaction_type.value,
+                t.hours,
+                t.balance_before or 0,
+                t.balance_after,
+                t.description or '',
+                t.reference_date.strftime('%d/%m/%Y') if t.reference_date else '',
+                t.creator.nome_completo if t.creator else 'Sistema'
+            ])
         
         output.seek(0)
+        csv_content = output.getvalue()
         
-        response = make_response(output.read())
-        response.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        response.headers['Content-Disposition'] = f'attachment; filename=relatorio_banco_horas_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        response = make_response(csv_content)
+        response.headers['Content-Type'] = 'text/csv; charset=utf-8'
+        response.headers['Content-Disposition'] = f'attachment; filename=relatorio_banco_horas_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
         
         return response
         
-    except ImportError:
-        flash('Pandas não está instalado. Instale com: pip install pandas openpyxl', 'error')
-        return redirect(url_for('admin.hour_bank_reports'))
     except Exception as e:
-        flash(f'Erro ao gerar Excel: {str(e)}', 'error')
+        flash(f'Erro ao gerar CSV: {str(e)}', 'error')
         return redirect(url_for('admin.hour_bank_reports'))
 
 
