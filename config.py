@@ -10,30 +10,29 @@ class Config:
     ENV = os.environ.get('FLASK_ENV', 'production')
     DEBUG = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
     
-    # Database - Configuração LOCAL
+    # Database configuration
     base_dir = os.path.abspath(os.path.dirname(__file__))
     storage_dir = os.path.join(base_dir, 'storage', 'database')
     
     # Criar diretório se não existir
     os.makedirs(storage_dir, exist_ok=True)
     
-    # FORÇAR USO DO BANCO LOCAL - IGNORAR SHARED_STORAGE
-    db_path = os.path.join(storage_dir, "skponto.db")
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'
-    
-    # Garantir que shared_storage nunca substitua a configuração
-    if 'shared_storage' not in SQLALCHEMY_DATABASE_URI:
-        print(f"🗄️ LOCAL DATABASE MODE - URI: {SQLALCHEMY_DATABASE_URI}")
-        print("📁 USANDO ARMAZENAMENTO LOCAL FORÇADO")
+    # Prioridade: DATABASE_URL (produção) > SQLite local (desenvolvimento)
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url:
+        SQLALCHEMY_DATABASE_URI = database_url
+        print(f"� POSTGRESQL DATABASE MODE - URI: {database_url[:50]}...")
+        print("� USANDO DATABASE_URL PARA PRODUÇÃO")
     else:
-        # Se por algum motivo shared_storage aparecer, forçar storage
+        # Fallback para SQLite local
+        db_path = os.path.join(storage_dir, "skponto.db")
         SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'
-        print(f"🔧 FORÇADO PARA STORAGE - URI: {SQLALCHEMY_DATABASE_URI}")
-    
-    print(f"   - Database: {storage_dir}")
-    print(f"   - Backups: {os.path.join(base_dir, 'storage', 'backups')}")
-    print(f"   - Uploads: {os.path.join(base_dir, 'storage', 'uploads')}")
-    print(f"   - Attestations: {os.path.join(base_dir, 'storage', 'attestations')}")
+        print(f"�️ LOCAL DATABASE MODE - URI: {SQLALCHEMY_DATABASE_URI}")
+        print("📁 USANDO ARMAZENAMENTO LOCAL PARA DESENVOLVIMENTO")
+        print(f"   - Database: {storage_dir}")
+        print(f"   - Backups: {os.path.join(base_dir, 'storage', 'backups')}")
+        print(f"   - Uploads: {os.path.join(base_dir, 'storage', 'uploads')}")
+        print(f"   - Attestations: {os.path.join(base_dir, 'storage', 'attestations')}")
     
     # Fix for PostgreSQL URL format and force psycopg3
     if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
