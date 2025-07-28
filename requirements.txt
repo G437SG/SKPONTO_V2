@@ -21,7 +21,7 @@ email-validator==2.0.0
 gunicorn==21.2.0
 
 # Database support
-psycopg2-binary==2.9.7
+psycopg2-binary==2.9.9
 
 # Essential utilities only
 requests==2.31.0

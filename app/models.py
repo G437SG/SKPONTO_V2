@@ -165,15 +165,15 @@ class User(UserMixin, db.Model):
     banco_horas_transacoes = db.relationship('HourBankTransaction', backref='usuario', lazy='dynamic', 
                                            foreign_keys='HourBankTransaction.user_id', cascade=CASCADE_DELETE_ORPHAN)
     # Relacionamento para HourBank (principal) - CRITICAL para cascade delete
-    hour_bank_rel = db.relationship('HourBank', backref='user_obj', 
+    hour_bank_rel = db.relationship('HourBank', 
                                    foreign_keys='HourBank.user_id', cascade=CASCADE_DELETE_ORPHAN, uselist=False)
     # Relacionamentos adicionais para garantir cascade delete completo
-    hour_bank_history = db.relationship('HourBankHistory', backref='user_history', lazy='dynamic',
-                                       foreign_keys='HourBankHistory.user_id', cascade=CASCADE_DELETE_ORPHAN)
-    overtime_requests = db.relationship('OvertimeRequest', backref='user_overtime', lazy='dynamic',
-                                       foreign_keys='OvertimeRequest.user_id', cascade=CASCADE_DELETE_ORPHAN)
-    hour_compensations = db.relationship('HourCompensation', backref='user_compensation', lazy='dynamic',
-                                       foreign_keys='HourCompensation.user_id', cascade=CASCADE_DELETE_ORPHAN)
+    hour_bank_history_rel = db.relationship('HourBankHistory', lazy='dynamic',
+                                           foreign_keys='HourBankHistory.user_id', cascade=CASCADE_DELETE_ORPHAN)
+    overtime_requests_rel = db.relationship('OvertimeRequest', lazy='dynamic',
+                                           foreign_keys='OvertimeRequest.user_id', cascade=CASCADE_DELETE_ORPHAN)
+    hour_compensations_rel = db.relationship('HourCompensation', lazy='dynamic',
+                                           foreign_keys='HourCompensation.user_id', cascade=CASCADE_DELETE_ORPHAN)
     
     # English aliases for compatibility
     @property
@@ -711,7 +711,7 @@ class OvertimeRequest(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relacionamentos
-    user = db.relationship('User', foreign_keys=[user_id])
+    user = db.relationship('User', foreign_keys=[user_id], overlaps="overtime_requests_rel")
     approver = db.relationship('User', foreign_keys=[approved_by])
     
     @property
@@ -761,8 +761,8 @@ class HourBank(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # Relacionamento (sem backref para evitar conflito com User.hour_bank_rel)
-    user = db.relationship('User')
+    # Relacionamento (resolvendo conflito com User.hour_bank_rel)
+    user = db.relationship('User', overlaps="hour_bank_rel")
     
     @property
     def has_positive_balance(self):
@@ -927,7 +927,7 @@ class HourCompensation(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relacionamentos
-    user = db.relationship('User', foreign_keys=[user_id])
+    user = db.relationship('User', foreign_keys=[user_id], overlaps="hour_compensations_rel")
     approver = db.relationship('User', foreign_keys=[approved_by])
     bank_transaction = db.relationship('HourBankTransaction', foreign_keys=[hour_bank_transaction_id])
     
@@ -1089,8 +1089,8 @@ class HourBankHistory(db.Model):
     # Timestamps
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
-    # Relacionamentos
-    user = db.relationship('User', foreign_keys=[user_id], backref='hour_bank_history')
+    # Relacionamentos (resolvendo conflitos)
+    user = db.relationship('User', foreign_keys=[user_id], overlaps="hour_bank_history_rel")
     admin = db.relationship('User', foreign_keys=[admin_id])
     
     @property

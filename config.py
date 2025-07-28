@@ -34,15 +34,10 @@ class Config:
         print(f"   - Uploads: {os.path.join(base_dir, 'storage', 'uploads')}")
         print(f"   - Attestations: {os.path.join(base_dir, 'storage', 'attestations')}")
     
-    # Fix for PostgreSQL URL format and force psycopg3
+    # Fix for PostgreSQL URL format
     if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
-    
-    # Force psycopg3 driver for PostgreSQL connections
-    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgresql://'):
-        if '+psycopg' not in SQLALCHEMY_DATABASE_URI:
-            SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgresql://', 'postgresql+psycopg://', 1)
-            print(f"🔧 Forçando uso do psycopg3: {SQLALCHEMY_DATABASE_URI}")
+        print(f"🔧 URL PostgreSQL corrigida: {SQLALCHEMY_DATABASE_URI[:60]}...")
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
