@@ -383,7 +383,7 @@ def adjust_user_hours():
             
             # Atualizar saldo do banco de horas
             user.hour_bank.current_balance = new_balance
-            user.hour_bank.last_updated = datetime.now()
+            user.hour_bank.updated_at = datetime.now()
             
             # Criar notificação para o usuário (apenas se não for teste)
             if not any(palavra in reason.lower() for palavra in ['teste', 'test', 'debug', 'mock', 'sample']):
@@ -513,7 +513,7 @@ def api_refresh_users_list():
                 'email': user.email,
                 'saldo': float(saldo),  # Garantir que é float
                 'user_type': user.user_type.name if user.user_type else 'TRABALHADOR',
-                'last_updated': hour_bank.last_updated.isoformat() if hour_bank and hour_bank.last_updated else None
+                'last_updated': hour_bank.updated_at.isoformat() if hour_bank and hour_bank.updated_at else None
             }
             users_list.append(user_data)
         

@@ -173,7 +173,7 @@ try:
                     hour_bank = HourBank(
                         user_id=user.id,
                         current_balance=0.0,
-                        last_updated=datetime.utcnow()
+                        updated_at=datetime.utcnow()
                     )
                     db.session.add(hour_bank)
                     

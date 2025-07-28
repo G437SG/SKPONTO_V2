@@ -100,7 +100,7 @@ try:
             admin_bank = HourBank(
                 user_id=admin.id,
                 current_balance=0.0,
-                last_updated=datetime.utcnow()
+                updated_at=datetime.utcnow()
             )
             db.session.add(admin_bank)
             
@@ -131,7 +131,7 @@ try:
                 bank = HourBank(
                     user_id=user.id,
                     current_balance=0.0,
-                    last_updated=datetime.utcnow()
+                    updated_at=datetime.utcnow()
                 )
                 db.session.add(bank)
                 
