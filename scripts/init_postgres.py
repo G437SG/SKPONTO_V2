@@ -9,11 +9,17 @@ import os
 import sys
 from datetime import datetime, date, timedelta
 
+# Adicionar o diretório pai ao path para importar app
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # Definir ambiente de produção
 os.environ['FLASK_ENV'] = 'production'
 os.environ['FLASK_CONFIG'] = 'production'
 
 try:
+    print("🚀 Inicializando banco PostgreSQL para produção...")
+    print("📋 Configurando imports...")
+    
     from app import create_app, db
     from app.models import (
         User, UserType, HourBank, OvertimeRequest, 
@@ -22,18 +28,19 @@ try:
     )
     from werkzeug.security import generate_password_hash
     
-    print("🚀 Inicializando banco PostgreSQL para produção...")
+    print("✅ Imports realizados com sucesso")
     
     app = create_app('production')
     
     with app.app_context():
         print("📋 Verificando conexão com PostgreSQL...")
         
-        # Testar conexão
+        # Testar conexão de forma compatível
         try:
-            result = db.engine.execute("SELECT version();")
+            from sqlalchemy import text
+            result = db.session.execute(text("SELECT version();"))
             version = result.fetchone()[0]
-            print(f"✅ Conectado ao PostgreSQL: {version}")
+            print(f"✅ Conectado ao PostgreSQL: {version[:50]}...")
         except Exception as e:
             print(f"❌ Erro na conexão: {e}")
             sys.exit(1)
@@ -180,21 +187,24 @@ try:
         
         # Verificar configurações de horas extras
         print("⚙️ Verificando configurações de horas extras...")
-        settings = OvertimeSettings.query.first()
-        if not settings:
-            settings = OvertimeSettings(
-                auto_approval_enabled=False,
-                max_daily_overtime=4.0,
-                max_monthly_overtime=40.0,
-                require_justification=True,
-                notification_enabled=True,
-                created_at=datetime.utcnow()
-            )
-            db.session.add(settings)
-            db.session.commit()
-            print("✅ Configurações de horas extras criadas")
-        else:
-            print("✅ Configurações já existem")
+        try:
+            settings = OvertimeSettings.query.first()
+            if not settings:
+                settings = OvertimeSettings(
+                    auto_approval_enabled=False,
+                    max_daily_overtime=4.0,
+                    max_monthly_overtime=40.0,
+                    require_justification=True,
+                    notification_enabled=True,
+                    created_at=datetime.utcnow()
+                )
+                db.session.add(settings)
+                db.session.commit()
+                print("✅ Configurações de horas extras criadas")
+            else:
+                print("✅ Configurações já existem")
+        except Exception as e:
+            print(f"⚠️ Erro nas configurações de horas extras: {e}")
         
         # Verificação final
         print("🔍 Verificação final...")
