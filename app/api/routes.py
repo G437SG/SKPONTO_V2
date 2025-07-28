@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from datetime import datetime, date
 from app import db
 from app.api import bp
-from app.models import TimeRecord, Notification, User
+from app.models import TimeRecord, Notification, User, UserType
 
 @bp.route('/status')
 def status():
@@ -253,6 +253,63 @@ def usuarios_api():
             'user_type': u.user_type.value,
             'last_login': u.last_login.isoformat() if u.last_login else None
         } for u in usuarios]
+    })
+
+@bp.route('/users')
+@login_required
+def users():
+    """Lista de usuários (API)"""
+    if current_user.user_type != UserType.ADMIN:
+        return jsonify({'error': 'Acesso negado'}), 403
+    
+    users = User.query.all()
+    return jsonify({
+        'users': [{
+            'id': u.id,
+            'nome_completo': u.nome_completo,
+            'email': u.email,
+            'user_type': u.user_type.value,
+            'is_active': u.is_active,
+            'created_at': u.created_at.isoformat() if u.created_at else None
+        } for u in users]
+    })
+
+@bp.route('/time-records')
+@login_required
+def time_records():
+    """Lista de registros de ponto (API)"""
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+    
+    # Admin pode ver todos, usuário só os próprios
+    if current_user.user_type == UserType.ADMIN:
+        records = TimeRecord.query.order_by(TimeRecord.data.desc()).paginate(
+            page=page, per_page=per_page, error_out=False
+        )
+    else:
+        records = TimeRecord.query.filter_by(user_id=current_user.id).order_by(
+            TimeRecord.data.desc()
+        ).paginate(page=page, per_page=per_page, error_out=False)
+    
+    return jsonify({
+        'records': [{
+            'id': r.id,
+            'user_id': r.user_id,
+            'data': r.data.isoformat(),
+            'entrada': r.entrada.strftime('%H:%M') if r.entrada else None,
+            'saida_almoco': r.saida_almoco.strftime('%H:%M') if r.saida_almoco else None,
+            'volta_almoco': r.volta_almoco.strftime('%H:%M') if r.volta_almoco else None,
+            'saida': r.saida.strftime('%H:%M') if r.saida else None,
+            'horas_trabalhadas': r.horas_trabalhadas_decimal
+        } for r in records.items],
+        'pagination': {
+            'page': records.page,
+            'pages': records.pages,
+            'per_page': records.per_page,
+            'total': records.total,
+            'has_next': records.has_next,
+            'has_prev': records.has_prev
+        }
     })
 
 @bp.errorhandler(404)

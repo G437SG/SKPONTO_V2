@@ -90,7 +90,7 @@ def register_blueprints(app):
     from app.admin.backup import bp as backup_bp
     
     app.register_blueprint(main_bp)
-    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(auth_bp)  # Sem prefixo para /login funcionar
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(errors_bp)

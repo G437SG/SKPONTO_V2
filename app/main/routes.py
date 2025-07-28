@@ -287,6 +287,7 @@ def ponto():
                          registro=registro)
 
 @bp.route('/meus_registros')
+@bp.route('/meus-registros')  # Alias com hífen para compatibilidade
 @login_required
 def meus_registros():
     """Visualização dos registros pessoais"""
