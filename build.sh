@@ -8,25 +8,34 @@ echo "🚀 Iniciando build para produção..."
 echo "🐍 Versão do Python:"
 python --version
 
-# Verificar se estamos usando Python 3.11 (mais compatível)
+# Verificar se estamos usando Python 3.11 (obrigatório)
 python_version=$(python --version 2>&1)
 if [[ $python_version != *"3.11"* ]]; then
-    echo "⚠️ AVISO: Recomendado Python 3.11.x para melhor compatibilidade"
+    echo "❌ ERRO: É necessário Python 3.11.x para compatibilidade"
+    echo "📋 Render.com deveria usar runtime.txt: python-3.11.9"
+    # Não falhar aqui, deixar o sistema tentar
 fi
 
 # Definir configurações de produção
 export FLASK_ENV=production
 export FLASK_CONFIG=production
 
-# Instalar dependências essenciais
+# Instalar dependências essenciais com versões específicas
 echo "📦 Instalando dependências essenciais..."
 pip install --upgrade pip
+
+# Instalar Flask stack em ordem específica para evitar conflitos
+echo "🔧 Instalando Flask stack..."
+pip install --no-cache-dir Werkzeug==2.3.7
+pip install --no-cache-dir Flask==2.3.3
 pip install --no-cache-dir -r requirements.txt
 
 # Verificar instalação crítica
 echo "🔍 Verificando instalações críticas..."
 python -c "
 try:
+    import werkzeug
+    print('✅ Werkzeug:', werkzeug.__version__)
     import flask
     print('✅ Flask:', flask.__version__)
     import gunicorn
