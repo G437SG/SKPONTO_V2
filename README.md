@@ -3,10 +3,10 @@
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![Flask](https://img.shields.io/badge/flask-2.3+-green.svg)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-5.0+-purple.svg)
-![SQLite](https://img.shields.io/badge/sqlite-3.0+-orange.svg)
+![PostgreSQL](https://img.shields.io/badge/postgresql-13+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-red.svg)
 
-Sistema completo de controle de ponto desenvolvido em Flask com interface moderna e funcionalidades avançadas de gestão de pessoal.
+Sistema completo de controle de ponto desenvolvido em Flask com interface moderna e funcionalidades avançadas de gestão de pessoal. **Atualizado em 28/07/2025 - Correções críticas de integridade de dados aplicadas.**
 
 ## 🚀 Funcionalidades Principais
 
