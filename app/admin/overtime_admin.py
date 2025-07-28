@@ -91,11 +91,10 @@ def overtime_control():
         
         current_app.logger.info("5. Obtendo solicitações recentes...")
         try:
-            recent_requests = OvertimeRequest.query.join(
-                User, OvertimeRequest.user_id == User.id
-            ).order_by(
-                OvertimeRequest.created_at.desc()
-            ).limit(20).all()
+            # Busca solicitações sem join complexo
+            recent_requests = (OvertimeRequest.query
+                             .order_by(OvertimeRequest.created_at.desc())
+                             .limit(20).all())
             current_app.logger.info(f"   {len(recent_requests)} solicitações encontradas")
             debug_info['recent_requests'] = f'OK - {len(recent_requests)} items'
         except Exception as e:
@@ -105,8 +104,8 @@ def overtime_control():
         
         current_app.logger.info("6. Obtendo todos os usuários...")
         try:
+            # Busca simples de usuários - sem joins complexos
             all_users = (User.query
-                        .outerjoin(HourBank)
                         .filter(User.is_active == True)
                         .filter(User.is_approved == True)
                         .order_by(User.nome, User.sobrenome).all())
@@ -121,15 +120,28 @@ def overtime_control():
         try:
             users_with_hours = []
             for user in all_users:
-                hour_bank = HourBank.query.filter_by(user_id=user.id).first()
-                saldo = hour_bank.current_balance if hour_bank else 0.0
-                users_with_hours.append({
-                    'id': user.id,
-                    'nome': f"{user.nome} {user.sobrenome}",
-                    'email': user.email,
-                    'saldo': saldo,
-                    'user_type': user.user_type.name if user.user_type else 'TRABALHADOR'
-                })
+                try:
+                    # Busca individual do banco de horas para cada usuário
+                    hour_bank = HourBank.query.filter_by(user_id=user.id).first()
+                    saldo = float(hour_bank.current_balance) if hour_bank and hour_bank.current_balance else 0.0
+                    
+                    users_with_hours.append({
+                        'id': user.id,
+                        'nome': f"{user.nome} {user.sobrenome}",
+                        'email': user.email,
+                        'saldo': saldo,
+                        'user_type': user.user_type.name if user.user_type else 'TRABALHADOR'
+                    })
+                except Exception as user_error:
+                    current_app.logger.warning(f"   Erro ao processar usuário {user.id}: {user_error}")
+                    # Adiciona usuário mesmo com erro no saldo
+                    users_with_hours.append({
+                        'id': user.id,
+                        'nome': f"{user.nome} {user.sobrenome}",
+                        'email': user.email,
+                        'saldo': 0.0,
+                        'user_type': user.user_type.name if user.user_type else 'TRABALHADOR'
+                    })
             
             users_with_hours.sort(key=lambda x: x['saldo'], reverse=True)
             current_app.logger.info(f"   Processados {len(users_with_hours)} usuários com saldos")
@@ -141,8 +153,8 @@ def overtime_control():
         
         current_app.logger.info("8. Obtendo solicitações pendentes...")
         try:
+            # Busca solicitações sem join complexo
             pending_requests = (OvertimeRequest.query
-                              .join(User, OvertimeRequest.user_id == User.id)
                               .filter(OvertimeRequest.status == OvertimeStatus.PENDENTE)
                               .order_by(OvertimeRequest.created_at.desc())
                               .limit(10).all())
@@ -155,8 +167,8 @@ def overtime_control():
         
         current_app.logger.info("9. Obtendo histórico do banco de horas...")
         try:
+            # Busca histórico sem join complexo
             hour_bank_history = (HourBankHistory.query
-                               .join(User, HourBankHistory.user_id == User.id)
                                .order_by(HourBankHistory.created_at.desc())
                                .limit(50).all())
             current_app.logger.info(f"   {len(hour_bank_history)} registros históricos")

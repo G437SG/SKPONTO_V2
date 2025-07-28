@@ -68,10 +68,35 @@ os.environ['FLASK_ENV'] = 'production'
 os.environ['FLASK_CONFIG'] = 'production'
 try:
     from app import create_app, db
+    from app.models import User, UserType
     app = create_app('production')
     with app.app_context():
+        # Criar todas as tabelas
         db.create_all()
         print('✅ Tabelas criadas com sucesso')
+        
+        # Verificar se existe administrador
+        admin_exists = User.query.filter_by(user_type=UserType.ADMIN).first()
+        if not admin_exists:
+            from werkzeug.security import generate_password_hash
+            
+            # Criar usuário administrador padrão
+            admin = User(
+                nome='Admin',
+                sobrenome='Sistema',
+                email='admin@skponto.com',
+                cpf='00000000000',
+                password_hash=generate_password_hash('admin123'),
+                user_type=UserType.ADMIN,
+                is_active=True,
+                is_approved=True
+            )
+            db.session.add(admin)
+            db.session.commit()
+            print('✅ Usuário administrador criado: admin@skponto.com / admin123')
+        else:
+            print('✅ Administrador já existe no sistema')
+            
 except Exception as e:
     print(f'❌ Erro ao criar tabelas: {e}')
     import traceback
