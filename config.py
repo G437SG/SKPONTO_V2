@@ -39,6 +39,24 @@ class Config:
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
         print(f"🔧 URL PostgreSQL corrigida: {SQLALCHEMY_DATABASE_URI[:60]}...")
     
+    # Driver selection based on Python version and availability
+    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgresql://'):
+        import sys
+        try:
+            # Try psycopg3 first for Python 3.13+
+            if sys.version_info >= (3, 13):
+                import psycopg
+                if '+psycopg' not in SQLALCHEMY_DATABASE_URI:
+                    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgresql://', 'postgresql+psycopg://', 1)
+                    print(f"🐍 Python {sys.version_info.major}.{sys.version_info.minor} - Usando psycopg3")
+            else:
+                # Use psycopg2 for older Python versions
+                import psycopg2
+                print(f"🐍 Python {sys.version_info.major}.{sys.version_info.minor} - Usando psycopg2")
+        except ImportError as e:
+            print(f"⚠️ Driver import warning: {e}")
+            # Let SQLAlchemy use default driver
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
     
