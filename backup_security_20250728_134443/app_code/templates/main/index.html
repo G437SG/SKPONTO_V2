@@ -1,0 +1,453 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Hero Section -->
+    <div class="hero-section text-center text-white py-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="hero-content">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="SKPONTO" height="80" class="mb-4" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display: none;">
+                            <i class="fas fa-clock fa-4x mb-4"></i>
+                        </div>
+                        <h1 class="display-3 fw-bold mb-4">SKPONTO</h1>
+                        <p class="lead fs-4 mb-4">Sistema Completo de Controle de Ponto</p>
+                        <p class="fs-5 mb-5">Gerencie sua equipe de forma inteligente e eficiente</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="display-5 fw-bold text-primary">Principais Funcionalidades</h2>
+                <p class="lead text-muted">Tudo que você precisa para gerenciar o controle de ponto</p>
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check fa-3x text-primary mb-3"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Controle de Ponto</h5>
+                        <p class="card-text text-muted">Registro fácil de entrada e saída com cálculo automático de horas trabalhadas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature-card card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-medical fa-3x text-success mb-3"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Atestados Médicos</h5>
+                        <p class="card-text text-muted">Upload e gestão de atestados médicos de forma digital e segura</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature-card card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar fa-3x text-warning mb-3"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Relatórios</h5>
+                        <p class="card-text text-muted">Relatórios detalhados em PDF e Excel para análise e controle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="benefits-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="display-6 fw-bold mb-4">Por que escolher o SKPONTO?</h2>
+                    <div class="benefit-item d-flex mb-4">
+                        <div class="benefit-icon me-3">
+                            <i class="fas fa-shield-alt fa-2x text-success"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Seguro e Confiável</h5>
+                            <p class="text-muted">Sistema desenvolvido com as melhores práticas de segurança, incluindo criptografia de dados e backups automáticos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item d-flex mb-4">
+                        <div class="benefit-icon me-3">
+                            <i class="fas fa-mobile-alt fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Responsivo</h5>
+                            <p class="text-muted">Acesse de qualquer dispositivo - computador, tablet ou smartphone. Interface otimizada para todas as telas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item d-flex mb-4">
+                        <div class="benefit-icon me-3">
+                            <i class="fas fa-clock fa-2x text-warning"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold">Fácil de Usar</h5>
+                            <p class="text-muted">Interface intuitiva e moderna que facilita o uso diário por todos os membros da equipe.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="stats-card card border-0 shadow-lg">
+                        <div class="card-body p-5">
+                            <h3 class="text-center mb-4 fw-bold">Estatísticas do Sistema</h3>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <div class="stat-item mb-4">
+                                        <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                                        <h4 class="fw-bold">100%</h4>
+                                        <p class="text-muted">Controle Total</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item mb-4">
+                                        <i class="fas fa-chart-line fa-2x text-success mb-2"></i>
+                                        <h4 class="fw-bold">24/7</h4>
+                                        <p class="text-muted">Disponibilidade</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <i class="fas fa-shield-alt fa-2x text-warning mb-2"></i>
+                                        <h4 class="fw-bold">100%</h4>
+                                        <p class="text-muted">Segurança</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <i class="fas fa-rocket fa-2x text-info mb-2"></i>
+                                        <h4 class="fw-bold">Rápido</h4>
+                                        <p class="text-muted">Performance</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section py-5 text-center text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="display-6 fw-bold mb-4">Comece Agora</h2>
+                    <p class="lead mb-4">Modernize o controle de ponto da sua empresa hoje mesmo</p>
+                    <div class="cta-buttons">
+                        <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg me-3 mb-3" id="btn-register">
+                            <i class="fas fa-user-plus me-2"></i>Criar Conta Gratuita
+                        </a>
+                        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-lg mb-3" id="btn-login">
+                            <i class="fas fa-sign-in-alt me-2"></i>Já tenho uma conta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #ff8800 0%, #ff6600 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" fill-opacity="0.1"><polygon points="0,0 1000,100 1000,0"/></svg>');
+    background-size: cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-buttons .btn {
+    min-width: 200px;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.hero-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Feature Cards */
+.feature-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+/* Benefits Section */
+.benefits-section {
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe0b3 100%);
+}
+
+.benefit-item {
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateX(10px);
+}
+
+.benefit-icon {
+    transition: transform 0.3s ease;
+}
+
+.benefit-item:hover .benefit-icon {
+    transform: scale(1.1);
+}
+
+/* Stats Card */
+.stats-card {
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.stat-item {
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, #ff6600 0%, #ff4400 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" fill-opacity="0.1"><polygon points="0,100 1000,0 1000,100"/></svg>');
+    background-size: cover;
+    z-index: 1;
+}
+
+.cta-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-buttons .btn {
+    min-width: 200px;
+    padding: 12px 24px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.cta-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0;
+    }
+    
+    .hero-buttons .btn,
+    .cta-buttons .btn {
+        min-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .benefit-icon {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Custom button styles matching the orange theme */
+.btn-primary {
+    background-color: #ff8800;
+    border-color: #ff8800;
+}
+
+.btn-primary:hover {
+    background-color: #ff6600;
+    border-color: #ff6600;
+}
+
+.btn-outline-primary {
+    color: #ff8800;
+    border-color: #ff8800;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ff8800;
+    border-color: #ff8800;
+}
+
+.text-primary {
+    color: #ff8800 !important;
+}
+
+.text-success {
+    color: #ff9933 !important;
+}
+
+.text-warning {
+    color: #ffaa44 !important;
+}
+
+.text-info {
+    color: #ffbb55 !important;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+}
+
+.btn-outline-primary {
+    border-color: white;
+    color: white;
+}
+
+.btn-outline-primary:hover {
+    background-color: white;
+    color: #667eea;
+}
+</style>
+
+<script>
+// Garantir que os botões sejam clicáveis
+document.addEventListener('DOMContentLoaded', function() {
+    // Garantir que os botões de CTA sejam clicáveis
+    const btnRegister = document.getElementById('btn-register');
+    const btnLogin = document.getElementById('btn-login');
+    
+    if (btnRegister) {
+        btnRegister.addEventListener('click', function(e) {
+            console.log('Botão Criar Conta Gratuita clicado');
+            // Garantir que o link funcione
+            if (this.href) {
+                window.location.href = this.href;
+            }
+        });
+    }
+    
+    if (btnLogin) {
+        btnLogin.addEventListener('click', function(e) {
+            console.log('Botão Já tenho uma conta clicado');
+            // Garantir que o link funcione
+            if (this.href) {
+                window.location.href = this.href;
+            }
+        });
+    }
+    
+    // Debug: verificar se os botões estão visíveis e clicáveis
+    console.log('Botões CTA verificados:', {
+        register: btnRegister ? 'encontrado' : 'não encontrado',
+        login: btnLogin ? 'encontrado' : 'não encontrado'
+    });
+});
+</script>
+                <!-- Botões removidos conforme solicitado -->
+            </div>
+            
+            <!-- Additional Info -->
+            <div class="row mt-5">
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-light border-0">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-shield-alt me-2 text-success"></i>Seguro e Confiável
+                            </h6>
+                            <p class="card-text small">
+                                Sistema desenvolvido com as melhores práticas de segurança, 
+                                incluindo criptografia de dados e backups automáticos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-light border-0">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-mobile-alt me-2 text-info"></i>Responsivo
+                            </h6>
+                            <p class="card-text small">
+                                Acesse de qualquer dispositivo - computador, tablet ou smartphone. 
+                                Interface otimizada para todas as telas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

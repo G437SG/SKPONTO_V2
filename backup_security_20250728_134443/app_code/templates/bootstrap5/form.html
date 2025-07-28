@@ -1,0 +1,91 @@
+{% macro render_form(form, action="", method="post", class_="", autocomplete="", novalidate=False, render_kw={}) %}
+<form method="{{ method }}" action="{{ action }}" 
+      class="{{ class_ }}" 
+      {% if autocomplete %}autocomplete="{{ autocomplete }}"{% endif %}
+      {% if novalidate %}novalidate{% endif %}
+      {% for key, value in render_kw.items() %}{{ key }}="{{ value }}"{% endfor %}>
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+        {% if field.type != 'HiddenField' and field.type != 'CSRFTokenField' %}
+            {{ render_field(field) }}
+        {% endif %}
+    {% endfor %}
+</form>
+{% endmacro %}
+
+{% macro render_field(field, show_label=True, extra_classes="") %}
+<div class="mb-3 {{ extra_classes }}">
+    {% if show_label and field.type != 'SubmitField' and field.type != 'BooleanField' %}
+        {{ field.label(class="form-label") }}
+    {% endif %}
+    
+    {% if field.type == 'BooleanField' %}
+        <div class="form-check">
+            {{ field(class="form-check-input") }}
+            {{ field.label(class="form-check-label") }}
+        </div>
+    {% elif field.type == 'SelectField' %}
+        {{ field(class="form-select") }}
+    {% elif field.type == 'TextAreaField' %}
+        {{ field(class="form-control", rows="3") }}
+    {% elif field.type == 'SubmitField' %}
+        {{ field(class="btn btn-primary") }}
+    {% elif field.type == 'FileField' %}
+        {{ field(class="form-control") }}
+    {% else %}
+        {{ field(class="form-control") }}
+    {% endif %}
+    
+    {% if field.errors %}
+        <div class="text-danger">
+            {% for error in field.errors %}
+                <small>{{ error }}</small><br>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    {% if field.description %}
+        <div class="form-text">{{ field.description }}</div>
+    {% endif %}
+</div>
+{% endmacro %}
+
+{% macro render_field_row(field, label_col_class="col-sm-3", field_col_class="col-sm-9") %}
+<div class="row mb-3">
+    <div class="{{ label_col_class }}">
+        {% if field.type != 'SubmitField' and field.type != 'BooleanField' %}
+            {{ field.label(class="col-form-label") }}
+        {% endif %}
+    </div>
+    <div class="{{ field_col_class }}">
+        {% if field.type == 'BooleanField' %}
+            <div class="form-check">
+                {{ field(class="form-check-input") }}
+                {{ field.label(class="form-check-label") }}
+            </div>
+        {% elif field.type == 'SelectField' %}
+            {{ field(class="form-select") }}
+        {% elif field.type == 'TextAreaField' %}
+            {{ field(class="form-control", rows="3") }}
+        {% elif field.type == 'SubmitField' %}
+            {{ field(class="btn btn-primary") }}
+        {% elif field.type == 'FileField' %}
+            {{ field(class="form-control") }}
+        {% else %}
+            {{ field(class="form-control") }}
+        {% endif %}
+        
+        {% if field.errors %}
+            <div class="text-danger">
+                {% for error in field.errors %}
+                    <small>{{ error }}</small><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% if field.description %}
+            <div class="form-text">{{ field.description }}</div>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}

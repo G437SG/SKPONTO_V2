@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-clock me-2"></i>Registro de Ponto
+                </h4>
+            </div>
+            <div class="card-body">
+                <!-- Clock Widget -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mx-auto">
+                        <div class="clock-widget text-center">
+                            <div class="clock-time" id="current-time">--:--:--</div>
+                            <div class="clock-date" id="current-date">--</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Work Class Info -->
+                {% if current_user.work_class %}
+                <div class="row mb-4">
+                    <div class="col-md-8 mx-auto">
+                        <div class="alert alert-info text-center">
+                            <strong>{{ current_user.work_class.name }}:</strong> 
+                            {{ current_user.work_class.daily_work_hours }}h trabalho + {{ current_user.work_class.lunch_hours }}h almoço
+                            <br><small>Qualquer tempo acima de {{ current_user.work_class.daily_work_hours }}h será considerado hora extra</small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Current Record -->
+                {% if registro %}
+                <div class="row mb-4">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card {{ 'border-success' if registro.is_completo else 'border-warning' }}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Registro de Hoje</h5>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <h6>Entrada</h6>
+                                        {% if registro.entrada %}
+                                            <span class="badge bg-success fs-6 entrada-hoje">{{ registro.entrada|time }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary entrada-hoje">Não registrada</span>
+                                        {% endif %}
+                                    </div>
+                                    {% if current_user.work_class and current_user.work_class.lunch_hours > 0 %}
+                                    <div class="col-3">
+                                        <h6>Saída Almoço</h6>
+                                        {% if registro.saida_almoco %}
+                                            <span class="badge bg-warning fs-6">{{ registro.saida_almoco|time }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Não registrada</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-3">
+                                        <h6>Volta Almoço</h6>
+                                        {% if registro.volta_almoco %}
+                                            <span class="badge bg-info fs-6">{{ registro.volta_almoco|time }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Não registrada</span>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                    <div class="col-3">
+                                        <h6>Saída</h6>
+                                        {% if registro.saida %}
+                                            <span class="badge bg-danger fs-6 saida-hoje">{{ registro.saida|time }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary saida-hoje">Não registrada</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                {% if registro.is_completo %}
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <small class="text-muted">Horas Trabalhadas</small>
+                                        <br>
+                                        <strong>{{ (registro.horas_trabalhadas or 0)|round(2) }}h</strong>
+                                        {% if current_user.work_class %}
+                                            <br><small class="text-muted">/ {{ current_user.work_class.daily_work_hours }}h esperadas</small>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Horas Extras</small>
+                                        <br>
+                                        <strong class="{{ 'text-warning' if registro.horas_extras > 0 else 'text-success' }}">
+                                            {{ registro.horas_extras|format_hours }}
+                                        </strong>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        {% if not registro or not registro.entrada %}
+                        <div class="d-grid mb-3">
+                            <button type="button" 
+                                    class="btn btn-success btn-lg" 
+                                    id="btn-entrada"
+                                    onclick="registerTime('entrada')">
+                                <i class="fas fa-play me-2"></i>Registrar Entrada
+                            </button>
+                        </div>
+                        {% elif registro.entrada and not registro.saida %}
+                        <!-- Simple clock-out button without lunch break -->
+                        <div class="d-grid mb-3">
+                            <button type="button" 
+                                    class="btn btn-danger btn-lg" 
+                                    id="btn-saida"
+                                    onclick="registerTime('saida')">
+                                <i class="fas fa-stop me-2"></i>Registrar Saída
+                            </button>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-success text-center">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Ponto completo para hoje!
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Manual Form (Alternative) -->
+                        <div class="text-center">
+                            <button type="button" 
+                                    class="btn btn-outline-primary btn-sm" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#manualForm">
+                                <i class="fas fa-edit me-2"></i>Registro Manual
+                            </button>
+                        </div>
+                        
+                        <div class="collapse mt-3" id="manualForm">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Registro Manual</h6>
+                                    <form method="POST">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Entrada</label>
+                                                    <input type="time" 
+                                                           class="form-control" 
+                                                           name="entrada_manual"
+                                                           value="{{ registro.entrada|time if registro and registro.entrada else '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Saída</label>
+                                                    <input type="time" 
+                                                           class="form-control" 
+                                                           name="saida_manual"
+                                                           value="{{ registro.saida|time if registro and registro.saida else '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Observações</label>
+                                            <textarea class="form-control" 
+                                                      name="observacoes" 
+                                                      rows="3"
+                                                      placeholder="Justificativa para registro manual">{{ registro.observacoes if registro else '' }}</textarea>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button type="submit" 
+                                                    name="manual_submit" 
+                                                    class="btn btn-primary">
+                                                <i class="fas fa-save me-2"></i>Salvar Registro
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tips Card -->
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h6 class="card-title">
+                    <i class="fas fa-lightbulb me-2 text-warning"></i>Dicas
+                </h6>
+                <ul class="mb-0 small">
+                    <li>Registre sua entrada assim que chegar ao trabalho</li>
+                    <li>Não esqueça de registrar sua saída ao final do expediente</li>
+                    <li>Use o registro manual apenas em casos excepcionais</li>
+                    <li>Em caso de dúvidas, entre em contato com o RH</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-register based on geolocation (optional feature)
+function checkLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            // Here you could implement location-based automatic registration
+            console.log("Location:", position.coords.latitude, position.coords.longitude);
+        });
+    }
+}
+
+// Check location on page load (uncomment to enable)
+// checkLocation();
+</script>
+{% endblock %}

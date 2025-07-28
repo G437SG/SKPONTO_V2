@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+{% block title %}Minhas Solicitações de Horas Extras{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2><i class="fas fa-list me-2"></i>Minhas Solicitações de Horas Extras</h2>
+                <div>
+                    <a href="{{ url_for('main.my_hour_bank') }}" class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-arrow-left"></i> Banco de Horas
+                    </a>
+                    <a href="{{ url_for('main.request_overtime') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Nova Solicitação
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-filter me-2"></i>Filtros</h6>
+                </div>
+                <div class="card-body">
+                    <form method="GET" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="">Todos os Status</option>
+                                {% for status in overtime_status %}
+                                <option value="{{ status.value }}" 
+                                        {% if status_filter == status.value %}selected{% endif %}>
+                                    {{ status.value }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">&nbsp;</label>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Filtrar
+                                </button>
+                                <a href="{{ url_for('main.my_overtime_requests') }}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-eraser"></i> Limpar
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Solicitações -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-clock me-2"></i>
+                        Solicitações 
+                        {% if requests.total %}
+                            ({{ requests.total }} encontrada{{ 's' if requests.total > 1 else '' }})
+                        {% endif %}
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if requests.items %}
+                        <div class="row">
+                            {% for request in requests.items %}
+                            <div class="col-lg-6 col-xl-4 mb-3">
+                                <div class="card h-100 border-start border-3 
+                                            {% if request.status.value == 'PENDENTE' %}border-warning
+                                            {% elif request.status.value == 'APROVADO' %}border-success
+                                            {% elif request.status.value == 'REJEITADO' %}border-danger
+                                            {% else %}border-secondary{% endif %}">
+                                    <div class="card-body">
+                                        <!-- Status Badge -->
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <span class="badge 
+                                                        {% if request.status.value == 'PENDENTE' %}bg-warning text-dark
+                                                        {% elif request.status.value == 'APROVADO' %}bg-success
+                                                        {% elif request.status.value == 'REJEITADO' %}bg-danger
+                                                        {% else %}bg-secondary{% endif %}">
+                                                {{ request.status.value }}
+                                            </span>
+                                            <small class="text-muted">#{{ request.id }}</small>
+                                        </div>
+
+                                        <!-- Data e Horas -->
+                                        <h6 class="card-title">
+                                            <i class="fas fa-calendar me-1"></i>
+                                            {{ request.date.strftime('%d/%m/%Y') }}
+                                        </h6>
+                                        
+                                        <div class="mb-2">
+                                            <small class="text-muted d-block">
+                                                <i class="fas fa-clock me-1"></i>
+                                                {{ request.start_time.strftime('%H:%M') }} - {{ request.end_time.strftime('%H:%M') }}
+                                            </small>
+                                            <strong class="text-primary">
+                                                {{ "%.2f"|format(request.estimated_hours) }} horas
+                                            </strong>
+                                        </div>
+
+                                        <!-- Tipo -->
+                                        <div class="mb-2">
+                                            <span class="badge bg-secondary">
+                                                {{ request.overtime_type.value }}
+                                            </span>
+                                        </div>
+
+                                        <!-- Justificativa -->
+                                        <div class="mb-3">
+                                            <small class="text-muted">Justificativa:</small>
+                                            <p class="card-text small">
+                                                {{ request.justification[:100] }}
+                                                {% if request.justification|length > 100 %}...{% endif %}
+                                            </p>
+                                        </div>
+
+                                        <!-- Informações de Aprovação/Rejeição -->
+                                        {% if request.status.value in ['APROVADO', 'REJEITADO'] %}
+                                        <div class="mb-2">
+                                            <small class="text-muted">
+                                                {% if request.approved_by %}
+                                                    {{ request.status.value|title }} por: {{ request.approved_by.nome_completo }}
+                                                    <br>Em: {{ request.approved_at.strftime('%d/%m/%Y %H:%M') }}
+                                                {% else %}
+                                                    Aprovação automática
+                                                {% endif %}
+                                            </small>
+                                            {% if request.admin_notes %}
+                                                <div class="mt-1">
+                                                    <small class="text-info">
+                                                        <strong>Observações:</strong> {{ request.admin_notes }}
+                                                    </small>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        {% endif %}
+
+                                        <!-- Data de Criação -->
+                                        <div class="text-end">
+                                            <small class="text-muted">
+                                                Criado em: {{ request.created_at.strftime('%d/%m/%Y %H:%M') }}
+                                            </small>
+                                        </div>
+
+                                        <!-- Ações -->
+                                        {% if request.status.value == 'PENDENTE' %}
+                                        <div class="mt-3 text-end">
+                                            <form method="POST" action="{{ url_for('main.cancel_overtime_request', request_id=request.id) }}" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                        onclick="return confirm('Deseja cancelar esta solicitação?')">
+                                                    <i class="fas fa-times"></i> Cancelar
+                                                </button>
+                                            </form>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Paginação -->
+                        {% if requests.pages > 1 %}
+                        <div class="d-flex justify-content-center mt-4">
+                            <nav aria-label="Navegação de páginas">
+                                <ul class="pagination">
+                                    {% if requests.has_prev %}
+                                        <li class="page-item">
+                                            <a class="page-link" 
+                                               href="{{ url_for('main.my_overtime_requests', page=requests.prev_num, status=status_filter) }}">
+                                                Anterior
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% for page_num in requests.iter_pages() %}
+                                        {% if page_num %}
+                                            {% if page_num != requests.page %}
+                                                <li class="page-item">
+                                                    <a class="page-link" 
+                                                       href="{{ url_for('main.my_overtime_requests', page=page_num, status=status_filter) }}">
+                                                        {{ page_num }}
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item active">
+                                                    <span class="page-link">{{ page_num }}</span>
+                                                </li>
+                                            {% endif %}
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <span class="page-link">…</span>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if requests.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" 
+                                               href="{{ url_for('main.my_overtime_requests', page=requests.next_num, status=status_filter) }}">
+                                                Próxima
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                        {% endif %}
+
+                    {% else %}
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-inbox fa-3x mb-3"></i>
+                            <h5>Nenhuma solicitação encontrada</h5>
+                            <p>
+                                {% if status_filter %}
+                                    Nenhuma solicitação encontrada com o status selecionado.<br>
+                                    <a href="{{ url_for('main.my_overtime_requests') }}">Ver todas as solicitações</a>
+                                {% else %}
+                                    Você ainda não fez nenhuma solicitação de horas extras.<br>
+                                    <a href="{{ url_for('main.request_overtime') }}" class="btn btn-primary mt-2">
+                                        <i class="fas fa-plus"></i> Fazer Primeira Solicitação
+                                    </a>
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resumo Estatístico -->
+    {% if requests.items %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Resumo</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-warning mb-1">
+                                    {{ requests.items|selectattr('status.value', 'equalto', 'PENDENTE')|list|length }}
+                                </h4>
+                                <small class="text-muted">Pendentes</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-success mb-1">
+                                    {{ requests.items|selectattr('status.value', 'equalto', 'APROVADO')|list|length }}
+                                </h4>
+                                <small class="text-muted">Aprovadas</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-danger mb-1">
+                                    {{ requests.items|selectattr('status.value', 'equalto', 'REJEITADO')|list|length }}
+                                </h4>
+                                <small class="text-muted">Rejeitadas</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-primary mb-1">
+                                {{ "%.1f"|format(requests.items|selectattr('status.value', 'equalto', 'APROVADO')|map(attribute='estimated_hours')|sum) }}h
+                            </h4>
+                            <small class="text-muted">Horas Aprovadas</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border-radius: 0.375rem;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.border-start {
+    border-left-width: 3px !important;
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+.border-end {
+    border-right: 1px solid #dee2e6 !important;
+}
+
+@media (max-width: 768px) {
+    .border-end {
+        border-right: none !important;
+        border-bottom: 1px solid #dee2e6 !important;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+</style>
+{% endblock %}

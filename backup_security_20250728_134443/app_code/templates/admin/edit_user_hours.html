@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Horas Extras - {{ user.nome }} {{ user.sobrenome or '' }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1><i class="fas fa-user-clock"></i> Editar Horas Extras</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.overtime_control') }}">Controle de Horas Extras</a></li>
+                    <li class="breadcrumb-item active">{{ user.nome }} {{ user.sobrenome or '' }}</li>
+                </ol>
+            </nav>
+        </div>
+        <a href="{{ url_for('admin.overtime_control') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+
+    <!-- Informações do Usuário -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-user"></i> Informações do Usuário</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <div class="user-avatar-large mb-2">
+                                    {{ user.nome[0] }}{{ user.sobrenome[0] if user.sobrenome else '' }}
+                                </div>
+                                <h5>{{ user.nome }} {{ user.sobrenome or '' }}</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Email:</strong> {{ user.email }}</p>
+                                    <p><strong>CPF:</strong> {{ user.cpf }}</p>
+                                    <p><strong>Cargo:</strong> {{ user.cargo or 'N/A' }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Tipo:</strong> 
+                                        <span class="badge badge-info">{{ user.user_type.name if user.user_type else 'N/A' }}</span>
+                                    </p>
+                                    <p><strong>Status:</strong> 
+                                        {% if user.is_active %}
+                                            <span class="badge badge-success">Ativo</span>
+                                        {% else %}
+                                            <span class="badge badge-secondary">Inativo</span>
+                                        {% endif %}
+                                    </p>
+                                    <p><strong>Saldo Atual:</strong> 
+                                        <span class="badge {% if hour_bank.current_balance >= 0 %}badge-success{% else %}badge-danger{% endif %} fs-5">
+                                            {{ "%.2f"|format(hour_bank.current_balance) }}h
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulário de Ajuste -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-edit"></i> Ajustar Horas Extras</h4>
+                </div>
+                <div class="card-body">
+                            <form method="POST" action="{{ url_for('admin.edit_user_hours', user_id=user.id) }}" class="hour-adjustment-form">
+                        <!-- Saldo Atual -->
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-info-circle"></i> Saldo Atual</h5>
+                            <h3 class="mb-0">{{ "%.2f"|format(hour_bank.current_balance) }} horas</h3>
+                            <small class="text-muted">
+                                Última atualização: {{ hour_bank.updated_at.strftime('%d/%m/%Y %H:%M') if hour_bank.updated_at else 'Nunca' }}
+                            </small>
+                        </div>
+
+                        <!-- Operação -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>Operação:</strong></label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="operation" id="operation_add" value="add" checked>
+                                <label class="form-check-label" for="operation_add">
+                                    <i class="fas fa-plus text-success"></i> Adicionar
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="operation" id="operation_subtract" value="subtract">
+                                <label class="form-check-label" for="operation_subtract">
+                                    <i class="fas fa-minus text-danger"></i> Subtrair
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Campos de Horas e Minutos -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="hours" class="form-label">Horas:</label>
+                                    <input type="number" class="form-control" id="hours" name="hours" 
+                                           value="0" step="0.01" min="0" onchange="updateHoursPreview()"
+                                           placeholder="Ex: 2.5">
+                                    <small class="text-muted">Pode usar decimais (ex: 2.5 = 2h 30min)</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="minutes" class="form-label">Minutos:</label>
+                                    <input type="number" class="form-control" id="minutes" name="minutes" 
+                                           min="0" max="59" value="0" onchange="updateHoursPreview()"
+                                           placeholder="0-59">
+                                    <small class="text-muted">Entre 0 e 59</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preview do Ajuste -->
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-calculator"></i> Preview:</h6>
+                            <p class="mb-1"><strong>Operação:</strong> <span id="operation_preview">Adicionar</span> <span id="hours_preview">0h 0m</span></p>
+                            <p class="mb-0"><strong>Novo Saldo:</strong> <span id="new_balance_preview">{{ "%.2f"|format(hour_bank.current_balance) }}h</span></p>
+                        </div>
+
+                        <!-- Motivo -->
+                        <div class="form-group mb-3">
+                            <label for="reason" class="form-label"><strong>Motivo do Ajuste:</strong></label>
+                            <textarea class="form-control" id="reason" name="reason" rows="3" required 
+                                      placeholder="Descreva o motivo do ajuste (obrigatório)..."></textarea>
+                        </div>
+
+                        <!-- Botões -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin.overtime_control') }}" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Aplicar Ajuste
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Histórico de Transações -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-history"></i> Histórico Recente</h4>
+                </div>
+                <div class="card-body">
+                    {% if recent_transactions %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Operação</th>
+                                        <th>Saldo</th>
+                                        <th>Admin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in recent_transactions %}
+                                    <tr>
+                                        <td>
+                                            <small>{{ transaction.created_at.strftime('%d/%m/%Y %H:%M') }}</small>
+                                        </td>
+                                        <td>
+                                            {% if transaction.adjustment > 0 %}
+                                                <span class="text-success">
+                                                    <i class="fas fa-plus"></i> {{ "%.2f"|format(transaction.adjustment) }}h
+                                                </span>
+                                            {% else %}
+                                                <span class="text-danger">
+                                                    <i class="fas fa-minus"></i> {{ "%.2f"|format(-transaction.adjustment) }}h
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <small>{{ "%.2f"|format(transaction.new_balance) }}h</small>
+                                        </td>
+                                        <td>
+                                            <small>{{ transaction.admin.nome if transaction.admin else 'Sistema' }}</small>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted">
+                            <i class="fas fa-history fa-3x mb-3"></i>
+                            <p>Nenhum histórico encontrado</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Configurações de Horas Extras -->
+            {% if overtime_settings %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5><i class="fas fa-cog"></i> Configurações</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><small><strong>Máx. Diária:</strong> {{ overtime_settings.max_daily_overtime }}h</small></p>
+                            <p><small><strong>Máx. Semanal:</strong> {{ overtime_settings.max_weekly_overtime }}h</small></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><small><strong>Requer Aprovação:</strong> 
+                                {% if overtime_settings.requires_approval %}
+                                    <span class="badge badge-warning">Sim</span>
+                                {% else %}
+                                    <span class="badge badge-success">Não</span>
+                                {% endif %}
+                            </small></p>
+                            <p><small><strong>Multiplicador:</strong> {{ overtime_settings.overtime_multiplier_normal }}x</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.user-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #007bff, #28a745);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.badge.fs-5 {
+    font-size: 1.1rem !important;
+}
+</style>
+
+<script>
+const currentBalance = {{ hour_bank.current_balance }};
+
+function updateHoursPreview() {
+    const hours = parseFloat(document.getElementById('hours').value) || 0;
+    const minutes = parseInt(document.getElementById('minutes').value) || 0;
+    const operation = document.querySelector('input[name="operation"]:checked').value;
+    
+    // Converter para decimal
+    const totalHours = hours + (minutes / 60);
+    
+    // Atualizar preview de horas
+    const hoursDisplay = Math.floor(totalHours);
+    const minutesDisplay = Math.round((totalHours - hoursDisplay) * 60);
+    document.getElementById('hours_preview').textContent = `${hoursDisplay}h ${minutesDisplay}m`;
+    
+    // Atualizar operação
+    document.getElementById('operation_preview').textContent = operation === 'add' ? 'Adicionar' : 'Subtrair';
+    
+    // Calcular novo saldo
+    let newBalance = currentBalance;
+    if (operation === 'add') {
+        newBalance += totalHours;
+    } else {
+        newBalance -= totalHours;
+    }
+    
+    document.getElementById('new_balance_preview').textContent = `${newBalance.toFixed(2)}h`;
+    
+    // Alterar cor do preview baseado no saldo final
+    const preview = document.getElementById('new_balance_preview');
+    if (newBalance >= 0) {
+        preview.className = 'text-success';
+    } else {
+        preview.className = 'text-danger';
+    }
+}
+
+// Event listeners para atualizar preview
+document.querySelectorAll('input[name="operation"]').forEach(radio => {
+    radio.addEventListener('change', updateHoursPreview);
+});
+
+// Atualizar preview inicial
+updateHoursPreview();
+</script>
+{% endblock %}

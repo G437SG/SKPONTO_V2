@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Upload de Arquivo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-upload text-primary me-2"></i>
+                        Upload de Arquivo
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('files.upload_file') }}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_token() }}
+                        
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Selecionar Arquivo</label>
+                            <input type="file" class="form-control" id="file" name="file" required>
+                            <div class="form-text">
+                                Tipos permitidos: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, ZIP, etc.
+                                <br>Tamanho máximo: 50MB
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descrição (opcional)</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descrição do arquivo..."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_public" name="is_public">
+                                <label class="form-check-label" for="is_public">
+                                    Tornar arquivo público
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('files.file_manager') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-upload me-1"></i>
+                                Fazer Upload
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

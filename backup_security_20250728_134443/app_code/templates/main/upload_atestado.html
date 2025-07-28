@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Enviar Atestado Médico</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.tipo.label(class="form-label") }}
+                        {{ form.tipo(class="form-select") }}
+                        {% for error in form.tipo.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                        <div class="form-text">Selecione o tipo do atestado médico</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.data_inicio.label(class="form-label") }}
+                            {{ form.data_inicio(class="form-control") }}
+                            {% for error in form.data_inicio.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.data_fim.label(class="form-label") }}
+                            {{ form.data_fim(class="form-control") }}
+                            {% for error in form.data_fim.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.cid.label(class="form-label") }}
+                            {{ form.cid(class="form-control", placeholder="Ex: M79.3") }}
+                            {% for error in form.cid.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text">Código CID-10 (se disponível)</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.medico_clinica.label(class="form-label") }}
+                            {{ form.medico_clinica(class="form-control", placeholder="Dr. João Silva - Clínica ABC") }}
+                            {% for error in form.medico_clinica.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text">Nome do médico e/ou clínica</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.arquivo.label(class="form-label") }}
+                        {{ form.arquivo(class="form-control") }}
+                        {% for error in form.arquivo.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                        <div class="form-text">
+                            Formatos aceitos: PDF, JPG, PNG. Tamanho máximo: 10MB
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.observacoes.label(class="form-label") }}
+                        {{ form.observacoes(class="form-control", rows="4", placeholder="Informações adicionais sobre o atestado (opcional)") }}
+                        {% for error in form.observacoes.errors %}
+                            <div class="text-danger small">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Informações importantes -->
+                    <div class="alert alert-info">
+                        <h6><i class="fas fa-info-circle"></i> Informações Importantes:</h6>
+                        <ul class="mb-0">
+                            <li>O atestado será analisado pela administração</li>
+                            <li>Você receberá uma notificação quando for aprovado ou rejeitado</li>
+                            <li>Certifique-se de que o arquivo está legível e contém todas as informações necessárias</li>
+                            <li>O período de afastamento será automaticamente descontado dos registros de ponto</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('main.atestados') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Enviar Atestado
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Preview do arquivo -->
+        <div class="card mt-4" id="preview-card" style="display: none;">
+            <div class="card-header">
+                <h5 class="mb-0">Preview do Arquivo</h5>
+            </div>
+            <div class="card-body text-center">
+                <div id="preview-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const arquivoInput = document.getElementById('arquivo');
+    const previewCard = document.getElementById('preview-card');
+    const previewContent = document.getElementById('preview-content');
+    const dataInicio = document.getElementById('data_inicio');
+    const dataFim = document.getElementById('data_fim');
+    
+    // Preview do arquivo
+    arquivoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewContent.innerHTML = '';
+                
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '400px';
+                    img.className = 'img-fluid';
+                    previewContent.appendChild(img);
+                } else if (file.type === 'application/pdf') {
+                    previewContent.innerHTML = '<i class="fas fa-file-pdf fa-3x text-danger"></i><br><strong>' + file.name + '</strong>';
+                } else {
+                    previewContent.innerHTML = '<i class="fas fa-file fa-3x text-muted"></i><br><strong>' + file.name + '</strong>';
+                }
+                
+                previewCard.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewCard.style.display = 'none';
+        }
+    });
+    
+    // Validação de datas
+    dataInicio.addEventListener('change', validateDates);
+    dataFim.addEventListener('change', validateDates);
+    
+    function validateDates() {
+        if (dataInicio.value && dataFim.value) {
+            const inicio = new Date(dataInicio.value);
+            const fim = new Date(dataFim.value);
+            
+            if (fim < inicio) {
+                dataFim.setCustomValidity('A data de fim deve ser posterior à data de início');
+            } else {
+                dataFim.setCustomValidity('');
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

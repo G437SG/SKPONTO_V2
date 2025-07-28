@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Detalhes do Usuário</h4>
+                    <div>
+                        <a href="{{ url_for('admin.editar_usuario', id=usuario.id) }}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a href="{{ url_for('admin.usuarios') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Informações pessoais -->
+                    <div class="col-md-6">
+                        <h5>Informações Pessoais</h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <th width="30%">Nome:</th>
+                                <td>{{ usuario.nome }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>{{ usuario.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Telefone:</th>
+                                <td>{{ usuario.telefone or '-' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Cargo:</th>
+                                <td>{{ usuario.cargo or '-' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Tipo:</th>
+                                <td>
+                                    {% if usuario.is_admin %}
+                                        <span class="badge bg-danger">Administrador</span>
+                                    {% elif usuario.user_type.value == 'trabalhador' %}
+                                        <span class="badge bg-primary">Trabalhador</span>
+                                    {% else %}
+                                        <span class="badge bg-info">Estagiário</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td>
+                                    {% if usuario.is_active %}
+                                        <span class="badge bg-success">Ativo</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Inativo</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <!-- Informações da conta -->
+                    <div class="col-md-6">
+                        <h5>Informações da Conta</h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <th width="40%">Criado em:</th>
+                                <td>{{ usuario.created_at|datetime }}</td>
+                            </tr>
+                            <tr>
+                                <th>Último login:</th>
+                                <td>{{ usuario.last_login|datetime if usuario.last_login else 'Nunca' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Total de registros:</th>
+                                <td>{{ total_registros }}</td>
+                            </tr>
+                            <tr>
+                                <th>Horas trabalhadas (mês):</th>
+                                <td>{{ horas_mes }}h</td>
+                            </tr>
+                            <tr>
+                                <th>Horas extras (mês):</th>
+                                <td>{{ horas_extras_mes|format_hours }}</td>
+                            </tr>
+                            <tr>
+                                <th>Atestados enviados:</th>
+                                <td>{{ total_atestados }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Últimos registros de ponto -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Últimos Registros de Ponto</h5>
+            </div>
+            <div class="card-body">
+                {% if ultimos_registros %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Entrada</th>
+                                    <th>Saída Almoço</th>
+                                    <th>Volta Almoço</th>
+                                    <th>Saída</th>
+                                    <th>Horas Trabalhadas</th>
+                                    <th>Horas Extras</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for registro in ultimos_registros %}
+                                <tr>
+                                    <td>{{ registro.data|date }}</td>
+                                    <td>{{ registro.entrada|time if registro.entrada else '-' }}</td>
+                                    <td>{{ registro.saida_almoco|time if registro.saida_almoco else '-' }}</td>
+                                    <td>{{ registro.volta_almoco|time if registro.volta_almoco else '-' }}</td>
+                                    <td>{{ registro.saida|time if registro.saida else '-' }}</td>
+                                    <td>{{ registro.horas_trabalhadas|format_hours }}</td>
+                                    <td>{{ registro.horas_extras|format_hours }}</td>
+                                    <td>
+                                        {% if registro.is_completo %}
+                                            <span class="badge bg-success">Completo</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Incompleto</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ url_for('admin.relatorios', user_id=usuario.id) }}" class="btn btn-outline-primary">
+                            Ver Relatório Completo
+                        </a>
+                    </div>
+                {% else %}
+                    <p class="text-muted">Nenhum registro de ponto encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Atestados médicos -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Atestados Médicos</h5>
+            </div>
+            <div class="card-body">
+                {% if atestados %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Período</th>
+                                    <th>Dias</th>
+                                    <th>Status</th>
+                                    <th>Enviado em</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for atestado in atestados %}
+                                <tr>
+                                    <td>{{ atestado.data_inicio|date }} - {{ atestado.data_fim|date }}</td>
+                                    <td>{{ atestado.dias_licenca }}</td>
+                                    <td>
+                                        {% if atestado.status.value == 'pendente' %}
+                                            <span class="badge bg-warning">Pendente</span>
+                                        {% elif atestado.status.value == 'aprovado' %}
+                                            <span class="badge bg-success">Aprovado</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Rejeitado</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ atestado.created_at|date }}</td>
+                                    <td>
+                                        <a href="{{ url_for('admin.atestado_detalhes', id=atestado.id) }}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            Ver Detalhes
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">Nenhum atestado médico encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Gráfico de atividade -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Atividade dos Últimos 30 Dias</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="chartAtividade" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Gráfico de atividade
+const ctx = document.getElementById('chartAtividade').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ dias_labels|default([])|tojson }},
+        datasets: [{
+            label: 'Horas Trabalhadas',
+            data: {{ horas_data|default([])|tojson }},
+            borderColor: '#4e73df',
+            backgroundColor: 'rgba(78, 115, 223, 0.1)',
+            borderWidth: 2,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 12
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

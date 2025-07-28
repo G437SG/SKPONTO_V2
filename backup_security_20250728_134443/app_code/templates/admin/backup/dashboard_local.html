@@ -1,0 +1,773 @@
+{% extends "base.html" %}
+{% block title %}Dashboard de Backup Local - SKPONTO{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%);
+        --info-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        --card-hover-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        --border-radius: 15px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    /* Header Moderno */
+    .dashboard-header {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+    }
+
+    .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .dashboard-subtitle {
+        color: #6c757d;
+        font-size: 1.1rem;
+        margin-top: 8px;
+        font-weight: 400;
+    }
+
+    /* Cards de Status */
+    .status-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .status-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 25px;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .status-card:hover {
+        box-shadow: var(--card-hover-shadow);
+        transform: translateY(-3px);
+    }
+
+    .status-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .status-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .local-storage-icon {
+        background: var(--primary-gradient);
+    }
+
+    .backup-stats-icon {
+        background: var(--success-gradient);
+    }
+
+    .system-health-icon {
+        background: var(--info-gradient);
+    }
+
+    .storage-space-icon {
+        background: var(--warning-gradient);
+    }
+
+    .status-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0;
+        color: #2d3748;
+    }
+
+    .status-value {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 10px 0;
+    }
+
+    .status-label {
+        font-size: 0.9rem;
+        color: #718096;
+        margin: 0;
+    }
+
+    /* Botões Modernos */
+    .btn-modern {
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-modern::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .btn-modern:hover::before {
+        left: 100%;
+    }
+
+    .btn-modern:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        text-decoration: none;
+    }
+
+    .btn-primary-modern {
+        background: var(--primary-gradient);
+        color: white;
+    }
+
+    .btn-success-modern {
+        background: var(--success-gradient);
+        color: white;
+    }
+
+    .btn-warning-modern {
+        background: var(--warning-gradient);
+        color: white;
+    }
+
+    /* Seções de Conteúdo */
+    .content-section {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid rgba(255,255,255,0.2);
+        margin-bottom: 30px;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    /* Tabela Moderna */
+    .table-modern {
+        margin: 0;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .table-modern th {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border: none;
+        font-weight: 600;
+        color: #2d3748;
+        padding: 15px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .table-modern td {
+        border: none;
+        padding: 15px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f3f4;
+    }
+
+    .table-modern tbody tr {
+        transition: var(--transition);
+    }
+
+    .table-modern tbody tr:hover {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    }
+
+    /* Progresso e Métricas */
+    .progress-modern {
+        height: 10px;
+        border-radius: 50px;
+        background: #e9ecef;
+        overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .progress-bar-modern {
+        height: 100%;
+        background: var(--success-gradient);
+        border-radius: 50px;
+        transition: width 0.6s ease;
+        position: relative;
+    }
+
+    .progress-bar-modern::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Badge Moderno */
+    .badge-modern {
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .badge-success {
+        background: var(--success-gradient);
+        color: white;
+    }
+
+    .badge-warning {
+        background: var(--warning-gradient);
+        color: white;
+    }
+
+    .badge-primary {
+        background: var(--primary-gradient);
+        color: white;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 60px 40px;
+        color: #718096;
+    }
+
+    .empty-state i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.3;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .status-section {
+            grid-template-columns: 1fr;
+        }
+        
+        .dashboard-title {
+            font-size: 2rem;
+        }
+        
+        .section-header {
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header Principal -->
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">
+            <i class="fas fa-hdd"></i>
+            Sistema de Backup Local
+        </h1>
+        <p class="dashboard-subtitle">
+            Gestão completa de backups e armazenamento local do SKPONTO
+        </p>
+    </div>
+
+    <!-- Cards de Status Principal -->
+    <div class="status-section">
+        <!-- Status do Armazenamento Local -->
+        <div class="status-card">
+            <div class="status-header">
+                <div class="status-icon local-storage-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3 class="status-title">Armazenamento Local</h3>
+            </div>
+            <div class="status-value text-success">{{ storage_info.status or 'Ativo' }}</div>
+            <p class="status-label">Sistema funcionando normalmente</p>
+            <div class="mt-3">
+                <small class="text-muted">Localização:</small><br>
+                <code class="text-primary">{{ storage_info.base_path or 'storage/' }}</code>
+            </div>
+        </div>
+
+        <!-- Estatísticas de Backup -->
+        <div class="status-card">
+            <div class="status-header">
+                <div class="status-icon backup-stats-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="status-title">Estatísticas de Backup</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-4">
+                    <div class="status-value text-primary">{{ backup_stats.total_backups or 0 }}</div>
+                    <p class="status-label">Total</p>
+                </div>
+                <div class="col-4">
+                    <div class="status-value text-success">{{ backup_stats.successful or 0 }}</div>
+                    <p class="status-label">Sucessos</p>
+                </div>
+                <div class="col-4">
+                    <div class="status-value text-warning">{{ backup_stats.failed or 0 }}</div>
+                    <p class="status-label">Falhas</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saúde do Sistema -->
+        <div class="status-card">
+            <div class="status-header">
+                <div class="status-icon system-health-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3 class="status-title">Saúde do Sistema</h3>
+            </div>
+            <div class="mb-3">
+                <small class="text-muted">Última verificação:</small>
+                <div class="status-value text-info">{{ system_health.last_check or 'Agora' }}</div>
+            </div>
+            <div class="progress-modern mb-2">
+                <div class="progress-bar-modern" style="width: {{ system_health.health_percentage or 95 }}%"></div>
+            </div>
+            <p class="status-label">{{ system_health.health_percentage or 95 }}% de saúde</p>
+        </div>
+
+        <!-- Espaço de Armazenamento -->
+        <div class="status-card">
+            <div class="status-header">
+                <div class="status-icon storage-space-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="status-title">Espaço em Disco</h3>
+            </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between">
+                    <span>Usado: {{ storage_info.used_space or '1.2 GB' }}</span>
+                    <span>Livre: {{ storage_info.free_space or '18.8 GB' }}</span>
+                </div>
+                <div class="progress-modern mt-2">
+                    <div class="progress-bar-modern" style="width: {{ storage_info.usage_percentage or 6 }}%"></div>
+                </div>
+            </div>
+            <p class="status-label">{{ storage_info.usage_percentage or 6 }}% utilizado</p>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-bolt"></i>
+                Ações Rápidas
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <form method="POST" action="{{ url_for('backup_dashboard.create_backup') }}">
+                    {{ csrf_token() }}
+                    <button type="submit" class="btn btn-success-modern btn-modern w-100">
+                        <i class="fas fa-plus"></i>
+                        Criar Backup Agora
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{{ url_for('backup_dashboard.history') }}" class="btn btn-primary-modern btn-modern w-100">
+                    <i class="fas fa-history"></i>
+                    Ver Histórico
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{{ url_for('backup_dashboard.settings') }}" class="btn btn-warning-modern btn-modern w-100">
+                    <i class="fas fa-cog"></i>
+                    Configurações
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <form method="POST" action="{{ url_for('backup_dashboard.cleanup') }}">
+                    {{ csrf_token() }}
+                    <button type="submit" class="btn btn-outline-danger btn-modern w-100" 
+                            onclick="return confirm('Deseja limpar backups antigos?')">
+                        <i class="fas fa-trash"></i>
+                        Limpeza Automática
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backups Recentes -->
+    <div class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i>
+                Backups Recentes
+            </h2>
+            <span class="badge badge-modern badge-primary">{{ backup_list|length if backup_list else 0 }} backups</span>
+        </div>
+
+        {% if backup_list %}
+        <div class="table-responsive">
+            <table class="table table-modern">
+                <thead>
+                    <tr>
+                        <th>Data/Hora</th>
+                        <th>Tipo</th>
+                        <th>Tamanho</th>
+                        <th>Status</th>
+                        <th>Duração</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for backup in backup_list[:10] %}
+                    <tr>
+                        <td>
+                            <strong>{{ backup.created_at.strftime('%d/%m/%Y') }}</strong><br>
+                            <small class="text-muted">{{ backup.created_at.strftime('%H:%M:%S') }}</small>
+                        </td>
+                        <td>
+                            <span class="badge badge-modern badge-primary">
+                                <i class="fas fa-{{ 'robot' if backup.backup_type.name == 'AUTO' else 'user' }}"></i>
+                                {{ backup.backup_type.name }}
+                            </span>
+                        </td>
+                        <td>
+                            <strong>{{ backup.file_size | filesizeformat if backup.file_size else 'N/A' }}</strong>
+                        </td>
+                        <td>
+                            {% if backup.status.name == 'SUCCESS' %}
+                                <span class="badge badge-modern badge-success">
+                                    <i class="fas fa-check"></i> Sucesso
+                                </span>
+                            {% elif backup.status.name == 'FAILED' %}
+                                <span class="badge badge-modern badge-warning">
+                                    <i class="fas fa-exclamation-triangle"></i> Falha
+                                </span>
+                            {% else %}
+                                <span class="badge badge-modern badge-primary">
+                                    <i class="fas fa-clock"></i> {{ backup.status.name }}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if backup.duration %}
+                                {{ "%.2f"|format(backup.duration) }}s
+                            {% else %}
+                                <span class="text-muted">N/A</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                {% if backup.status.name == 'SUCCESS' and backup.local_path %}
+                                <a href="{{ url_for('backup_dashboard.download_backup', backup_id=backup.id) }}" 
+                                   class="btn btn-sm btn-outline-primary" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                {% endif %}
+                                <a href="{{ url_for('backup_dashboard.backup_details', backup_id=backup.id) }}" 
+                                   class="btn btn-sm btn-outline-info" title="Detalhes">
+                                    <i class="fas fa-info"></i>
+                                </a>
+                                {% if current_user.user_type.name == 'ADMIN' %}
+                                <form method="POST" action="{{ url_for('backup_dashboard.delete_backup', backup_id=backup.id) }}" 
+                                      class="d-inline" onsubmit="return confirm('Deseja excluir este backup?')">
+                                    {{ csrf_token() }}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-archive"></i>
+            <h4>Nenhum backup encontrado</h4>
+            <p>Clique em "Criar Backup Agora" para gerar seu primeiro backup.</p>
+            <form method="POST" action="{{ url_for('backup_dashboard.create_backup') }}" class="mt-3">
+                {{ csrf_token() }}
+                <button type="submit" class="btn btn-success-modern btn-modern">
+                    <i class="fas fa-plus"></i>
+                    Criar Primeiro Backup
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Gestão de Arquivos -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="content-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-folder"></i>
+                        Gestão de Arquivos
+                    </h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-6 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-database fa-2x text-primary mb-2"></i>
+                            <h5>{{ file_stats.database_files or 0 }}</h5>
+                            <small class="text-muted">Arquivos de Banco</small>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-file-medical fa-2x text-success mb-2"></i>
+                            <h5>{{ file_stats.attestation_files or 0 }}</h5>
+                            <small class="text-muted">Atestados</small>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-file-archive fa-2x text-warning mb-2"></i>
+                            <h5>{{ file_stats.backup_files or 0 }}</h5>
+                            <small class="text-muted">Arquivos de Backup</small>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-file-alt fa-2x text-info mb-2"></i>
+                            <h5>{{ file_stats.log_files or 0 }}</h5>
+                            <small class="text-muted">Logs do Sistema</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="content-section">
+                <div class="section-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-chart-pie"></i>
+                        Distribuição de Espaço
+                    </h3>
+                </div>
+                <div class="space-distribution">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><i class="fas fa-database text-primary"></i> Banco de Dados</span>
+                            <span class="fw-bold">{{ space_distribution.database_size or '800 MB' }}</span>
+                        </div>
+                        <div class="progress-modern">
+                            <div class="progress-bar-modern" style="width: {{ space_distribution.database_percentage or 65 }}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><i class="fas fa-file-archive text-warning"></i> Backups</span>
+                            <span class="fw-bold">{{ space_distribution.backups_size or '300 MB' }}</span>
+                        </div>
+                        <div class="progress-modern">
+                            <div class="progress-bar-modern" style="width: {{ space_distribution.backups_percentage or 25 }}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><i class="fas fa-file-medical text-success"></i> Atestados</span>
+                            <span class="fw-bold">{{ space_distribution.attestations_size or '80 MB' }}</span>
+                        </div>
+                        <div class="progress-modern">
+                            <div class="progress-bar-modern" style="width: {{ space_distribution.attestations_percentage or 7 }}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span><i class="fas fa-file-alt text-info"></i> Logs</span>
+                            <span class="fw-bold">{{ space_distribution.logs_size or '40 MB' }}</span>
+                        </div>
+                        <div class="progress-modern">
+                            <div class="progress-bar-modern" style="width: {{ space_distribution.logs_percentage or 3 }}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configurações de Backup Automático -->
+    <div class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-robot"></i>
+                Backup Automático
+            </h2>
+            <div>
+                {% if backup_config.auto_backup_enabled %}
+                    <span class="badge badge-modern badge-success">
+                        <i class="fas fa-check"></i> Ativado
+                    </span>
+                {% else %}
+                    <span class="badge badge-modern badge-warning">
+                        <i class="fas fa-pause"></i> Desativado
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Configuração Atual</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-clock text-primary"></i> <strong>Frequência:</strong> {{ backup_config.frequency or 'Diário' }}</li>
+                    <li><i class="fas fa-calendar text-success"></i> <strong>Próximo backup:</strong> {{ backup_config.next_backup or 'Hoje às 23:00' }}</li>
+                    <li><i class="fas fa-history text-info"></i> <strong>Retenção:</strong> {{ backup_config.retention_days or '30' }} dias</li>
+                    <li><i class="fas fa-hdd text-warning"></i> <strong>Tipo:</strong> {{ backup_config.backup_type or 'Completo' }}</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Ações</h5>
+                <div class="d-grid gap-2">
+                    {% if backup_config.auto_backup_enabled %}
+                    <form method="POST" action="{{ url_for('backup_dashboard.disable_auto_backup') }}">
+                        {{ csrf_token() }}
+                        <button type="submit" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-pause"></i> Desativar Backup Automático
+                        </button>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{{ url_for('backup_dashboard.enable_auto_backup') }}">
+                        {{ csrf_token() }}
+                        <button type="submit" class="btn btn-success-modern btn-modern w-100">
+                            <i class="fas fa-play"></i> Ativar Backup Automático
+                        </button>
+                    </form>
+                    {% endif %}
+                    
+                    <a href="{{ url_for('backup_dashboard.settings') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-cog"></i> Configurar Backup
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+console.log('🚀 Dashboard de Backup Local carregado');
+
+// Auto-refresh dos dados a cada 30 segundos
+setInterval(function() {
+    console.log('🔄 Atualizando dados do dashboard...');
+    // Aqui você pode adicionar chamadas AJAX para atualizar dados em tempo real
+}, 30000);
+
+// Função para formatar tamanhos de arquivo
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Animações de entrada
+document.addEventListener('DOMContentLoaded', function() {
+    // Animar cards de status
+    const statusCards = document.querySelectorAll('.status-card');
+    statusCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        }, index * 100);
+    });
+    
+    console.log('✅ Dashboard inicializado com sucesso');
+});
+</script>
+{% endblock %}

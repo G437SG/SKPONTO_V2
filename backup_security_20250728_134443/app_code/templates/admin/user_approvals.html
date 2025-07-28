@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %}Aprovações de Usuários - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3">Aprovações de Usuários</h1>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Solicitações Pendentes -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clock text-warning"></i> Solicitações Pendentes
+                        <span class="badge bg-warning ms-2">{{ pending_requests.total }}</span>
+                    </h5>
+                    {% if pending_requests.items %}
+                    <button type="button" class="btn btn-sm btn-outline-success" onclick="toggleBulkActions()">
+                        <i class="fas fa-check-double"></i> Ações em Lote
+                    </button>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if pending_requests.items %}
+                    <form id="bulkForm" method="POST" action="{{ url_for('admin.bulk_approve_users') }}" style="display: none;">
+                        {{ csrf_token() }}
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="selectAll()">
+                                    <i class="fas fa-check-square"></i> Selecionar Todos
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deselectAll()">
+                                    <i class="fas fa-square"></i> Deselecionar Todos
+                                </button>
+                            </div>
+                            <div>
+                                <button type="submit" name="action" value="approve" class="btn btn-sm btn-success">
+                                    <i class="fas fa-check"></i> Aprovar Selecionados
+                                </button>
+                                <button type="submit" name="action" value="reject" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-times"></i> Rejeitar Selecionados
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="bulk-header" style="display: none;">
+                                        <input type="checkbox" id="selectAllCheckbox" onchange="toggleAllCheckboxes()">
+                                    </th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>CPF</th>
+                                    <th>Tipo</th>
+                                    <th>Solicitado em</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in pending_requests.items %}
+                                <tr>
+                                    <td class="bulk-checkbox" style="display: none;">
+                                        <input type="checkbox" name="request_ids" value="{{ request.id }}" form="bulkForm">
+                                    </td>
+                                    <td>
+                                        <strong>{{ request.user.nome }} {{ request.user.sobrenome }}</strong>
+                                        {% if request.user.foto_perfil %}
+                                        <img src="{{ url_for('static', filename='uploads/profiles/' + request.user.foto_perfil) }}" 
+                                             alt="Foto" class="rounded-circle ms-2" style="width: 30px; height: 30px;">
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ request.user.email }}</td>
+                                    <td>{{ request.user.cpf }}</td>
+                                    <td>
+                                        <span class="badge bg-info">{{ request.user.user_type.value.title() }}</span>
+                                    </td>
+                                    <td>{{ request.requested_at|datetime }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="{{ url_for('admin.user_approval_details', request_id=request.id) }}" 
+                                               class="btn btn-sm btn-outline-info">
+                                                <i class="fas fa-eye"></i> Detalhes
+                                            </a>
+                                            <a href="{{ url_for('admin.approve_user', request_id=request.id) }}" 
+                                               class="btn btn-sm btn-outline-success">
+                                                <i class="fas fa-check"></i> Processar
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Paginação -->
+                    {% if pending_requests.pages > 1 %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if pending_requests.has_prev %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin.user_approvals', page=pending_requests.prev_num) }}">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            
+                            {% for page_num in pending_requests.iter_pages() %}
+                                {% if page_num %}
+                                    {% if page_num != pending_requests.page %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ url_for('admin.user_approvals', page=page_num) }}">{{ page_num }}</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ page_num }}</span>
+                                    </li>
+                                    {% endif %}
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if pending_requests.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('admin.user_approvals', page=pending_requests.next_num) }}">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-check-circle text-success fa-3x mb-3"></i>
+                        <h5>Nenhuma solicitação pendente</h5>
+                        <p class="text-muted">Todas as solicitações foram processadas.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Solicitações Processadas Recentemente -->
+            {% if processed_requests %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-history text-secondary"></i> Processadas Recentemente
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Processado em</th>
+                                    <th>Processado por</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in processed_requests %}
+                                <tr>
+                                    <td>{{ request.user.nome }} {{ request.user.sobrenome }}</td>
+                                    <td>{{ request.user.email }}</td>
+                                    <td>
+                                        {% if request.status.value == 'APROVADO' %}
+                                        <span class="badge bg-success">Aprovado</span>
+                                        {% else %}
+                                        <span class="badge bg-danger">Rejeitado</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ request.reviewed_at|datetime }}</td>
+                                    <td>{{ request.reviewer.nome if request.reviewer else 'N/A' }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleBulkActions() {
+    const bulkForm = document.getElementById('bulkForm');
+    const bulkHeaders = document.querySelectorAll('.bulk-header');
+    const bulkCheckboxes = document.querySelectorAll('.bulk-checkbox');
+    
+    if (bulkForm.style.display === 'none') {
+        bulkForm.style.display = 'block';
+        bulkHeaders.forEach(header => header.style.display = 'table-cell');
+        bulkCheckboxes.forEach(checkbox => checkbox.style.display = 'table-cell');
+    } else {
+        bulkForm.style.display = 'none';
+        bulkHeaders.forEach(header => header.style.display = 'none');
+        bulkCheckboxes.forEach(checkbox => checkbox.style.display = 'none');
+    }
+}
+
+function selectAll() {
+    const checkboxes = document.querySelectorAll('input[name="request_ids"]');
+    checkboxes.forEach(checkbox => checkbox.checked = true);
+    document.getElementById('selectAllCheckbox').checked = true;
+}
+
+function deselectAll() {
+    const checkboxes = document.querySelectorAll('input[name="request_ids"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+    document.getElementById('selectAllCheckbox').checked = false;
+}
+
+function toggleAllCheckboxes() {
+    const masterCheckbox = document.getElementById('selectAllCheckbox');
+    const checkboxes = document.querySelectorAll('input[name="request_ids"]');
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = masterCheckbox.checked;
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i class="fas fa-chart-bar"></i>
+                    Relatórios
+                </h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+                        <li class="breadcrumb-item active">Relatórios</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="card shadow">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-file-download"></i>
+                                Gerar Relatório de Ponto
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST">
+                                {{ form.hidden_tag() }}
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            {{ form.data_inicio.label(class="form-label") }}
+                                            {{ form.data_inicio(class="form-control") }}
+                                            {% if form.data_inicio.errors %}
+                                                <div class="text-danger">
+                                                    {% for error in form.data_inicio.errors %}
+                                                        <small>{{ error }}</small>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            {{ form.data_fim.label(class="form-label") }}
+                                            {{ form.data_fim(class="form-control") }}
+                                            {% if form.data_fim.errors %}
+                                                <div class="text-danger">
+                                                    {% for error in form.data_fim.errors %}
+                                                        <small>{{ error }}</small>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.user_id.label(class="form-label") }}
+                                    {{ form.user_id(class="form-select") }}
+                                    {% if form.user_id.errors %}
+                                        <div class="text-danger">
+                                            {% for error in form.user_id.errors %}
+                                                <small>{{ error }}</small>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.formato.label(class="form-label") }}
+                                    {{ form.formato(class="form-select") }}
+                                    {% if form.formato.errors %}
+                                        <div class="text-danger">
+                                            {% for error in form.formato.errors %}
+                                                <small>{{ error }}</small>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary me-md-2">
+                                        <i class="fas fa-times"></i>
+                                        Cancelar
+                                    </a>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-download"></i>
+                                        Gerar Relatório
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mt-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-info-circle"></i>
+                                Informações sobre Relatórios
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-file-pdf"></i> Formato PDF</h6>
+                                    <p class="text-muted">Gera um relatório em formato PDF com layout profissional, ideal para impressão e arquivamento.</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-file-excel"></i> Formato Excel</h6>
+                                    <p class="text-muted">Gera uma planilha Excel com os dados, permitindo análises e manipulações adicionais.</p>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h6><i class="fas fa-clock"></i> Dados Incluídos no Relatório</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success"></i> Horários de entrada e saída</li>
+                                <li><i class="fas fa-check text-success"></i> Total de horas trabalhadas por dia</li>
+                                <li><i class="fas fa-check text-success"></i> Horas extras</li>
+                                <li><i class="fas fa-check text-success"></i> Faltas e atrasos</li>
+                                <li><i class="fas fa-check text-success"></i> Atestados médicos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

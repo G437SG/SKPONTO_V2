@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="d-flex align-items-center mb-4">
+                <a href="{{ url_for('admin.classes_trabalho') }}" class="btn btn-outline-secondary me-3">
+                    <i class="bi bi-arrow-left"></i>
+                    Voltar
+                </a>
+                <h1>
+                    <i class="bi bi-plus-circle"></i>
+                    Nova Classe de Trabalho
+                </h1>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                {{ form.name.label(class="form-label") }}
+                                {{ form.name(class="form-control") }}
+                                {% if form.name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.name.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">Nome único para identificar esta classe de trabalho.</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                {{ form.description.label(class="form-label") }}
+                                {{ form.description(class="form-control", rows="3") }}
+                                {% if form.description.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.description.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">Descrição detalhada da classe de trabalho.</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.daily_work_hours.label(class="form-label") }}
+                                <div class="input-group">
+                                    {{ form.daily_work_hours(class="form-control", step="0.1", min="1", max="12") }}
+                                    <span class="input-group-text">horas</span>
+                                </div>
+                                {% if form.daily_work_hours.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.daily_work_hours.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">Horas de trabalho efetivo (sem incluir almoço).</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                {{ form.lunch_hours.label(class="form-label") }}
+                                <div class="input-group">
+                                    {{ form.lunch_hours(class="form-control", step="0.1", min="0", max="3") }}
+                                    <span class="input-group-text">horas</span>
+                                </div>
+                                {% if form.lunch_hours.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.lunch_hours.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="form-text">Tempo de almoço/intervalo.</div>
+                            </div>
+                        </div>
+
+                        <!-- Preview das horas -->
+                        <div class="alert alert-info">
+                            <h6><i class="bi bi-info-circle"></i> Resumo da Classe</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <strong>Horas de Trabalho:</strong>
+                                    <span id="preview-trabalho">8.0</span>h
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Horas de Almoço:</strong>
+                                    <span id="preview-almoco">1.0</span>h
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Total Esperado:</strong>
+                                    <span id="preview-total">9.0</span>h/dia
+                                </div>
+                            </div>
+                            <small class="text-muted">
+                                Qualquer tempo além do total esperado será considerado hora extra.
+                            </small>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.classes_trabalho') }}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i>
+                                Criar Classe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Dicas -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="bi bi-lightbulb"></i> Dicas</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li><strong>Horas Diárias:</strong> Refere-se ao tempo efetivo de trabalho, sem incluir intervalos.</li>
+                        <li><strong>Horas de Almoço:</strong> Tempo de intervalo que será descontado do cálculo de horas trabalhadas.</li>
+                        <li><strong>Horas Extras:</strong> Qualquer tempo além da soma (Horas Diárias + Horas Almoço) será considerado hora extra.</li>
+                        <li><strong>Exemplos comuns:</strong>
+                            <ul>
+                                <li>Trabalhador CLT: 8h trabalho + 1h almoço = 9h total</li>
+                                <li>Estagiário: 6h trabalho + 1h almoço = 7h total</li>
+                                <li>Meio período: 4h trabalho + 0h almoço = 4h total</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const horasTrabalho = document.getElementById('{{ form.daily_work_hours.id }}');
+    const horasAlmoco = document.getElementById('{{ form.lunch_hours.id }}');
+    const previewTrabalho = document.getElementById('preview-trabalho');
+    const previewAlmoco = document.getElementById('preview-almoco');
+    const previewTotal = document.getElementById('preview-total');
+
+    function updatePreview() {
+        const trabalho = parseFloat(horasTrabalho.value) || 0;
+        const almoco = parseFloat(horasAlmoco.value) || 0;
+        const total = trabalho + almoco;
+
+        previewTrabalho.textContent = trabalho.toFixed(1);
+        previewAlmoco.textContent = almoco.toFixed(1);
+        previewTotal.textContent = total.toFixed(1);
+    }
+
+    horasTrabalho.addEventListener('input', updatePreview);
+    horasAlmoco.addEventListener('input', updatePreview);
+    
+    // Update inicial
+    updatePreview();
+});
+</script>
+{% endblock %}
