@@ -183,6 +183,31 @@ def configure_context_processors(app):
         from flask_login import current_user
         return {'current_user': current_user}
 
+def configure_security_headers(app):
+    """Configura headers de segurança"""
+    @app.after_request
+    def set_security_headers(response):
+        # Headers de segurança básicos
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['X-Frame-Options'] = 'DENY'
+        response.headers['X-XSS-Protection'] = '1; mode=block'
+        
+        # HTTPS em produção
+        if app.config.get('ENV') == 'production':
+            response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+        
+        # CSP básico
+        response.headers['Content-Security-Policy'] = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; "
+            "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; "
+            "font-src 'self' fonts.gstatic.com; "
+            "img-src 'self' data:; "
+            "connect-src 'self'"
+        )
+        
+        return response
+
 def create_app(config_name=None):
     """Factory para criar a aplicação Flask"""
     app = Flask(__name__)
@@ -205,6 +230,8 @@ def create_app(config_name=None):
     configure_template_filters(app)
     configure_template_context(app)
     configure_context_processors(app)
+    # Configurar headers de segurança
+    configure_security_headers(app)
 
     # Configurar armazenamento local
     with app.app_context():
