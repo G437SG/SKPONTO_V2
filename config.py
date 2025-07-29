@@ -17,22 +17,17 @@ class Config:
     # Criar diretório se não existir
     os.makedirs(storage_dir, exist_ok=True)
     
-    # Prioridade: DATABASE_URL (produção) > SQLite local (desenvolvimento)
+    # FORÇAR PostgreSQL em produção
     database_url = os.environ.get('DATABASE_URL')
-    if database_url:
-        SQLALCHEMY_DATABASE_URI = database_url
-        print(f"� POSTGRESQL DATABASE MODE - URI: {database_url[:50]}...")
-        print("� USANDO DATABASE_URL PARA PRODUÇÃO")
-    else:
-        # Fallback para SQLite local
-        db_path = os.path.join(storage_dir, "skponto.db")
-        SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'
-        print(f"�️ LOCAL DATABASE MODE - URI: {SQLALCHEMY_DATABASE_URI}")
-        print("📁 USANDO ARMAZENAMENTO LOCAL PARA DESENVOLVIMENTO")
-        print(f"   - Database: {storage_dir}")
-        print(f"   - Backups: {os.path.join(base_dir, 'storage', 'backups')}")
-        print(f"   - Uploads: {os.path.join(base_dir, 'storage', 'uploads')}")
-        print(f"   - Attestations: {os.path.join(base_dir, 'storage', 'attestations')}")
+    if not database_url:
+        # Definir PostgreSQL como padrão
+        database_url = 'postgresql://skponto_user:ho8BpKkpG7dBMP7qGygnSP9G5vQd3FzF@dpg-d1rq11vgi27c73cm8oj0-a.oregon-postgres.render.com/skponto_production'
+        os.environ['DATABASE_URL'] = database_url
+        print("🔧 CONFIGURADO DATABASE_URL padrão para PostgreSQL")
+    
+    SQLALCHEMY_DATABASE_URI = database_url
+    print(f"🗄️ POSTGRESQL MODE - URI: {database_url[:50]}...")
+    print("🚀 USANDO POSTGRESQL PARA PRODUÇÃO")
     
     # Fix for PostgreSQL URL format
     if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
@@ -43,11 +38,27 @@ class Config:
     if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgresql://'):
         import sys
         try:
-            # Try psycopg3 first for Python 3.13+
-            if sys.version_info >= (3, 13):
+            # Try psycopg2 for compatibility
+            import psycopg2
+            if '+psycopg2' not in SQLALCHEMY_DATABASE_URI:
+                SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgresql://', 'postgresql+psycopg2://', 1)
+                print(f"✅ Driver psycopg2 configurado")
+        except ImportError:
+            try:
+                # Fallback to psycopg3 if available
                 import psycopg
                 if '+psycopg' not in SQLALCHEMY_DATABASE_URI:
                     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgresql://', 'postgresql+psycopg://', 1)
+                    print(f"✅ Driver psycopg3 configurado")
+            except ImportError:
+                print("⚠️ Nenhum driver PostgreSQL encontrado!")
+                # Se não há drivers, usar SQLite como fallback apenas em desenvolvimento
+                if ENV == 'development':
+                    db_path = os.path.join(storage_dir, "skponto.db")
+                    SQLALCHEMY_DATABASE_URI = f'sqlite:///{db_path}'
+                    print(f"⚠️ FALLBACK para SQLite: {SQLALCHEMY_DATABASE_URI}")
+                else:
+                    raise ImportError("Driver PostgreSQL necessário para produção!")
                     print(f"🐍 Python {sys.version_info.major}.{sys.version_info.minor} - Usando psycopg3")
             else:
                 # Use psycopg2 for older Python versions

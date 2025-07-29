@@ -5,8 +5,42 @@ Aplicação principal Flask
 """
 
 import os
+import sys
+from pathlib import Path
 from flask_migrate import Migrate
 from app import create_app, db
+
+def ensure_directories():
+    """Garante que todos os diretórios necessários existam"""
+    directories = [
+        'storage',
+        'storage/database', 
+        'storage/backups',
+        'storage/logs',
+        'storage/uploads',
+        'storage/attestations',
+        'logs'
+    ]
+    
+    for directory in directories:
+        try:
+            os.makedirs(directory, exist_ok=True)
+            print(f" ✅ Diretório verificado: {directory}")
+        except Exception as e:
+            print(f" ⚠️  Erro ao criar diretório {directory}: {e}")
+
+def check_database_connection():
+    """Verifica a conexão com o banco de dados"""
+    try:
+        # Testar conexão com o banco
+        with db.engine.connect() as connection:
+            result = connection.execute(db.text("SELECT 1"))
+            result.fetchone()
+        print(" ✅ Conexão com PostgreSQL estabelecida")
+        return True
+    except Exception as e:
+        print(f" ❌ Erro de conexão com o banco: {e}")
+        return False
 from app.models import (
     User, TimeRecord, MedicalAttestation, Notification,
     SecurityLog, SystemConfig, UserType, AttestationType,
@@ -15,8 +49,11 @@ from app.models import (
     SystemStatus, BackupType, BackupStatus, ApprovalStatus
 )
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+app = create_app(os.getenv('FLASK_CONFIG') or 'production')
 migrate = Migrate(app, db)
+
+# Garantir que os diretórios existam
+ensure_directories()
 
 
 @app.shell_context_processor
@@ -45,20 +82,33 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
+    # Garantir que estamos usando PostgreSQL em produção
+    if not os.getenv('DATABASE_URL'):
+        print(" ⚠️  CONFIGURANDO DATABASE_URL para PostgreSQL...")
+        os.environ['DATABASE_URL'] = 'postgresql://skponto_user:ho8BpKkpG7dBMP7qGygnSP9G5vQd3FzF@dpg-d1rq11vgi27c73cm8oj0-a.oregon-postgres.render.com/skponto_production'
+    
+    print(f" 🗄️  Usando banco: PostgreSQL")
+    print(f" 🌍 Ambiente: {os.getenv('FLASK_ENV', 'production')}")
+    
     with app.app_context():
+        # Verificar conexão com PostgreSQL
+        if not check_database_connection():
+            print(" ❌ Falha na conexão com PostgreSQL!")
+            print(" 🔧 Verifique se o banco está acessível...")
+            exit(1)
+        
         # Criar tabelas se não existirem
         try:
             db.create_all()
             print(" ✅ Tabelas do banco de dados verificadas")
         except Exception as e:
             print(f" ❌ Erro ao verificar tabelas: {e}")
-            print(" 🔧 Recriando banco de dados...")
+            print(" 🔧 Tentando recriar tabelas...")
             try:
-                db.drop_all()
                 db.create_all()
-                print(" ✅ Banco de dados recriado com sucesso")
+                print(" ✅ Banco de dados configurado com sucesso")
             except Exception as e2:
-                print(f" ❌ Erro ao recriar banco: {e2}")
+                print(f" ❌ Erro ao configurar banco: {e2}")
                 exit(1)
         
         # Verificar se existe pelo menos um admin
@@ -84,6 +134,5 @@ if __name__ == '__main__':
     host = '0.0.0.0'  # Necessário para Render.com
     
     print(f" 🚀 Iniciando SKPONTO na porta {port}")
-    print(f" 🌍 Ambiente: {os.getenv('FLASK_ENV', 'development')}")
     
     app.run(host=host, port=port, debug=debug)

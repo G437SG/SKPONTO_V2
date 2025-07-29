@@ -2293,3 +2293,37 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'backup
 2025-07-25 14:12:37,686 - app - ERROR - error_dashboard.py:142 - get_error_statistics() - Erro ao calcular estatísticas: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
 2025-07-25 14:12:37,687 - app - ERROR - error_dashboard.py:201 - get_recent_errors() - Erro ao obter erros recentes: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
 2025-07-25 14:12:37,688 - app - ERROR - error_dashboard.py:255 - get_error_trends() - Erro ao obter tendências: 'utf-8' codec can't decode byte 0xf3 in position 121: invalid continuation byte
+2025-07-29 13:09:26,052 - app - ERROR - error_handler.py:119 - handle_error() - 
+=== ERRO ERR_20250729_130926_500 ===
+Código: 500
+Mensagem: Erro Não Tratado
+Tipo: AttributeError
+Descrição: 'User' object has no attribute 'hour_bank'
+Arquivo: C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py
+Linha: 222
+Função: usuarios
+URL: http://127.0.0.1:5000/admin/usuarios
+Método: GET
+IP: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0 (Edition ms_store_gx)
+Traceback:
+Traceback (most recent call last):
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 75, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arq\OneDrive\Python Projetos\SKPONTO_V2\app\admin\routes.py", line 222, in usuarios
+    if not user.hour_bank:
+           ^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'hour_bank'
+
+========================
+
