@@ -1,0 +1,1491 @@
+{
+  "timestamp": "2025-07-29T11:38:35.898119",
+  "status": "READY",
+  "success_rate": 97.22222222222221,
+  "total_tests": 36,
+  "passed_tests": 35,
+  "detailed_results": {
+    "imports": {
+      "Flask": "OK",
+      "SQLAlchemy": "OK",
+      "Flask-Login": "OK",
+      "Flask-WTF": "OK",
+      "bcrypt": "OK",
+      "psycopg2": "OK",
+      "reportlab": "OK",
+      "app": "OK",
+      "models": "OK",
+      "config": "OK"
+    },
+    "app_creation": {
+      "status": "OK",
+      "blueprints": [
+        "main",
+        "auth",
+        "admin",
+        "api",
+        "errors",
+        "files",
+        "error_dashboard",
+        "backup"
+      ]
+    },
+    "models": {
+      "User": "OK",
+      "TimeRecord": "OK",
+      "MedicalAttestation": "OK",
+      "Notification": "OK",
+      "SecurityLog": "OK",
+      "SystemConfig": "OK",
+      "WorkClass": "OK",
+      "BackupHistory": "OK",
+      "UserApprovalRequest": "OK",
+      "HourBank": "OK",
+      "HourBankTransaction": "OK",
+      "HourBankHistory": "OK",
+      "OvertimeRequest": "OK",
+      "HourCompensation": "OK"
+    },
+    "forms": {
+      "LoginForm": "OK",
+      "RegisterForm": "OK",
+      "ForgotPasswordForm": "OK",
+      "ResetPasswordForm": "OK",
+      "TimeRecordForm": "OK",
+      "MedicalAttestationForm": "OK",
+      "EmptyForm": "OK",
+      "UserManagementForm": "ERROR: (sqlite3.OperationalError) no such table: work_classes\n[SQL: SELECT work_classes.id AS work_classes_id, work_classes.name AS work_classes_name, work_classes.description AS work_classes_description, work_classes.daily_work_hours AS work_classes_daily_work_hours, work_classes.lunch_hours AS work_classes_lunch_hours, work_classes.is_active AS work_classes_is_active, work_classes.is_approved AS work_classes_is_approved, work_classes.created_at AS work_classes_created_at, work_classes.created_by AS work_classes_created_by \nFROM work_classes \nWHERE work_classes.is_active = 1 ORDER BY work_classes.name]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "WorkClassForm": "OK"
+    },
+    "routes": {
+      "total_routes": 144,
+      "route_groups": {
+        "main": [
+          {
+            "endpoint": "main.health_check",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/health"
+          },
+          {
+            "endpoint": "main.get_recent_notifications",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/notifications/recent"
+          },
+          {
+            "endpoint": "main.index",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/index"
+          },
+          {
+            "endpoint": "main.index",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/"
+          },
+          {
+            "endpoint": "main.dashboard",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/dashboard"
+          },
+          {
+            "endpoint": "main.ponto",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/ponto"
+          },
+          {
+            "endpoint": "main.meus_registros",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/meus-registros"
+          },
+          {
+            "endpoint": "main.meus_registros",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/meus_registros"
+          },
+          {
+            "endpoint": "main.editar_registro",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/editar_registro/<int:id>"
+          },
+          {
+            "endpoint": "main.perfil",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/perfil"
+          },
+          {
+            "endpoint": "main.atestados",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/atestados"
+          },
+          {
+            "endpoint": "main.upload_atestado",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/upload_atestado"
+          },
+          {
+            "endpoint": "main.download_atestado",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/download_atestado/<int:id>"
+          },
+          {
+            "endpoint": "main.cancelar_atestado",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/cancelar_atestado/<int:id>"
+          },
+          {
+            "endpoint": "main.notificacoes",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/notificacoes"
+          },
+          {
+            "endpoint": "main.marcar_notificacao_lida",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/marcar_notificacao_lida/<int:id>"
+          },
+          {
+            "endpoint": "main.deletar_notificacao",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/deletar_notificacao/<int:id>"
+          },
+          {
+            "endpoint": "main.marcar_todas_lidas",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/marcar_todas_lidas"
+          },
+          {
+            "endpoint": "main.api_registrar_ponto",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/api/registrar_ponto"
+          },
+          {
+            "endpoint": "main.api_notificacoes_nao_lidas",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/notificacoes_nao_lidas"
+          },
+          {
+            "endpoint": "main.privacy_policy",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/privacy-policy"
+          },
+          {
+            "endpoint": "main.terms_of_service",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/terms-of-service"
+          },
+          {
+            "endpoint": "main.serve_uploaded_file",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/uploads/<path:filename>"
+          },
+          {
+            "endpoint": "main.my_hour_bank",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/my-hour-bank"
+          },
+          {
+            "endpoint": "main.my_hour_bank_history",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/my-hour-bank/history"
+          },
+          {
+            "endpoint": "main.request_overtime",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/overtime-request"
+          },
+          {
+            "endpoint": "main.my_overtime_requests",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/my-overtime-requests"
+          },
+          {
+            "endpoint": "main.cancel_overtime_request",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/overtime-request/<int:request_id>/cancel"
+          },
+          {
+            "endpoint": "main.request_compensation",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/request-compensation"
+          },
+          {
+            "endpoint": "main.my_compensations",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/my-compensations"
+          },
+          {
+            "endpoint": "main.cancel_compensation",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/compensation/<int:compensation_id>/cancel"
+          },
+          {
+            "endpoint": "main.my_hour_bank_settings",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/my-hour-bank/settings"
+          },
+          {
+            "endpoint": "main.my_hour_bank_chart_data",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/my-hour-bank/chart-data"
+          },
+          {
+            "endpoint": "main.quick_overtime_request",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/api/overtime-quick-request"
+          },
+          {
+            "endpoint": "main.quick_compensation_request",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/api/compensation-quick-request"
+          }
+        ],
+        "auth": [
+          {
+            "endpoint": "auth.login",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/login"
+          },
+          {
+            "endpoint": "auth.logout",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/logout"
+          },
+          {
+            "endpoint": "auth.register",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/register"
+          },
+          {
+            "endpoint": "auth.forgot_password",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/forgot_password"
+          },
+          {
+            "endpoint": "auth.reset_password",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/reset_password/<int:user_id>"
+          }
+        ],
+        "admin": [
+          {
+            "endpoint": "admin.dashboard",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/dashboard"
+          },
+          {
+            "endpoint": "admin.usuarios",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/usuarios"
+          },
+          {
+            "endpoint": "admin.usuario_detalhes",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/usuario/<int:id>"
+          },
+          {
+            "endpoint": "admin.editar_usuario",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/editar_usuario/<int:id>"
+          },
+          {
+            "endpoint": "admin.criar_usuario",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/criar_usuario"
+          },
+          {
+            "endpoint": "admin.desativar_usuario",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/desativar_usuario/<int:id>"
+          },
+          {
+            "endpoint": "admin.ativar_usuario",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/ativar_usuario/<int:id>"
+          },
+          {
+            "endpoint": "admin.deletar_usuario",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/deletar_usuario/<int:id>"
+          },
+          {
+            "endpoint": "admin.atestados",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/atestados"
+          },
+          {
+            "endpoint": "admin.atestado_detalhes",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/atestado/<int:id>"
+          },
+          {
+            "endpoint": "admin.aprovar_atestado",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/aprovar_atestado/<int:id>"
+          },
+          {
+            "endpoint": "admin.rejeitar_atestado",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/rejeitar_atestado/<int:id>"
+          },
+          {
+            "endpoint": "admin.notificacoes",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/notificacoes"
+          },
+          {
+            "endpoint": "admin.relatorios",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/relatorios"
+          },
+          {
+            "endpoint": "admin.backup",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup"
+          },
+          {
+            "endpoint": "admin.backup_completo",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup-completo"
+          },
+          {
+            "endpoint": "admin.backup_config",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup-config"
+          },
+          {
+            "endpoint": "admin.logs",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/logs"
+          },
+          {
+            "endpoint": "admin.classes_trabalho",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/classes-trabalho"
+          },
+          {
+            "endpoint": "admin.nova_classe_trabalho",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/classes-trabalho/nova"
+          },
+          {
+            "endpoint": "admin.editar_classe_trabalho",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/classes-trabalho/<int:id>/editar"
+          },
+          {
+            "endpoint": "admin.toggle_classe_status",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/classes-trabalho/<int:id>/toggle-status"
+          },
+          {
+            "endpoint": "admin.atribuir_classe_trabalho",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/classes-trabalho/<int:id>/atribuir"
+          },
+          {
+            "endpoint": "admin.usuarios_classe_trabalho",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/classes-trabalho/<int:id>/usuarios"
+          },
+          {
+            "endpoint": "admin.migrar_classes_padrao",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/migrar_classes_padrao"
+          },
+          {
+            "endpoint": "admin.registros_ponto",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/registros-ponto"
+          },
+          {
+            "endpoint": "admin.user_approvals",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/user-approvals"
+          },
+          {
+            "endpoint": "admin.approve_user",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/approve-user/<int:request_id>"
+          },
+          {
+            "endpoint": "admin.user_approval_details",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/user-approval-details/<int:request_id>"
+          },
+          {
+            "endpoint": "admin.bulk_approve_users",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/bulk-approve-users"
+          },
+          {
+            "endpoint": "admin.attestation_management",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/attestation-management"
+          },
+          {
+            "endpoint": "admin.sync_local_attestations",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/sync-local-attestations"
+          },
+          {
+            "endpoint": "admin.cleanup_orphaned_files",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/cleanup-orphaned-files"
+          },
+          {
+            "endpoint": "admin.user_attestation_files",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/user-attestation-files/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.get_local_download_link",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/get-local-download-link"
+          },
+          {
+            "endpoint": "admin.delete_local_file",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/delete-local-file"
+          },
+          {
+            "endpoint": "admin.test_local_connection",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/test-local-connection"
+          },
+          {
+            "endpoint": "admin.update_local_config",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/update-local-config"
+          },
+          {
+            "endpoint": "admin.generate_local_auth_url",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/generate-local-auth-url"
+          },
+          {
+            "endpoint": "admin.exchange_local_auth_code",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/exchange-local-auth-code"
+          },
+          {
+            "endpoint": "admin.update_shared_link",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/update-shared-link"
+          },
+          {
+            "endpoint": "admin.system_config",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/system-config"
+          },
+          {
+            "endpoint": "admin.security_logs",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/security-logs"
+          },
+          {
+            "endpoint": "admin.hour_bank_dashboard",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank"
+          },
+          {
+            "endpoint": "admin.hour_bank_users",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank/users"
+          },
+          {
+            "endpoint": "admin.hour_bank_user_detail",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank/user/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.hour_bank_adjust",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank/adjust/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.hour_bank_transfer",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank/transfer"
+          },
+          {
+            "endpoint": "admin.overtime_requests",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-requests"
+          },
+          {
+            "endpoint": "admin.approve_overtime_request",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-request/<int:request_id>/approve"
+          },
+          {
+            "endpoint": "admin.hour_compensations",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-compensations"
+          },
+          {
+            "endpoint": "admin.approve_compensation",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-compensation/<int:compensation_id>/approve"
+          },
+          {
+            "endpoint": "admin.hour_bank_settings",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank/settings"
+          },
+          {
+            "endpoint": "admin.hour_bank_reports",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/hour-bank/reports"
+          },
+          {
+            "endpoint": "admin.hour_bank_stats_api",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/api/hour-bank/stats"
+          },
+          {
+            "endpoint": "admin.overtime_control",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-control"
+          },
+          {
+            "endpoint": "admin.adjust_user_hours",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/adjust-user-hours"
+          },
+          {
+            "endpoint": "admin.api_users_with_balances",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/api/users-with-balances"
+          },
+          {
+            "endpoint": "admin.api_refresh_users_list",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/api/refresh-users-list"
+          },
+          {
+            "endpoint": "admin.overtime_batch_process",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-batch-process"
+          },
+          {
+            "endpoint": "admin.overtime_analytics",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-analytics"
+          },
+          {
+            "endpoint": "admin.overtime_settings",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-settings"
+          },
+          {
+            "endpoint": "admin.overtime_reports",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/overtime-reports"
+          },
+          {
+            "endpoint": "admin.user_overtime_summary",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/user-overtime-summary/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.get_user_hours_history",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/user-hours-history/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.edit_user_hours",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/edit-user-hours/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.update_user_hours",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/update-user-hours/<int:user_id>"
+          },
+          {
+            "endpoint": "admin.get_all_users_data",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/get_all_users_data"
+          }
+        ],
+        "api": [
+          {
+            "endpoint": "api.status",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/status"
+          },
+          {
+            "endpoint": "api.registro_ponto_api",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/api/registro_ponto"
+          },
+          {
+            "endpoint": "api.meus_registros_api",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/meus_registros"
+          },
+          {
+            "endpoint": "api.notificacoes_api",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/notificacoes"
+          },
+          {
+            "endpoint": "api.marcar_notificacao_lida_api",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/api/marcar_notificacao_lida/<int:id>"
+          },
+          {
+            "endpoint": "api.estatisticas_api",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/estatisticas"
+          },
+          {
+            "endpoint": "api.usuarios_api",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/usuarios"
+          },
+          {
+            "endpoint": "api.users",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/users"
+          },
+          {
+            "endpoint": "api.time_records",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/api/time-records"
+          }
+        ],
+        "files": [
+          {
+            "endpoint": "files.file_manager",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/files/manager"
+          },
+          {
+            "endpoint": "files.upload_file",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/files/upload"
+          },
+          {
+            "endpoint": "files.download_file",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/files/download/<path:filename>"
+          },
+          {
+            "endpoint": "files.create_folder",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/files/create-folder"
+          },
+          {
+            "endpoint": "files.delete_file",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/files/delete/<path:filename>"
+          },
+          {
+            "endpoint": "files.move_file",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/files/move"
+          },
+          {
+            "endpoint": "files.rename_file",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/files/rename"
+          },
+          {
+            "endpoint": "files.create_zip",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/files/create-zip"
+          },
+          {
+            "endpoint": "files.file_info",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/files/info/<path:filename>"
+          }
+        ],
+        "error_dashboard": [
+          {
+            "endpoint": "error_dashboard.dashboard",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/errors/"
+          },
+          {
+            "endpoint": "error_dashboard.api_stats",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/errors/api/stats"
+          },
+          {
+            "endpoint": "error_dashboard.api_recent_errors",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/errors/api/recent/<int:hours>"
+          },
+          {
+            "endpoint": "error_dashboard.clear_logs",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/errors/api/clear-logs"
+          }
+        ],
+        "backup": [
+          {
+            "endpoint": "backup.debug",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/debug"
+          },
+          {
+            "endpoint": "backup.test_no_auth",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/test-no-auth"
+          },
+          {
+            "endpoint": "backup.test_simple",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/test-simple"
+          },
+          {
+            "endpoint": "backup.dashboard",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/dashboard"
+          },
+          {
+            "endpoint": "backup.api_storage_info",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/api/storage-info"
+          },
+          {
+            "endpoint": "backup.api_list_backups",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/api/list-backups"
+          },
+          {
+            "endpoint": "backup.create_backup",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/create"
+          },
+          {
+            "endpoint": "backup.delete_backup",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS",
+              "DELETE"
+            ],
+            "rule": "/admin/backup/delete/<backup_name>"
+          },
+          {
+            "endpoint": "backup.download_backup",
+            "methods": [
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/download/<backup_name>"
+          },
+          {
+            "endpoint": "backup.delete_multiple_backups",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/delete-multiple"
+          },
+          {
+            "endpoint": "backup.cleanup_backups",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/cleanup"
+          },
+          {
+            "endpoint": "backup.auto_backup_config",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/auto-backup-config"
+          },
+          {
+            "endpoint": "backup.trigger_auto_backup",
+            "methods": [
+              "POST",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/trigger-auto-backup"
+          },
+          {
+            "endpoint": "backup.backup_settings",
+            "methods": [
+              "POST",
+              "HEAD",
+              "GET",
+              "OPTIONS"
+            ],
+            "rule": "/admin/backup/settings"
+          }
+        ]
+      }
+    },
+    "templates": {
+      "app/templates": [
+        "base.html",
+        "privacy-policy.html"
+      ],
+      "app/templates/main": [
+        "atestados.html",
+        "dashboard.html",
+        "editar_registro.html",
+        "index.html",
+        "meus_registros.html",
+        "notificacoes.html",
+        "perfil.html",
+        "ponto.html",
+        "upload_atestado.html"
+      ],
+      "app/templates/admin": [
+        "atestados.html",
+        "atestado_detalhes.html",
+        "atribuir_classe_trabalho.html",
+        "backup_config.html",
+        "classes_trabalho.html",
+        "criar_usuario.html",
+        "dashboard.html",
+        "editar_classe_trabalho.html",
+        "editar_usuario.html",
+        "edit_user_hours.html",
+        "error_dashboard.html",
+        "logs.html",
+        "notificacoes.html",
+        "nova_classe_trabalho.html",
+        "overtime_control.html",
+        "overtime_control_backup.html",
+        "overtime_control_fixed.html",
+        "overtime_error_debug.html",
+        "registros_ponto.html",
+        "relatorios.html",
+        "user_approvals.html",
+        "user_approval_details.html",
+        "user_approval_form.html",
+        "usuarios.html",
+        "usuarios_classe_trabalho.html",
+        "usuario_detalhes.html"
+      ],
+      "app/templates/auth": [
+        "forgot_password.html",
+        "login.html",
+        "register.html",
+        "reset_password.html"
+      ],
+      "app/templates/errors": [
+        "403.html",
+        "404.html",
+        "413.html",
+        "500.html",
+        "error.html"
+      ],
+      "app/templates/files": [
+        "manager.html",
+        "upload.html"
+      ]
+    },
+    "static_files": {
+      "app/static/css": [
+        "style.css"
+      ],
+      "app/static/js": [
+        "app.js",
+        "app.js.backup"
+      ],
+      "app/static/images": [
+        "favicon.ico",
+        "logo.png"
+      ],
+      "app/static/img": [
+        "default-avatar.svg"
+      ]
+    },
+    "configuration": {
+      "Config": {
+        "status": "OK",
+        "attributes": [
+          "SECRET_KEY",
+          "SQLALCHEMY_DATABASE_URI"
+        ]
+      },
+      "DevelopmentConfig": {
+        "status": "OK",
+        "attributes": [
+          "SECRET_KEY",
+          "SQLALCHEMY_DATABASE_URI"
+        ]
+      },
+      "ProductionConfig": {
+        "status": "OK",
+        "attributes": [
+          "SECRET_KEY",
+          "SQLALCHEMY_DATABASE_URI"
+        ]
+      },
+      "TestingConfig": {
+        "status": "OK",
+        "attributes": [
+          "SECRET_KEY",
+          "SQLALCHEMY_DATABASE_URI"
+        ]
+      }
+    },
+    "requirements": {
+      "total_lines": 39,
+      "found_packages": [
+        "Flask==",
+        "Flask-SQLAlchemy==",
+        "Flask-Login==",
+        "Flask-WTF==",
+        "psycopg",
+        "gunicorn==",
+        "bcrypt=="
+      ],
+      "missing_packages": []
+    }
+  }
+}

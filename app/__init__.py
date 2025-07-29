@@ -89,6 +89,9 @@ def register_blueprints(app):
     # Registrar blueprint do dashboard de backup
     from app.admin.backup import bp as backup_bp
     
+    # Registrar blueprint do sistema de debug
+    from app.debug_blueprint import bp as debug_bp
+    
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)  # Sem prefixo para /login funcionar
     app.register_blueprint(admin_bp, url_prefix='/admin')
@@ -98,6 +101,8 @@ def register_blueprints(app):
     app.register_blueprint(error_dashboard)  # Dashboard de erros
     app.register_blueprint(backup_bp,
                            url_prefix='/admin/backup')  # Dashboard de backup
+    app.register_blueprint(debug_bp,
+                           url_prefix='/admin/debug')  # Sistema de debug
 
 
 def register_cli_commands(app):
@@ -232,6 +237,15 @@ def create_app(config_name=None):
     configure_context_processors(app)
     # Configurar headers de segurança
     configure_security_headers(app)
+
+    # Configurar sistema de debug
+    try:
+        from app.debug_system import DebugLogger
+        debug_logger = DebugLogger()
+        app.debug_logger = debug_logger
+        app.logger.info("Sistema de debug inicializado com sucesso")
+    except Exception as e:
+        app.logger.warning(f"Erro ao inicializar sistema de debug: {str(e)}")
 
     # Configurar armazenamento local
     with app.app_context():

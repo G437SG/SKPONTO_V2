@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-07-29T11:17:28.047217",
+  "timestamp": "2025-07-29T11:28:58.754405",
   "url": "https://skponto.onrender.com",
   "checks": {
     "connectivity": "OK",
@@ -20,20 +20,20 @@
       "login_form": "OK"
     },
     "security_headers": {
-      "X-Content-Type-Options": "MISSING",
-      "X-Frame-Options": "MISSING",
-      "X-XSS-Protection": "MISSING",
-      "Strict-Transport-Security": "MISSING",
-      "Content-Security-Policy": "MISSING"
+      "X-Content-Type-Options": "PRESENT",
+      "X-Frame-Options": "PRESENT",
+      "X-XSS-Protection": "PRESENT",
+      "Strict-Transport-Security": "PRESENT",
+      "Content-Security-Policy": "PRESENT"
     },
     "performance": {
-      "response_time": 0.7279653549194336,
+      "response_time": 0.2948877811431885,
       "content_size": 18142
     },
     "database": {
       "connectivity": "OK"
     }
   },
-  "overall_status": "WARNING",
-  "overall_percentage": 63.1578947368421
+  "overall_status": "GOOD",
+  "overall_percentage": 89.47368421052632
 }
