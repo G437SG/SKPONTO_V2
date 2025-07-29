@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Banco de Horas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-piggy-bank"></i> Meu Banco de Horas</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5>Saldo Atual</h5>
+                                    <h2 class="text-success">+0h 0m</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5>Horas Extras</h5>
+                                    <h2 class="text-primary">0h 0m</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5>Compensações</h5>
+                                    <h2 class="text-warning">0h 0m</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Histórico de Movimentações</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Tipo</th>
+                                            <th>Horas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" class="text-center text-muted">
+                                                Nenhuma movimentação encontrada.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>Ações</h5>
+                            <div class="d-grid gap-2">
+                                <a href="{{ url_for('main.request_compensation') }}" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Solicitar Compensação
+                                </a>
+                                <a href="{{ url_for('main.my_compensations') }}" class="btn btn-outline-primary">
+                                    <i class="fas fa-list"></i> Minhas Compensações
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

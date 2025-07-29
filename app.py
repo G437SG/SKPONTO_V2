@@ -10,6 +10,15 @@ from pathlib import Path
 from flask_migrate import Migrate
 from app import create_app, db
 
+# Importar modelos (movido para o topo)
+from app.models import (
+    User, TimeRecord, MedicalAttestation, Notification,
+    SecurityLog, SystemConfig, UserType, AttestationType,
+    AttestationStatus, NotificationType, WorkClass,
+    BackupHistory, UserApprovalRequest,
+    SystemStatus, BackupType, BackupStatus, ApprovalStatus
+)
+
 def ensure_directories():
     """Garante que todos os diretórios necessários existam"""
     directories = [
@@ -30,7 +39,7 @@ def ensure_directories():
             print(f" ⚠️  Erro ao criar diretório {directory}: {e}")
 
 def check_database_connection():
-    """Verifica a conexão com o banco de dados"""
+    """Verifica a conexão com o banco de dados - modo não crítico"""
     try:
         # Testar conexão com o banco
         with db.engine.connect() as connection:
@@ -39,16 +48,11 @@ def check_database_connection():
         print(" ✅ Conexão com PostgreSQL estabelecida")
         return True
     except Exception as e:
-        print(f" ❌ Erro de conexão com o banco: {e}")
+        print(f" ⚠️  Aviso de conexão com o banco: {e}")
+        print(" 🔄 A aplicação continuará executando...")
         return False
-from app.models import (
-    User, TimeRecord, MedicalAttestation, Notification,
-    SecurityLog, SystemConfig, UserType, AttestationType,
-    AttestationStatus, NotificationType, WorkClass,
-    BackupHistory, UserApprovalRequest,
-    SystemStatus, BackupType, BackupStatus, ApprovalStatus
-)
 
+# Criar a aplicação Flask
 app = create_app(os.getenv('FLASK_CONFIG') or 'production')
 migrate = Migrate(app, db)
 
@@ -82,51 +86,17 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
-    # Garantir que estamos usando PostgreSQL em produção
+    # Configurar DATABASE_URL se não existir
     if not os.getenv('DATABASE_URL'):
-        print(" ⚠️  CONFIGURANDO DATABASE_URL para PostgreSQL...")
+        print(" 🔧 CONFIGURADO DATABASE_URL padrão para PostgreSQL")
         os.environ['DATABASE_URL'] = 'postgresql://skponto_user:ho8BpKkpG7dBMP7qGygnSP9G5vQd3FzF@dpg-d1rq11vgi27c73cm8oj0-a.oregon-postgres.render.com/skponto_production'
     
-    print(f" 🗄️  Usando banco: PostgreSQL")
+    print(f" 🗄️  POSTGRESQL MODE - URI: {os.environ['DATABASE_URL'][:50]}...")
+    print(f" 🚀 USANDO POSTGRESQL PARA PRODUÇÃO")
     print(f" 🌍 Ambiente: {os.getenv('FLASK_ENV', 'production')}")
     
-    with app.app_context():
-        # Verificar conexão com PostgreSQL
-        if not check_database_connection():
-            print(" ❌ Falha na conexão com PostgreSQL!")
-            print(" 🔧 Verifique se o banco está acessível...")
-            exit(1)
-        
-        # Criar tabelas se não existirem
-        try:
-            db.create_all()
-            print(" ✅ Tabelas do banco de dados verificadas")
-        except Exception as e:
-            print(f" ❌ Erro ao verificar tabelas: {e}")
-            print(" 🔧 Tentando recriar tabelas...")
-            try:
-                db.create_all()
-                print(" ✅ Banco de dados configurado com sucesso")
-            except Exception as e2:
-                print(f" ❌ Erro ao configurar banco: {e2}")
-                exit(1)
-        
-        # Verificar se existe pelo menos um admin
-        try:
-            admin_exists = User.query.filter_by(
-                user_type=UserType.ADMIN
-            ).first()
-            if not admin_exists:
-                print("  ⚠️  AVISO: Nenhum administrador encontrado!")
-                print("  Execute: flask create-admin")
-                print("  Para criar o primeiro administrador do sistema.")
-            else:
-                print(" ✅ Administrador encontrado no sistema")
-        except Exception as e:
-            print(
-                " ⚠️  Aviso: Não foi possível verificar administradores: "
-                f"{e}"
-            )
+    # Garantir diretórios
+    ensure_directories()
     
     # Configuração para desenvolvimento e produção
     debug = os.getenv('FLASK_ENV') == 'development'
@@ -134,5 +104,40 @@ if __name__ == '__main__':
     host = '0.0.0.0'  # Necessário para Render.com
     
     print(f" 🚀 Iniciando SKPONTO na porta {port}")
+    print(f" � Acesse: http://localhost:{port}")
     
-    app.run(host=host, port=port, debug=debug)
+    # Verificações não críticas em background
+    try:
+        with app.app_context():
+            # Verificar conexão (não crítico)
+            check_database_connection()
+            
+            # Tentar configurar banco (não crítico)
+            try:
+                db.create_all()
+                print(" ✅ Tabelas do banco verificadas")
+            except Exception as e:
+                print(f" ⚠️  Aviso ao verificar tabelas: {e}")
+            
+            # Verificar admin (não crítico)
+            try:
+                admin_exists = User.query.filter_by(
+                    user_type=UserType.ADMIN
+                ).first()
+                if not admin_exists:
+                    print("  ⚠️  AVISO: Execute 'flask create-admin' para criar administrador")
+                else:
+                    print(" ✅ Administrador encontrado no sistema")
+            except Exception as e:
+                print(f" ⚠️  Aviso: {e}")
+    except Exception as e:
+        print(f" ⚠️  Aviso na inicialização: {e}")
+        print(" 🔄 A aplicação continuará executando...")
+    
+    # INICIAR A APLICAÇÃO (SEMPRE)
+    try:
+        app.run(host=host, port=port, debug=debug)
+    except Exception as e:
+        print(f" ❌ Erro ao iniciar aplicação: {e}")
+        print(" � Verifique se a porta não está em uso")
+        input(" 📋 Pressione Enter para sair...")

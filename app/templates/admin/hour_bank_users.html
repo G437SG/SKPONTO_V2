@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Usuários - Banco de Horas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-users"></i> Usuários - Banco de Horas</h4>
+                </div>
+                <div class="card-body">
+                    <p>Lista detalhada de todos os usuários e seus saldos de banco de horas.</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Departamento</th>
+                                    <th>Saldo Atual</th>
+                                    <th>Horas do Mês</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Administrador Sistema</td>
+                                    <td>TI</td>
+                                    <td class="text-success">+8h 30m</td>
+                                    <td>40h 15m</td>
+                                    <td><span class="badge bg-success">Ativo</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i> Detalhes
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

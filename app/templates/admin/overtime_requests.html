@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Solicitações de Horas Extras{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="fas fa-clock"></i> Solicitações de Horas Extras</h4>
+                </div>
+                <div class="card-body">
+                    <p>Gerenciamento de solicitações de horas extras dos funcionários.</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Data</th>
+                                    <th>Horas Solicitadas</th>
+                                    <th>Justificativa</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        Nenhuma solicitação de hora extra pendente.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

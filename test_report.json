@@ -1,0 +1,54 @@
+{
+  "report": {
+    "total": 6,
+    "success": 5,
+    "errors": 1,
+    "warnings": 0,
+    "success_rate": 83.33333333333334
+  },
+  "results": [
+    {
+      "route": "/",
+      "status": "SUCCESS",
+      "message": "OK",
+      "response_code": 200,
+      "timestamp": "14:00:10"
+    },
+    {
+      "route": "/login",
+      "status": "SUCCESS",
+      "message": "OK",
+      "response_code": 200,
+      "timestamp": "14:00:12"
+    },
+    {
+      "route": "/register",
+      "status": "SUCCESS",
+      "message": "OK",
+      "response_code": 200,
+      "timestamp": "14:00:14"
+    },
+    {
+      "route": "/static/css/style.css",
+      "status": "SUCCESS",
+      "message": "OK",
+      "response_code": 200,
+      "timestamp": "14:00:16"
+    },
+    {
+      "route": "/static/js/app.js",
+      "status": "SUCCESS",
+      "message": "OK",
+      "response_code": 200,
+      "timestamp": "14:00:18"
+    },
+    {
+      "route": "/login",
+      "status": "ERROR",
+      "message": "Falha no login",
+      "response_code": 400,
+      "timestamp": "14:00:22"
+    }
+  ],
+  "timestamp": "2025-07-29 14:00:22"
+}

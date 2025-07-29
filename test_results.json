@@ -1,0 +1,136 @@
+{
+  "total_tests": 16,
+  "successful_tests": 2,
+  "failed_tests": 14,
+  "login_success": true,
+  "page_results": [
+    {
+      "url": "/",
+      "description": "Página inicial",
+      "status_code": 500,
+      "success": false,
+      "response_time": 3.270043,
+      "content_length": 8020
+    },
+    {
+      "url": "/admin/dashboard",
+      "description": "Dashboard Admin",
+      "status_code": 200,
+      "success": true,
+      "response_time": 6.533606,
+      "content_length": 20395
+    },
+    {
+      "url": "/admin/users",
+      "description": "Gestão de Usuários",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.864644,
+      "content_length": 12597
+    },
+    {
+      "url": "/admin/time_records",
+      "description": "Registros de Ponto",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.854955,
+      "content_length": 12597
+    },
+    {
+      "url": "/admin/reports",
+      "description": "Relatórios",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.845757,
+      "content_length": 12597
+    },
+    {
+      "url": "/admin/attestations",
+      "description": "Atestados Médicos",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.862944,
+      "content_length": 12597
+    },
+    {
+      "url": "/admin/hour_bank",
+      "description": "Banco de Horas",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.850397,
+      "content_length": 12597
+    },
+    {
+      "url": "/admin/overtime",
+      "description": "Horas Extras",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.867365,
+      "content_length": 12597
+    },
+    {
+      "url": "/admin/logs",
+      "description": "Logs do Sistema",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.324586,
+      "content_length": 60763
+    },
+    {
+      "url": "/admin/settings",
+      "description": "Configurações",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.922864,
+      "content_length": 12597
+    },
+    {
+      "url": "/time/register",
+      "description": "Registro de Ponto",
+      "status_code": 404,
+      "success": false,
+      "response_time": 3.006217,
+      "content_length": 12597
+    },
+    {
+      "url": "/time/history",
+      "description": "Histórico de Pontos",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.959557,
+      "content_length": 12597
+    },
+    {
+      "url": "/profile",
+      "description": "Perfil do Usuário",
+      "status_code": 404,
+      "success": false,
+      "response_time": 3.156261,
+      "content_length": 12597
+    },
+    {
+      "url": "/attestations",
+      "description": "Meus Atestados",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.893901,
+      "content_length": 12597
+    },
+    {
+      "url": "/hour_bank",
+      "description": "Meu Banco de Horas",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.85967,
+      "content_length": 12597
+    },
+    {
+      "url": "/reports/personal",
+      "description": "Relatórios Pessoais",
+      "status_code": 404,
+      "success": false,
+      "response_time": 2.846944,
+      "content_length": 12597
+    }
+  ]
+}

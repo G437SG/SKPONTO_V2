@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <!-- Cards de estatísticas gerais -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total de Usuários
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_usuarios }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Registros Hoje
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ registros_hoje }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clock fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Atestados Pendentes
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ atestados_pendentes }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-file-medical fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Usuários Online
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ usuarios_online }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-globe fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Card para Aprovações Pendentes -->
+    {% if pending_approvals > 0 %}
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            Aprovações Pendentes
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_approvals }}</div>
+                        <div class="text-xs text-muted">
+                            <a href="{{ url_for('admin.user_approvals') }}" class="text-decoration-none">
+                                <i class="fas fa-arrow-right"></i> Ver Solicitações
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-user-clock fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Gráficos e tabelas -->
+<div class="row">
+    <!-- Gráfico de registros por mês -->
+    <div class="col-xl-6 col-lg-7">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Registros por Mês</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area" style="height: 300px;">
+                    <canvas id="chartRegistrosMes"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico de tipos de usuário -->
+    <div class="col-xl-6 col-lg-5">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Distribuição de Usuários</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2" style="height: 250px;">
+                    <canvas id="chartTiposUsuario"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabelas de atividades recentes -->
+<div class="row">
+    <!-- Últimos registros -->
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Últimos Registros de Ponto</h6>
+            </div>
+            <div class="card-body">
+                {% if ultimos_registros %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Data</th>
+                                    <th>Entrada</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for registro in ultimos_registros %}
+                                <tr>
+                                    <td>{{ registro.usuario.nome }}</td>
+                                    <td>{{ registro.data|date }}</td>
+                                    <td>{{ registro.entrada|time if registro.entrada else '-' }}</td>
+                                    <td>
+                                        {% if registro.is_completo %}
+                                            <span class="badge bg-success">Completo</span>
+                                        {% else %}
+                                            <span class="badge bg-warning">Incompleto</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">Nenhum registro encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Atestados pendentes -->
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Atestados Pendentes de Análise</h6>
+            </div>
+            <div class="card-body">
+                {% if atestados_pendentes_lista %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Período</th>
+                                    <th>Enviado em</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for atestado in atestados_pendentes_lista %}
+                                <tr>
+                                    <td>{{ atestado.usuario.nome }}</td>
+                                    <td>{{ atestado.data_inicio|date }} - {{ atestado.data_fim|date }}</td>
+                                    <td>{{ atestado.created_at|date }}</td>
+                                    <td>
+                                        <a href="{{ url_for('admin.atestado_detalhes', id=atestado.id) }}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            Analisar
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">Nenhum atestado pendente.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sistema de alertas -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Alertas do Sistema</h6>
+            </div>
+            <div class="card-body">
+                {% if alertas %}
+                    {% for alerta in alertas %}
+                    <div class="alert alert-{{ alerta.tipo }} alert-dismissible fade show" role="alert">
+                        <i class="fas fa-{{ alerta.icone }} me-2"></i>
+                        <strong>{{ alerta.titulo }}</strong> {{ alerta.mensagem }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted mb-0">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Todos os sistemas funcionando normalmente.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ações Rápidas de Administração -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Ações Rápidas de Administração</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('error_dashboard.dashboard') }}" class="btn btn-primary btn-block">
+                            <i class="fas fa-database"></i><br>
+                            Dashboard de Backup
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('admin.usuarios') }}" class="btn btn-success btn-block">
+                            <i class="fas fa-users"></i><br>
+                            Gerenciar Usuários
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('admin.system_config') }}" class="btn btn-warning btn-block">
+                            <i class="fas fa-cogs"></i><br>
+                            Configurações
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('admin.security_logs') }}" class="btn btn-info btn-block">
+                            <i class="fas fa-shield-alt"></i><br>
+                            Logs de Segurança
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Gráfico de registros por mês
+const ctxRegistros = document.getElementById('chartRegistrosMes').getContext('2d');
+new Chart(ctxRegistros, {
+    type: 'line',
+    data: {
+        labels: {{ meses_labels|tojson }},
+        datasets: [{
+            label: 'Registros',
+            data: {{ registros_por_mes|tojson }},
+            borderColor: '#4e73df',
+            backgroundColor: 'rgba(78, 115, 223, 0.1)',
+            borderWidth: 2,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Gráfico de tipos de usuário
+const ctxTipos = document.getElementById('chartTiposUsuario').getContext('2d');
+new Chart(ctxTipos, {
+    type: 'doughnut',
+    data: {
+        labels: ['Administradores', 'Trabalhadores', 'Estagiários'],
+        datasets: [{
+            data: {{ tipos_usuario|tojson }},
+            backgroundColor: ['#e74a3b', '#1cc88a', '#36b9cc']
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

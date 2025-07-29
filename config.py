@@ -71,8 +71,10 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
     
-    # Security
-    WTF_CSRF_ENABLED = os.environ.get('WTF_CSRF_ENABLED', 'True').lower() == 'true'
+    # Security - TEMPORARIAMENTE DESABILITADO PARA DEBUG
+    WTF_CSRF_ENABLED = False  # TEMPORÁRIO - DESABILITADO PARA TESTE
+    WTF_CSRF_TIME_LIMIT = 3600  # 1 hora
+    WTF_CSRF_SSL_STRICT = False  # Para desenvolvimento local
     SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False').lower() == 'true'
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'Lax'

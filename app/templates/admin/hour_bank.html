@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Banco de Horas - Administração{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-piggy-bank"></i> Banco de Horas - Administração</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5><i class="fas fa-users"></i> Total de Usuários</h5>
+                                    <h2 id="total-usuarios" class="text-primary">-</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h5><i class="fas fa-clock"></i> Total de Horas</h5>
+                                    <h2 id="total-horas" class="text-success">-</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Saldo Atual</th>
+                                    <th>Horas Extras</th>
+                                    <th>Compensações</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="hour-bank-table">
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <i class="fas fa-spinner fa-spin"></i> Carregando dados...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadHourBankData();
+});
+
+function loadHourBankData() {
+    // Simular dados por enquanto
+    const tbody = document.getElementById('hour-bank-table');
+    
+    // Dados de exemplo
+    const mockData = [
+        { 
+            id: 1, 
+            name: 'Administrador Sistema', 
+            balance: '+8h 30m', 
+            overtime: '12h 45m', 
+            compensations: '4h 15m' 
+        }
+    ];
+    
+    let html = '';
+    mockData.forEach(user => {
+        html += `<tr>
+            <td>${user.name}</td>
+            <td class="text-success">${user.balance}</td>
+            <td>${user.overtime}</td>
+            <td>${user.compensations}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="viewUserHours(${user.id})">
+                        <i class="fas fa-eye"></i> Ver
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-warning" onclick="adjustHours(${user.id})">
+                        <i class="fas fa-edit"></i> Ajustar
+                    </button>
+                </div>
+            </td>
+        </tr>`;
+    });
+    
+    tbody.innerHTML = html;
+    
+    // Atualizar totais
+    document.getElementById('total-usuarios').textContent = '1';
+    document.getElementById('total-horas').textContent = '+8h 30m';
+}
+
+function viewUserHours(userId) {
+    window.location.href = `/admin/hour-bank/users/${userId}`;
+}
+
+function adjustHours(userId) {
+    // Implementar ajuste de horas
+    console.log('Ajustar horas para usuário:', userId);
+}
+</script>
+{% endblock %}

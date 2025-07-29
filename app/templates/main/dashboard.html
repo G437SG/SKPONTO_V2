@@ -1,485 +1,222 @@
 {% extends "base.html" %}
 
+{% block title %}Dashboard{% endblock %}
+
 {% block content %}
-<div class="row">
-    <!-- Cards de estatísticas -->
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-primary">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Horas este Mês</h5>
-                        <h3 class="mb-0">{{ horas_mes }}</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-clock fa-2x"></i>
-                    </div>
-                </div>
-            </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+            <hr>
         </div>
     </div>
     
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-warning">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Banco de Horas</h5>
-                        <h3 class="mb-0 {{ 'text-success' if horas_extras_mes >= 0 else 'text-danger' }}">
-                            {% if current_user.hour_bank %}
-                                {{ current_user.hour_bank.formatted_balance }}
-                            {% else %}
-                                {{ horas_extras_mes|format_hours }}
-                            {% endif %}
-                        </h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-piggy-bank fa-2x"></i>
-                    </div>
-                </div>
-                <div class="card-footer bg-transparent border-0 p-0 mt-2">
-                    <a href="{{ url_for('main.my_hour_bank') }}" class="text-white text-decoration-none">
-                        <small><i class="fas fa-chart-line me-1"></i>Ver Detalhes</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-success">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Dias Trabalhados</h5>
-                        <h3 class="mb-0">{{ dias_trabalhados }}</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-calendar-check fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-info">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h5 class="card-title">Notificações</h5>
-                        <h3 class="mb-0">{{ notificacoes|length }}</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-bell fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Profile Section -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div class="me-3">
-                        {% if current_user.foto_perfil %}
-                            <img src="{{ url_for('static', filename=current_user.profile_picture_url) }}" 
-                                 alt="Foto de {{ current_user.nome_completo }}" 
-                                 class="rounded-circle border border-2 border-primary" 
-                                 width="80" height="80"
-                                 onerror="this.src='{{ url_for('static', filename='img/default-avatar.svg') }}'">
-                        {% else %}
-                            <img src="{{ url_for('static', filename='img/default-avatar.svg') }}" 
-                                 alt="Avatar padrão" 
-                                 class="rounded-circle border border-2 border-secondary" 
-                                 width="80" height="80">
-                        {% endif %}
-                    </div>
-                    <div class="flex-grow-1">
-                        <h4 class="mb-1">Bem-vindo(a), {{ current_user.nome }}!</h4>
-                        <p class="text-muted mb-1">{{ current_user.email }}</p>
-                        <p class="text-muted mb-0">
-                            <i class="fas fa-user-tag me-1"></i>{{ current_user.user_type.value.title() }}
-                            {% if current_user.cargo %}
-                                | <i class="fas fa-briefcase me-1"></i>{{ current_user.cargo }}
-                            {% endif %}
-                        </p>
-                    </div>
-                    <div>
-                        <a href="{{ url_for('main.perfil') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-user-edit me-1"></i>Editar Perfil
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <!-- Registro de hoje -->
-    <div class="col-md-6 mb-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-clock me-2"></i>Registro de Hoje
-                </h5>
-            </div>
-            <div class="card-body">
-                {% if registro_hoje %}
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <h6>Entrada</h6>
-                                    {% if registro_hoje.entrada %}
-                                        <span class="badge bg-success fs-6">{{ registro_hoje.entrada|time }}</span>
-                                    {% else %}
-                                        <span class="badge bg-secondary">Não registrada</span>
-                                    {% endif %}
-                                </div>
-                                <div class="col-6">
-                                    <h6>Saída</h6>
-                                    {% if registro_hoje.saida %}
-                                        <span class="badge bg-danger fs-6">{{ registro_hoje.saida|time }}</span>
-                                    {% else %}
-                                        <span class="badge bg-secondary">Não registrada</span>
-                                    {% endif %}
-                                </div>
-                            </div>
+    <!-- Estatísticas Rápidas -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Horas Hoje</h5>
+                            <h3 id="horas-hoje">0h 0m</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-clock fa-2x"></i>
                         </div>
                     </div>
-                    
-                    {% if registro_hoje.is_completo %}
-                    <hr>
-                    <div class="text-center">
-                        <small class="text-muted">
-                            Horas trabalhadas: {{ registro_hoje.horas_trabalhadas|format_hours }}
-                            {% if current_user.work_class %}
-                                / {{ current_user.work_class.daily_work_hours|format_hours }} esperadas
-                            {% endif %}
-                            {% if registro_hoje.horas_extras > 0 %}
-                                <br>Extras: {{ registro_hoje.horas_extras|format_hours }}
-                            {% endif %}
-                        </small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Banco de Horas</h5>
+                            <h3 id="banco-horas">0h 0m</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-piggy-bank fa-2x"></i>
+                        </div>
                     </div>
-                    {% endif %}
-                {% else %}
-                    <p class="text-center text-muted">Nenhum registro hoje</p>
-                {% endif %}
-                
-                <div class="text-center mt-3">
-                    <a href="{{ url_for('main.ponto') }}" class="btn btn-primary">
-                        <i class="fas fa-clock me-2"></i>Registrar Ponto
-                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Atestados</h5>
+                            <h3 id="total-atestados">0</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-file-medical fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Frequência</h5>
+                            <h3 id="frequencia-mes">100%</h3>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-percentage fa-2x"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Notificações recentes -->
-    <div class="col-md-6 mb-4">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">
-                    <i class="fas fa-bell me-2"></i>Notificações Recentes
-                </h5>
-                <a href="{{ url_for('main.notificacoes') }}" class="btn btn-sm btn-outline-primary">
-                    Ver todas
-                </a>
-            </div>
-            <div class="card-body notification-container" style="max-height: 300px; overflow-y: auto;">
-                {% if notificacoes %}
-                    {% for notificacao in notificacoes %}
-                    <div class="notification-item d-flex mb-2 p-2 border-bottom">
-                        <div class="me-2 flex-shrink-0">
-                            {% if notificacao.tipo == 'ATESTADO_APROVADO' %}
-                                <i class="fas fa-check-circle text-success"></i>
-                            {% elif notificacao.tipo == 'ATESTADO_REJEITADO' %}
-                                <i class="fas fa-times-circle text-danger"></i>
-                            {% elif notificacao.tipo == 'PONTO_IRREGULAR' %}
-                                <i class="fas fa-exclamation-triangle text-warning"></i>
-                            {% elif notificacao.tipo == 'BACKUP_REALIZADO' %}
-                                <i class="fas fa-cloud text-info"></i>
-                            {% else %}
-                                <i class="fas fa-bell text-primary"></i>
-                            {% endif %}
-                        </div>
-                        <div class="flex-grow-1 min-width-0">
-                            <div class="notification-title fw-bold small">{{ notificacao.titulo }}</div>
-                            <div class="notification-message text-muted small">{{ notificacao.mensagem }}</div>
-                            <div class="notification-time text-muted small">
-                                <i class="fas fa-clock me-1"></i>{{ notificacao.created_at|datetime }}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <p class="text-center text-muted">Nenhuma notificação</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Informações da Classe de Trabalho -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card border-info">
-            <div class="card-header bg-info text-white">
-                <h5 class="mb-0">
-                    <i class="fas fa-briefcase me-2"></i>Minha Classe de Trabalho
-                </h5>
-            </div>
-            <div class="card-body">
-                {% if current_user.work_class %}
+    <!-- Ações Rápidas -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-bolt"></i> Ações Rápidas</h5>
+                </div>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <h6>Classe:</h6>
-                            <span class="badge bg-success fs-6">{{ current_user.work_class.name }}</span>
+                            <a href="{{ url_for('main.registrar_ponto') }}" class="btn btn-primary btn-lg w-100 mb-2">
+                                <i class="fas fa-clock"></i><br>
+                                Registrar Ponto
+                            </a>
                         </div>
                         <div class="col-md-3">
-                            <h6>Horas de Trabalho:</h6>
-                            <span class="text-primary fw-bold">{{ current_user.work_class.daily_work_hours }}h</span>
+                            <a href="{{ url_for('main.my_hour_bank') }}" class="btn btn-success btn-lg w-100 mb-2">
+                                <i class="fas fa-piggy-bank"></i><br>
+                                Banco de Horas
+                            </a>
                         </div>
                         <div class="col-md-3">
-                            <h6>Pausa Almoço:</h6>
-                            <span class="text-secondary fw-bold">{{ current_user.work_class.lunch_hours }}h</span>
+                            <a href="{{ url_for('main.meus_atestados') }}" class="btn btn-warning btn-lg w-100 mb-2">
+                                <i class="fas fa-file-medical"></i><br>
+                                Atestados
+                            </a>
                         </div>
                         <div class="col-md-3">
-                            <h6>Total Esperado:</h6>
-                            <span class="text-info fw-bold">{{ current_user.expected_total_hours }}h</span>
+                            <a href="{{ url_for('main.meus_registros') }}" class="btn btn-info btn-lg w-100 mb-2">
+                                <i class="fas fa-list"></i><br>
+                                Meus Registros
+                            </a>
                         </div>
                     </div>
-                    {% if current_user.work_class.description %}
-                    <hr>
-                    <p class="text-muted mb-0">{{ current_user.work_class.description }}</p>
-                    {% endif %}
-                {% else %}
-                    <div class="text-center">
-                        <i class="fas fa-exclamation-triangle fa-2x text-warning mb-2"></i>
-                        <p class="mb-0">Você ainda não possui uma classe de trabalho definida.</p>
-                        <small class="text-muted">Entre em contato com o administrador para definir sua carga horária.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Últimos Registros -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-history"></i> Últimos Registros</h5>
+                </div>
+                <div class="card-body">
+                    <div id="ultimos-registros">
+                        <div class="text-center">
+                            <i class="fas fa-spinner fa-spin"></i> Carregando...
+                        </div>
                     </div>
-                {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-bell"></i> Notificações</h5>
+                </div>
+                <div class="card-body">
+                    <div id="notificacoes">
+                        <div class="text-center">
+                            <i class="fas fa-spinner fa-spin"></i> Carregando...
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-{% if current_user.is_admin and atestados_pendentes %}
-<div class="row">
-    <div class="col-12 mb-4">
-        <div class="card border-warning">
-            <div class="card-header bg-warning text-dark">
-                <h5 class="mb-0">
-                    <i class="fas fa-file-medical me-2"></i>Atestados Pendentes de Aprovação
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Funcionário</th>
-                                <th>Tipo</th>
-                                <th>Período</th>
-                                <th>Enviado em</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for atestado in atestados_pendentes %}
-                            <tr>
-                                <td>{{ atestado.usuario.nome_completo }}</td>
-                                <td>
-                                    <span class="badge bg-info">{{ atestado.tipo.value.title() }}</span>
-                                </td>
-                                <td>{{ atestado.data_inicio|date }} a {{ atestado.data_fim|date }}</td>
-                                <td>{{ atestado.created_at|datetime }}</td>
-                                <td>
-                                    <a href="{{ url_for('admin.atestado_detalhes', id=atestado.id) }}" 
-                                       class="btn btn-sm btn-primary">
-                                        <i class="fas fa-eye"></i> Ver
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center">
-                    <a href="{{ url_for('admin.atestados') }}" class="btn btn-warning">
-                        Ver todos os atestados
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-list me-2"></i>Últimos Registros
-                </h5>
-            </div>
-            <div class="card-body">
-                {% if ultimos_registros %}
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Entrada</th>
-                                <th>Saída</th>
-                                <th>Horas</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for registro in ultimos_registros %}
-                            <tr>
-                                <td>{{ registro.data|date }}</td>
-                                <td>
-                                    {% if registro.is_atestado %}
-                                        <span class="badge bg-secondary">ATESTADO</span>
-                                    {% elif registro.entrada %}
-                                        {{ registro.entrada|time }}
-                                    {% else %}
-                                        <span class="text-muted">-</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if registro.is_atestado %}
-                                        <span class="badge bg-secondary">ATESTADO</span>
-                                    {% elif registro.saida %}
-                                        {{ registro.saida|time }}
-                                    {% else %}
-                                        <span class="text-muted">-</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if registro.is_atestado %}
-                                        <span class="text-info">AFASTAMENTO</span>
-                                    {% elif registro.is_completo %}
-                                        {{ registro.horas_trabalhadas|format_hours }}
-                                        {% if registro.horas_extras > 0 %}
-                                            <small class="text-warning">(+{{ registro.horas_extras|format_hours }})</small>
-                                        {% endif %}
-                                    {% else %}
-                                        <span class="text-muted">-</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if registro.is_atestado %}
-                                        <span class="badge bg-info" title="{{ registro.motivo_atestado }}">Atestado</span>
-                                    {% elif registro.is_completo %}
-                                        <span class="badge bg-success">Completo</span>
-                                    {% else %}
-                                        <span class="badge bg-warning">Incompleto</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% else %}
-                    <p class="text-center text-muted">Nenhum registro encontrado</p>
-                {% endif %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Carregar estatísticas
+    fetch('/api/estatisticas')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('horas-hoje').textContent = data.horas_hoje || '0h 0m';
+                document.getElementById('banco-horas').textContent = data.banco_horas || '0h 0m';
+                document.getElementById('total-atestados').textContent = data.total_atestados || '0';
+                document.getElementById('frequencia-mes').textContent = data.frequencia_mes || '100%';
+            }
+        })
+        .catch(error => console.error('Erro ao carregar estatísticas:', error));
+    
+    // Carregar últimos registros
+    fetch('/api/meus_registros?limit=5')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.records.length > 0) {
+                let html = '<div class="table-responsive"><table class="table table-sm">';
+                html += '<thead><tr><th>Data</th><th>Entrada</th><th>Saída</th><th>Horas</th></tr></thead><tbody>';
                 
-                <div class="text-center mt-3">
-                    <a href="{{ url_for('main.meus_registros') }}" class="btn btn-outline-primary">
-                        Ver todos os registros
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<style>
-/* Dashboard notification improvements */
-.notification-container {
-    padding: 0.5rem;
-}
-
-.notification-item {
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-    min-height: fit-content;
-}
-
-.notification-item:hover {
-    background-color: #f8f9fa;
-}
-
-.notification-item:last-child {
-    border-bottom: none !important;
-}
-
-.notification-title {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.3;
-    margin-bottom: 0.25rem;
-}
-
-.notification-message {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    line-height: 1.3;
-    margin-bottom: 0.25rem;
-    max-width: 100%;
-}
-
-.notification-time {
-    line-height: 1.2;
-}
-
-.min-width-0 {
-    min-width: 0;
-}
-
-.flex-shrink-0 {
-    flex-shrink: 0;
-}
-
-/* Responsive notifications */
-@media (max-width: 768px) {
-    .notification-item {
-        padding: 0.5rem;
-    }
+                data.records.forEach(record => {
+                    html += `<tr>
+                        <td>${record.data}</td>
+                        <td>${record.entrada || '-'}</td>
+                        <td>${record.saida || '-'}</td>
+                        <td>${record.horas_trabalhadas || '-'}</td>
+                    </tr>`;
+                });
+                
+                html += '</tbody></table></div>';
+                document.getElementById('ultimos-registros').innerHTML = html;
+            } else {
+                document.getElementById('ultimos-registros').innerHTML = '<p class="text-muted">Nenhum registro encontrado.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar registros:', error);
+            document.getElementById('ultimos-registros').innerHTML = '<p class="text-danger">Erro ao carregar registros.</p>';
+        });
     
-    .notification-message {
-        font-size: 0.8rem;
-    }
-    
-    .notification-title {
-        font-size: 0.85rem;
-    }
-    
-    .notification-time {
-        font-size: 0.75rem;
-    }
-}
-
-/* Auto-growing notification container */
-.notification-container .notification-item {
-    flex-wrap: wrap;
-}
-
-.notification-container .notification-item .flex-grow-1 {
-    word-break: break-word;
-    overflow-wrap: anywhere;
-}
-</style>
+    // Carregar notificações
+    fetch('/api/notificacoes?limit=5')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.notifications.length > 0) {
+                let html = '';
+                
+                data.notifications.forEach(notif => {
+                    html += `<div class="alert alert-${notif.tipo === 'SUCCESS' ? 'success' : 'info'} alert-sm mb-2">
+                        <strong>${notif.titulo}</strong><br>
+                        <small>${notif.mensagem}</small>
+                    </div>`;
+                });
+                
+                document.getElementById('notificacoes').innerHTML = html;
+            } else {
+                document.getElementById('notificacoes').innerHTML = '<p class="text-muted">Nenhuma notificação.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar notificações:', error);
+            document.getElementById('notificacoes').innerHTML = '<p class="text-danger">Erro ao carregar notificações.</p>';
+        });
+});
+</script>
 {% endblock %}

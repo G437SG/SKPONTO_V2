@@ -300,7 +300,7 @@ def time_records():
             'saida_almoco': r.saida_almoco.strftime('%H:%M') if r.saida_almoco else None,
             'volta_almoco': r.volta_almoco.strftime('%H:%M') if r.volta_almoco else None,
             'saida': r.saida.strftime('%H:%M') if r.saida else None,
-            'horas_trabalhadas': r.horas_trabalhadas_decimal
+            'horas_trabalhadas': str(r.horas_trabalhadas) if r.horas_trabalhadas else "0h 0m"
         } for r in records.items],
         'pagination': {
             'page': records.page,

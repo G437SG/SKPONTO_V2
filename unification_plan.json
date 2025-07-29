@@ -1,0 +1,375 @@
+{
+  "critical_duplicates": {
+    "app_files": {
+      "files": {
+        "app.py": {
+          "size": 4854,
+          "lines": 144,
+          "has_main": true,
+          "has_create_app": true,
+          "has_flask_run": true,
+          "modified": 1753808142.4167726
+        }
+      },
+      "main_file": "app.py",
+      "recommendation": "Manter apenas o arquivo principal app.py"
+    },
+    "config_files": {
+      "files": {
+        "config.py": {
+          "size": 6666,
+          "lines": 161,
+          "has_database_config": true,
+          "has_secret_key": true,
+          "has_classes": true,
+          "modified": 1753809959.2416575,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\alembic\\config.py": {
+          "size": 33543,
+          "lines": 1006,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980156.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\coverage\\config.py": {
+          "size": 23042,
+          "lines": 647,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1751720827.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\flask\\config.py": {
+          "size": 12856,
+          "lines": 348,
+          "has_database_config": false,
+          "has_secret_key": true,
+          "has_classes": true,
+          "modified": 1750980155.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\flask_login\\config.py": {
+          "size": 1813,
+          "lines": 56,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": false,
+          "modified": 1750980157.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\gunicorn\\config.py": {
+          "size": 63419,
+          "lines": 2259,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980129.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\mako\\testing\\config.py": {
+          "size": 323,
+          "lines": 18,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980128.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\numpy\\distutils\\command\\config.py": {
+          "size": 20670,
+          "lines": 517,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980104.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\pandas\\_config\\config.py": {
+          "size": 25435,
+          "lines": 947,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980133.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\setuptools\\_distutils\\config.py": {
+          "size": 4906,
+          "lines": 140,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980061.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\setuptools\\_distutils\\command\\config.py": {
+          "size": 13131,
+          "lines": 377,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980061.0,
+          "in_app_dir": false
+        },
+        ".venv\\Lib\\site-packages\\sqlalchemy\\testing\\config.py": {
+          "size": 12058,
+          "lines": 424,
+          "has_database_config": false,
+          "has_secret_key": false,
+          "has_classes": true,
+          "modified": 1750980121.0,
+          "in_app_dir": false
+        },
+        "backup_security_20250728_134443\\config\\config.py": {
+          "size": 5945,
+          "lines": 148,
+          "has_database_config": true,
+          "has_secret_key": true,
+          "has_classes": true,
+          "modified": 1753720644.0557096,
+          "in_app_dir": false
+        }
+      },
+      "main_file": "config.py",
+      "recommendation": "Manter apenas o config.py principal e consolidar configurações"
+    },
+    "templates": {
+      "atestados.html": [
+        {
+          "path": "app\\templates\\admin\\atestados.html",
+          "size": 15075,
+          "lines": 273,
+          "modified": 1750995501.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "app\\templates\\main\\atestados.html",
+          "size": 7193,
+          "lines": 139,
+          "modified": 1751599560.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\admin\\atestados.html",
+          "size": 15075,
+          "lines": 273,
+          "modified": 1750995501.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\main\\atestados.html",
+          "size": 7193,
+          "lines": 139,
+          "modified": 1751599560.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        }
+      ],
+      "dashboard.html": [
+        {
+          "path": "app\\admin\\backup\\templates\\admin\\backup\\dashboard.html",
+          "size": 35821,
+          "lines": 949,
+          "modified": 1753705800.4504828,
+          "has_bootstrap": true,
+          "has_javascript": true,
+          "has_ajax": true
+        },
+        {
+          "path": "app\\templates\\admin\\dashboard.html",
+          "size": 13667,
+          "lines": 341,
+          "modified": 1752682155.0,
+          "has_bootstrap": false,
+          "has_javascript": true,
+          "has_ajax": false
+        },
+        {
+          "path": "app\\templates\\admin\\debug\\dashboard.html",
+          "size": 14892,
+          "lines": 379,
+          "modified": 1753808027.433203,
+          "has_bootstrap": false,
+          "has_javascript": true,
+          "has_ajax": true
+        },
+        {
+          "path": "app\\templates\\main\\dashboard.html",
+          "size": 20369,
+          "lines": 486,
+          "modified": 1753458777.9015813,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "app\\templates\\main\\hour_bank\\dashboard.html",
+          "size": 11469,
+          "lines": 264,
+          "modified": 1753312593.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\admin\\backup\\templates\\admin\\backup\\dashboard.html",
+          "size": 35821,
+          "lines": 949,
+          "modified": 1753705800.4504828,
+          "has_bootstrap": true,
+          "has_javascript": true,
+          "has_ajax": true
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\admin\\dashboard.html",
+          "size": 13667,
+          "lines": 341,
+          "modified": 1752682155.0,
+          "has_bootstrap": false,
+          "has_javascript": true,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\main\\dashboard.html",
+          "size": 20369,
+          "lines": 486,
+          "modified": 1753458777.9015813,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\main\\hour_bank\\dashboard.html",
+          "size": 11469,
+          "lines": 264,
+          "modified": 1753312593.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        }
+      ],
+      "logs.html": [
+        {
+          "path": "app\\templates\\admin\\logs.html",
+          "size": 8992,
+          "lines": 170,
+          "modified": 1750988153.0,
+          "has_bootstrap": true,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "app\\templates\\admin\\debug\\logs.html",
+          "size": 10966,
+          "lines": 320,
+          "modified": 1753808027.433203,
+          "has_bootstrap": false,
+          "has_javascript": true,
+          "has_ajax": true
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\admin\\logs.html",
+          "size": 8992,
+          "lines": 170,
+          "modified": 1750988153.0,
+          "has_bootstrap": true,
+          "has_javascript": false,
+          "has_ajax": false
+        }
+      ],
+      "notificacoes.html": [
+        {
+          "path": "app\\templates\\admin\\notificacoes.html",
+          "size": 7875,
+          "lines": 155,
+          "modified": 1750989706.0,
+          "has_bootstrap": false,
+          "has_javascript": true,
+          "has_ajax": false
+        },
+        {
+          "path": "app\\templates\\main\\notificacoes.html",
+          "size": 15024,
+          "lines": 332,
+          "modified": 1751719574.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\admin\\notificacoes.html",
+          "size": 7875,
+          "lines": 155,
+          "modified": 1750989706.0,
+          "has_bootstrap": false,
+          "has_javascript": true,
+          "has_ajax": false
+        },
+        {
+          "path": "backup_security_20250728_134443\\app_code\\templates\\main\\notificacoes.html",
+          "size": 15024,
+          "lines": 332,
+          "modified": 1751719574.0,
+          "has_bootstrap": false,
+          "has_javascript": false,
+          "has_ajax": false
+        }
+      ]
+    },
+    "blueprints": {
+      "debug": [
+        {
+          "path": "app\\debug_blueprint.py",
+          "size": 7778,
+          "lines": 246,
+          "modified": 1753808027.433203,
+          "blueprint_name": "debug"
+        },
+        {
+          "path": "app\\debug_blueprint_fixed.py",
+          "size": 7778,
+          "lines": 246,
+          "modified": 1753808027.4603474,
+          "blueprint_name": "debug"
+        }
+      ],
+      "error_dashboard": [
+        {
+          "path": "app\\error_dashboard.py",
+          "size": 9461,
+          "lines": 289,
+          "modified": 1752676829.0,
+          "blueprint_name": "error_dashboard"
+        }
+      ],
+      "unknown": [
+        {
+          "path": "app\\admin\\backup\\error_log.py",
+          "size": 12707,
+          "lines": 351,
+          "modified": 1753458777.9186444,
+          "blueprint_name": null
+        },
+        {
+          "path": "app\\admin\\backup\\routes.py",
+          "size": 25373,
+          "lines": 687,
+          "modified": 1753705800.4484508,
+          "blueprint_name": null
+        }
+      ]
+    },
+    "test_files": {
+      "login_tests": [
+        

@@ -1,0 +1,304 @@
+{
+  "total_tests": 37,
+  "successful_tests": 30,
+  "failed_tests": 7,
+  "login_success": true,
+  "page_results": [
+    {
+      "url": "/dashboard",
+      "description": "Dashboard Principal",
+      "category": "MAIN",
+      "status_code": 500,
+      "success": false,
+      "response_time": 3.284965
+    },
+    {
+      "url": "/health",
+      "description": "Health Check",
+      "category": "MAIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.851567
+    },
+    {
+      "url": "/admin/dashboard",
+      "description": "Dashboard Admin",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 6.734819
+    },
+    {
+      "url": "/admin/registros-ponto",
+      "description": "Registros de Ponto",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.903033
+    },
+    {
+      "url": "/admin/relatorios",
+      "description": "Relatórios Admin",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.072725
+    },
+    {
+      "url": "/admin/atestados",
+      "description": "Atestados Admin",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.50199
+    },
+    {
+      "url": "/admin/logs",
+      "description": "Logs do Sistema",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.299075
+    },
+    {
+      "url": "/admin/notificacoes",
+      "description": "Notificações Admin",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.078048
+    },
+    {
+      "url": "/admin/overtime-control",
+      "description": "Controle Horas Extras",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 7.925823
+    },
+    {
+      "url": "/admin/overtime-analytics",
+      "description": "Analytics Horas Extras",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 10.534372
+    },
+    {
+      "url": "/admin/overtime-requests",
+      "description": "Solicitações Horas Extras",
+      "category": "ADMIN",
+      "status_code": 500,
+      "success": false,
+      "response_time": 2.881361
+    },
+    {
+      "url": "/admin/classes-trabalho",
+      "description": "Classes de Trabalho",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 4.165043
+    },
+    {
+      "url": "/admin/user-approvals",
+      "description": "Aprovações de Usuários",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.803345
+    },
+    {
+      "url": "/admin/backup/dashboard",
+      "description": "Dashboard Backup",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.865242
+    },
+    {
+      "url": "/admin/debug/",
+      "description": "Dashboard Debug",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.875736
+    },
+    {
+      "url": "/admin/errors/",
+      "description": "Dashboard Erros",
+      "category": "ADMIN",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.931242
+    },
+    {
+      "url": "/perfil",
+      "description": "Perfil do Usuário",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.944741
+    },
+    {
+      "url": "/ponto",
+      "description": "Registro de Ponto",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.06421
+    },
+    {
+      "url": "/meus_registros",
+      "description": "Meus Registros",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.295521
+    },
+    {
+      "url": "/atestados",
+      "description": "Meus Atestados",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.297237
+    },
+    {
+      "url": "/notificacoes",
+      "description": "Minhas Notificações",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.966284
+    },
+    {
+      "url": "/my-overtime-requests",
+      "description": "Minhas Solicitações Horas Extras",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.369309
+    },
+    {
+      "url": "/upload_atestado",
+      "description": "Upload Atestado",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.869722
+    },
+    {
+      "url": "/overtime-request",
+      "description": "Solicitar Horas Extras",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.864645
+    },
+    {
+      "url": "/files/manager",
+      "description": "Gerenciador de Arquivos",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.885139
+    },
+    {
+      "url": "/privacy-policy",
+      "description": "Política de Privacidade",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.862589
+    },
+    {
+      "url": "/terms-of-service",
+      "description": "Termos de Serviço",
+      "category": "USER",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.889497
+    },
+    {
+      "url": "/api/status",
+      "description": "API Status",
+      "category": "API",
+      "status_code": 200,
+      "success": true,
+      "response_time": 2.038345
+    },
+    {
+      "url": "/api/estatisticas",
+      "description": "API Estatísticas",
+      "category": "API",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.538876
+    },
+    {
+      "url": "/api/usuarios",
+      "description": "API Usuários",
+      "category": "API",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.170045
+    },
+    {
+      "url": "/api/meus_registros",
+      "description": "API Meus Registros",
+      "category": "API",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.368938
+    },
+    {
+      "url": "/api/notificacoes",
+      "description": "API Notificações",
+      "category": "API",
+      "status_code": 200,
+      "success": true,
+      "response_time": 3.275573
+    },
+    {
+      "url": "/",
+      "description": "Página Inicial (500)",
+      "category": "PROBLEM",
+      "status_code": 500,
+      "success": false,
+      "response_time": 3.323195
+    },
+    {
+      "url": "/admin/usuarios",
+      "description": "Gestão de Usuários (500)",
+      "category": "PROBLEM",
+      "status_code": 500,
+      "success": false,
+      "response_time": 3.396407
+    },
+    {
+      "url": "/admin/hour-bank",
+      "description": "Banco de Horas Admin (500)",
+      "category": "PROBLEM",
+      "status_code": 500,
+      "success": false,
+      "response_time": 3.556885
+    },
+    {
+      "url": "/admin/system-config",
+      "description": "Configurações Sistema (500)",
+      "category": "PROBLEM",
+      "status_code": 500,
+      "success": false,
+      "response_time": 2.89814
+    },
+    {
+      "url": "/my-hour-bank",
+      "description": "Meu Banco de Horas (500)",
+      "category": "PROBLEM",
+      "status_code": 500,
+      "success": false,
+      "response_time": 3.299926
+    }
+  ]
+}

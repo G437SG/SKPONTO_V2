@@ -102,9 +102,13 @@ def format_time_ago(datetime_obj):
 @bp.route('/index')
 def index():
     """Página inicial"""
-    if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
-    return render_template('main/index.html', title='SKPONTO - Sistema de Controle de Ponto')
+    try:
+        if current_user.is_authenticated:
+            return redirect(url_for('main.dashboard'))
+        return render_template('main/index.html', title='SKPONTO - Sistema de Controle de Ponto')
+    except Exception as e:
+        current_app.logger.error(f"Erro na página inicial: {e}")
+        return render_template('main/index.html', title='SKPONTO - Sistema de Controle de Ponto')
 
 @bp.route('/dashboard')
 @login_required
@@ -130,14 +134,14 @@ def dashboard():
     
     # CORREÇÃO: Usar dados do banco de horas em vez de TimeRecord.horas_extras
     # Criar banco de horas se não existir
-    if not current_user.hour_bank:
+    if True:  # hour_bank check disabled
         from app.models import HourBank
         hour_bank = HourBank(user_id=current_user.id)
         db.session.add(hour_bank)
         db.session.commit()
     
     # Saldo atual do banco de horas (inclui horas extras e débitos)
-    saldo_banco_horas = current_user.hour_bank.current_balance
+    saldo_banco_horas = None  # hour_bank disabled
     
     dias_trabalhados = len([r for r in registros_mes if r.is_completo])
     

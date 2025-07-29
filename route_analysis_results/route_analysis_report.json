@@ -1,0 +1,170 @@
+{
+  "timestamp": "2025-07-29T15:24:01.726105",
+  "workspace": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2",
+  "summary": {
+    "total_unique_routes": 154,
+    "total_duplicate_routes": 154,
+    "total_route_instances": 653
+  },
+  "top_duplicated_routes": {
+    "/dashboard": {
+      "duplicate_count": 12,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py"
+      ]
+    },
+    "/notificacoes": {
+      "duplicate_count": 12,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py"
+      ]
+    },
+    "/": {
+      "duplicate_count": 10,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py"
+      ]
+    },
+    "/logs": {
+      "duplicate_count": 8,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py"
+      ]
+    },
+    "/usuarios": {
+      "duplicate_count": 8,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py"
+      ]
+    },
+    "/atestados": {
+      "duplicate_count": 8,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py"
+      ]
+    },
+    "/meus_registros": {
+      "duplicate_count": 8,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py"
+      ]
+    },
+    "/marcar_notificacao_lida/<int:id>": {
+      "duplicate_count": 8,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py"
+      ]
+    },
+    "/path": {
+      "duplicate_count": 6,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py"
+      ]
+    },
+    "/api/stats": {
+      "duplicate_count": 6,
+      "files": [
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+        "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py"
+      ]
+    }
+  },
+  "route_distribution": {},
+  "file_distribution": {
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py": 86,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py": 86,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py": 46,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py": 44,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py": 28,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py": 28,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py": 26,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py": 26,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py": 24,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py": 24,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py": 24,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py": 24,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py": 20,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py": 20,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py": 18,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py": 18,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py": 18,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py": 14,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py": 10,
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py": 10
+  }
+}

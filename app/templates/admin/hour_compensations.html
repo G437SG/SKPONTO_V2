@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Compensações de Horas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0"><i class="fas fa-balance-scale"></i> Compensações de Horas</h4>
+                </div>
+                <div class="card-body">
+                    <p>Gerenciamento de solicitações de compensação de horas extras.</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Período</th>
+                                    <th>Horas Solicitadas</th>
+                                    <th>Motivo</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">
+                                        Nenhuma solicitação de compensação pendente.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,4104 @@
+{
+  "total_duplicates": 154,
+  "routes_to_consolidate": {
+    "blueprint:name": {
+      "keep": {
+        "route": "blueprint:name",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:name",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:name",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:name",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\detailed_duplicate_analysis.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:name",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\detailed_duplicate_analysis.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 5
+    },
+    "/path": {
+      "keep": {
+        "route": "/path",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/path",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/path",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/path",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/path",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/path",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 6
+    },
+    "/": {
+      "keep": {
+        "route": "/",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 10
+    },
+    "/api/errors": {
+      "keep": {
+        "route": "/api/errors",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/errors",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/errors",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/errors",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/errors/clear": {
+      "keep": {
+        "route": "/api/errors/clear",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/errors/clear",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/errors/clear",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/errors/clear",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/stats": {
+      "keep": {
+        "route": "/api/stats",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 6
+    },
+    "/api/test-error": {
+      "keep": {
+        "route": "/api/test-error",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/test-error",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/test-error",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/test-error",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/logs": {
+      "keep": {
+        "route": "/logs",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 8
+    },
+    "/api/logs": {
+      "keep": {
+        "route": "/api/logs",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/realtime": {
+      "keep": {
+        "route": "/realtime",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/realtime",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/realtime",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/realtime",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/realtime": {
+      "keep": {
+        "route": "/api/realtime",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/realtime",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/realtime",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/realtime",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:debug": {
+      "keep": {
+        "route": "blueprint:debug",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:debug",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:debug",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:debug",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/recent/<int:hours>": {
+      "keep": {
+        "route": "/api/recent/<int:hours>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/recent/<int:hours>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 2
+    },
+    "/api/clear-logs": {
+      "keep": {
+        "route": "/api/clear-logs",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/clear-logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 2
+    },
+    "blueprint:error_dashboard": {
+      "keep": {
+        "route": "blueprint:error_dashboard",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:error_dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:error_dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:error_dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank": {
+      "keep": {
+        "route": "/hour-bank",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank/users": {
+      "keep": {
+        "route": "/hour-bank/users",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank/users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank/user/<int:user_id>": {
+      "keep": {
+        "route": "/hour-bank/user/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank/user/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/user/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/user/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank/adjust/<int:user_id>": {
+      "keep": {
+        "route": "/hour-bank/adjust/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank/adjust/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/adjust/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/adjust/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank/transfer": {
+      "keep": {
+        "route": "/hour-bank/transfer",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank/transfer",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/transfer",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/transfer",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-requests": {
+      "keep": {
+        "route": "/overtime-requests",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-requests",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-requests",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-requests",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-request/<int:request_id>/approve": {
+      "keep": {
+        "route": "/overtime-request/<int:request_id>/approve",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-request/<int:request_id>/approve",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-request/<int:request_id>/approve",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-request/<int:request_id>/approve",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-compensations": {
+      "keep": {
+        "route": "/hour-compensations",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-compensations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-compensations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-compensations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-compensation/<int:compensation_id>/approve": {
+      "keep": {
+        "route": "/hour-compensation/<int:compensation_id>/approve",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-compensation/<int:compensation_id>/approve",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-compensation/<int:compensation_id>/approve",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-compensation/<int:compensation_id>/approve",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank/settings": {
+      "keep": {
+        "route": "/hour-bank/settings",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/hour-bank/reports": {
+      "keep": {
+        "route": "/hour-bank/reports",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/hour-bank/reports",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/reports",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/hour-bank/reports",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/hour-bank/stats": {
+      "keep": {
+        "route": "/api/hour-bank/stats",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/hour-bank/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/hour-bank/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/hour-bank/stats",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-control": {
+      "keep": {
+        "route": "/overtime-control",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-control",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-control",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-control",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/adjust-user-hours": {
+      "keep": {
+        "route": "/adjust-user-hours",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/adjust-user-hours",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/adjust-user-hours",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/adjust-user-hours",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/users-with-balances": {
+      "keep": {
+        "route": "/api/users-with-balances",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/users-with-balances",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/users-with-balances",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/users-with-balances",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/refresh-users-list": {
+      "keep": {
+        "route": "/api/refresh-users-list",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/refresh-users-list",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/refresh-users-list",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/refresh-users-list",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-batch-process": {
+      "keep": {
+        "route": "/overtime-batch-process",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-batch-process",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-batch-process",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-batch-process",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-analytics": {
+      "keep": {
+        "route": "/overtime-analytics",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-analytics",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-analytics",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-analytics",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-settings": {
+      "keep": {
+        "route": "/overtime-settings",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-reports": {
+      "keep": {
+        "route": "/overtime-reports",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-reports",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-reports",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-reports",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/user-overtime-summary/<int:user_id>": {
+      "keep": {
+        "route": "/user-overtime-summary/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/user-overtime-summary/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-overtime-summary/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-overtime-summary/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/user-hours-history/<int:user_id>": {
+      "keep": {
+        "route": "/user-hours-history/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/user-hours-history/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-hours-history/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-hours-history/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/edit-user-hours/<int:user_id>": {
+      "keep": {
+        "route": "/edit-user-hours/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/edit-user-hours/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/edit-user-hours/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/edit-user-hours/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/update-user-hours/<int:user_id>": {
+      "keep": {
+        "route": "/update-user-hours/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/update-user-hours/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/update-user-hours/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/update-user-hours/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/get_all_users_data": {
+      "keep": {
+        "route": "/get_all_users_data",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/get_all_users_data",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/get_all_users_data",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/get_all_users_data",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/dashboard": {
+      "keep": {
+        "route": "/dashboard",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/dashboard",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 12
+    },
+    "/usuarios": {
+      "keep": {
+        "route": "/usuarios",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 8
+    },
+    "/usuario/<int:id>": {
+      "keep": {
+        "route": "/usuario/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/editar_usuario/<int:id>": {
+      "keep": {
+        "route": "/editar_usuario/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/editar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/editar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/editar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/criar_usuario": {
+      "keep": {
+        "route": "/criar_usuario",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/criar_usuario",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/criar_usuario",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/criar_usuario",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/desativar_usuario/<int:id>": {
+      "keep": {
+        "route": "/desativar_usuario/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/desativar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/desativar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/desativar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/ativar_usuario/<int:id>": {
+      "keep": {
+        "route": "/ativar_usuario/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/ativar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/ativar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/ativar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/deletar_usuario/<int:id>": {
+      "keep": {
+        "route": "/deletar_usuario/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/deletar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/deletar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/deletar_usuario/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/atestados": {
+      "keep": {
+        "route": "/atestados",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestados",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 8
+    },
+    "/atestado/<int:id>": {
+      "keep": {
+        "route": "/atestado/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/aprovar_atestado/<int:id>": {
+      "keep": {
+        "route": "/aprovar_atestado/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/aprovar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/aprovar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/aprovar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/rejeitar_atestado/<int:id>": {
+      "keep": {
+        "route": "/rejeitar_atestado/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/rejeitar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/rejeitar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/rejeitar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/notificacoes": {
+      "keep": {
+        "route": "/notificacoes",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/notificacoes",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 12
+    },
+    "/relatorios": {
+      "keep": {
+        "route": "/relatorios",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/relatorios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/relatorios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/relatorios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/backup": {
+      "keep": {
+        "route": "/backup",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/backup-completo": {
+      "keep": {
+        "route": "/backup-completo",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/backup-completo",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/backup-completo",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/backup-completo",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/backup-config": {
+      "keep": {
+        "route": "/backup-config",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/backup-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/backup-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/backup-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/classes-trabalho": {
+      "keep": {
+        "route": "/classes-trabalho",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/classes-trabalho",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/classes-trabalho/nova": {
+      "keep": {
+        "route": "/classes-trabalho/nova",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/classes-trabalho/nova",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/nova",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/nova",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/classes-trabalho/<int:id>/editar": {
+      "keep": {
+        "route": "/classes-trabalho/<int:id>/editar",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/classes-trabalho/<int:id>/editar",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/editar",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/editar",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/classes-trabalho/<int:id>/toggle-status": {
+      "keep": {
+        "route": "/classes-trabalho/<int:id>/toggle-status",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/classes-trabalho/<int:id>/toggle-status",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/toggle-status",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/toggle-status",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/classes-trabalho/<int:id>/atribuir": {
+      "keep": {
+        "route": "/classes-trabalho/<int:id>/atribuir",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/classes-trabalho/<int:id>/atribuir",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/atribuir",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/atribuir",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/classes-trabalho/<int:id>/usuarios": {
+      "keep": {
+        "route": "/classes-trabalho/<int:id>/usuarios",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/classes-trabalho/<int:id>/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/classes-trabalho/<int:id>/usuarios",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/migrar_classes_padrao": {
+      "keep": {
+        "route": "/migrar_classes_padrao",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/migrar_classes_padrao",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/migrar_classes_padrao",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/migrar_classes_padrao",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/registros-ponto": {
+      "keep": {
+        "route": "/registros-ponto",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/registros-ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/registros-ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/registros-ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/user-approvals": {
+      "keep": {
+        "route": "/user-approvals",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/user-approvals",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-approvals",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-approvals",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/approve-user/<int:request_id>": {
+      "keep": {
+        "route": "/approve-user/<int:request_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/approve-user/<int:request_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/approve-user/<int:request_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/approve-user/<int:request_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/user-approval-details/<int:request_id>": {
+      "keep": {
+        "route": "/user-approval-details/<int:request_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/user-approval-details/<int:request_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-approval-details/<int:request_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-approval-details/<int:request_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/bulk-approve-users": {
+      "keep": {
+        "route": "/bulk-approve-users",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/bulk-approve-users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/bulk-approve-users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/bulk-approve-users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/attestation-management": {
+      "keep": {
+        "route": "/attestation-management",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/attestation-management",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/attestation-management",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/attestation-management",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/sync-local-attestations": {
+      "keep": {
+        "route": "/sync-local-attestations",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/sync-local-attestations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/sync-local-attestations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/sync-local-attestations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/cleanup-orphaned-files": {
+      "keep": {
+        "route": "/cleanup-orphaned-files",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/cleanup-orphaned-files",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/cleanup-orphaned-files",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/cleanup-orphaned-files",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/user-attestation-files/<int:user_id>": {
+      "keep": {
+        "route": "/user-attestation-files/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/user-attestation-files/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-attestation-files/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/user-attestation-files/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/get-local-download-link": {
+      "keep": {
+        "route": "/get-local-download-link",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/get-local-download-link",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/get-local-download-link",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/get-local-download-link",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/delete-local-file": {
+      "keep": {
+        "route": "/delete-local-file",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/delete-local-file",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete-local-file",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete-local-file",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/test-local-connection": {
+      "keep": {
+        "route": "/test-local-connection",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/test-local-connection",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/test-local-connection",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/test-local-connection",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/update-local-config": {
+      "keep": {
+        "route": "/update-local-config",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/update-local-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/update-local-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/update-local-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/generate-local-auth-url": {
+      "keep": {
+        "route": "/generate-local-auth-url",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/generate-local-auth-url",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/generate-local-auth-url",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/generate-local-auth-url",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/exchange-local-auth-code": {
+      "keep": {
+        "route": "/exchange-local-auth-code",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/exchange-local-auth-code",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/exchange-local-auth-code",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/exchange-local-auth-code",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/update-shared-link": {
+      "keep": {
+        "route": "/update-shared-link",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/update-shared-link",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/update-shared-link",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/update-shared-link",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/system-config": {
+      "keep": {
+        "route": "/system-config",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/system-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/system-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/system-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/security-logs": {
+      "keep": {
+        "route": "/security-logs",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/security-logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/security-logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/security-logs",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:admin": {
+      "keep": {
+        "route": "blueprint:admin",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:admin",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:admin",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:admin",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/error-log": {
+      "keep": {
+        "route": "/error-log",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\error_log.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/error-log",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\error_log.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/error-log",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\error_log.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/error-log",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\error_log.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/diagnosis": {
+      "keep": {
+        "route": "/api/diagnosis",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\error_log.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/diagnosis",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\error_log.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/diagnosis",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\error_log.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/diagnosis",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\error_log.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/debug": {
+      "keep": {
+        "route": "/debug",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/debug",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/debug",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/debug",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/test-no-auth": {
+      "keep": {
+        "route": "/test-no-auth",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/test-no-auth",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/test-no-auth",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/test-no-auth",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/test-simple": {
+      "keep": {
+        "route": "/test-simple",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/test-simple",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/test-simple",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/test-simple",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/storage-info": {
+      "keep": {
+        "route": "/api/storage-info",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/storage-info",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/storage-info",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/storage-info",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/list-backups": {
+      "keep": {
+        "route": "/api/list-backups",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/list-backups",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/list-backups",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/list-backups",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/create": {
+      "keep": {
+        "route": "/create",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/create",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/create",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/create",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/delete/<backup_name>": {
+      "keep": {
+        "route": "/delete/<backup_name>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/delete/<backup_name>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete/<backup_name>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete/<backup_name>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/download/<backup_name>": {
+      "keep": {
+        "route": "/download/<backup_name>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/download/<backup_name>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/download/<backup_name>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/download/<backup_name>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/delete-multiple": {
+      "keep": {
+        "route": "/delete-multiple",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/delete-multiple",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete-multiple",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete-multiple",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/cleanup": {
+      "keep": {
+        "route": "/cleanup",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/cleanup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/cleanup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/cleanup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/auto-backup-config": {
+      "keep": {
+        "route": "/auto-backup-config",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/auto-backup-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/auto-backup-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/auto-backup-config",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/trigger-auto-backup": {
+      "keep": {
+        "route": "/trigger-auto-backup",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/trigger-auto-backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/trigger-auto-backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/trigger-auto-backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/settings": {
+      "keep": {
+        "route": "/settings",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:backup": {
+      "keep": {
+        "route": "blueprint:backup",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:backup",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/status": {
+      "keep": {
+        "route": "/status",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/status",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/status",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/status",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/registro_ponto": {
+      "keep": {
+        "route": "/registro_ponto",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/registro_ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/registro_ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/registro_ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/meus_registros": {
+      "keep": {
+        "route": "/meus_registros",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/meus_registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 8
+    },
+    "/marcar_notificacao_lida/<int:id>": {
+      "keep": {
+        "route": "/marcar_notificacao_lida/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_notificacao_lida/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 8
+    },
+    "/estatisticas": {
+      "keep": {
+        "route": "/estatisticas",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/estatisticas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/estatisticas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/estatisticas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/users": {
+      "keep": {
+        "route": "/users",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/users",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 2
+    },
+    "/time-records": {
+      "keep": {
+        "route": "/time-records",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/time-records",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 2
+    },
+    "blueprint:api": {
+      "keep": {
+        "route": "blueprint:api",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:api",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:api",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:api",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/login": {
+      "keep": {
+        "route": "/login",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/login",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/login",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/login",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/logout": {
+      "keep": {
+        "route": "/logout",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/logout",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logout",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/logout",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/register": {
+      "keep": {
+        "route": "/register",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/register",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/register",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/register",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/forgot_password": {
+      "keep": {
+        "route": "/forgot_password",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/forgot_password",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/forgot_password",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/forgot_password",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/reset_password/<int:user_id>": {
+      "keep": {
+        "route": "/reset_password/<int:user_id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/reset_password/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/reset_password/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/reset_password/<int:user_id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:auth": {
+      "keep": {
+        "route": "blueprint:auth",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:auth",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:auth",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:auth",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:errors": {
+      "keep": {
+        "route": "blueprint:errors",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\errors\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:errors",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\errors\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:errors",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\errors\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:errors",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\errors\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/manager": {
+      "keep": {
+        "route": "/manager",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/manager",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/manager",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/manager",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/upload": {
+      "keep": {
+        "route": "/upload",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/upload",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/upload",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/upload",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/download/<path:filename>": {
+      "keep": {
+        "route": "/download/<path:filename>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/download/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/download/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/download/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/create-folder": {
+      "keep": {
+        "route": "/create-folder",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/create-folder",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/create-folder",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/create-folder",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/delete/<path:filename>": {
+      "keep": {
+        "route": "/delete/<path:filename>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/delete/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/delete/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/move": {
+      "keep": {
+        "route": "/move",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/move",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/move",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/move",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/rename": {
+      "keep": {
+        "route": "/rename",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/rename",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/rename",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/rename",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/create-zip": {
+      "keep": {
+        "route": "/create-zip",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/create-zip",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/create-zip",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/create-zip",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/info/<path:filename>": {
+      "keep": {
+        "route": "/info/<path:filename>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/info/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/info/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/info/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:files": {
+      "keep": {
+        "route": "blueprint:files",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:files",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:files",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:files",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/my-hour-bank": {
+      "keep": {
+        "route": "/my-hour-bank",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/my-hour-bank",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-hour-bank",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-hour-bank",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/my-hour-bank/history": {
+      "keep": {
+        "route": "/my-hour-bank/history",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/my-hour-bank/history",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-hour-bank/history",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-hour-bank/history",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-request": {
+      "keep": {
+        "route": "/overtime-request",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/my-overtime-requests": {
+      "keep": {
+        "route": "/my-overtime-requests",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/my-overtime-requests",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-overtime-requests",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-overtime-requests",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/overtime-request/<int:request_id>/cancel": {
+      "keep": {
+        "route": "/overtime-request/<int:request_id>/cancel",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/overtime-request/<int:request_id>/cancel",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-request/<int:request_id>/cancel",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/overtime-request/<int:request_id>/cancel",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/request-compensation": {
+      "keep": {
+        "route": "/request-compensation",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/request-compensation",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/request-compensation",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/request-compensation",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/my-compensations": {
+      "keep": {
+        "route": "/my-compensations",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/my-compensations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-compensations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-compensations",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/compensation/<int:compensation_id>/cancel": {
+      "keep": {
+        "route": "/compensation/<int:compensation_id>/cancel",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/compensation/<int:compensation_id>/cancel",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/compensation/<int:compensation_id>/cancel",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/compensation/<int:compensation_id>/cancel",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/my-hour-bank/settings": {
+      "keep": {
+        "route": "/my-hour-bank/settings",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/my-hour-bank/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-hour-bank/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/my-hour-bank/settings",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/my-hour-bank/chart-data": {
+      "keep": {
+        "route": "/api/my-hour-bank/chart-data",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/my-hour-bank/chart-data",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/my-hour-bank/chart-data",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/my-hour-bank/chart-data",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/overtime-quick-request": {
+      "keep": {
+        "route": "/api/overtime-quick-request",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/overtime-quick-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/overtime-quick-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/overtime-quick-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/compensation-quick-request": {
+      "keep": {
+        "route": "/api/compensation-quick-request",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/compensation-quick-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/compensation-quick-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/compensation-quick-request",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/health": {
+      "keep": {
+        "route": "/health",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/health",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/health",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/health",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/notifications/recent": {
+      "keep": {
+        "route": "/api/notifications/recent",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/notifications/recent",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/notifications/recent",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/notifications/recent",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/index": {
+      "keep": {
+        "route": "/index",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/index",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/index",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/index",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/ponto": {
+      "keep": {
+        "route": "/ponto",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/meus-registros": {
+      "keep": {
+        "route": "/meus-registros",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/meus-registros",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 2
+    },
+    "/editar_registro/<int:id>": {
+      "keep": {
+        "route": "/editar_registro/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/editar_registro/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/editar_registro/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/editar_registro/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/perfil": {
+      "keep": {
+        "route": "/perfil",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/perfil",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/perfil",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/perfil",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/upload_atestado": {
+      "keep": {
+        "route": "/upload_atestado",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/upload_atestado",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/upload_atestado",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/upload_atestado",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/download_atestado/<int:id>": {
+      "keep": {
+        "route": "/download_atestado/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/download_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/download_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/download_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/cancelar_atestado/<int:id>": {
+      "keep": {
+        "route": "/cancelar_atestado/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/cancelar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/cancelar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/cancelar_atestado/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/deletar_notificacao/<int:id>": {
+      "keep": {
+        "route": "/deletar_notificacao/<int:id>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/deletar_notificacao/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/deletar_notificacao/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/deletar_notificacao/<int:id>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/marcar_todas_lidas": {
+      "keep": {
+        "route": "/marcar_todas_lidas",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/marcar_todas_lidas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_todas_lidas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/marcar_todas_lidas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/registrar_ponto": {
+      "keep": {
+        "route": "/api/registrar_ponto",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/registrar_ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/registrar_ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/registrar_ponto",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/api/notificacoes_nao_lidas": {
+      "keep": {
+        "route": "/api/notificacoes_nao_lidas",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/api/notificacoes_nao_lidas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/notificacoes_nao_lidas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/api/notificacoes_nao_lidas",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/privacy-policy": {
+      "keep": {
+        "route": "/privacy-policy",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/privacy-policy",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/privacy-policy",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/privacy-policy",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/terms-of-service": {
+      "keep": {
+        "route": "/terms-of-service",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/terms-of-service",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/terms-of-service",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/terms-of-service",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "/uploads/<path:filename>": {
+      "keep": {
+        "route": "/uploads/<path:filename>",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+        "type": "flask_route"
+      },
+      "remove": [
+        {
+          "route": "/uploads/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/uploads/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        },
+        {
+          "route": "/uploads/<path:filename>",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+          "type": "flask_route"
+        }
+      ],
+      "duplicate_count": 4
+    },
+    "blueprint:main": {
+      "keep": {
+        "route": "blueprint:main",
+        "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\__init__.py",
+        "type": "blueprint"
+      },
+      "remove": [
+        {
+          "route": "blueprint:main",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:main",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\__init__.py",
+          "type": "blueprint"
+        },
+        {
+          "route": "blueprint:main",
+          "file": "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\__init__.py",
+          "type": "blueprint"
+        }
+      ],
+      "duplicate_count": 4
+    }
+  },
+  "files_to_modify": [
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\error_log.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\errors\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\__init__.py"
+  ],
+  "files_to_remove": [
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\errors\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\error_log.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\error_log.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\hour_bank_routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\files\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\auth\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\overtime_admin.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\overtime_admin.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\hour_bank_routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\api\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\files\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\main\\hour_bank_routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\main\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\errors\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\route_consolidation_analyzer.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\detailed_duplicate_analysis.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\backup\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\error_dashboard.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\admin\\backup\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\hour_bank_routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\debug_blueprint_fixed.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\routes.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\backup_security_20250728_134443\\app_code\\admin\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\error_dashboard.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\auth\\__init__.py",
+    "c:\\Users\\Arq\\OneDrive\\Python Projetos\\SKPONTO_V2\\app\\api\\__init__.py"
+  ]
+}

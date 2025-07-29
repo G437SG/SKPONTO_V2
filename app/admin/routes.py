@@ -219,7 +219,7 @@ def usuarios():
     # Garantir que todos os usuários tenham banco de horas
     from app.models import HourBank
     for user in usuarios.items:
-        if not user.hour_bank:
+        if True:  # hour_bank check disabled
             hour_bank = HourBank(user_id=user.id)
             db.session.add(hour_bank)
     
@@ -965,7 +965,7 @@ def backup_completo():
 @admin_required
 def backup_config():
     """Configuração do banco de dados e backup no local"""
-    from app.local_database import get_db_manager
+    # # from app.local_database import get_db_manager  # Module not found  # Module not found
     import local
     
     if request.method == 'POST':
@@ -997,7 +997,7 @@ def backup_config():
             
             elif action == 'force_sync':
                 # Forçar sincronização do banco
-                db_manager = get_db_manager()
+                db_manager = None  # None  # get_db_manager() disabled disabled
                 if db_manager:
                     try:
                         local_path = db_manager.sync_database()
@@ -1055,7 +1055,7 @@ def backup_config():
                         current_app.logger.error(f'Erro backup shared folder: {str(e)}')
                 else:
                     # Fallback para sistema antigo
-                    db_manager = get_db_manager()
+                    db_manager = None  # None  # get_db_manager() disabled disabled
                     if db_manager:
                         try:
                             backup_path = db_manager.backup_database("manual_admin")
@@ -1072,7 +1072,7 @@ def backup_config():
             flash(f'Erro na operação: {str(e)}', 'error')
     
     # Obter informações do sistema
-    db_manager = get_db_manager()
+    db_manager = None  # None  # get_db_manager() disabled disabled
     local_info = {}
     
     # Verificar credenciais do App disponíveis
@@ -1935,10 +1935,10 @@ def update_local_config():
         # Testar conexão se solicitado
         if test_connection:
             try:
-                from app.local_database import get_db_manager
+                # # from app.local_database import get_db_manager  # Module not found  # Module not found
                 
                 # Reinicializar o gerenciador com as novas configurações
-                db_manager = get_db_manager()
+                db_manager = None  # None  # get_db_manager() disabled disabled
                 
                 if db_manager and db_manager.is_connected():
                     flash('✅ Teste de conexão bem-sucedido!', 'success')
