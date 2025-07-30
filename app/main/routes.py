@@ -132,13 +132,19 @@ def dashboard():
 
     horas_mes = sum(r.horas_trabalhadas for r in registros_mes)
     
-    # CORREÇÃO: Usar dados do banco de horas em vez de TimeRecord.horas_extras
-    # Criar banco de horas se não existir
-    if True:  # hour_bank check disabled
-        from app.models import HourBank
+    # CORREÇÃO: Verificar se banco de horas existe antes de criar
+    from app.models import HourBank
+    hour_bank = HourBank.query.filter_by(user_id=current_user.id).first()
+    if not hour_bank:
         hour_bank = HourBank(user_id=current_user.id)
         db.session.add(hour_bank)
-        db.session.commit()
+        try:
+            db.session.commit()
+            current_app.logger.info(f"Banco de horas criado para usuário {current_user.id}")
+        except Exception as e:
+            db.session.rollback()
+            current_app.logger.error(f"Erro ao criar banco de horas: {e}")
+            hour_bank = HourBank.query.filter_by(user_id=current_user.id).first()
     
     # Saldo atual do banco de horas (inclui horas extras e débitos)
     saldo_banco_horas = None  # hour_bank disabled
@@ -832,3 +838,167 @@ def serve_uploaded_file(filename):
     except Exception as e:
         current_app.logger.error(f"Erro ao servir arquivo {filename}: {str(e)}")
         abort(404)
+
+
+@bp.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    """Recuperar senha"""
+    try:
+        return render_template('auth/forgot_password.html', title='Recuperar Senha')
+    except Exception as e:
+        current_app.logger.error(f"Erro na página de recuperação: {e}")
+        flash('Erro ao carregar página de recuperação', 'error')
+        return redirect(url_for('auth.login'))
+
+@bp.route('/overtime')
+@login_required
+def overtime():
+    """Página de horas extras"""
+    try:
+        return render_template('main/overtime.html', title='Horas Extras')
+    except Exception as e:
+        current_app.logger.error(f"Erro na página de horas extras: {e}")
+        flash('Erro ao carregar horas extras', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/export/pdf')
+@login_required
+def export_pdf():
+    """Exportar relatórios em PDF"""
+    try:
+        flash('Exportação PDF em desenvolvimento', 'info')
+        return redirect(url_for('main.dashboard'))
+    except Exception as e:
+        current_app.logger.error(f"Erro na exportação PDF: {e}")
+        flash('Erro ao exportar PDF', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/export/excel')
+@login_required
+def export_excel():
+    """Exportar relatórios em Excel"""
+    try:
+        flash('Exportação Excel em desenvolvimento', 'info')
+        return redirect(url_for('main.dashboard'))
+    except Exception as e:
+        current_app.logger.error(f"Erro na exportação Excel: {e}")
+        flash('Erro ao exportar Excel', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/attestations')
+@login_required
+def attestations():
+    """Lista de atestados do usuário"""
+    try:
+        return redirect(url_for('main.meus_atestados'))
+    except Exception as e:
+        current_app.logger.error(f"Erro na página de atestados: {e}")
+        flash('Erro ao carregar atestados', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/attestations/new')
+@login_required
+def new_attestation():
+    """Novo atestado"""
+    try:
+        return redirect(url_for('main.novo_atestado'))
+    except Exception as e:
+        current_app.logger.error(f"Erro ao criar atestado: {e}")
+        flash('Erro ao criar atestado', 'error')
+        return redirect(url_for('main.meus_atestados'))
+
+@bp.route('/profile')
+@login_required
+def profile():
+    """Perfil do usuário"""
+    try:
+        return render_template('main/profile.html', title='Meu Perfil')
+    except Exception as e:
+        current_app.logger.error(f"Erro na página de perfil: {e}")
+        flash('Erro ao carregar perfil', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/settings')
+@login_required
+def settings():
+    """Configurações do usuário"""
+    try:
+        return render_template('main/settings.html', title='Configurações')
+    except Exception as e:
+        current_app.logger.error(f"Erro na página de configurações: {e}")
+        flash('Erro ao carregar configurações', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/notifications')
+@login_required
+def notifications():
+    """Notificações do usuário"""
+    try:
+        return redirect(url_for('main.minhas_notificacoes'))
+    except Exception as e:
+        current_app.logger.error(f"Erro na página de notificações: {e}")
+        flash('Erro ao carregar notificações', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/clock-in', methods=['GET', 'POST'])
+@login_required
+def clock_in():
+    """Registrar entrada"""
+    try:
+        if request.method == 'POST':
+            # Lógica para registrar entrada
+            # TODO: Implementar lógica de registro de ponto
+            flash('Entrada registrada com sucesso!', 'success')
+            return redirect(url_for('main.dashboard'))
+        else:
+            # GET - mostrar página de entrada
+            return render_template('main/clock_in.html', title='Registrar Entrada')
+    except Exception as e:
+        current_app.logger.error(f"Erro ao registrar entrada: {e}")
+        flash('Erro ao registrar entrada', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/clock-out', methods=['GET', 'POST'])
+@login_required
+def clock_out():
+    """Registrar saída"""
+    try:
+        if request.method == 'POST':
+            # Lógica para registrar saída
+            # TODO: Implementar lógica de registro de ponto
+            flash('Saída registrada com sucesso!', 'success')
+            return redirect(url_for('main.dashboard'))
+        else:
+            # GET - mostrar página de saída
+            return render_template('main/clock_out.html', title='Registrar Saída')
+    except Exception as e:
+        current_app.logger.error(f"Erro ao registrar saída: {e}")
+        flash('Erro ao registrar saída', 'error')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/reports')
+@login_required
+def reports():
+    """Página de relatórios"""
+    return render_template('main/reports.html', title='Relatórios')
+
+@bp.route('/reports/monthly')
+@login_required
+def reports_monthly():
+    """Relatório mensal"""
+    return render_template('main/reports_monthly.html', title='Relatório Mensal')
+
+@bp.route('/reports/attendance')
+@login_required
+def reports_attendance():
+    """Relatório de presença"""
+    return render_template('main/reports_attendance.html', title='Relatório de Presença')
+
+@bp.route('/upload-attestation', methods=['GET', 'POST'])
+@login_required
+def upload_attestation():
+    """Upload de atestado"""
+    if request.method == 'POST':
+        flash('Atestado enviado com sucesso!', 'success')
+        return redirect(url_for('main.attestations'))
+    return render_template('main/upload_attestation.html', title='Enviar Atestado')

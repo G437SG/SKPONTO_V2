@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard de Backup - SKPONTO{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 mb-0">Dashboard de Backup</h1>
+                    <p class="text-muted">Gerencie backups e armazenamento do sistema</p>
+                </div>
+                <div>
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards de Status -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title mb-0">Armazenamento</h5>
+                            <h3 class="mb-0">
+                                {% if storage_info %}
+                                    {{ "%.1f"|format(storage_info.used_space / 1024 / 1024) }} MB
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </h3>
+                            <small>Espaço utilizado</small>
+                        </div>
+                        <i class="fas fa-hdd fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title mb-0">Total de Backups</h5>
+                            <h3 class="mb-0">
+                                {% if backups %}
+                                    {{ backups|length }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </h3>
+                            <small>Arquivos de backup</small>
+                        </div>
+                        <i class="fas fa-archive fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title mb-0">Sistema</h5>
+                            <h3 class="mb-0">Ativo</h3>
+                            <small>Status do backup</small>
+                        </div>
+                        <i class="fas fa-heartbeat fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h5 class="card-title mb-0">Último Backup</h5>
+                            <h3 class="mb-0">
+                                {% if backups and backups|length > 0 %}
+                                    Hoje
+                                {% else %}
+                                    Nunca
+                                {% endif %}
+                            </h3>
+                            <small>Data do backup</small>
+                        </div>
+                        <i class="fas fa-clock fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt"></i> Ações Rápidas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary btn-lg w-100 mb-2" onclick="createBackup()">
+                                <i class="fas fa-plus"></i><br>
+                                Criar Backup
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-info btn-lg w-100 mb-2" onclick="refreshPage()">
+                                <i class="fas fa-sync"></i><br>
+                                Atualizar
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-success btn-lg w-100 mb-2" onclick="downloadLatest()">
+                                <i class="fas fa-download"></i><br>
+                                Download
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-warning btn-lg w-100 mb-2" onclick="cleanOldBackups()">
+                                <i class="fas fa-trash"></i><br>
+                                Limpar Antigos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Backups -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list"></i> Backups Disponíveis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if backups and backups|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nome do Arquivo</th>
+                                        <th>Tamanho</th>
+                                        <th>Data de Criação</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for backup in backups %}
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-file-archive text-primary"></i>
+                                            {{ backup.name if backup.name else 'Backup sem nome' }}
+                                        </td>
+                                        <td>
+                                            {% if backup.size %}
+                                                {{ "%.2f"|format(backup.size / 1024 / 1024) }} MB
+                                            {% else %}
+                                                N/A
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if backup.created_at %}
+                                                {{ backup.created_at.strftime('%d/%m/%Y %H:%M') }}
+                                            {% else %}
+                                                N/A
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-outline-primary" onclick="downloadBackup('{{ backup.name }}')">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" onclick="deleteBackup('{{ backup.name }}')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-archive fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Nenhum backup encontrado</h5>
+                            <p class="text-muted">Clique em "Criar Backup" para gerar seu primeiro backup.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function createBackup() {
+    if (confirm('Deseja criar um novo backup? Isso pode levar alguns minutos.')) {
+        // Implementar criação de backup
+        window.location.href = '{{ url_for("backup.create_backup") }}';
+    }
+}
+
+function refreshPage() {
+    window.location.reload();
+}
+
+function downloadLatest() {
+    {% if backups and backups|length > 0 %}
+        downloadBackup('{{ backups[0].name }}');
+    {% else %}
+        alert('Nenhum backup disponível para download.');
+    {% endif %}
+}
+
+function cleanOldBackups() {
+    if (confirm('Deseja remover backups antigos? Esta ação não pode ser desfeita.')) {
+        // Implementar limpeza
+        console.log('Limpeza de backups antigos');
+    }
+}
+
+function downloadBackup(filename) {
+    window.location.href = `/admin/backup/download/${filename}`;
+}
+
+function deleteBackup(filename) {
+    if (confirm(`Deseja deletar o backup "${filename}"? Esta ação não pode ser desfeita.`)) {
+        fetch(`/admin/backup/delete/${filename}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Backup deletado com sucesso!');
+                window.location.reload();
+            } else {
+                alert('Erro ao deletar backup: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Erro ao deletar backup: ' + error.message);
+        });
+    }
+}
+</script>
+{% endblock %}

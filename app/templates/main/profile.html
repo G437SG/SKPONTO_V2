@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-user"></i> Meu Perfil</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-user-circle fa-5x text-muted mb-3"></i>
+                            <h5>{{ current_user.nome }} {{ current_user.sobrenome }}</h5>
+                            <p class="text-muted">{{ current_user.cargo or 'Cargo não informado' }}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <h6>Informações Pessoais</h6>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td>{{ current_user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CPF:</strong></td>
+                                    <td>{{ current_user.cpf or 'Não informado' }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Telefone:</strong></td>
+                                    <td>{{ current_user.telefone or 'Não informado' }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo:</strong></td>
+                                    <td>{{ current_user.user_type.value if current_user.user_type else 'Não definido' }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-end">
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                        <button class="btn btn-primary" onclick="alert('Edição em desenvolvimento')">
+                            <i class="fas fa-edit"></i> Editar Perfil
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

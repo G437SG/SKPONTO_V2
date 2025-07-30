@@ -94,7 +94,7 @@ def register_blueprints(app):
     
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)  # Sem prefixo para /login funcionar
-    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(admin_bp, url_prefix='/admin', strict_slashes=False)
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(errors_bp)
     app.register_blueprint(files_bp, url_prefix='/files')
@@ -216,6 +216,9 @@ def configure_security_headers(app):
 def create_app(config_name=None):
     """Factory para criar a aplicação Flask"""
     app = Flask(__name__)
+    
+    # Configurar URL trailing slash para evitar redirecionamentos 308
+    app.url_map.strict_slashes = False
     
     # Configuração
     config_name = config_name or os.environ.get('FLASK_CONFIG', 'default')

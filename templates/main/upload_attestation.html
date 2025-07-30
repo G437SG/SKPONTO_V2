@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-medical me-2"></i>Enviar Atestado
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="attestation_file" class="form-label">Arquivo do Atestado</label>
+                            <input type="file" class="form-control" id="attestation_file" name="attestation_file" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Atestado</button>
+                        <a href="{{ url_for('main.attestations') }}" class="btn btn-secondary ms-2">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

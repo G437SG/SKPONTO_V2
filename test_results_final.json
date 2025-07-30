@@ -1,302 +1,458 @@
 {
-  "total_tests": 42,
-  "successful_tests": 32,
-  "failed_tests": 10,
-  "login_success": true,
-  "page_results": [
-    {
-      "url": "/",
-      "description": "Página Inicial",
-      "status_code": 500,
-      "success": false,
-      "response_time": 3.658859
-    },
-    {
-      "url": "/dashboard",
-      "description": "Dashboard Principal",
-      "status_code": 500,
-      "success": false,
-      "response_time": 3.543657
-    },
-    {
-      "url": "/health",
-      "description": "Health Check",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.888438
-    },
-    {
-      "url": "/admin/dashboard",
-      "description": "Dashboard Admin",
-      "status_code": 200,
-      "success": true,
-      "response_time": 7.706486
-    },
-    {
-      "url": "/admin/usuarios",
-      "description": "Gestão de Usuários",
-      "status_code": 500,
-      "success": false,
-      "response_time": 5.368847
-    },
-    {
-      "url": "/admin/registros-ponto",
-      "description": "Registros de Ponto",
-      "status_code": 200,
-      "success": true,
-      "response_time": 4.939655
-    },
-    {
-      "url": "/admin/relatorios",
-      "description": "Relatórios Admin",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.548974
-    },
-    {
-      "url": "/admin/atestados",
-      "description": "Atestados Admin",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.499147
-    },
-    {
-      "url": "/admin/logs",
-      "description": "Logs do Sistema",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.276114
-    },
-    {
-      "url": "/admin/notificacoes",
-      "description": "Notificações Admin",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.094089
-    },
-    {
-      "url": "/admin/system-config",
-      "description": "Configurações do Sistema",
-      "status_code": 500,
-      "success": false,
-      "response_time": 2.894761
-    },
-    {
-      "url": "/admin/hour-bank",
-      "description": "Banco de Horas Admin",
-      "status_code": 500,
-      "success": false,
-      "response_time": 3.528027
-    },
-    {
-      "url": "/admin/hour-bank/users",
-      "description": "Usuários Banco de Horas",
-      "status_code": 500,
-      "success": false,
-      "response_time": 3.410812
-    },
-    {
-      "url": "/admin/hour-compensations",
-      "description": "Compensações de Horas",
-      "status_code": 500,
-      "success": false,
-      "response_time": 2.853856
-    },
-    {
-      "url": "/admin/overtime-control",
-      "description": "Controle Horas Extras",
-      "status_code": 200,
-      "success": true,
-      "response_time": 7.977421
-    },
-    {
-      "url": "/admin/overtime-requests",
-      "description": "Solicitações Horas Extras",
-      "status_code": 500,
-      "success": false,
-      "response_time": 2.928678
-    },
-    {
-      "url": "/admin/overtime-analytics",
-      "description": "Analytics Horas Extras",
-      "status_code": 200,
-      "success": true,
-      "response_time": 7.893183
-    },
-    {
-      "url": "/admin/classes-trabalho",
-      "description": "Classes de Trabalho",
-      "status_code": 200,
-      "success": true,
-      "response_time": 4.201159
-    },
-    {
-      "url": "/admin/user-approvals",
-      "description": "Aprovações de Usuários",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.894003
-    },
-    {
-      "url": "/admin/backup/dashboard",
-      "description": "Dashboard Backup",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.892668
-    },
-    {
-      "url": "/admin/debug/",
-      "description": "Dashboard Debug",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.841028
-    },
-    {
-      "url": "/admin/errors/",
-      "description": "Dashboard Erros",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.850627
-    },
-    {
-      "url": "/perfil",
-      "description": "Perfil do Usuário",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.952257
-    },
-    {
-      "url": "/ponto",
-      "description": "Registro de Ponto",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.0904
-    },
-    {
-      "url": "/meus_registros",
-      "description": "Meus Registros",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.262845
-    },
-    {
-      "url": "/atestados",
-      "description": "Meus Atestados",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.279877
-    },
-    {
-      "url": "/notificacoes",
-      "description": "Minhas Notificações",
-      "status_code": 200,
-      "success": true,
-      "response_time": 4.15763
-    },
-    {
-      "url": "/my-hour-bank",
-      "description": "Meu Banco de Horas",
-      "status_code": 500,
-      "success": false,
-      "response_time": 3.441624
-    },
-    {
-      "url": "/my-overtime-requests",
-      "description": "Minhas Solicitações Horas Extras",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.434517
-    },
-    {
-      "url": "/my-compensations",
-      "description": "Minhas Compensações",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.299025
-    },
-    {
-      "url": "/upload_atestado",
-      "description": "Upload Atestado",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.848642
-    },
-    {
-      "url": "/overtime-request",
-      "description": "Solicitar Horas Extras",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.872533
-    },
-    {
-      "url": "/request-compensation",
-      "description": "Solicitar Compensação",
-      "status_code": 500,
-      "success": false,
-      "response_time": 2.942276
-    },
-    {
-      "url": "/files/manager",
-      "description": "Gerenciador de Arquivos",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.864232
-    },
-    {
-      "url": "/privacy-policy",
-      "description": "Política de Privacidade",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.828747
-    },
-    {
-      "url": "/terms-of-service",
-      "description": "Termos de Serviço",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.882075
-    },
-    {
-      "url": "/api/status",
-      "description": "API Status",
-      "status_code": 200,
-      "success": true,
-      "response_time": 2.028996
-    },
-    {
-      "url": "/api/estatisticas",
-      "description": "API Estatísticas",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.414667
-    },
-    {
-      "url": "/api/usuarios",
-      "description": "API Usuários",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.041086
-    },
-    {
-      "url": "/api/meus_registros",
-      "description": "API Meus Registros",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.241346
-    },
-    {
-      "url": "/api/notificacoes",
-      "description": "API Notificações",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.232737
-    },
-    {
-      "url": "/api/time-records",
-      "description": "API Registros de Tempo",
-      "status_code": 200,
-      "success": true,
-      "response_time": 3.240523
+  "/": {
+    "status": "ERROR_500",
+    "status_code": 500,
+    "content_length": 16390,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:31 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "16390",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvZw.BvhMHHY9JuQrIiBIf7frKPfue5Q; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
     }
-  ]
+  },
+  "/login": {
+    "status": "ERROR_500",
+    "status_code": 500,
+    "content_length": 16390,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:38 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "16390",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvbg.a6fMLUG-QnKtBESJuFbCKwvwVqk; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/register": {
+    "status": "ERROR_500",
+    "status_code": 500,
+    "content_length": 16390,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:44 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "16390",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvdA.Ie-uqcexc1bP8PvPYrqComEEbu4; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/forgot-password": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:47 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiMWE4ZmNlMTM0Nzk1YjY3MWQ2ODRkNDcxNThiMmE0MzUzY2U4MTUyZiJ9.aIkvdw.Wa1xhNeHqx7UHynHDmVa4BqMmrk; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/dashboard": {
+    "status": "ERROR_500",
+    "status_code": 500,
+    "content_length": 16390,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:50 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "16390",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkveg.4AmGG-0PnA8nFhlK2H-Ay6yS1AU; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/api/time-records": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 371,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:54 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "371",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvfQ.vOnD4I_ZOyULlN1VyaB5onjYaUA; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/api/users": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 454,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:30:57 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "454",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvgA.18WaV-qjezhR2jCxeRliPGAzEdU; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/my-compensations": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 13276,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:00 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "3125",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiZGEyNWEyNjY2NDhlZGE4YTNjYTRkMmJlNmU3MjU4YzM5MTcxZWFjNiJ9.aIkvhA.ExZ-87j_ZfivfRszq0He_B4yKAg; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/overtime": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:03 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiZDAzMGNiZGM5YTUyYTVlMDYwZWJjNzNiZGI3M2Y3Mjc2NjhjODU1MyJ9.aIkvhw.5mEBiq9n_EjRYTcENay57of2yAM; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/export/pdf": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:06 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiODNlMDI3Y2EwNzM4YTlmOWQzMmMxMDk3Y2EyOWQ2MWQzZDdmNDEyZSJ9.aIkvig.SlTsjzoj_W6w3WUKo5sb6-N9q5w; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/export/excel": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:09 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiNWFjMTlmNGUzOTQ4ZWQzZDcxM2JjYTM2NzBlYWJjZDA0MDg1MjljNCJ9.aIkvjA.hxHPApXtv54sgLMvWaxwtoUgm8I; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/attestations": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:11 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiYjIwZmFkY2U4ZGJiYTJiZjZiYmIyODA0MGUxMzNlNjlhZThlNWYwYSJ9.aIkvjw.gqyCnuV5YHR34Oj1TNxYdHc3JdE; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/attestations/new": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:14 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiZTAyYzFjMmJkYWY0MjFiYjQzZjk5NDIxZWRjOTM4MmY5MmJlZjExMSJ9.aIkvkg.KF1md6e6Ldvc8RIcoo3L9Jre86A; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/profile": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:17 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiOTQ2YTMxYTdiNmNhZGY4YzNiNGRhMTNmMjgxYWE2ZTgwNDQ0MTM5NCJ9.aIkvlQ.52pY69bz_EKqQAUvdylEP2gUdsk; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/settings": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:20 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiODJjZGU0ZGUyZDc5NzBiMmIyMDM5YWE4ZmI1N2VhMzNhYjY0MDFjYyJ9.aIkvmA.Qejo9CsY3p5KAWGZc2Px1CLFSpg; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/dashboard": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 20395,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:27 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "4309",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiZGVmZjEwYmY5OWYyZmIzMjJkZTIwMTM1ZjhkMzNiYTc1ZmM4MzBiNyJ9.aIkvng.UqbLzzhrBxQ_YJu3iuo55n0gS-s; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/usuarios": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 18063,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:31 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "4277",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiMTU1YTQ2YzZkODQ0ODBiMWRmMTgzZTcyMzE3ZTMxZjM4MThiZjc5OCJ9.aIkvow.vBQ6I5AKhqY3V1hZV8k8DSM8QUo; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/system-config": {
+    "status": "ERROR_500",
+    "status_code": 500,
+    "content_length": 8122,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:37 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "8122",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvqA.O-x5BGnmnJueUtf6uUTGLs9SH0Y; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/atestados": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 16439,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:40 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "3697",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiNTQxOGExMTM4ZDlmNTJhNWUyNzY3ZTQyMmM4MThkOGZjYjRhYzhiYiJ9.aIkvrA.SyrbCQIsyCZNMd2Kns39e9HUkHk; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/registros-ponto": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 18618,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:44 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "3899",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiNjJiYmZiODRhMTRhYTMyZWEwNzYzY2E4ZmY3MDBmZDFjM2UxZDIyNSJ9.aIkvsA.XXUKjJSANFIooyMpIyhyt20SNKY; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/relatorios": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 17609,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:47 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "3866",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiYTYyMzdjMmU0MDJkOGRmZjQ1MGY1ZGY3NmU0NTA1NzYwNWIxNWNmYiJ9.aIkvsw.X3FErP4r7qP3AEGG3WriuNl0TrM; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/backup/dashboard": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 0,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:50 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.aIkvtg._uFlDHXhpVXN-bIMkzQehAhcR7c; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/admin/classes-trabalho": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 21296,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:54 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "4058",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Content-Encoding": "zstd",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiOGI1YTIwMDg4ZTNmYmYzMWFlMjE3OGM4ZjJmNWEzMDlhNjM4YjFlZSJ9.aIkvug.UYxVSLiNMzhYkMZmMyNPdF27mMs; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/notifications": {
+    "status": "NOT_FOUND",
+    "status_code": 404,
+    "content_length": 12597,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:31:57 GMT",
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Length": "12597",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding, Cookie",
+      "Set-Cookie": "session=eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEiLCJjc3JmX3Rva2VuIjoiOTcwYTMzODNhYTU2NDc5MzM0MTJkOGZkNWMxMjlmMDMzZGJmODVlYiJ9.aIkvvQ.AhTlMg_SISfOo5TfeaPVpO4rsZQ; Secure; HttpOnly; Path=/; SameSite=Lax",
+      "Connection": "close"
+    }
+  },
+  "/health": {
+    "status": "SUCCESS",
+    "status_code": 200,
+    "content_length": 163,
+    "headers": {
+      "Server": "Werkzeug/3.0.3 Python/3.11.9",
+      "Date": "Tue, 29 Jul 2025 20:32:00 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "163",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+      "Vary": "Accept-Encoding",
+      "Connection": "close"
+    }
+  }
 }

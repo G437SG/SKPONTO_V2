@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-server me-2"></i>Configurações do Sistema
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p>Configurações do sistema em desenvolvimento...</p>
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

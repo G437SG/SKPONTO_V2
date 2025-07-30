@@ -59,6 +59,21 @@ migrate = Migrate(app, db)
 # Garantir que os diretórios existam
 ensure_directories()
 
+@app.route('/favicon.ico')
+def favicon():
+    """Serve favicon ou retorna 204 se não existir"""
+    try:
+        from flask import send_from_directory
+        return send_from_directory(
+            os.path.join(app.root_path, 'static', 'img'),
+            'favicon.ico',
+            mimetype='image/vnd.microsoft.icon'
+        )
+    except:
+        # Se não existir favicon, retorna 204 (No Content) em vez de 404
+        from flask import Response
+        return Response(status=204)
+
 
 @app.shell_context_processor
 def make_shell_context():

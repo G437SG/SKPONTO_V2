@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-cogs me-2"></i>Painel Administrativo
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card border-primary">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                                    <h5>Usuários</h5>
+                                    <a href="{{ url_for('admin.usuarios') }}" class="btn btn-primary">Gerenciar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                                    <h5>Relatórios</h5>
+                                    <a href="{{ url_for('admin.admin_reports') }}" class="btn btn-success">Visualizar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-warning">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-server fa-3x text-warning mb-3"></i>
+                                    <h5>Sistema</h5>
+                                    <a href="{{ url_for('admin.system') }}" class="btn btn-warning">Configurar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

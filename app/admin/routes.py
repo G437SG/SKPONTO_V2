@@ -80,6 +80,26 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+@bp.route('/')
+@bp.route('/index')
+@login_required
+@admin_required
+def admin_root():
+    """Rota raiz do admin - renderiza dashboard diretamente"""
+    # Em vez de redirecionar, vamos renderizar diretamente o dashboard
+    hoje = date.today()
+    inicio_mes = hoje.replace(day=1)
+    
+    # Estatísticas gerais
+    total_usuarios = User.query.filter_by(is_active=True).count()
+    usuarios_online_hoje = User.query.filter(User.last_login >= hoje).count()
+    
+    # Retornar template do dashboard diretamente
+    return render_template('admin/dashboard.html', 
+                         title='Painel Administrativo',
+                         total_usuarios=total_usuarios,
+                         usuarios_online_hoje=usuarios_online_hoje)
+
 @bp.route('/dashboard')
 @login_required
 @admin_required
@@ -182,6 +202,13 @@ def dashboard():
                          registros_por_mes=registros_por_mes,
                          tipos_usuario=tipos_usuario)
 
+@bp.route('/users')
+@login_required
+@admin_required
+def users():
+    """Redireciona para a página de usuários"""
+    return redirect(url_for('admin.usuarios'))
+
 @bp.route('/usuarios')
 @login_required
 @admin_required
@@ -219,14 +246,16 @@ def usuarios():
     # Garantir que todos os usuários tenham banco de horas
     from app.models import HourBank
     for user in usuarios.items:
-        if True:  # hour_bank check disabled
+        existing_hour_bank = HourBank.query.filter_by(user_id=user.id).first()
+        if not existing_hour_bank:
             hour_bank = HourBank(user_id=user.id)
             db.session.add(hour_bank)
     
     try:
         db.session.commit()
-    except Exception:
+    except Exception as e:
         db.session.rollback()
+        current_app.logger.error(f"Erro ao criar bancos de horas: {e}")
     
     return render_template('admin/usuarios.html',
                          title='Gestão de Usuários',
@@ -2239,3 +2268,17 @@ def security_logs():
         current_app.logger.error(f"Erro ao acessar logs de segurança: {e}")
         flash('❌ Erro ao carregar logs de segurança', 'error')
         return redirect(url_for('admin.dashboard'))
+
+@bp.route('/system')
+@login_required
+@admin_required
+def system():
+    """Configurações do sistema"""
+    return render_template('admin/system.html', title='Sistema')
+
+@bp.route('/reports')
+@login_required
+@admin_required
+def admin_reports():
+    """Relatórios administrativos"""
+    return render_template('admin/reports.html', title='Relatórios Admin')

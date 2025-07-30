@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar me-2"></i>Relatórios
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card border-primary">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-calendar-month fa-3x text-primary mb-3"></i>
+                                    <h5>Relatório Mensal</h5>
+                                    <a href="{{ url_for('main.reports_monthly') }}" class="btn btn-primary">Visualizar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-check fa-3x text-success mb-3"></i>
+                                    <h5>Presença</h5>
+                                    <a href="{{ url_for('main.reports_attendance') }}" class="btn btn-success">Visualizar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-info">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-download fa-3x text-info mb-3"></i>
+                                    <h5>Exportar</h5>
+                                    <a href="{{ url_for('main.export_pdf') }}" class="btn btn-info">PDF</a>
+                                    <a href="{{ url_for('main.export_excel') }}" class="btn btn-info ms-2">Excel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

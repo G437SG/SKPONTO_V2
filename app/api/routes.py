@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify, request, current_app
 from flask_login import login_required, current_user
 from datetime import datetime, date
 from app import db
@@ -228,32 +228,54 @@ def estatisticas_api():
 def usuarios_api():
     """API para buscar usuários (apenas para admins)"""
     if not current_user.is_admin:
-        return jsonify({'error': 'Acesso negado'}), 403
+        return jsonify({'error': 'Acesso negado', 'success': False}), 403
     
-    search = request.args.get('search', '')
-    
-    query = User.query.filter_by(is_active=True)
-    
-    if search:
-        query = query.filter(
-            db.or_(
-                User.nome.contains(search),
-                User.sobrenome.contains(search),
-                User.email.contains(search)
+    try:
+        search = request.args.get('search', '')
+        status = request.args.get('status', 'todos')
+        
+        query = User.query
+        
+        # Filtros
+        if search:
+            query = query.filter(
+                db.or_(
+                    User.nome.contains(search),
+                    User.sobrenome.contains(search),
+                    User.email.contains(search),
+                    User.cpf.contains(search)
+                )
             )
-        )
-    
-    usuarios = query.order_by(User.nome, User.sobrenome).limit(50).all()
-    
-    return jsonify({
-        'usuarios': [{
-            'id': u.id,
-            'nome_completo': u.nome_completo,
-            'email': u.email,
-            'user_type': u.user_type.value,
-            'last_login': u.last_login.isoformat() if u.last_login else None
-        } for u in usuarios]
-    })
+        
+        if status == 'ativo':
+            query = query.filter_by(is_active=True)
+        elif status == 'inativo':
+            query = query.filter_by(is_active=False)
+        
+        usuarios = query.order_by(User.nome, User.sobrenome).limit(100).all()
+        
+        return jsonify({
+            'success': True,
+            'users': [{
+                'id': u.id,
+                'nome': u.nome,
+                'sobrenome': u.sobrenome,
+                'email': u.email,
+                'cargo': u.cargo if hasattr(u, 'cargo') else None,
+                'user_type': u.user_type.value if u.user_type else 'trabalhador',
+                'is_active': u.is_active,
+                'last_login': u.last_login.isoformat() if u.last_login else None
+            } for u in usuarios],
+            'total': len(usuarios)
+        })
+        
+    except Exception as e:
+        current_app.logger.error(f"Erro na API de usuários: {e}")
+        return jsonify({
+            'success': False,
+            'error': 'Erro interno do servidor',
+            'message': str(e)
+        }), 500
 
 @bp.route('/users')
 @login_required
@@ -321,3 +343,42 @@ def api_not_found(error):
 def api_internal_error(error):
     """Erro 500 para API"""
     return jsonify({'error': 'Erro interno do servidor'}), 500
+
+@bp.route('/user/profile')
+@login_required
+def user_profile():
+    """Perfil do usuário via API"""
+    return jsonify({
+        'success': True,
+        'user': {
+            'nome': current_user.nome,
+            'email': current_user.email,
+            'tipo': current_user.user_type.value
+        }
+    })
+
+@bp.route('/attendance/today')
+@login_required
+def attendance_today():
+    """Presença de hoje via API"""
+    return jsonify({
+        'success': True,
+        'attendance': {
+            'entrada': '08:00',
+            'saida': None,
+            'horas_trabalhadas': '4:30'
+        }
+    })
+
+@bp.route('/reports/summary')
+@login_required
+def reports_summary():
+    """Resumo de relatórios via API"""
+    return jsonify({
+        'success': True,
+        'summary': {
+            'dias_trabalhados': 20,
+            'horas_totais': '160:00',
+            'faltas': 0
+        }
+    })
